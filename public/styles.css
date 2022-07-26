@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
+*{
+    color: white;
+}
+body {
+    background: #1F1D2B;
+  }
+
+  .subsystemTitle{
+    color:#FFFFFF;
+    font-size: 35px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: center;
+    /* border: 3px solid green; */
+
+  }
+
+  #ip1 {
+    border-radius: 18px;
+    background: #FFFFFF;
+    padding: 20px; 
+    width: 200px;
+    height: 15px;    
+    color: black;
+    /* sds */
+   
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
