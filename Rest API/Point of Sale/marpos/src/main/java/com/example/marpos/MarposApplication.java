@@ -15,9 +15,10 @@ public class MarposApplication {
 		SpringApplication.run(MarposApplication.class, args);
 	}
 
-    @Bean
+    @Bean   // Injecting data into the database to test if database functions as intended
     CommandLineRunner runner(MenuItemRepository menu, IngredientsRepository ingredients) {
         return args -> {
+            // Sample ingredients
             Ingredient celery = new Ingredient(
                     "celery",
                     0.5,
@@ -34,6 +35,7 @@ public class MarposApplication {
                     Quantification.KILO
             );
 
+            // Sample menu item
             MenuItem item = new MenuItem(
                     "Sigang na Baboy",
                     List.of(celery, tomato, pork)
