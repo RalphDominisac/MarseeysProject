@@ -1,25 +1,28 @@
 package com.example.marpos;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/menu")
+@RequestMapping("api/v1/menu")  // Port 8080
 @AllArgsConstructor
 // REST API for MenuItems
 public class MenuItemController {
     private final MenuItemService menuItemService;
 
+    // GET request handler
     @GetMapping
     public List<MenuItem> fetchAllItems() {
         return menuItemService.getAllItems();
     }
 
-
+    // POST request handler using item name for menu items
+    @PostMapping
+    public MenuItem orderItem(@RequestParam(value = "name") String name) {
+        return menuItemService.getItem(name);
+    }
 }
