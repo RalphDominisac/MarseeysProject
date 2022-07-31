@@ -1,38 +1,43 @@
 import React from 'react';
 import SignInPOS from './SignInPOS';
+import OrderPagePOS from "./OrderPagePOS";
+import SidebarPOS from "./SidebarPOS";
+import Dashboard from "./Dashboard";
+
 
 
 
 function App(){
 
-    return(
-        <div>
-
+    return (
+      <div>
+        {/* <br></br>
         <br></br>
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        
-            {/* <p style={{textAlign: 'center'}}>LOGO MARSEEYS IMAGE HERE</p> */}
-            <img id="marseeyslogo"src="images/Asset 11.png" alt="Marseeys logo" class="center" />
 
-            <p class="subsystemTitle"> Sales Ordering System (v.1.0) </p>
+        <img
+          id="marseeyslogo"
+          src="images/Asset 11.png"
+          alt="Marseeys logo"
+          class="center"
+        />
 
-            <SignInPOS />
-          
-           
+        <p class="subsystemTitle"> Sales Ordering System (v.1.0) </p> */}
 
-       
 
-            
+        {/* TESTING AREA */}
 
-          
+        {/* <SignInPOS /> */}
 
-        </div>
+        {/* <OrderPagePOS/> */}
 
-        
+        {/* <SidebarPOS/> */}
 
+        <Dashboard/>
+
+      </div>
     );
 
 }

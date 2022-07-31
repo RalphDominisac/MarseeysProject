@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
 *{
-    color: white;
+    /* color: white; ---------------------------------------------------------------------- */    
 }
 body {
     background: #1F1D2B;
