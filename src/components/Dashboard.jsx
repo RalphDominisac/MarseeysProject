@@ -22,23 +22,24 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const drawerWidth = 240;
 
@@ -86,7 +87,27 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  palette: {
+    background: {
+      default: "#252836",
+    },
+    text: {
+      primary: "#ffffff",
+    },
+    paper: {
+    background: "red",
+  },
+    
+  },
+});
+
+
+// const paperstyles = {
+//   paper: {
+//     background: "blue",
+//   },
+// };
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -94,14 +115,21 @@ function DashboardContent() {
     setOpen(!open);
   };
 
+
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          sx={{ backgroundColor: "red", width: "50" }}
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
+              backgroundColor: "#282c34",
             }}
           >
             <IconButton
@@ -116,37 +144,51 @@ function DashboardContent() {
             >
               <MenuIcon />
             </IconButton>
+            INSERT TIME AND DATE HERE
             <Typography
               component="h1"
               variant="h6"
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
+            ></Typography>
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
+            INSERT SEARCH BAR HERE
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+
+        <Drawer
+          variant="permanent"
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "#282c34",
+            },
+          }}
+        >
+          {/* ** Upper Right Part For Logo */}
           <Toolbar
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
               px: [1],
+              backgroundColor: "#1F1D2B",
             }}
           >
-            <IconButton onClick={toggleDrawer}>
+            MARSEEYS LOGO
+            <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
+
           <Divider />
-          <List component="nav">
+          <List component="nav" sx={{ backgroundColor: "#282c34" }}>
+            MARSEEYS MENU LOGO
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
@@ -155,29 +197,29 @@ function DashboardContent() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: "#282c34",
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
+          <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0,}}>
+            dfdfdftttttttttttttttttttttttttttttttttttt
+            <Grid container spacing={2}>
+              {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
+
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    height: 300,
+                    width: 750,
                   }}
                 >
-                  <Chart />
+                  {/* <Chart /> */}
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -187,21 +229,34 @@ function DashboardContent() {
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    height: 300,
+                    width: 513,
+                    marginLeft: 13,
                   }}
                 >
                   <Deposits />
                 </Paper>
               </Grid>
+
               {/* Recent Orders */}
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    width: 750,
+                    height: 370,
+                  }}
+                >
                   <Orders />
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+            {/* <Copyright sx={{ pt: 4 }} /> */}
           </Container>
+
+          {/* Potential side order part */}
         </Box>
       </Box>
     </ThemeProvider>
@@ -211,3 +266,5 @@ function DashboardContent() {
 export default function Dashboard() {
   return <DashboardContent />;
 }
+
+
