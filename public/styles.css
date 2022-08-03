@@ -53,6 +53,66 @@ body {
     width:30%;
   }
 
+  #marseeysicon{
+     height:auto;
+    width:30%;
+    margin-left: 83px;
+    margin-top: 20px;
+     margin-bottom: 20px;
+    
+  }
+
+  #orderIcon{
+    height:auto;
+    width:25%;
+    margin-left: 24px;
+  
+  }
+
+    #pendingIcon{
+    height:auto;
+    width:30%;
+    margin-left: 19px;
+  
+  }
+
+      #draftIcon{
+    height:auto;
+    width:23%;
+    margin-left: 26px;
+  
+  }
+
+     #historyIcon{
+    height:auto;
+    width:29%;
+    margin-left: 20px;
+  
+  }
+
+     #discountsIcon{
+    height:auto;
+    width:39%;
+    margin-left: 12px;
+  
+  }
+
+  #arcreditIcon{
+    height:auto;
+    width:37%;
+    margin-left: 12px;
+
+  }
+
+    #logoutIcon{
+    height:auto;
+    width:24%;
+    margin-left: 25px;
+
+  }
+
+ 
+
 
 
   /* for sidebar size */

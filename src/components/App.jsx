@@ -4,6 +4,9 @@ import OrderPagePOS from "./OrderPagePOS";
 import SidebarPOS from "./SidebarPOS";
 import Dashboard from "./Dashboard";
 import OrderSidePOS from "./OrderSidePOS";
+import DrawerSample from "./DrawerSample";
+import TestSample from "./TestSample";
+
 
 
 
@@ -27,19 +30,20 @@ function App(){
 
         <p class="subsystemTitle"> Sales Ordering System (v.1.0) </p> */}
 
-
         {/* TESTING AREA */}
 
         {/* <SignInPOS /> */}
 
-        {/* <OrderPagePOS/> */}
+        {/* <OrderPagePOS /> */}
+
+        {/* <OrderSidePOS/> */}
 
         {/* <SidebarPOS/> */}
 
-        <Dashboard/>
+        <Dashboard />
 
-          {/* <OrderSidePOS/> */}
-
+        {/* <DrawerSample/> */}
+        {/* <TestSample /> */}
       </div>
     );
 

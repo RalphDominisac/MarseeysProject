@@ -21,6 +21,13 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import DateTime from "./DateTime";
+
+
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+
+import { useState } from "react";
 
 
 // function Copyright(props) {
@@ -40,6 +47,9 @@ import Orders from "./Orders";
 //     </Typography>
 //   );
 // }
+
+
+
 
 const drawerWidth = 240;
 
@@ -109,24 +119,32 @@ const mdTheme = createTheme({
 //   },
 // };
 
-function DashboardContent() {
+export default function DashboardContent() {
+  // const [selected1, setSelected1] = useState(false);
+  // const [selected2, setSelected2] = useState(false);
+  // const [selected3, setSelected3] = useState(false);
+  // const [selected4, setSelected4] = useState(false);
+  // const [selected5, setSelected5] = useState(false);
+  // const [selected6, setSelected6] = useState(false);
+  // const [selected7, setSelected7] = useState(false);
+
+  const [selectedIndex, setSelectedIndex] = React.useState("");
+
+   const handleListItemClick = (event, index) => {
+     setSelectedIndex(index);
+   };
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar
-          position="absolute"
-          open={open}
-          sx={{ backgroundColor: "red", width: "50" }}
-        >
-          <Toolbar
+        <AppBar position="absolute" open={open} sx={{ width: "50" }}>
+          {/* <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
               backgroundColor: "#282c34",
@@ -152,13 +170,13 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             ></Typography>
-            {/* <IconButton color="inherit">
+            <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton> */}
+            </IconButton>
             INSERT SEARCH BAR HERE
-          </Toolbar>
+          </Toolbar> */}
         </AppBar>
 
         <Drawer
@@ -166,7 +184,7 @@ function DashboardContent() {
           open={open}
           PaperProps={{
             sx: {
-              backgroundColor: "#282c34",
+              backgroundColor: "#252836",
             },
           }}
         >
@@ -180,32 +198,219 @@ function DashboardContent() {
               backgroundColor: "#1F1D2B",
             }}
           >
-            MARSEEYS LOGO
-            <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
+            <img
+              id="marseeysicon"
+              src="images/marseeys-icon.png"
+              alt="Marseeys Icon"
+              class="center"
+            />
 
+            {/* <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
+              <ChevronLeftIcon />
+            </IconButton> */}
+          </Toolbar>
           <Divider />
-          <List component="nav" sx={{ backgroundColor: "#282c34" }}>
-            MARSEEYS MENU LOGO
-            {mainListItems}
+
+          {/* SIDEBAR MENU LEFT ******************************************************************************/}
+          <List component="nav" sx={{ backgroundColor: "#252836" }}>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 0}
+              onClick={(event) => handleListItemClick(event, 0)}
+            >
+              <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
+
+              {/* <ListItemText primary="ORDER" /> */}
+              <img
+                id="orderIcon"
+                src="images/ordericon.png"
+                alt="Order Icon"
+                // class="center"
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 1}
+              onClick={(event) => handleListItemClick(event, 1)}
+            >
+              <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
+              <img
+                id="pendingIcon"
+                src="images/pending.png"
+                alt="Pending Icon"
+                // class="center"
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 2}
+              onClick={(event) => handleListItemClick(event, 2)}
+            >
+              <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
+              <img
+                id="draftIcon"
+                src="images/draft.png"
+                alt="Draft Icon"
+                // class="center"
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 3}
+              onClick={(event) => handleListItemClick(event, 3)}
+            >
+              <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
+              <img
+                id="historyIcon"
+                src="images/history.png"
+                alt="Histroy Icon"
+                // class="center"
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 4}
+              onClick={(event) => handleListItemClick(event, 4)}
+            >
+              <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+              <img
+                id="discountsIcon"
+                src="images/discounts.png"
+                alt="discounts Icon"
+                // class="center"
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 5}
+              onClick={(event) => handleListItemClick(event, 5)}
+            >
+              <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+              <img
+                id="arcreditIcon"
+                src="images/arcredit.png"
+                alt="arcredit Icon"
+                // class="center"
+              />
+            </ListItemButton>
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+                ":hover": {
+                  // backgroundColor: "#02A7DD",
+                  border: "3px solid #F2A42A",
+                },
+              }}
+              selected={selectedIndex === 6}
+              onClick={(event) => handleListItemClick(event, 6)}
+            >
+              <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
+              <img
+                id="logoutIcon"
+                src="images/logout.png"
+                alt="logout Icon"
+                // class="center"
+              />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
           component="main"
           sx={{
-            backgroundColor: "#282c34",
+            backgroundColor: "#252836",
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
           }}
         >
-          <Toolbar />
-          <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0,}}>
-            dfdfdftttttttttttttttttttttttttttttttttttt
+          {/* <Toolbar /> */}
+          <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}>
             <Grid container spacing={2}>
               {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
 
@@ -217,8 +422,10 @@ function DashboardContent() {
                     flexDirection: "column",
                     height: 300,
                     width: 750,
+                    backgroundColor: "green",
                   }}
                 >
+                  <DateTime></DateTime>
                   {/* <Chart /> */}
                 </Paper>
               </Grid>
@@ -263,8 +470,18 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+// export default function Dashboard() {
+  // const [selected1, setSelected1] = useState(false);
+  // const [selected2, setSelected2] = useState(false);
+  // const [selected3, setSelected3] = useState(false);
+  // const [selected4, setSelected4] = useState(false);
+  // const [selected5, setSelected5] = useState(false);
+  // const [selected6, setSelected6] = useState(false);
+  // const [selected7, setSelected7] = useState(false);
+  
+  
+//   return <DashboardContent />;
+// }
+
 
 
