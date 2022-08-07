@@ -29,6 +29,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 
 import { useState } from "react";
 
+import { alpha } from "@mui/material/styles";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import CategoryButtons from "./CategoryButtons";
+
 
 // function Copyright(props) {
 //   return (
@@ -51,7 +56,50 @@ import { useState } from "react";
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 120;
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: "white",
+  color: "black",
+  "&:hover": {
+    backgroundColor: "white",
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "20ch",
+      "&:focus": {
+        width: "25ch",
+      },
+    },
+  },
+}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -315,7 +363,7 @@ export default function DashboardContent() {
               <img
                 id="historyIcon"
                 src="images/history.png"
-                alt="Histroy Icon"
+                alt="History Icon"
                 // class="center"
               />
             </ListItemButton>
@@ -345,7 +393,7 @@ export default function DashboardContent() {
                 // class="center"
               />
             </ListItemButton>
-            <ListItemButton
+            {/* <ListItemButton
               sx={{
                 "&.Mui-selected": {
                   // backgroundColor: "#02A7DD",
@@ -363,15 +411,15 @@ export default function DashboardContent() {
               selected={selectedIndex === 5}
               onClick={(event) => handleListItemClick(event, 5)}
             >
-              <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+              <ListItemIcon> </ListItemIcon>
               <img
                 id="arcreditIcon"
                 src="images/arcredit.png"
                 alt="arcredit Icon"
-                // class="center"
+                
               />
-            </ListItemButton>
-            <Divider sx={{ my: 1 }} />
+            </ListItemButton> */}
+
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
@@ -398,8 +446,11 @@ export default function DashboardContent() {
                 // class="center"
               />
             </ListItemButton>
+
+            <Divider sx={{ my: 10 }} />
           </List>
         </Drawer>
+
         <Box
           component="main"
           sx={{
@@ -410,23 +461,93 @@ export default function DashboardContent() {
           }}
         >
           {/* <Toolbar /> */}
-          <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}>
+          {/* <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}> */}
+          <Container maxWidth="md" sx={{ ml: 0 }}>
             <Grid container spacing={2}>
               {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
 
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
-                    p: 2,
+                    // p: 1,
                     display: "flex",
                     flexDirection: "column",
-                    height: 300,
-                    width: 750,
+                    height: 790,
+                    width: 850,
                     backgroundColor: "green",
                   }}
                 >
-                  <DateTime></DateTime>
                   {/* <Chart /> */}
+
+                  {/* Header Time and Date Display*/}
+                  {/* <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                      <Toolbar>
+                        <Typography
+                          variant="h6"
+                          noWrap
+                          component="div"
+                          sx={{
+                            flexGrow: 1,
+                            display: { xs: "none", sm: "block" },
+                          }}
+                        >
+                          <DateTime />
+                        </Typography>
+                        <Search>
+                          <SearchIconWrapper>
+                            <SearchIcon sx={{ color: "black" }} />
+                          </SearchIconWrapper>
+                          <StyledInputBase
+                            placeholder="Search for an item"
+                            inputProps={{ "aria-label": "search" }}
+                          />
+                        </Search>
+                      </Toolbar>
+                    </AppBar>
+                  </Box> */}
+
+                  {/* <Toolbar>
+                    <DateTime />
+
+                    <Search>
+                      <SearchIconWrapper>
+                        <SearchIcon sx={{ color: "black" }} />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder="Search for an item"
+                        inputProps={{ "aria-label": "search" }}
+                      />
+                    </Search>
+                  </Toolbar> */}
+
+                  <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                      <Toolbar>
+                        <Typography
+                          variant="h6"
+                          noWrap
+                          component="div"
+                          sx={{
+                            flexGrow: 1,
+                            display: { xs: "none", sm: "block" },
+                          }}
+                        >
+                          <DateTime />
+                        </Typography>
+                        <Search>
+                          <SearchIconWrapper>
+                            <SearchIcon />
+                          </SearchIconWrapper>
+                          <StyledInputBase
+                            placeholder="Search for an item"
+                            inputProps={{ "aria-label": "search" }}
+                          />
+                        </Search>
+                      </Toolbar>
+                    </AppBar>
+                    <CategoryButtons />
+                  </Box>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -436,9 +557,9 @@ export default function DashboardContent() {
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 300,
-                    width: 513,
-                    marginLeft: 13,
+                    height: 790,
+                    width: 524,
+                    marginLeft: 25,
                   }}
                 >
                   <Deposits />
@@ -446,7 +567,7 @@ export default function DashboardContent() {
               </Grid>
 
               {/* Recent Orders */}
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Paper
                   sx={{
                     p: 2,
@@ -458,7 +579,7 @@ export default function DashboardContent() {
                 >
                   <Orders />
                 </Paper>
-              </Grid>
+              </Grid> */}
             </Grid>
             {/* <Copyright sx={{ pt: 4 }} /> */}
           </Container>

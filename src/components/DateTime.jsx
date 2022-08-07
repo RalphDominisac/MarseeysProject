@@ -40,7 +40,7 @@ var months = [
 
 var day = days[now.getDay()];
 var month = months[now.getMonth()];
-var numDay = now.getDay();
+var numDay = now.getDate();
 var numYear = now.getFullYear();
 
   useEffect(() => {
@@ -52,11 +52,8 @@ var numYear = now.getFullYear();
   let longMonth = date.toLocaleString("en-us", { month: "long" }); /* June */
   return (
     <div>
-      <p> {date.toLocaleTimeString()}</p>
-      <p>
-        {/* {longMonth + " "} */}
-        {/* {prnDt} */}
-
+      <p class="timeDisplay">{date.toLocaleTimeString()}</p>
+      <p class="dateDisplay">
         {day + ", " + month + " " + numDay + " " + numYear}
       </p>
     </div>

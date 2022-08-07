@@ -15,23 +15,24 @@ body {
 
   }
 
-  #ip1 {
+    /* sds */
+  /* #ip1 {
     border-radius: 18px;
     background: #FFFFFF;
     padding: 20px; 
     width: 200px;
     height: 15px;    
     color: black;
-    /* sds */
+  
    
-}
+} */
 
 /* Create two equal columns that floats next to each other */
 .column {
     float: left;
     width: 50%;
     padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+    height: 300px; 
   }
   
   /* Clear floats after the columns */
@@ -55,8 +56,8 @@ body {
 
   #marseeysicon{
      height:auto;
-    width:30%;
-    margin-left: 83px;
+    width:60%;
+    margin-left: 25px;
     margin-top: 20px;
      margin-bottom: 20px;
     
@@ -64,50 +65,74 @@ body {
 
   #orderIcon{
     height:auto;
-    width:25%;
-    margin-left: 24px;
-  
+    width:60%;
+    margin-left: -32px;
+      margin-bottom: 20px;
   }
+
 
     #pendingIcon{
     height:auto;
-    width:30%;
-    margin-left: 19px;
+    width:70%;
+    margin-left: -35px;
+      margin-bottom: 20px;
   
   }
 
       #draftIcon{
     height:auto;
-    width:23%;
-    margin-left: 26px;
+    width:55%;
+    margin-left: -28px;
+      margin-bottom: 20px;
   
   }
 
      #historyIcon{
     height:auto;
-    width:29%;
-    margin-left: 20px;
+    width:68%;
+    margin-left: -33px;
+      margin-bottom: 20px;
   
   }
 
      #discountsIcon{
     height:auto;
-    width:39%;
-    margin-left: 12px;
+    width:90%;
+    margin-left: -40px;
+      margin-bottom: 20px;
   
   }
 
-  #arcreditIcon{
+  /* #arcreditIcon{
     height:auto;
     width:37%;
     margin-left: 12px;
 
-  }
+  } */
 
     #logoutIcon{
     height:auto;
-    width:24%;
-    margin-left: 25px;
+    width:50%;
+    margin-left: -25px;
+     margin-top: 48px;
+
+  }
+
+  .timeDisplay{
+     color:#FFFFFF;
+    font-size: 60px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: 2px;
+
+  }
+
+    .dateDisplay{
+     color:#FFFFFF;
+    font-size: 27px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -80px;
 
   }
 
@@ -117,9 +142,16 @@ body {
 
   /* for sidebar size */
 
-
     /* .MuiDrawer-paper {
- width: 94% !important;
+ width: 10% !important;
+ } */
+
+     /* .MuiDrawer-fullList {
+  width: "auto" !important;
+ }
+
+     .MuiDrawer-list {
+ width: 50% !important;
  } */
 
 
