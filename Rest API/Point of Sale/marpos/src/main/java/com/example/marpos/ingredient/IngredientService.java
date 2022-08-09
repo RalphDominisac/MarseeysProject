@@ -1,7 +1,8 @@
-package com.example.marpos;
+package com.example.marpos.ingredient;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,6 +14,10 @@ public class IngredientService {
 
     public List<Ingredient> getAllItems() {
         return ingredientRepository.findAll();
+    }
+
+    public Ingredient searchItem(@RequestParam(value = "name") String name) {
+        return ingredientRepository.findByNameEqualsIgnoreCase(name);
     }
 
     public void createIngredient(Ingredient ingredient) {

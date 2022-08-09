@@ -1,4 +1,4 @@
-package com.example.marpos;
+package com.example.marpos.ingredient;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

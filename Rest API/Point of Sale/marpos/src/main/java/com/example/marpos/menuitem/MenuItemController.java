@@ -1,10 +1,8 @@
-package com.example.marpos;
+package com.example.marpos.menuitem;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +15,8 @@ public class MenuItemController {
 
     // GET request handler
     @GetMapping
-    public List<MenuItem> fetchAllItems() {
-        return menuItemService.getAllItems();
+    public Optional<List<MenuItem>> fetchItems(@RequestParam(value = "type") MenuType type) {
+        return menuItemService.getItems(type);
     }
 
     // POST request handler for searching items

@@ -1,4 +1,4 @@
-package com.example.marpos;
+package com.example.marpos.menuitem;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ public class MenuItemService {
     private final MenuItemRepository menuItemRepository;
 
     // Returns a list of all menu items in database
-    public List<MenuItem> getAllItems() {
-        return menuItemRepository.findAll();
+    public Optional<List<MenuItem>> getItems(MenuType type) {
+        return menuItemRepository.findMenuItemsByTypeIs(type);
     }
 
     // Returns a single menu item based on input
