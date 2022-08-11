@@ -19,7 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
-import Deposits from "./Deposits";
+import OrderSidePage from "./OrderSidePage";
 import Orders from "./Orders";
 import DateTime from "./DateTime";
 
@@ -161,20 +161,9 @@ const mdTheme = createTheme({
 });
 
 
-// const paperstyles = {
-//   paper: {
-//     background: "blue",
-//   },
-// };
 
 export default function DashboardContent() {
-  // const [selected1, setSelected1] = useState(false);
-  // const [selected2, setSelected2] = useState(false);
-  // const [selected3, setSelected3] = useState(false);
-  // const [selected4, setSelected4] = useState(false);
-  // const [selected5, setSelected5] = useState(false);
-  // const [selected6, setSelected6] = useState(false);
-  // const [selected7, setSelected7] = useState(false);
+
 
   const [selectedIndex, setSelectedIndex] = React.useState("");
 
@@ -560,9 +549,10 @@ export default function DashboardContent() {
                     height: 790,
                     width: 524,
                     marginLeft: 25,
+                    backgroundColor: "#1F1D2B",
                   }}
                 >
-                  <Deposits />
+                  <OrderSidePage />
                 </Paper>
               </Grid>
 
