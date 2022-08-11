@@ -1,5 +1,7 @@
-package com.example.marpos.ingredient;
+package com.example.marpos.controller;
 
+import com.example.marpos.model.Ingredient;
+import com.example.marpos.service.IngredientService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

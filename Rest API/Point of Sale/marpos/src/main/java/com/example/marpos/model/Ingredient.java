@@ -1,13 +1,16 @@
-package com.example.marpos.ingredient;
+package com.example.marpos.model;
 
-import lombok.Data;
+import com.example.marpos.constant.IngredientQuantification;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Document
 public class Ingredient {
     @Id
@@ -25,22 +28,5 @@ public class Ingredient {
         this.unit = unit;
         this.threshold = threshold;
         this.lastUpdated = LocalDate.now();
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    // Added for editing access in front-end
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
     }
 }

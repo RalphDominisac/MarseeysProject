@@ -1,15 +1,17 @@
-package com.example.marpos.menuitem;
+package com.example.marpos.model;
 
-import com.example.marpos.ingredient.Ingredient;
-import com.example.marpos.ingredient.IngredientService;
-import lombok.Data;
+import com.example.marpos.constant.MenuType;
+import com.example.marpos.service.IngredientService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Document
 public class MenuItem {
     @Id
@@ -20,11 +22,6 @@ public class MenuItem {
     private List<Ingredient> ingredients;
     private MenuType type;
     private boolean isAvailable;
-
-    // Added to edit price from front-end
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public MenuItem(String name, double price, List<Ingredient> ingredients, MenuType type) {
         this.name = name;

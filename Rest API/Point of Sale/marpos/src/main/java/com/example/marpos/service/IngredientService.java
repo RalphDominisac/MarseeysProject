@@ -1,5 +1,7 @@
-package com.example.marpos.ingredient;
+package com.example.marpos.service;
 
+import com.example.marpos.model.Ingredient;
+import com.example.marpos.repo.IngredientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;

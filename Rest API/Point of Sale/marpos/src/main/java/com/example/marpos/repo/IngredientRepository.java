@@ -1,5 +1,6 @@
-package com.example.marpos.ingredient;
+package com.example.marpos.repo;
 
+import com.example.marpos.model.Ingredient;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 // Ingredients collection
