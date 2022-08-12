@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
+@import url('http://fonts.cdnfonts.com/css/helvetica-lt-std');
 *{
     /* color: white; ---------------------------------------------------------------------- */    
 }
@@ -142,7 +143,7 @@ body {
     font-size: 30px;
     font-family: 'Barlow Condensed', sans-serif;
     text-align: left;
-    margin-top: 2px;
+    margin-top: -12px;
 
   }
 
@@ -286,6 +287,7 @@ body {
   border-color: 'red';
   color:white;
   background-color: #252836;
+  font-family: 'Helvetica LT Std'
 }
 
 .inputRounded  .Mui-focused{
@@ -295,6 +297,25 @@ body {
 .inputRounded .MuiOutlinedInput-notchedOutline{
   border-color:#504C64;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

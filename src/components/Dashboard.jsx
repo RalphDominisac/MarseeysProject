@@ -17,10 +17,10 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./Chart";
+
+
 import OrderSidePage from "./OrderSidePage";
-import Orders from "./Orders";
+
 import DateTime from "./DateTime";
 
 
@@ -382,32 +382,6 @@ export default function DashboardContent() {
                 // class="center"
               />
             </ListItemButton>
-            {/* <ListItemButton
-              sx={{
-                "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
-                },
-                "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
-                },
-                ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
-                },
-              }}
-              selected={selectedIndex === 5}
-              onClick={(event) => handleListItemClick(event, 5)}
-            >
-              <ListItemIcon> </ListItemIcon>
-              <img
-                id="arcreditIcon"
-                src="images/arcredit.png"
-                alt="arcredit Icon"
-                
-              />
-            </ListItemButton> */}
 
             <ListItemButton
               sx={{
@@ -435,8 +409,6 @@ export default function DashboardContent() {
                 // class="center"
               />
             </ListItemButton>
-
-            <Divider sx={{ my: 10 }} />
           </List>
         </Drawer>
 
@@ -451,7 +423,7 @@ export default function DashboardContent() {
         >
           {/* <Toolbar /> */}
           {/* <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}> */}
-          <Container maxWidth="md" sx={{ ml: 0 }}>
+          <Container maxWidth="md" sx={{ ml: -1 }}>
             <Grid container spacing={2}>
               {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
 
@@ -463,7 +435,7 @@ export default function DashboardContent() {
                     flexDirection: "column",
                     height: 790,
                     width: 850,
-                    backgroundColor: "green",
+                    backgroundColor: "#252836",
                   }}
                 >
                   {/* <Chart /> */}
@@ -510,8 +482,12 @@ export default function DashboardContent() {
                     </Search>
                   </Toolbar> */}
 
-                  <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
+                  <Box sx={{ flexGrow: 1, ml: -1 }}>
+                    <AppBar
+                      elevation={0}
+                      position="static"
+                      sx={{ backgroundColor: "#252836" }}
+                    >
                       <Toolbar>
                         <Typography
                           variant="h6"
@@ -524,6 +500,7 @@ export default function DashboardContent() {
                         >
                           <DateTime />
                         </Typography>
+
                         <Search>
                           <SearchIconWrapper>
                             <SearchIcon />
@@ -535,6 +512,11 @@ export default function DashboardContent() {
                         </Search>
                       </Toolbar>
                     </AppBar>
+                    <Typography sx={{ ml: 3, mt: -3, color: "#504C64" }}>
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                    </Typography>
                     <CategoryButtons />
                   </Box>
                 </Paper>
@@ -547,7 +529,7 @@ export default function DashboardContent() {
                     display: "flex",
                     flexDirection: "column",
                     height: 790,
-                    width: 524,
+                    width: 549,
                     marginLeft: 25,
                     backgroundColor: "#1F1D2B",
                   }}
