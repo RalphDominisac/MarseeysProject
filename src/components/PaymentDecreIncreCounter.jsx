@@ -30,8 +30,8 @@ const App = () => {
           },
           color: "white",
           backgroundColor: "#9E3F3F",
-          ml: 35,
-          mt: -6,
+          ml: 71,
+          mt: -8,
           width: 3,
           borderTopLeftRadius: 10,
           borderBottomLeftRadius: 10,
@@ -47,34 +47,33 @@ const App = () => {
         <RemoveIcon />
       </Button>
 
-      <h1 className="counterResult">{count}</h1>
+      <h1 className="paymentcounterResult">{count}</h1>
 
-     
-        <Button
-          onClick={IncNum}
-          sx={{
-            ":hover": {
-              bgcolor: "#55CE6B", // theme.palette.primary.main
-            },
-            color: "white",
-            backgroundColor: "#5D9B68",
-            ml: 45,
-            mt: -9,
-            width: 10,
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-          }}
-          style={{
-            maxWidth: "30px",
-            maxHeight: "30px",
-            minWidth: "30px",
-            minHeight: "50px",
-          }}
-          size="small"
-        >
-          <AddIcon />
-        </Button>
-    
+      <Button
+        onClick={IncNum}
+        sx={{
+          ":hover": {
+            bgcolor: "#55CE6B", // theme.palette.primary.main
+          },
+          color: "white",
+          backgroundColor: "#5D9B68",
+          ml: 81,
+          mt: -14.8,
+          width: 10,
+          borderTopRightRadius: 10,
+          borderBottomRightRadius: 10,
+        }}
+        style={{
+          maxWidth: "30px",
+          maxHeight: "30px",
+          minWidth: "30px",
+          minHeight: "50px",
+        }}
+        size="small"
+      >
+        <AddIcon />
+      </Button>
+
       {/* </div> */}
       {/* </div> */}
       {/* </div> */}

@@ -4,6 +4,7 @@ import SignInPOS from './SignInPOS';
 import HomeOrderPage from "./HomeOrderPage";
 import DrawerSample from "./DrawerSample";
 import TestSample from "./TestSample";
+import PaymentPage from "./PaymentPage";
 
 
 
@@ -34,10 +35,12 @@ function App(){
 
         {/* <SidebarPOS/> */}
 
-        <HomeOrderPage />
+        {/* <HomeOrderPage /> */}
 
         {/* <DrawerSample/> */}
         {/* <TestSample /> */}
+
+        <PaymentPage/>
       </div>
     );
 

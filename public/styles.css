@@ -233,12 +233,29 @@ body {
   width: 14%;
   height: 50px;
   background-color: #252836;
+  border-color: "red";
   /* padding: 10px 0 2px 0; */
   /* padding: 10px; */
   /* margin-bottom: 10px; */
   text-align: center;
   margin-top: -50px;
   margin-left: 302px;
+   font-family: 'Barlow Condensed', sans-serif;
+}
+
+.paymentcounterResult {
+  color: white;
+  background: transparent;
+  width: 6%;
+  height: 50px;
+  background-color: #252836;
+  border: 1px solid #504C64;
+  /* padding: 10px 0 2px 0; */
+  /* padding: 10px; */
+  /* margin-bottom: 10px; */
+  text-align: center;
+  margin-top: -68px;
+  margin-left: 597px;
    font-family: 'Barlow Condensed', sans-serif;
 }
 
@@ -301,6 +318,26 @@ body {
 }
 
 .inputRounded .MuiOutlinedInput-notchedOutline{
+  border-color:#504C64;
+}
+
+
+
+
+
+.paymentinputRounded .MuiOutlinedInput-root {
+  border-radius: 13px;
+  border-color: 'red';
+  color:white;
+  background-color: #252836;
+  font-family: 'Helvetica LT Std'
+}
+
+.paymentinputRounded .Mui-focused{
+  color:white;
+}
+
+.paymentinputRounded .MuiOutlinedInput-notchedOutline{
   border-color:#504C64;
 }
 
