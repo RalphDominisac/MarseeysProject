@@ -43,22 +43,6 @@ export default function CategoryButtons() {
       </Stack>
 
       <Stack spacing={0} direction="row">
-        {/* <Button
-          variant="contained"
-          sx={{
-            display: "block",
-            mt: 1,
-            ml: 1,
-            width: 160,
-            height: 110,
-            textTransform: "none",
-          }}
-        >
-          <Typography>Buffalo Wings</Typography>
-          <Typography>Php 200.00</Typography>
-          <Typography>20 Available</Typography>
-        </Button> */}
-
         <ItemsCategoryButton
           title="Buffalo Wings"
           price="200.00"
@@ -89,7 +73,19 @@ export default function CategoryButtons() {
 
       <Button
         variant="contained"
-        sx={{ mt: 37, ml: 85, width: 160, textTransform: "none" }}
+        sx={{
+          ":hover": {
+            bgcolor: "#FFB644", // theme.palette.primary.main
+          },
+          mt: 37,
+          ml: 85,
+          width: 160,
+          textTransform: "none",
+          bgcolor: "#F2A42A",
+          fontFamily: "Barlow Condensed",
+          fontSize: "18px",
+          height: "32px",
+        }}
       >
         Customer List
       </Button>

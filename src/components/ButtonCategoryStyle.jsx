@@ -25,6 +25,8 @@ export default function ButtonComponent({ title }) {
         borderRadius: 3,
         color: "white",
         height: 49,
+        fontFamily: "Barlow Condensed",
+        fontSize: "19px",
       }}
     >
       {title}

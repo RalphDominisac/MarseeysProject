@@ -33,6 +33,7 @@ import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
+import { autocompleteClasses } from "@mui/material";
 
 
 // function Copyright(props) {
@@ -60,7 +61,7 @@ const drawerWidth = 120;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: 14,
   backgroundColor: "white",
   color: "black",
   "&:hover": {
@@ -162,7 +163,8 @@ const mdTheme = createTheme({
 
 
 
-export default function DashboardContent() {
+// export default function DashboardContent() {
+  export default function HomeOrderPage() {
 
 
   const [selectedIndex, setSelectedIndex] = React.useState("");
@@ -180,41 +182,7 @@ export default function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open} sx={{ width: "50" }}>
-          {/* <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-              backgroundColor: "#282c34",
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            INSERT TIME AND DATE HERE
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            ></Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            INSERT SEARCH BAR HERE
-          </Toolbar> */}
-        </AppBar>
+        <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
 
         <Drawer
           variant="permanent"
@@ -233,6 +201,9 @@ export default function DashboardContent() {
               justifyContent: "flex-end",
               px: [1],
               backgroundColor: "#1F1D2B",
+              borderRadius: 4,
+              ml: -1.5
+             
             }}
           >
             <img
@@ -253,17 +224,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 0}
               onClick={(event) => handleListItemClick(event, 0)}
@@ -281,17 +254,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 1}
               onClick={(event) => handleListItemClick(event, 1)}
@@ -307,17 +282,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 2}
               onClick={(event) => handleListItemClick(event, 2)}
@@ -333,17 +310,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 3}
               onClick={(event) => handleListItemClick(event, 3)}
@@ -359,17 +338,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 4}
               onClick={(event) => handleListItemClick(event, 4)}
@@ -386,17 +367,19 @@ export default function DashboardContent() {
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 "&.Mui-focusVisible": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
                 ":hover": {
-                  // backgroundColor: "#02A7DD",
-                  border: "3px solid #F2A42A",
+                  border: "2px solid #F2A42A",
                 },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
               }}
               selected={selectedIndex === 6}
               onClick={(event) => handleListItemClick(event, 6)}
@@ -438,50 +421,6 @@ export default function DashboardContent() {
                     backgroundColor: "#252836",
                   }}
                 >
-                  {/* <Chart /> */}
-
-                  {/* Header Time and Date Display*/}
-                  {/* <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
-                      <Toolbar>
-                        <Typography
-                          variant="h6"
-                          noWrap
-                          component="div"
-                          sx={{
-                            flexGrow: 1,
-                            display: { xs: "none", sm: "block" },
-                          }}
-                        >
-                          <DateTime />
-                        </Typography>
-                        <Search>
-                          <SearchIconWrapper>
-                            <SearchIcon sx={{ color: "black" }} />
-                          </SearchIconWrapper>
-                          <StyledInputBase
-                            placeholder="Search for an item"
-                            inputProps={{ "aria-label": "search" }}
-                          />
-                        </Search>
-                      </Toolbar>
-                    </AppBar>
-                  </Box> */}
-
-                  {/* <Toolbar>
-                    <DateTime />
-
-                    <Search>
-                      <SearchIconWrapper>
-                        <SearchIcon sx={{ color: "black" }} />
-                      </SearchIconWrapper>
-                      <StyledInputBase
-                        placeholder="Search for an item"
-                        inputProps={{ "aria-label": "search" }}
-                      />
-                    </Search>
-                  </Toolbar> */}
-
                   <Box sx={{ flexGrow: 1, ml: -1 }}>
                     <AppBar
                       elevation={0}
@@ -556,7 +495,7 @@ export default function DashboardContent() {
             {/* <Copyright sx={{ pt: 4 }} /> */}
           </Container>
 
-          {/* Potential side order part */}
+       
         </Box>
       </Box>
     </ThemeProvider>

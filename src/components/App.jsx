@@ -1,7 +1,7 @@
 import React from 'react';
 import SignInPOS from './SignInPOS';
 
-import Dashboard from "./Dashboard";
+import HomeOrderPage from "./HomeOrderPage";
 import DrawerSample from "./DrawerSample";
 import TestSample from "./TestSample";
 
@@ -32,13 +32,9 @@ function App(){
 
         {/* <SignInPOS /> */}
 
-      
-
-     
-
         {/* <SidebarPOS/> */}
 
-        <Dashboard />
+        <HomeOrderPage />
 
         {/* <DrawerSample/> */}
         {/* <TestSample /> */}
