@@ -1,18 +1,7 @@
 package com.example.marpos;
 
-import com.example.marpos.model.MenuItem;
-import com.example.marpos.constant.MenuType;
-import com.example.marpos.model.Ingredient;
-import com.example.marpos.constant.IngredientQuantification;
-import com.example.marpos.repo.IngredientRepository;
-import com.example.marpos.repo.MenuItemRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.awt.*;
-import java.util.List;
 
 @SpringBootApplication
 public class MarposApplication {
