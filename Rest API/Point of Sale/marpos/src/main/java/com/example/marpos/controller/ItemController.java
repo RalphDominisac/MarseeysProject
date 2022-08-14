@@ -1,5 +1,6 @@
 package com.example.marpos.controller;
 
+import com.example.marpos.dto.ItemRequest;
 import com.example.marpos.enumeration.ItemType;
 import com.example.marpos.entity.item.Item;
 import com.example.marpos.service.ItemService;
@@ -24,18 +25,18 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/{type}")
-    public ResponseEntity<Optional<List<Item>>> getItemsFromCategory(@PathVariable String type) {
+    @GetMapping
+    public ResponseEntity<Optional<List<Item>>> getItemsFromCategory(@RequestParam(value = "type") String type) {
         return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type)));
     }
 
-    @GetMapping()
+    @GetMapping("/search")
     public ResponseEntity<Optional<List<Item>>> searchItem(@RequestParam(value = "name") String name) {
         return ResponseEntity.ok(itemService.searchItem(name));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Item> saveItem(@RequestBody Item item) {
+    public ResponseEntity<Item> saveItem(@RequestBody ItemRequest item) {
         return new ResponseEntity<>(itemService.saveItem(item), HttpStatus.CREATED);
     }
 }

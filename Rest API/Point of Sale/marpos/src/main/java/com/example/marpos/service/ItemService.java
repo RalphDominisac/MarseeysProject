@@ -1,5 +1,6 @@
 package com.example.marpos.service;
 
+import com.example.marpos.dto.ItemRequest;
 import com.example.marpos.enumeration.ItemType;
 import com.example.marpos.entity.item.Item;
 import com.example.marpos.repository.ItemRepository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 // Service layer of the MenuItem class
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final NextSequenceService nextSequenceService;
 
 //    getItemsFromCategory - done
 //    searchItem - done
@@ -29,7 +31,10 @@ public class ItemService {
         return itemRepository.findMenuItemsByNameContainingIgnoreCase(name);
     }
 
-    public Item saveItem(Item item) {
+    public Item saveItem(ItemRequest itemRequest) {
+        Item item = Item.build(nextSequenceService.getNextSequence("ItemSequence"), itemRequest.getName(),
+                itemRequest.getPrice(), itemRequest.getIngredients(),
+                itemRequest.getType(), itemRequest.isAvailable());
         return itemRepository.save(item);
     }
 }

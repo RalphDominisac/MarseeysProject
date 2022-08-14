@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
 
-// Menu collection
-public interface ItemRepository extends MongoRepository<Item, String> {
+
+public interface ItemRepository extends MongoRepository<Item, Integer> {
     Optional<List<Item>> findMenuItemsByTypeIs(ItemType type);
     Optional<List<Item>> findMenuItemsByNameContainingIgnoreCase(String name);
 }

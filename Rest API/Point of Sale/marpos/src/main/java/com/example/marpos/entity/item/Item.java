@@ -12,11 +12,11 @@ import java.util.List;
 
 @Data
 @Document(collection = "menu")
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 public class Item {
     @Id
-    private ObjectId id;
+    private int id;
     @Indexed(unique = true)
     private String name;
     private double price;
