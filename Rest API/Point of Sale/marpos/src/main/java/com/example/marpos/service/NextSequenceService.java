@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NextSequenceService {
-    @Autowired private MongoOperations mongo;
+    @Autowired
+    private MongoOperations mongo;
 
     public int getNextSequence(String seqName)
     {
