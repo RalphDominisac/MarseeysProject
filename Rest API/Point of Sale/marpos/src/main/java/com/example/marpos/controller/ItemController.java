@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,16 +28,16 @@ public class ItemController {
 
     @GetMapping
     public ResponseEntity<Optional<List<Item>>> getItemsFromCategory(@RequestParam(value = "type") String type) {
-        return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type)));
+        return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type.toUpperCase())));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Optional<List<Item>>> searchItem(@RequestParam(value = "name") String name) {
+    public ResponseEntity<Optional<List<Item>>> searchItem(@RequestParam(value = "name") String name){
         return ResponseEntity.ok(itemService.searchItem(name));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Item> saveItem(@RequestBody ItemRequest item) {
+    public ResponseEntity<Item> saveItem(@RequestBody @Valid ItemRequest item) {
         return new ResponseEntity<>(itemService.saveItem(item), HttpStatus.CREATED);
     }
 }

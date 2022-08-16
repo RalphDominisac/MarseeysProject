@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -15,5 +17,7 @@ import java.util.List;
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 public class Ingredient {
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 1, message = "Name cannot be empty")
     private String name;
 }
