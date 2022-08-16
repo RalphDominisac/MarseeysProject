@@ -49,98 +49,99 @@
 
 // import TextField from "@mui/material/TextField";
 
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+// import * as React from "react";
+// import Button from "@mui/material/Button";
+// import Stack from "@mui/material/Stack";
 
 
 
 
 
-export default function TestSample() {
+// export default function TestSample() {
   
-    // const [selectedIndex2, setSelectedIndex2] = React.useState("");
+//     // const [selectedIndex2, setSelectedIndex2] = React.useState("");
 
-    // const handleListItemClick2 = (event, index) => {
-    //   setSelectedIndex2(index);
-    // };
+//     // const handleListItemClick2 = (event, index) => {
+//     //   setSelectedIndex2(index);
+//     // };
 
     
 
 
 
-return (
-  <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
-    <Button
-      variant="outlined"
-      sx={{
-        "&.Mui-selected": {},
-        "&.Mui-focusVisible": {
-          border: "3px solid #F2A42A",
-        },
-        ":focus": {
-          border: "3px solid #F2A42A",
-        },
+// return (
+//   <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
+//     <Button
+//       variant="outlined"
+//       sx={{
+//         "&.Mui-selected": {},
+//         "&.Mui-focusVisible": {
+//           border: "3px solid #F2A42A",
+//         },
+//         ":focus": {
+//           border: "3px solid #F2A42A",
+//         },
 
-        width: 131,
-        textTransform: "none",
-        height: 42,
-        borderRadius: 3,
-        fontFamily: "Barlow Condensed",
-        fontSize: "22px",
-      }}
-      // selected={selectedIndex2 === 0}
-      // onClick={(event) => handleListItemClick2(event, 0)}
-    >
-      Dine In
-    </Button>
-    <Button
-      variant="outlined"
-      sx={{
-        "&.Mui-selected": {},
-        "&.Mui-focusVisible": {
-          border: "3px solid #F2A42A",
-        },
-        ":focus": {
-          border: "3px solid #F2A42A",
-        },
+//         width: 131,
+//         textTransform: "none",
+//         height: 42,
+//         borderRadius: 3,
+//         fontFamily: "Barlow Condensed",
+//         fontSize: "22px",
+//       }}
+//       // selected={selectedIndex2 === 0}
+//       // onClick={(event) => handleListItemClick2(event, 0)}
+//     >
+//       Dine In
+//     </Button>
+//     <Button
+//       variant="outlined"
+//       sx={{
+//         "&.Mui-selected": {},
+//         "&.Mui-focusVisible": {
+//           border: "3px solid #F2A42A",
+//         },
+//         ":focus": {
+//           border: "3px solid #F2A42A",
+//         },
 
-        width: 131,
-        textTransform: "none",
-        height: 42,
-        borderRadius: 3,
-        fontFamily: "Barlow Condensed",
-        fontSize: "22px",
-      }}
-      // selected={selectedIndex2 === 1}
-      // onClick={(event) => handleListItemClick2(event, 1)}
-    >
-      Pickup
-    </Button>
-    <Button
-      variant="outlined"
-      sx={{
-        "&.Mui-selected": {},
-        "&.Mui-focusVisible": {
-          border: "3px solid #F2A42A",
-        },
-        ":focus": {
-          border: "3px solid #F2A42A",
-        },
+//         width: 131,
+//         textTransform: "none",
+//         height: 42,
+//         borderRadius: 3,
+//         fontFamily: "Barlow Condensed",
+//         fontSize: "22px",
+//       }}
+//       // selected={selectedIndex2 === 1}
+//       // onClick={(event) => handleListItemClick2(event, 1)}
+//     >
+//       Pickup
+//     </Button>
+//     <Button
+//       variant="outlined"
+//       sx={{
+//         "&.Mui-selected": {},
+//         "&.Mui-focusVisible": {
+//           border: "3px solid #F2A42A",
+//         },
+//         ":focus": {
+//           border: "3px solid #F2A42A",
+//         },
 
-        width: 131,
-        textTransform: "none",
-        height: 42,
-        borderRadius: 3,
-        fontFamily: "Barlow Condensed",
-        fontSize: "22px",
-      }}
-      // selected={selectedIndex2 === 2}
-      // onClick={(event) => handleListItemClick2(event, 2)}
-    >
-      Delivery
-    </Button>
-  </Stack>
-);
-}
+//         width: 131,
+//         textTransform: "none",
+//         height: 42,
+//         borderRadius: 3,
+//         fontFamily: "Barlow Condensed",
+//         fontSize: "22px",
+//       }}
+//       // selected={selectedIndex2 === 2}
+//       // onClick={(event) => handleListItemClick2(event, 2)}
+//     >
+//       Delivery
+//     </Button>
+//   </Stack>
+// );
+// }
+
 

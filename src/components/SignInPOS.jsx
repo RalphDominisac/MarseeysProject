@@ -25,6 +25,16 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
+
+
+
 
 
 import { styled } from "@mui/system";
@@ -87,6 +97,24 @@ const theme = createTheme({
 
 
 export default function SignInPOS() {
+
+  // ROUTING:
+  const navigate = useNavigate();
+
+  // const navigateHome = () => {
+  //   // 👇️ navigate to /
+  //   navigate("/");
+  // };
+
+  const navigateToHomeOrderPage = () => {
+    // 👇️ navigate to /contacts
+    navigate("/homeorderpage");
+  };
+
+
+
+
+
   // -----------------------------------------------------------
  //  ** Password show and not show JS
   const [values, setValues] = React.useState({
@@ -134,6 +162,20 @@ export default function SignInPOS() {
             alignItems: "center",
           }}
         >
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+
+          <img
+            id="marseeyslogo"
+            src="./images/Asset 11.png"
+            alt="Marseeys logo"
+            class="center"
+          />
+
+          <p class="subsystemTitle"> Sales Ordering System (v.1.0) </p>
           <Box
             component="form"
             noValidate
@@ -177,10 +219,14 @@ export default function SignInPOS() {
                   </InputLabel>
                   <FilledInput
                     sx={{
+                      ":hover": {
+                        bgcolor: "white",
+                      },
                       input: {
                         color: "black",
                         background: "white",
                       },
+                      backgroundColor: "white",
                     }}
                     id="filled-adornment-password"
                     type={values.showPassword ? "text" : "password"}
@@ -193,7 +239,12 @@ export default function SignInPOS() {
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
-                          // style={{ background: "white"}}
+                          // sx={{ color: "red", backgroundColor: "black" }}
+
+                          // sx={{ "& :hover": { color: "yellow" } }}
+                          //   sx={{backgroundColor:"white"}}
+                          // style={{ backgroundColor: "#252836" }}
+                          style={{ background: "black" }}
                         >
                           {values.showPassword ? (
                             <VisibilityOff style={{ fill: "white" }} />
@@ -208,6 +259,7 @@ export default function SignInPOS() {
               </Grid>
             </Grid>
             <Button
+              onClick={navigateToHomeOrderPage}
               type="submit"
               fullWidth
               variant="contained"

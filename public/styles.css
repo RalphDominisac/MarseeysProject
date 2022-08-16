@@ -192,12 +192,24 @@ body {
     margin-left: 25px;
 
   }
+    .orderSummaryItemStack{
+      color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -4px;
+    margin-left: 25px;
+  }
 
-
-
- 
-
-
+  .customerListStack{
+      color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -4px;
+    margin-left: 40px;
+  }
+  
 
   /* for sidebar size */
 
@@ -340,6 +352,8 @@ body {
 .paymentinputRounded .MuiOutlinedInput-notchedOutline{
   border-color:#504C64;
 }
+
+
 
 
 

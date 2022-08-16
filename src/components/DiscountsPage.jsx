@@ -19,13 +19,14 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 
-import OrderSidePage from "./OrderSidePage";
+import CustomerListSidePage from "./CustomerListSidePage";
 
 import DateTime from "./DateTime";
 
 
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import VoucherButtons from "./VoucherButtons";
 
 import { useState } from "react";
 
@@ -35,17 +36,10 @@ import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import Button from "@mui/material/Button";
+import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
+import TextField from "@mui/material/TextField";
 
-
-
-
-// import DrawerLeftMenu from "./DrawerLeftMenu";
 
 
 // function Copyright(props) {
@@ -69,7 +63,7 @@ import {
 
 
 
-const drawerWidth = 120; 
+const drawerWidth = 120;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -132,7 +126,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { 
+const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
@@ -176,14 +170,7 @@ const mdTheme = createTheme({
 
 
 // export default function DashboardContent() {
-  export default function HomeOrderPage() {
-
-    const navigate = useNavigate();
-    const navigateHome = () => {
-      // 👇️ navigate to /
-      navigate("/");
-    };
-
+  export default function DiscountsPage() {
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
     const handleListItemClick = (event, index) => {
@@ -201,8 +188,6 @@ const mdTheme = createTheme({
           <CssBaseline />
           <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
 
-          {/* <DrawerLeftMenu/> */}
-
           <Drawer
             variant="permanent"
             open={open}
@@ -212,6 +197,7 @@ const mdTheme = createTheme({
               },
             }}
           >
+            {/* ** Upper Right Part For Logo */}
             <Toolbar
               sx={{
                 display: "flex",
@@ -229,9 +215,14 @@ const mdTheme = createTheme({
                 alt="Marseeys Icon"
                 class="center"
               />
+
+              {/* <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
+              <ChevronLeftIcon />
+            </IconButton> */}
             </Toolbar>
             <Divider />
 
+            {/* SIDEBAR MENU LEFT ******************************************************************************/}
             <List component="nav" sx={{ backgroundColor: "#252836" }}>
               <ListItemButton
                 sx={{
@@ -253,12 +244,14 @@ const mdTheme = createTheme({
                 selected={selectedIndex === 0}
                 onClick={(event) => handleListItemClick(event, 0)}
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
 
+                {/* <ListItemText primary="ORDER" /> */}
                 <img
                   id="orderIcon"
                   src="images/ordericon.png"
                   alt="Order Icon"
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -281,11 +274,12 @@ const mdTheme = createTheme({
                 selected={selectedIndex === 1}
                 onClick={(event) => handleListItemClick(event, 1)}
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
                 <img
                   id="pendingIcon"
                   src="images/pending.png"
                   alt="Pending Icon"
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -308,8 +302,13 @@ const mdTheme = createTheme({
                 selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 2)}
               >
-                <ListItemIcon></ListItemIcon>
-                <img id="draftIcon" src="images/draft.png" alt="Draft Icon" />
+                <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
+                <img
+                  id="draftIcon"
+                  src="images/draft.png"
+                  alt="Draft Icon"
+                  // class="center"
+                />
               </ListItemButton>
               <ListItemButton
                 sx={{
@@ -331,11 +330,12 @@ const mdTheme = createTheme({
                 selected={selectedIndex === 3}
                 onClick={(event) => handleListItemClick(event, 3)}
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
                 <img
                   id="historyIcon"
                   src="images/history.png"
                   alt="History Icon"
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -358,11 +358,12 @@ const mdTheme = createTheme({
                 selected={selectedIndex === 4}
                 onClick={(event) => handleListItemClick(event, 4)}
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
                 <img
                   id="discountsIcon"
                   src="images/discounts.png"
                   alt="discounts Icon"
+                  // class="center"
                 />
               </ListItemButton>
 
@@ -384,15 +385,14 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 6}
-                onClick={
-                  ((event) => handleListItemClick(event, 6), navigateHome)
-                }
+                onClick={(event) => handleListItemClick(event, 6)}
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
                 <img
                   id="logoutIcon"
                   src="images/logout.png"
                   alt="logout Icon"
+                  // class="center"
                 />
               </ListItemButton>
             </List>
@@ -438,28 +438,29 @@ const mdTheme = createTheme({
                             sx={{
                               flexGrow: 1,
                               display: { xs: "none", sm: "block" },
+                              fontFamily: "Barlow Condensed",
+                              fontSize: "30px",
+                              mt: 5,
                             }}
                           >
-                            <DateTime />
+                            APPLY VOUCHER FOR ORDER #0001
                           </Typography>
-
-                          <Search>
-                            <SearchIconWrapper>
-                              <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                              placeholder="Search for an item"
-                              inputProps={{ "aria-label": "search" }}
-                            />
-                          </Search>
                         </Toolbar>
                       </AppBar>
-                      <Typography sx={{ ml: 3, mt: -3, color: "#504C64" }}>
+
+                     
+
+                     
+
+                     
+
+
+                      <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - -
                       </Typography>
-                      <CategoryButtons />
+                      <VoucherButtons discountPercent="10%"></VoucherButtons>
                     </Box>
                   </Paper>
                 </Grid>
@@ -476,24 +477,9 @@ const mdTheme = createTheme({
                       backgroundColor: "#1F1D2B",
                     }}
                   >
-                    <OrderSidePage />
+                    {/* <CustomerListSidePage /> */}
                   </Paper>
                 </Grid>
-
-                {/* Recent Orders */}
-                {/* <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    width: 750,
-                    height: 370,
-                  }}
-                >
-                  <Orders />
-                </Paper>
-              </Grid> */}
               </Grid>
               {/* <Copyright sx={{ pt: 4 }} /> */}
             </Container>
@@ -503,18 +489,6 @@ const mdTheme = createTheme({
     );
   }
 
-// export default function Dashboard() {
-  // const [selected1, setSelected1] = useState(false);
-  // const [selected2, setSelected2] = useState(false);
-  // const [selected3, setSelected3] = useState(false);
-  // const [selected4, setSelected4] = useState(false);
-  // const [selected5, setSelected5] = useState(false);
-  // const [selected6, setSelected6] = useState(false);
-  // const [selected7, setSelected7] = useState(false);
-  
-  
-//   return <DashboardContent />;
-// }
 
 
 

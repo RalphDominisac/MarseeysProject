@@ -5,30 +5,30 @@ import HomeOrderPage from "./HomeOrderPage";
 import DrawerSample from "./DrawerSample";
 import TestSample from "./TestSample";
 import PaymentPage from "./PaymentPage";
+import OrderSummaryPage from "./OrderSummaryPage";
+import CustomerListPage from "./CustomerListPage";
+import PendingOrdersPage from "./PendingOrdersPage";
+import DraftsPage from "./DraftsPage";
+import HistoryPage from "./HistoryPage";
+import DiscountsPage from "./DiscountsPage";
 
-
-
+import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
 
 
 function App(){
-
     return (
+      // <Router>
+      //   <Routes>
+      //    <Route path="/" element={<SignInPOS/>} />
+      //     <Route path="/homeorderspage" element={<HomeOrderPage/>} />
+      //     <Route path="/pendingpage" element={<PendingOrdersPage/>} />
+      //     <Route path="/draftspage" element={<DraftsPage/>} />
+      //     <Route path="/historypage" element={<HistoryPage/>} />
+      //     <Route path="/discountspage" element={<DiscountsPage/>} />
+      //     <Route path="/signin" element={<SignInPOS/>} />
+      //   </Routes>
+      // </Router>
       <div>
-        {/* <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-
-        <img
-          id="marseeyslogo"
-          src="images/Asset 11.png"
-          alt="Marseeys logo"
-          class="center"
-        />
-
-        <p class="subsystemTitle"> Sales Ordering System (v.1.0) </p> */}
-
         {/* TESTING AREA: */}
 
         {/* <SignInPOS /> */}
@@ -40,8 +40,27 @@ function App(){
         {/* <DrawerSample/> */}
         {/* <TestSample /> */}
 
-        <PaymentPage/>
+        {/* <PaymentPage/> */}
+        {/* <OrderSummaryPage /> */}
+        {/* <CustomerListPage /> */}
+
+        {/* <PendingOrdersPage /> */}
+        {/* <DraftsPage/> */}
+        {/* <HistoryPage /> */}
+        {/* <DiscountsPage /> */}
       </div>
+
+      // ************************************************************
+      // UNCOMMENT THIS TO ACTIVATE ROUTES:
+      // <div>
+      //   <div>
+
+      //     <Routes>
+      //       <Route path="/" element={<SignInPOS />} />
+      //       <Route path="/homeorderpage" element={<HomeOrderPage />} />
+      //     </Routes>
+      //   </div>
+      // </div>
     );
 
 }

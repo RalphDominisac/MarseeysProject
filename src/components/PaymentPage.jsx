@@ -19,7 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 
-import PaymentDetailsPage from "./PaymentDetailsPage";
+import PaymentDetailsSidePage from "./PaymentDetailsSidePage";
 
 import DateTime from "./DateTime";
 
@@ -539,7 +539,32 @@ const mdTheme = createTheme({
                       Php 2000.00
                     </Typography>
 
-                    <Typography sx={{ ml: 3, mt: 8, color: "#504C64" }}>
+                    <Button
+                      sx={{
+                        ":hover": {
+                          bgcolor: "#D33131", // theme.palette.primary.main
+                        },
+                        color: "white",
+                        backgroundColor: "#9E3F3F",
+                        ml: 90,
+                        mt: 2,
+                        width: 10,
+                        borderRadius: 3,
+                        fontFamily: "Barlow Condensed",
+                        fontSize: "17px",
+                      }}
+                      style={{
+                        maxWidth: "30px",
+                        maxHeight: "30px",
+                        minWidth: "115px",
+                        minHeight: "40px",
+                      }}
+                      size="small"
+                    >
+                      Remove Item
+                    </Button>
+
+                    <Typography sx={{ ml: 3, mt: 1, color: "#504C64" }}>
                       - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                       - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                       - - - - - - - - - - - - - - - - - - - - - - -
@@ -560,7 +585,7 @@ const mdTheme = createTheme({
                     backgroundColor: "#1F1D2B",
                   }}
                 >
-                  <PaymentDetailsPage />
+                  <PaymentDetailsSidePage />
                 </Paper>
               </Grid>
             </Grid>
