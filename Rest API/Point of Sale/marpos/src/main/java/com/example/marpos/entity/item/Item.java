@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document(collection = "menu")
+@Document(collection = "Menu")
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 public class Item {
@@ -22,4 +22,5 @@ public class Item {
     private List<Ingredient> ingredients;
     private ItemType type;
     private boolean isAvailable;
+    private boolean isDeleted;
 }

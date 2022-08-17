@@ -15,11 +15,19 @@ public class NextSequenceService {
     @Autowired
     private MongoOperations mongo;
 
-    public int getNextSequence(String seqName)
-    {
+    public int getNextSequence(String seqName) {
         Sequence counter = mongo.findAndModify(
                 query(where("_id").is(seqName)),
                 new Update().inc("seq",1),
+                options().returnNew(true).upsert(true),
+                Sequence.class);
+        return counter.getSeq();
+    }
+
+    public int getPrevSequence(String seqName) {
+        Sequence counter = mongo.findAndModify(
+                query(where("_id").is(seqName)),
+                new Update().inc("seq",-1),
                 options().returnNew(true).upsert(true),
                 Sequence.class);
         return counter.getSeq();
