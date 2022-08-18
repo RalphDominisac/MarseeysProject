@@ -39,6 +39,13 @@ import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
 
 
 // function Copyright(props) {

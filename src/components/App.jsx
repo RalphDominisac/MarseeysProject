@@ -28,39 +28,42 @@ function App(){
       //     <Route path="/signin" element={<SignInPOS/>} />
       //   </Routes>
       // </Router>
-      <div>
-        {/* TESTING AREA: */}
+      // <div>
+      //   {/* TESTING AREA: */}
 
-        {/* <SignInPOS /> */}
+      //   {/* <SignInPOS /> */}
 
-        {/* <SidebarPOS/> */}
+      //   {/* <SidebarPOS/> */}
 
-        {/* <HomeOrderPage /> */}
+      //   {/* <HomeOrderPage /> */}
 
-        {/* <DrawerSample/> */}
-        {/* <TestSample /> */}
+      //   {/* <DrawerSample/> */}
+      //   {/* <TestSample /> */}
 
-        {/* <PaymentPage/> */}
-        {/* <OrderSummaryPage /> */}
-        {/* <CustomerListPage /> */}
+      //   {/* <PaymentPage/> */}
+      //   {/* <OrderSummaryPage /> */}
+      //   {/* <CustomerListPage /> */}
 
-        {/* <PendingOrdersPage /> */}
-        {/* <DraftsPage/> */}
-        {/* <HistoryPage /> */}
-        {/* <DiscountsPage /> */}
-      </div>
+      //   {/* <PendingOrdersPage /> */}
+      //   {/* <DraftsPage/> */}
+      //   {/* <HistoryPage /> */}
+      //   {/* <DiscountsPage /> */}
+      // </div>
 
       // ************************************************************
       // UNCOMMENT THIS TO ACTIVATE ROUTES:
-      // <div>
-      //   <div>
-
-      //     <Routes>
-      //       <Route path="/" element={<SignInPOS />} />
-      //       <Route path="/homeorderpage" element={<HomeOrderPage />} />
-      //     </Routes>
-      //   </div>
-      // </div>
+      <div>
+        <div>
+          <Routes>
+            <Route path="/" element={<SignInPOS />} />
+            <Route path="/homeorderpage" element={<HomeOrderPage />} />
+            <Route path="/pendingpage" element={<PendingOrdersPage />} />
+            <Route path="/draftspage" element={<DraftsPage />} />
+            <Route path="/historypage" element={<HistoryPage />} />
+            <Route path="/discountspage" element={<DiscountsPage />} />
+          </Routes>
+        </div>
+      </div>
     );
 
 }

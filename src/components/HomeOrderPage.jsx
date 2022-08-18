@@ -179,10 +179,34 @@ const mdTheme = createTheme({
   export default function HomeOrderPage() {
 
     const navigate = useNavigate();
-    const navigateHome = () => {
+    const navigateSignInPage = () => {
       // 👇️ navigate to /
       navigate("/");
     };
+
+
+    const navigateToHomeOrderPage = () => {
+      navigate("/homeorderpage");
+    };
+
+    const navigateToPendingPage = () => {
+      navigate("/pendingpage");
+    };
+
+    const navigateToDraftsPage = () => {
+      navigate("/draftspage");
+    };
+
+    const navigateToHistoryPage = () => {
+      navigate("/historypage");
+    };
+
+    const navigateToDiscountsPage = () => {
+      navigate("/discountspage");
+    };
+
+
+
 
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
@@ -251,7 +275,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
+                onClick={
+                  ((event) => handleListItemClick(event, 0),
+                  navigateToHomeOrderPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
 
@@ -279,7 +306,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}
+                onClick={
+                  ((event) => handleListItemClick(event, 1),
+                  navigateToPendingPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
                 <img
@@ -306,7 +336,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}
+                onClick={
+                  ((event) => handleListItemClick(event, 2),
+                  navigateToDraftsPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
                 <img id="draftIcon" src="images/draft.png" alt="Draft Icon" />
@@ -329,7 +362,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+                onClick={
+                  ((event) => handleListItemClick(event, 3),
+                  navigateToHistoryPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
                 <img
@@ -356,7 +392,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
+                onClick={
+                  ((event) => handleListItemClick(event, 4),
+                  navigateToDiscountsPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
                 <img
@@ -385,7 +424,7 @@ const mdTheme = createTheme({
                 }}
                 selected={selectedIndex === 6}
                 onClick={
-                  ((event) => handleListItemClick(event, 6), navigateHome)
+                  ((event) => handleListItemClick(event, 6), navigateSignInPage)
                 }
               >
                 <ListItemIcon></ListItemIcon>

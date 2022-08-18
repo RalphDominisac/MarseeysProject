@@ -40,6 +40,13 @@ import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
 
 
 // function Copyright(props) {
@@ -173,6 +180,35 @@ const mdTheme = createTheme({
   export default function DiscountsPage() {
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
+     const navigate = useNavigate();
+
+      const navigateSignInPage = () => {
+        // 👇️ navigate to /
+        navigate("/");
+      };
+
+     const navigateToHomeOrderPage = () => {
+       navigate("/homeorderpage");
+     };
+
+     const navigateToPendingPage = () => {
+       navigate("/pendingpage");
+     };
+
+      const navigateToDraftsPage = () => {
+        navigate("/draftpage");
+      };
+
+       const navigateToHistoryPage = () => {
+         navigate("/historypage");
+       };
+
+       const navigateToDiscountsPage = () => {
+         navigate("/discountspage");
+       };
+
+
+
     const handleListItemClick = (event, index) => {
       setSelectedIndex(index);
     };
@@ -242,7 +278,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
+                onClick={
+                  ((event) => handleListItemClick(event, 0),
+                  navigateToHomeOrderPage)
+                }
               >
                 <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
 
@@ -272,7 +311,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}
+                onClick={
+                  ((event) => handleListItemClick(event, 1),
+                  navigateToPendingPage)
+                }
               >
                 <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
                 <img
@@ -300,7 +342,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}
+                onClick={
+                  ((event) => handleListItemClick(event, 2),
+                  navigateToDraftsPage)
+                }
               >
                 <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
                 <img
@@ -328,7 +373,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+                onClick={
+                  ((event) => handleListItemClick(event, 3),
+                  navigateToHistoryPage)
+                }
               >
                 <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
                 <img
@@ -356,7 +404,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
+                onClick={
+                  ((event) => handleListItemClick(event, 4),
+                  navigateToDiscountsPage)
+                }
               >
                 <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
                 <img
@@ -385,7 +436,9 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 6}
-                onClick={(event) => handleListItemClick(event, 6)}
+                onClick={
+                  ((event) => handleListItemClick(event, 6), navigateSignInPage)
+                }
               >
                 <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
                 <img
@@ -447,13 +500,6 @@ const mdTheme = createTheme({
                           </Typography>
                         </Toolbar>
                       </AppBar>
-
-                     
-
-                     
-
-                     
-
 
                       <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
