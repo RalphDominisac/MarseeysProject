@@ -8,9 +8,8 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface ItemRepository extends MongoRepository<Item, Integer> {
     @Query("{'type': ?0, 'isDeleted': false}")
-    Optional<List<Item>> findItemsByTypeEquals(ItemType type);
-    Optional<List<Item>> findItemsByNameContainingIgnoreCase(String name);
+    List<Item> findItemsByTypeEquals(ItemType type);
+    List<Item> findItemsByNameContainingIgnoreCase(String name);
 }

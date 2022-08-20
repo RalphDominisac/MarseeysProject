@@ -29,12 +29,12 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/{type}")
-    public ResponseEntity<Optional<List<Item>>> getItemsFromCategory(@PathVariable String type) throws BadSearchException {
+    public ResponseEntity<List<Item>> getItemsFromCategory(@PathVariable String type) throws BadSearchException {
         return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type.toUpperCase())));
     }
 
     @GetMapping
-    public ResponseEntity<Optional<List<Item>>> searchItem(@RequestParam(value = "name") String name) throws BadSearchException {
+    public ResponseEntity<List<Item>> searchItem(@RequestParam(value = "name") String name) throws BadSearchException {
         return ResponseEntity.ok(itemService.searchItem(name));
     }
 

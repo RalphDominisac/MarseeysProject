@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
-@Document(collection = "inventory")
+@Document(collection = "Inventory")
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 public class Ingredient {

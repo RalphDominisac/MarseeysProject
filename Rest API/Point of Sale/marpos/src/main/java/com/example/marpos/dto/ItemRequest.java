@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 
 @Data
-@AllArgsConstructor(staticName = "build")
+@AllArgsConstructor
 @NoArgsConstructor
 public class ItemRequest {
     @NotNull(message = "Name cannot be null")

@@ -49,7 +49,7 @@ public class ItemExceptionHandler {
     public Map<String, String> handleInvalidCategory(HttpMessageNotReadableException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
-        errorMap.put("Please indicate a valid category in all caps", ex.getMessage());
+        errorMap.put("Please indicate a valid category", ex.getMessage());
 
         return errorMap;
     }
