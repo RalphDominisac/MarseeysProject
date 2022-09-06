@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/menu")  // Port 8080
@@ -21,7 +20,7 @@ import java.util.Optional;
 public class ItemController {
 
     //    getItemsFromCategory - done
-    //    searchItem - done
+    //    searchItem - done; commented out
     //    saveItem - done
     //    editItem - done
     //    deleteItem - done
@@ -33,10 +32,10 @@ public class ItemController {
         return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type.toUpperCase())));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Item>> searchItem(@RequestParam(value = "name") String name) throws BadSearchException {
-        return ResponseEntity.ok(itemService.searchItem(name));
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Item>> searchItem(@RequestParam(value = "name") String name) throws BadSearchException {
+//        return ResponseEntity.ok(itemService.searchItem(name));
+//    }
 
     @PostMapping("/add")
     public ResponseEntity<Item> saveItem(@RequestBody @Valid ItemRequest item) {

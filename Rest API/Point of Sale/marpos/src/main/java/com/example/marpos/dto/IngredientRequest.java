@@ -10,8 +10,8 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerRequest {
+public class IngredientRequest {
     @NotNull(message = "Name cannot be null")
-    @Size(min = 2, message = "Name cannot be empty")
+    @Size(min = 1, message = "Name cannot be empty")
     private String name;
 }

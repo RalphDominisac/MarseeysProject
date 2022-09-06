@@ -1,17 +1,21 @@
-package com.example.marpos.entity.customer;
+package com.example.marpos.entity.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "Customers")
+@Document(collection = "Payments")
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
-public class Customer {
+public class Payment {
     @Id
     private int id;
-    private String name;
+    @DBRef(db = "Orders")
+    private int orderId;
+    private double amount;
+    private double change;
 }

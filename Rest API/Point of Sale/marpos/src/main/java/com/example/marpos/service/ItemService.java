@@ -7,8 +7,6 @@ import com.example.marpos.exception.item.BadSearchException;
 import com.example.marpos.exception.item.ItemNotFoundException;
 import com.example.marpos.repository.ItemRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class ItemService {
     private final NextSequenceService nextSequenceService;
 
     //    getItemsFromCategory - done
-    //    searchItem - done
+    //    searchItem - done; commented out
     //    saveItem - done
     //    editItem - done
     //    deleteItem - done
@@ -37,22 +35,27 @@ public class ItemService {
         }
     }
 
-    public List<Item> searchItem(String name) throws BadSearchException {
-        List<Item> items = itemRepository.findItemsByNameContainingIgnoreCase(name);
-
-        if(items.isEmpty()) {
-            throw new BadSearchException("No items found.");
-        } else {
-            return items;
-        }
-    }
+//    public List<Item> searchItem(String name) throws BadSearchException {
+//        List<Item> items = itemRepository.findItemsByNameContainingIgnoreCase(name);
+//
+//        if(items.isEmpty()) {
+//            throw new BadSearchException("No items found.");
+//        } else {
+//            return items;
+//        }
+//    }
 
     public Item saveItem(ItemRequest itemRequest) {
         try {
-            Item item = Item.build(nextSequenceService.getNextSequence("ItemSequence"), itemRequest.getName(),
-                    itemRequest.getPrice(), itemRequest.getIngredients(),
-                    itemRequest.getType(), true,
-                    false);
+            Item item = Item.build(
+                    nextSequenceService.getNextSequence("ItemSequence"),
+                    itemRequest.getName(),
+                    itemRequest.getPrice(),
+                    //itemRequest.getIngredientRequests(),
+                    itemRequest.getType(),
+                    true,
+                    false
+            );
             return itemRepository.save(item);
         } catch (Exception ex) {
             nextSequenceService.getPrevSequence("ItemSequence");
@@ -65,7 +68,7 @@ public class ItemService {
 
         item.setName(itemRequest.getName());
         item.setPrice(itemRequest.getPrice());
-        item.setIngredients(itemRequest.getIngredients());
+//        item.setIngredientRequests(itemRequest.getIngredientRequests());
         item.setType(itemRequest.getType());
 
         return itemRepository.save(item);
