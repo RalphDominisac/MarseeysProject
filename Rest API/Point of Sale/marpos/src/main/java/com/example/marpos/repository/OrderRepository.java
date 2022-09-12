@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface OrderRepository extends MongoRepository<Order, Integer> {
-    @Query("{$or: [{'paid': false}, {'served': false}], {'canceled': false}")
+    @Query("{$and: [{$or: [{'paid': false}, {'served': false}]}, {'canceled': false}]}")
     List<Order> findPendingOrders();
 }

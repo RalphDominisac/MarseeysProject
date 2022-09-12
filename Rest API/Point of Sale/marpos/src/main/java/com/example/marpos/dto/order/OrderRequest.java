@@ -1,11 +1,9 @@
 package com.example.marpos.dto.order;
 
-import com.example.marpos.entity.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,5 +18,5 @@ public class OrderRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items")
-    private List<@Valid Item> contents;
+    private List<Integer> contents;
 }

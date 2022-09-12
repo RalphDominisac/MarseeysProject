@@ -1,6 +1,6 @@
 package com.example.marpos.controller;
 
-import com.example.marpos.dto.ItemRequest;
+import com.example.marpos.dto.item.ItemRequest;
 import com.example.marpos.enumeration.ItemType;
 import com.example.marpos.entity.item.Item;
 import com.example.marpos.exception.item.BadSearchException;

@@ -1,14 +1,21 @@
 package com.example.marpos.entity.order;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.example.marpos.entity.item.Item;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor(staticName = "build")
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
+@Setter
 @NoArgsConstructor
 public class DineIn extends Order{
     private int tableNo;
+
+    public DineIn(int orderId, String customer, List<Item> contents, double price, LocalDateTime date, boolean paid, boolean served, boolean canceled, int tableNo) {
+        super(orderId, customer, contents, price, date, paid, served, canceled);
+        this.tableNo = tableNo;
+    }
 }

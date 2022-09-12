@@ -10,5 +10,5 @@ import java.util.List;
 public interface ItemRepository extends MongoRepository<Item, Integer> {
     @Query("{'type': ?0, 'deleted': false}")
     List<Item> findItemsByTypeEquals(ItemType type);
-    List<Item> findItemsByNameContainingIgnoreCase(String name);
+//    List<Item> findItemsByNameContainingIgnoreCase(String name);
 }

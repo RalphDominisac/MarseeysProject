@@ -1,10 +1,13 @@
 package com.example.marpos.service;
 
-import com.example.marpos.dto.order.EditOrderRequest;
-import com.example.marpos.dto.order.OrderRequest;
+import com.example.marpos.dto.order.*;
 import com.example.marpos.entity.item.Item;
+import com.example.marpos.entity.order.Delivery;
+import com.example.marpos.entity.order.DineIn;
 import com.example.marpos.entity.order.Order;
+import com.example.marpos.entity.order.PickUp;
 import com.example.marpos.exception.order.OrderNotFoundException;
+import com.example.marpos.repository.ItemRepository;
 import com.example.marpos.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.List;
 @Service
 public class OrderService {
     private OrderRepository orderRepository;
+    private ItemRepository itemRepository;
     private NextSequenceService nextSequenceService;
 
     //  getPendingOrders - done
@@ -26,17 +30,84 @@ public class OrderService {
         return orderRepository.findPendingOrders();
     }
 
-    public Order saveOrder(OrderRequest orderRequest) {
+    public Order saveOrder(DineInRequest dineInRequest) {
         try {
-            Order order = Order.build(
+            double total = 0;
+            List<Item> items = (List<Item>) itemRepository.findAllById(dineInRequest.getContents());
+
+            // Getting total price
+            for (Item item : items) {
+                total += item.getPrice();
+            }
+
+            DineIn order = new DineIn(
                     nextSequenceService.getNextSequence("OrderSequence"),
-                    orderRequest.getCustomer(),
-                    orderRequest.getContents(),
-                    orderRequest.getContents().stream().mapToDouble(Item::getPrice).sum(),
+                    dineInRequest.getCustomer(),
+                    items,
+                    total,
                     LocalDateTime.now(),
                     false,
                     false,
-                    false
+                    false,
+                    dineInRequest.getTableNo()
+            );
+            return orderRepository.save(order);
+        } catch(Exception ex) {
+            nextSequenceService.getPrevSequence("OrderSequence");
+            throw ex;
+        }
+    }
+
+    public Order saveOrder(DeliveryRequest deliveryRequest) {
+        try {
+            double total = 0;
+            List<Item> items = (List<Item>) itemRepository.findAllById(deliveryRequest.getContents());
+
+            // Getting total price
+            for (Item item : items) {
+                total += item.getPrice();
+            }
+
+            Delivery order = new Delivery(
+                    nextSequenceService.getNextSequence("OrderSequence"),
+                    deliveryRequest.getCustomer(),
+                    items,
+                    total,
+                    LocalDateTime.now(),
+                    false,
+                    false,
+                    false,
+                    deliveryRequest.getAddress(),
+                    deliveryRequest.getMethod()
+            );
+            return orderRepository.save(order);
+        } catch(Exception ex) {
+            nextSequenceService.getPrevSequence("OrderSequence");
+            throw ex;
+        }
+    }
+
+    public Order saveOrder(PickUpRequest pickUpRequest) {
+        try {
+            double total = 0;
+            List<Item> items = (List<Item>) itemRepository.findAllById(pickUpRequest.getContents());
+
+            // Getting total price
+            for (Item item : items) {
+                total += item.getPrice();
+            }
+
+            PickUp order = new PickUp(
+                    nextSequenceService.getNextSequence("OrderSequence"),
+                    pickUpRequest.getCustomer(),
+                    items,
+                    total,
+                    LocalDateTime.now(),
+                    false,
+                    false,
+                    false,
+                    pickUpRequest.getPhoneNo(),
+                    pickUpRequest.getEstimatedTime()
             );
             return orderRepository.save(order);
         } catch(Exception ex) {

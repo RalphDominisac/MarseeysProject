@@ -1,4 +1,4 @@
-package com.example.marpos.dto;
+package com.example.marpos.dto.item;
 
 import com.example.marpos.enumeration.ItemType;
 import lombok.AllArgsConstructor;
