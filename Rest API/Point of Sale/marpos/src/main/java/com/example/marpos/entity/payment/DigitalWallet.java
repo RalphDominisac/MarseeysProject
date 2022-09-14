@@ -1,5 +1,6 @@
 package com.example.marpos.entity.payment;
 
+import com.example.marpos.entity.order.Order;
 import lombok.*;
 
 @Getter
@@ -8,8 +9,8 @@ import lombok.*;
 public class DigitalWallet extends Payment{
     private String mobileNo;
 
-    public DigitalWallet(int id, int orderId, double amount, double change, String mobileNo) {
-        super(id, orderId, amount, change);
+    public DigitalWallet(int id, Order order, double amount, double change, String mobileNo) {
+        super(id, order, amount, change);
         this.mobileNo = mobileNo;
     }
 }
