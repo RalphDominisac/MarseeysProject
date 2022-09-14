@@ -8,7 +8,9 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface ItemRepository extends MongoRepository<Item, Integer> {
-    @Query("{'type': ?0, 'deleted': false}")
+    @Query("{$and: [{'type': ?0}, {'deleted': false}]}")
     List<Item> findItemsByTypeEquals(ItemType type);
+    @Query("{$and: [{'_id': ?0}, {'deleted': false}]}")
+    Item findItem(int id);
 //    List<Item> findItemsByNameContainingIgnoreCase(String name);
 }

@@ -6,6 +6,7 @@ import com.example.marpos.entity.order.Delivery;
 import com.example.marpos.entity.order.DineIn;
 import com.example.marpos.entity.order.Order;
 import com.example.marpos.entity.order.PickUp;
+import com.example.marpos.exception.item.ItemNotFoundException;
 import com.example.marpos.exception.order.OrderNotFoundException;
 import com.example.marpos.repository.ItemRepository;
 import com.example.marpos.repository.OrderRepository;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,16 +32,26 @@ public class OrderService {
         return orderRepository.findPendingOrders();
     }
 
-    public Order saveOrder(DineInRequest dineInRequest) {
-        try {
-            double total = 0;
-            List<Item> items = (List<Item>) itemRepository.findAllById(dineInRequest.getContents());
+    public Order saveOrder(DineInRequest dineInRequest) throws ItemNotFoundException {
+        double total = 0;
+        List<Item> items = new ArrayList<>();
+        List<Integer> itemIds = dineInRequest.getContents();
 
-            // Getting total price
-            for (Item item : items) {
-                total += item.getPrice();
+        // Fetching orders one by one
+        for (Integer itemId : itemIds) {
+            if(itemRepository.findById(itemId).isEmpty()) {
+                throw new ItemNotFoundException(itemId);
+            } else {
+                items.add(itemRepository.findItem(itemId));
             }
+        }
 
+        // Getting total price
+        for (Item item : items) {
+            total += item.getPrice();
+        }
+
+        try {
             DineIn order = new DineIn(
                     nextSequenceService.getNextSequence("OrderSequence"),
                     dineInRequest.getCustomer(),
@@ -58,16 +70,26 @@ public class OrderService {
         }
     }
 
-    public Order saveOrder(DeliveryRequest deliveryRequest) {
-        try {
-            double total = 0;
-            List<Item> items = (List<Item>) itemRepository.findAllById(deliveryRequest.getContents());
+    public Order saveOrder(DeliveryRequest deliveryRequest) throws ItemNotFoundException {
+        double total = 0;
+        List<Item> items = new ArrayList<>();
+        List<Integer> itemIds = deliveryRequest.getContents();
 
-            // Getting total price
-            for (Item item : items) {
-                total += item.getPrice();
+        // Fetching orders one by one
+        for (Integer itemId : itemIds) {
+            if(itemRepository.findById(itemId).isEmpty()) {
+                throw new ItemNotFoundException(itemId);
+            } else {
+                items.add(itemRepository.findItem(itemId));
             }
+        }
 
+        // Getting total price
+        for (Item item : items) {
+            total += item.getPrice();
+        }
+
+        try {
             Delivery order = new Delivery(
                     nextSequenceService.getNextSequence("OrderSequence"),
                     deliveryRequest.getCustomer(),
@@ -87,16 +109,26 @@ public class OrderService {
         }
     }
 
-    public Order saveOrder(PickUpRequest pickUpRequest) {
-        try {
-            double total = 0;
-            List<Item> items = (List<Item>) itemRepository.findAllById(pickUpRequest.getContents());
+    public Order saveOrder(PickUpRequest pickUpRequest) throws ItemNotFoundException {
+        double total = 0;
+        List<Item> items = new ArrayList<>();
+        List<Integer> itemIds = pickUpRequest.getContents();
 
-            // Getting total price
-            for (Item item : items) {
-                total += item.getPrice();
+        // Fetching orders one by one
+        for (Integer itemId : itemIds) {
+            if(itemRepository.findById(itemId).isEmpty()) {
+                throw new ItemNotFoundException(itemId);
+            } else {
+                items.add(itemRepository.findItem(itemId));
             }
+        }
 
+        // Getting total price
+        for (Item item : items) {
+            total += item.getPrice();
+        }
+
+        try {
             PickUp order = new PickUp(
                     nextSequenceService.getNextSequence("OrderSequence"),
                     pickUpRequest.getCustomer(),
@@ -116,11 +148,22 @@ public class OrderService {
         }
     }
 
-    public Order editOrder(int id, EditOrderRequest editOrderRequest) throws OrderNotFoundException {
+    public Order editOrder(int id, EditOrderRequest editOrderRequest) throws OrderNotFoundException, ItemNotFoundException {
         Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
+        List<Item> items = new ArrayList<>();
+        List<Integer> itemIds = editOrderRequest.getContents();
+
+        // Fetching orders one by one
+        for (Integer itemId : itemIds) {
+            if(itemRepository.findById(itemId).isEmpty()) {
+                throw new ItemNotFoundException(itemId);
+            } else {
+                items.add(itemRepository.findItem(itemId));
+            }
+        }
 
         order.setCustomer(editOrderRequest.getCustomer());
-        order.setContents(editOrderRequest.getContents());
+        order.setContents(items);
         order.setPaid(editOrderRequest.isPaid());
         order.setServed(editOrderRequest.isServed());
         order.setCanceled(editOrderRequest.isCanceled());

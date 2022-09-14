@@ -28,7 +28,7 @@ public class OrderExceptionHandler {
         return errorMap;
     }
 
-    @ResponseStatus()
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(OrderNotFoundException.class)
     public Map<String, String> handleNoSuchOrder(OrderNotFoundException ex) {
         Map<String, String> errorMap = new HashMap<>();
