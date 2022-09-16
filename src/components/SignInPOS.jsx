@@ -35,17 +35,10 @@ import {
 
 
 
-
-
 import { styled } from "@mui/system";
 
 
 // for custom styling: https://www.youtube.com/watch?v=8TID2i4zksg
-
-
-// 
-
-// const theme = createTheme();
 
 
 
@@ -93,23 +86,19 @@ const theme = createTheme({
 
 
 
-
-
-
 export default function SignInPOS() {
 
   // ROUTING:
   const navigate = useNavigate();
 
-  // const navigateHome = () => {
-  //   // 👇️ navigate to /
-  //   navigate("/");
-  // };
 
   const navigateToHomeOrderPage = () => {
-    // 👇️ navigate to /contacts
     navigate("/homeorderpage");
   };
+
+    // const navigateToBBQOrderPage = () => {
+    //   navigate("/orderPages/bbqorderpage");
+    // };
 
 
 
@@ -260,6 +249,7 @@ export default function SignInPOS() {
             </Grid>
             <Button
               onClick={navigateToHomeOrderPage}
+              // onClick={navigateToBBQOrderPage}
               type="submit"
               fullWidth
               variant="contained"

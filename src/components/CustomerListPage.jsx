@@ -39,25 +39,14 @@ import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 
 
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 
 
 
@@ -170,6 +159,44 @@ const mdTheme = createTheme({
 
 // export default function DashboardContent() {
   export default function CustomerListPage() {
+
+     const navigate = useNavigate();
+     const navigateSignInPage = () => {
+       // 👇️ navigate to /
+       navigate("/");
+     };
+
+     const navigateToHomeOrderPage = () => {
+       navigate("/homeorderpage");
+     };
+
+     const navigateToPendingPage = () => {
+       navigate("/pendingpage");
+     };
+
+     const navigateToDraftsPage = () => {
+       navigate("/draftspage");
+     };
+
+     const navigateToHistoryPage = () => {
+       navigate("/historypage");
+     };
+
+     const navigateToDiscountsPage = () => {
+       navigate("/discountspage");
+     };
+
+
+
+
+
+
+
+
+
+
+
+
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
     const handleListItemClick = (event, index) => {
@@ -241,7 +268,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
+                onClick={
+                  ((event) => handleListItemClick(event, 0),
+                  navigateToHomeOrderPage)
+                }
               >
                 <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
 
@@ -271,7 +301,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}
+                onClick={
+                  ((event) => handleListItemClick(event, 1),
+                  navigateToPendingPage)
+                }
               >
                 <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
                 <img
@@ -299,7 +332,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}
+                onClick={
+                  ((event) => handleListItemClick(event, 2),
+                  navigateToDraftsPage)
+                }
               >
                 <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
                 <img
@@ -327,7 +363,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+                onClick={
+                  ((event) => handleListItemClick(event, 3),
+                  navigateToHistoryPage)
+                }
               >
                 <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
                 <img
@@ -355,7 +394,10 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
+                onClick={
+                  ((event) => handleListItemClick(event, 4),
+                  navigateToDiscountsPage)
+                }
               >
                 <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
                 <img
@@ -384,7 +426,9 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 6}
-                onClick={(event) => handleListItemClick(event, 6)}
+                onClick={
+                  ((event) => handleListItemClick(event, 6), navigateSignInPage)
+                }
               >
                 <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
                 <img
@@ -431,6 +475,7 @@ const mdTheme = createTheme({
                       >
                         <Toolbar>
                           <Button
+                            onClick={navigateToHomeOrderPage}
                             sx={{
                               ":hover": {
                                 bgcolor: "#787589", // theme.palette.primary.main

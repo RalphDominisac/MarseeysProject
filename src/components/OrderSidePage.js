@@ -12,6 +12,28 @@ import DecreIncreCounter from "./DecreIncreCounter";
 
 import TextField from "@mui/material/TextField";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
+
+
+// import Modal from "./Modal";
+import ModalDraft from "./ModalDraft";
+import ModalRemoveItem from "./ModalRemoveItem";
+import ModalProceed from "./ModalProceed";
+
+import { Container } from "@mui/material";
+
+import Box from "@mui/material/Box";
+
+
+
+
+
 
 
 
@@ -23,12 +45,25 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function OrderSidePage() {
+export default function OrderSidePage(props) {
 
+  //Modal State
+  // const [modalOpen, setModalOpen] = useState(false);
 
+  //ModalDraft State
+  const [modalOpenDraft, setModalOpenDraft] = useState(false);
 
+  //ModalRemoveItem State
+  const [modalOpenRemoveItem, setModalOpenRemoveItem] = useState(false);
 
+  //ModalProceed State
+  const [modalOpenProceed, setModalOpenProceed] = useState(false);
 
+  const navigate = useNavigate();
+
+  const navigateToPaymentsPage = () => {
+    navigate("/paymentpage");
+  };
 
   return (
     <React.Fragment>
@@ -37,6 +72,10 @@ export default function OrderSidePage() {
       </Typography>
 
       <Button
+        className="openModalBtn"
+        onClick={() => {
+          setModalOpenDraft(true);
+        }}
         variant="contained"
         sx={{
           "&:hover": {
@@ -55,6 +94,8 @@ export default function OrderSidePage() {
       >
         Save to Draft
       </Button>
+      {/* {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
+      {modalOpenDraft && <ModalDraft setOpenModalDraft={setModalOpenDraft} />}
 
       <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
         <Button
@@ -81,7 +122,6 @@ export default function OrderSidePage() {
             borderColor: "#252836",
             color: "white",
           }}
-    
         >
           Dine In
         </Button>
@@ -109,7 +149,6 @@ export default function OrderSidePage() {
             borderColor: "#252836",
             color: "white",
           }}
-       
         >
           Pickup
         </Button>
@@ -137,7 +176,6 @@ export default function OrderSidePage() {
             borderColor: "#252836",
             color: "white",
           }}
-       
         >
           Delivery
         </Button>
@@ -157,58 +195,89 @@ export default function OrderSidePage() {
 
       {/* <Divider sx={{ mt: -2, backgroundColor: "#504C64", borderRadius: 10 }} /> */}
 
-      <Typography sx={{ ml: 2, mt: -3, color: "#504C64" }}>
-        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        - - - - - - - - - -
-      </Typography>
-
-      <Typography class="orderItemStack" sx={{ color: "white" }}>
-        Salted Egg Chicken (Half)
-      </Typography>
-
-      <DecreIncreCounter />
-
-      <Typography class="initialPriceTag">Php 2000.00</Typography>
-
-      <Typography class="menuPriceTag">Php 2000.00</Typography>
-
-      <TextField
-        className="inputRounded"
-        placeholder="Order request"
-        variant="outlined"
-        size="small"
-        sx={{ ml: 3, width: 335}}
-      />
-
-      <Button
+      <Container
         sx={{
-          ":hover": {
-            bgcolor: "#D33131", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#9E3F3F",
-          ml: 48,
-          mt: -5,
-          width: 10,
-          borderRadius: 5,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
+          width: 530,
+          height: 450,
+          overflow: "hidden",
+          overflowY: "scroll",
         }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "115px",
-          minHeight: "40px",
-        }}
-        size="small"
       >
-        Remove Item
-      </Button>
+        <Typography sx={{ mt: -1, ml: -1, mb: 1.8, color: "#504C64" }}>
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - - - - - - - - - - - -
+        </Typography>
 
-      <Typography sx={{ ml: 2, mt: 1, color: "#504C64" }}>
-        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        - - - - - - - - - -
-      </Typography>
+        {/* <div>
+          <div>{props.menuItemName}</div>
+          <div>{props.menuItemPrice}</div>
+        </div> */}
+
+        <Typography
+          sx={{
+            ml: -0.1,
+            color: "white",
+            fontSize: 20,
+            fontFamily: "Barlow Condensed",
+            textAlign: "left",
+            mt: -1,
+          }}
+        >
+          {props.menuItemName}
+        </Typography>
+
+        <DecreIncreCounter />
+
+        <Typography class="initialPriceTag">
+          "add calculation""
+        </Typography>
+
+        <Typography> {props.menuItemPrice}</Typography>
+
+        <TextField
+          className="inputRounded"
+          placeholder="Order Comments"
+          variant="outlined"
+          size="small"
+          sx={{ ml: -0.5, width: 335 }}
+        />
+
+        <Button
+          onClick={() => {
+            setModalOpenRemoveItem(true);
+          }}
+          sx={{
+            ":hover": {
+              bgcolor: "#D33131", // theme.palette.primary.main
+            },
+            color: "white",
+            backgroundColor: "#9E3F3F",
+            ml: 45,
+            mt: -8.2,
+            width: 10,
+            borderRadius: 5,
+            fontFamily: "Barlow Condensed",
+            fontSize: "17px",
+          }}
+          style={{
+            maxWidth: "30px",
+            maxHeight: "30px",
+            minWidth: "115px",
+            minHeight: "40px",
+          }}
+          size="small"
+        >
+          Remove Item
+        </Button>
+        {modalOpenRemoveItem && (
+          <ModalRemoveItem setOpenModalRemoveItem={setModalOpenRemoveItem} />
+        )}
+
+        <Typography sx={{ mt: -2, color: "#504C64" }}>
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - - - - - - - - - - -
+        </Typography>
+      </Container>
 
       {/* INCREMENT ITEMS (SPACE HERE) */}
       {/* PUT A NEXT PAGE BUTTON IF NUMBER OF ITEMS EXCEEDS TO 4 */}
@@ -221,7 +290,7 @@ export default function OrderSidePage() {
           color: "white",
           backgroundColor: "#F2A42A",
           ml: 3,
-          mt: 44,
+          mt: 8,
           width: 10,
           borderRadius: 5,
         }}
@@ -249,18 +318,6 @@ export default function OrderSidePage() {
         Sub Total:
       </Typography>
 
-      {/* <Typography
-        sx={{
-          ml: 20,
-          mt: -3,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: "16px",
-        }}
-      >
-        Php 8000.00
-      </Typography> */}
-
       <Typography
         sx={{
           ml: 20,
@@ -274,6 +331,10 @@ export default function OrderSidePage() {
       </Typography>
 
       <Button
+        // onClick={navigateToPaymentsPage}
+        onClick={() => {
+          setModalOpenProceed(true);
+        }}
         className="proceedToPaymentButton"
         sx={{
           ":hover": {
@@ -297,6 +358,9 @@ export default function OrderSidePage() {
       >
         Proceed to Payment
       </Button>
+      {modalOpenProceed && (
+        <ModalProceed setOpenModalProceed={setModalOpenProceed} />
+      )}
     </React.Fragment>
   );
 }

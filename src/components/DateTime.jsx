@@ -3,16 +3,7 @@ import React, { useState, useEffect } from "react";
 export const DateTime = () => {
   var [date, setDate] = useState(new Date());
 
-//   var options = {
-//     weekday: "long",
-//     year: "numeric",
-//     month: "long",
-//     day: "numeric",
-   
-//   };
-//   var prnDt = new Date().toLocaleTimeString("en", options);
 
-//   console.log(prnDt);
 var now = new Date();
 var days = [
   "Sunday",

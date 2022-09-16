@@ -6,6 +6,14 @@ import Typography from "@mui/material/Typography";
 import ButtonCategoryStyle from "./ButtonCategoryStyle";
 import ItemsCategoryButton from "./ItemsCategoryButton";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
+
 
 
 function preventDefault(event) {
@@ -13,6 +21,11 @@ function preventDefault(event) {
 }
 
 export default function CategoryButtons() {
+   const navigate = useNavigate();
+
+   const navigateToCustomerListPage = () => {
+     navigate("/customerlistpage");
+   };
 
 
   return (
@@ -37,6 +50,7 @@ export default function CategoryButtons() {
         <ButtonCategoryStyle title="Rice" />
         <ButtonCategoryStyle title="Seafood" />
         <ButtonCategoryStyle title="Sizzling" />
+        <ButtonCategoryStyle title="Solo Meals" />
         <ButtonCategoryStyle title="Soup" />
 
         <ButtonCategoryStyle title="Vegetables" />
@@ -73,6 +87,7 @@ export default function CategoryButtons() {
 
       <Button
         variant="contained"
+        onClick={navigateToCustomerListPage}
         sx={{
           ":hover": {
             bgcolor: "#FFB644", // theme.palette.primary.main

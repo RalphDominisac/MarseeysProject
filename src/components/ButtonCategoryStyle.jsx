@@ -1,10 +1,12 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { useState } from "react";
 
-export default function ButtonComponent({ title }) {
+export default function ButtonCategoryStyle({ title, onClick }) {
   return (
     <Button
       variant="outlined"
+      onClick={onClick}
       sx={{
         "&.Mui-selected": {},
         "&.Mui-focusVisible": {

@@ -2,11 +2,12 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function ItemsCategoryButton({ title, price, availables }) {
+export default function ItemsCategoryButton({ title, price, availables, onClick }) {
 
 
   return (
     <Button
+      onClick={onClick}
       variant="contained"
       className="itemButton"
       sx={{

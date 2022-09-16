@@ -185,7 +185,7 @@ export default function PaymentDetailsSidePage() {
       <Button
         sx={{
           ":hover": {
-            bgcolor: "#D33131", // theme.palette.primary.main
+            bgcolor: "#787589", // theme.palette.primary.main
           },
           color: "white",
           backgroundColor: "#504C64",

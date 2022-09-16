@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
+@import url('http://fonts.cdnfonts.com/css/helvetica-lt-std');
+*{
+    /* color: white; ---------------------------------------------------------------------- */    
+}
+body {
+    background: #1F1D2B;
+  }
+
+  .subsystemTitle{
+    color:#FFFFFF;
+    font-size: 35px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: center;
+    /* border: 3px solid green; */
+
+  }
+
+    /* sds */
+  /* #ip1 {
+    border-radius: 18px;
+    background: #FFFFFF;
+    padding: 20px; 
+    width: 200px;
+    height: 15px;    
+    color: black;
+  
+   
+} */
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; 
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  #marseeyslogo{
+    height:auto;
+    width:30%;
+    
+  }
+
+  #marseeysicon{
+     height:auto;
+    width:60%;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+  }
+
+  #orderIcon{
+    height:auto;
+    width:52%;
+    margin-left: -23px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+
+    #pendingIcon{
+    height:auto;
+    width:65%;
+    margin-left: -29px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  
+  }
+
+      #draftIcon{
+    height:auto;
+    width:50%;
+    margin-left: -21px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  
+  }
+
+     #historyIcon{
+    height:auto;
+    width:65%;
+    margin-left: -28px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  
+  }
+
+     #discountsIcon{
+    height:auto;
+    width:85%;
+    margin-left: -35px;
+    margin-bottom: 20px;
+     margin-top: 20px;
+  
+  }
+
+  /* #arcreditIcon{
+    height:auto;
+    width:37%;
+    margin-left: 12px;
+
+  } */
+
+    #logoutIcon{
+    height:auto;
+    width:50%;
+    margin-left: -19px;
+     margin-top: px;
+
+  }
+
+  .timeDisplay{
+     color:#FFFFFF;
+    font-size: 60px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: 2px;
+
+  }
+
+    .dateDisplay{
+     color:#FFFFFF;
+    font-size: 27px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -80px;
+
+  }
+
+
+    .orderNumberSide{
+     color:#FFFFFF;
+    font-size: 30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -12px;
+
+  }
+
+  .itemNameTag{
+     color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: 25px;
+    margin-left: 25px;
+    
+  }
+
+   .qtyTag{
+     color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+     margin-top: -50px;
+    margin-left: 320px;
+    
+  }
+
+    .deliveryTag{
+     color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -50px;
+    margin-left: 430px;
+    
+  }
+
+  /* .orderItemStack{
+      color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 25px;
+
+  } */
+    .orderSummaryItemStack{
+      color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -4px;
+    margin-left: 25px;
+  }
+
+  .customerListStack{
+      color:#FFFFFF;
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: left;
+    margin-top: -4px;
+    margin-left: 40px;
+  }
+  
+
+  /* for sidebar size */
+
+    /* .MuiDrawer-paper {
+ width: 10% !important;
+ } */
+
+     /* .MuiDrawer-fullList {
+  width: "auto" !important;
+ }
+
+     .MuiDrawer-list {
+ width: 50% !important;
+ } */
+
+ 
+ /* INCRE DECRE CSS: */
+ /* .center_div {
+  width: 50px;
+  height: 10px;
+  background-color: #252836;
+  border-radius: 5%;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 80px;
+} */
+
+.counterResult {
+  color: white;
+  background: transparent;
+  width: 14%;
+  height: 50px;
+  background-color: #252836;
+  border-color: "red";
+  /* padding: 10px 0 2px 0; */
+  /* padding: 10px; */
+  /* margin-bottom: 10px; */
+  text-align: center;
+  margin-top: -50px;
+  margin-left: 278px;
+   font-family: 'Barlow Condensed', sans-serif;
+}
+
+.paymentcounterResult {
+  color: white;
+  background: transparent;
+  width: 6%;
+  height: 50px;
+  background-color: #252836;
+  border: 1px solid #504C64;
+  /* padding: 10px 0 2px 0; */
+  /* padding: 10px; */
+  /* margin-bottom: 10px; */
+  text-align: center;
+  margin-top: -68px;
+  margin-left: 597px;
+   font-family: 'Barlow Condensed', sans-serif;
+}
+
+
+
+/* .buttonFunction:hover {
+  background-color: #d33131;
+}
+
+
+
+.buttonFunction2:hover {
+  background-color: #55ce6b;
+} */
+
+/* .btn_div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+} */
+
+.todo_style {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+
+.initialPriceTag{
+    color:#FFFFFF;
+    font-size: 15px;
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-top: -80px;
+    margin-left: 395px;
+
+}
+
+.menuPriceTag{
+    color:#FFFFFF;
+    font-size: 15px;
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-top: -22px;
+    margin-left: 0px;
+  
+}
+
+
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 13px;
+  border-color: 'red';
+  color:white;
+  background-color: #252836;
+  font-family: 'Helvetica LT Std'
+}
+
+.inputRounded  .Mui-focused{
+  color:white;
+}
+
+.inputRounded .MuiOutlinedInput-notchedOutline{
+  border-color:#504C64;
+}
+
+
+
+
+
+.paymentinputRounded .MuiOutlinedInput-root {
+  border-radius: 13px;
+  border-color: 'red';
+  color:white;
+  background-color: #252836;
+  font-family: 'Helvetica LT Std'
+}
+
+.paymentinputRounded .Mui-focused{
+  color:white;
+}
+
+.paymentinputRounded .MuiOutlinedInput-notchedOutline{
+  border-color:#504C64;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* '& label.Mui-focused': {
+      color: 'green',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'green',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'red',
+      },
+      '&:hover fieldset': {
+        borderColor: 'yellow',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
+      }, */
+
+
+
+
+
+
+  

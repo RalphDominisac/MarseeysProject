@@ -25,12 +25,6 @@ import TableNumberButtons from "./TableNumberButtons";
 
 
 
-
-
-
-
-
-
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -58,7 +52,7 @@ export default function CustomerListSidePage() {
           mt: -1,
         }}
       >
-        Statistics
+        Statistics - (not that necessary at the moment)
       </Typography>
 
       <Typography
