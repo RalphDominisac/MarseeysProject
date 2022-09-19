@@ -1,19 +1,20 @@
 package com.example.marpos.service;
 
-import com.example.marpos.dto.payment.BankTransferRequest;
-import com.example.marpos.dto.payment.CreditRequest;
-import com.example.marpos.dto.payment.DigitalWalletRequest;
-import com.example.marpos.dto.payment.PaymentRequest;
 import com.example.marpos.entity.order.Order;
 import com.example.marpos.entity.payment.BankTransfer;
 import com.example.marpos.entity.payment.Credit;
 import com.example.marpos.entity.payment.DigitalWallet;
 import com.example.marpos.entity.payment.Payment;
-import com.example.marpos.exception.order.OrderNotFoundException;
-import com.example.marpos.exception.payment.InsufficientAmountException;
-import com.example.marpos.exception.payment.OrderAlreadyPaidException;
+import com.example.marpos.exception.DatabaseException;
+import com.example.marpos.exception.PaymentException;
+import com.example.marpos.helper.DatabaseHelper;
+import com.example.marpos.model.payment.BankTransferRequest;
+import com.example.marpos.model.payment.CreditRequest;
+import com.example.marpos.model.payment.DigitalWalletRequest;
+import com.example.marpos.model.payment.PaymentRequest;
 import com.example.marpos.repository.OrderRepository;
 import com.example.marpos.repository.PaymentRepository;
+import com.example.marpos.types.ExceptionTypeEnum;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,16 +24,25 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
     private OrderRepository orderRepository;
     private NextSequenceService nextSequenceService;
+    private DatabaseHelper databaseHelper;
 
     //  savePayment(Cash, Credit, BankTransfer, DigitalWallet) - done
 
-    public Payment savePayment(PaymentRequest paymentRequest) throws OrderNotFoundException, InsufficientAmountException, OrderAlreadyPaidException {
-        double change;
-        Order order = orderRepository.findById(paymentRequest.getOrderId()).orElseThrow(() -> new OrderNotFoundException(paymentRequest.getOrderId()));
-        change = paymentRequest.getAmount() - order.getPrice();
+    /**
+     * Creates a payment document representing cash payments
+     * @param paymentRequest PaymentRequest
+     * @return created Payment
+     * @throws DatabaseException 20002L
+     * @throws PaymentException 30001L, 30002L
+     */
+    public Payment savePayment(PaymentRequest paymentRequest) throws DatabaseException, PaymentException {
+        Order order = orderRepository.findById(paymentRequest.getOrderId()).orElseThrow(() -> new DatabaseException(
+                paymentRequest.getOrderId().toString(),
+                ExceptionTypeEnum.ORDER_NOT_FOUND_EXCEPTION
+        ));
+        double change = paymentRequest.getAmount() - order.getPrice();
 
-        if(order.isPaid()) throw new OrderAlreadyPaidException(paymentRequest.getOrderId());
-        if(change < 0) throw new InsufficientAmountException();
+        databaseHelper.paymentErrorCheck(order, change);
 
         try {
             Payment payment = new Payment(
@@ -47,18 +57,25 @@ public class PaymentService {
 
             return paymentRepository.save(payment);
         } catch (Exception ex) {
-            nextSequenceService.getPrevSequence("PaymentSequence");
             throw ex;
         }
     }
 
-    public Payment savePayment(CreditRequest creditRequest) throws OrderNotFoundException, InsufficientAmountException, OrderAlreadyPaidException {
-        double change;
-        Order order = orderRepository.findById(creditRequest.getOrderId()).orElseThrow(() -> new OrderNotFoundException(creditRequest.getOrderId()));
-        change = creditRequest.getAmount() - order.getPrice();
+    /**
+     * Creates a payment document using the Credit class
+     * @param creditRequest CreditRequest
+     * @return created Payment
+     * @throws DatabaseException 20002L
+     * @throws PaymentException 30001L, 30002L
+     */
+    public Payment savePayment(CreditRequest creditRequest) throws DatabaseException, PaymentException {
+        Order order = orderRepository.findById(creditRequest.getOrderId()).orElseThrow(() -> new DatabaseException(
+                creditRequest.getOrderId().toString(),
+                ExceptionTypeEnum.ORDER_NOT_FOUND_EXCEPTION
+        ));
+        double change = creditRequest.getAmount() - order.getPrice();
 
-        if(order.isPaid()) throw new OrderAlreadyPaidException(creditRequest.getOrderId());
-        if(change < 0) throw new InsufficientAmountException();
+        databaseHelper.paymentErrorCheck(order, change);
 
         try {
             Payment payment = new Credit(
@@ -74,18 +91,25 @@ public class PaymentService {
 
             return paymentRepository.save(payment);
         } catch (Exception ex) {
-            nextSequenceService.getPrevSequence("PaymentSequence");
             throw ex;
         }
     }
 
-    public Payment savePayment(BankTransferRequest bankTransferRequest) throws OrderNotFoundException, InsufficientAmountException, OrderAlreadyPaidException {
-        double change;
-        Order order = orderRepository.findById(bankTransferRequest.getOrderId()).orElseThrow(() -> new OrderNotFoundException(bankTransferRequest.getOrderId()));
-        change = bankTransferRequest.getAmount() - order.getPrice();
+    /**
+     * Creates a payment document using the BankTransfer class
+     * @param bankTransferRequest BankTransferRequest
+     * @return created Payment
+     * @throws DatabaseException 20002L
+     * @throws PaymentException 30001L, 30002L
+     */
+    public Payment savePayment(BankTransferRequest bankTransferRequest) throws DatabaseException, PaymentException {
+        Order order = orderRepository.findById(bankTransferRequest.getOrderId()).orElseThrow(() -> new DatabaseException(
+                bankTransferRequest.getOrderId().toString(),
+                ExceptionTypeEnum.ORDER_NOT_FOUND_EXCEPTION
+        ));
+        double change = bankTransferRequest.getAmount() - order.getPrice();
 
-        if(order.isPaid()) throw new OrderAlreadyPaidException(bankTransferRequest.getOrderId());
-        if(change < 0) throw new InsufficientAmountException();
+        databaseHelper.paymentErrorCheck(order, change);
 
         try {
             Payment payment = new BankTransfer(
@@ -103,18 +127,25 @@ public class PaymentService {
 
             return paymentRepository.save(payment);
         } catch (Exception ex) {
-            nextSequenceService.getPrevSequence("PaymentSequence");
             throw ex;
         }
     }
 
-    public Payment savePayment(DigitalWalletRequest digitalWalletRequest) throws OrderNotFoundException, InsufficientAmountException, OrderAlreadyPaidException {
-        double change;
-        Order order = orderRepository.findById(digitalWalletRequest.getOrderId()).orElseThrow(() -> new OrderNotFoundException(digitalWalletRequest.getOrderId()));
-        change = digitalWalletRequest.getAmount() - order.getPrice();
+    /**
+     * Creates a payment document using the DigitalWallet class
+     * @param digitalWalletRequest DigitalWalletRequest
+     * @return created Payment
+     * @throws DatabaseException 20002L
+     * @throws PaymentException 30001L, 30002L
+     */
+    public Payment savePayment(DigitalWalletRequest digitalWalletRequest) throws DatabaseException, PaymentException {
+        Order order = orderRepository.findById(digitalWalletRequest.getOrderId()).orElseThrow(() -> new DatabaseException(
+                digitalWalletRequest.getOrderId().toString(),
+                ExceptionTypeEnum.ORDER_NOT_FOUND_EXCEPTION
+        ));
+        double change = digitalWalletRequest.getAmount() - order.getPrice();
 
-        if(order.isPaid()) throw new OrderAlreadyPaidException(digitalWalletRequest.getOrderId());
-        if(change < 0) throw new InsufficientAmountException();
+        databaseHelper.paymentErrorCheck(order, change);
 
         try {
             Payment payment = new DigitalWallet(
@@ -130,7 +161,6 @@ public class PaymentService {
 
             return paymentRepository.save(payment);
         } catch (Exception ex) {
-            nextSequenceService.getPrevSequence("PaymentSequence");
             throw ex;
         }
     }

@@ -1,21 +1,24 @@
 package com.example.marpos.service;
 
-import com.example.marpos.dto.order.*;
 import com.example.marpos.entity.item.Item;
 import com.example.marpos.entity.order.Delivery;
 import com.example.marpos.entity.order.DineIn;
 import com.example.marpos.entity.order.Order;
 import com.example.marpos.entity.order.PickUp;
-import com.example.marpos.exception.item.ItemNotFoundException;
-import com.example.marpos.exception.order.OrderNotFoundException;
+import com.example.marpos.exception.DatabaseException;
+import com.example.marpos.helper.DatabaseHelper;
+import com.example.marpos.model.order.DeliveryRequest;
+import com.example.marpos.model.order.DineInRequest;
+import com.example.marpos.model.order.EditOrderRequest;
+import com.example.marpos.model.order.PickUpRequest;
 import com.example.marpos.repository.ItemRepository;
 import com.example.marpos.repository.OrderRepository;
+import com.example.marpos.types.ExceptionTypeEnum;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,33 +27,22 @@ public class OrderService {
     private OrderRepository orderRepository;
     private ItemRepository itemRepository;
     private NextSequenceService nextSequenceService;
-
-    //  getPendingOrders - done
-    //  saveOrder - done
-    //  editOrder - done
+    private DatabaseHelper databaseHelper;
 
     public List<Order> getPendingOrders() {
         return orderRepository.findPendingOrders();
     }
 
-    public Order saveOrder(DineInRequest dineInRequest) throws ItemNotFoundException {
-        double total = 0;
-        List<Item> items = new ArrayList<>();
+    /**
+     * Creates an order document using the DineIn class.
+     * @param dineInRequest DineInRequest
+     * @return created Order
+     * @throws DatabaseException 10001L
+     */
+    public Order saveOrder(DineInRequest dineInRequest) throws DatabaseException {
         List<Integer> itemIds = dineInRequest.getContents();
-
-        // Fetching orders one by one
-        for (Integer itemId : itemIds) {
-            if(itemRepository.findById(itemId).isEmpty()) {
-                throw new ItemNotFoundException(itemId);
-            } else {
-                items.add(itemRepository.findItem(itemId));
-            }
-        }
-
-        // Getting total price
-        for (Item item : items) {
-            total += item.getPrice();
-        }
+        List<Item> items = databaseHelper.checkItemsExist(itemIds, itemRepository);
+        double total = databaseHelper.getOrderTotal(items);
 
         try {
             DineIn order = new DineIn(
@@ -65,30 +57,24 @@ public class OrderService {
                     dineInRequest.getTableNo()
             );
             return orderRepository.save(order);
-        } catch(Exception ex) {
-            nextSequenceService.getPrevSequence("OrderSequence");
-            throw ex;
+        } catch (Exception ex) {
+            throw new DatabaseException(
+                    ex,
+                    ExceptionTypeEnum.SAVE_ORDER_EXCEPTION
+            );
         }
     }
 
-    public Order saveOrder(DeliveryRequest deliveryRequest) throws ItemNotFoundException {
-        double total = 0;
-        List<Item> items = new ArrayList<>();
+    /**
+     * Creates an order document using the Delivery class.
+     * @param deliveryRequest DeliveryRequest
+     * @return created Order
+     * @throws DatabaseException 10001L
+     */
+    public Order saveOrder(DeliveryRequest deliveryRequest) throws DatabaseException {
         List<Integer> itemIds = deliveryRequest.getContents();
-
-        // Fetching orders one by one
-        for (Integer itemId : itemIds) {
-            if(itemRepository.findById(itemId).isEmpty()) {
-                throw new ItemNotFoundException(itemId);
-            } else {
-                items.add(itemRepository.findItem(itemId));
-            }
-        }
-
-        // Getting total price
-        for (Item item : items) {
-            total += item.getPrice();
-        }
+        List<Item> items = databaseHelper.checkItemsExist(itemIds, itemRepository);
+        double total = databaseHelper.getOrderTotal(items);
 
         try {
             Delivery order = new Delivery(
@@ -103,68 +89,69 @@ public class OrderService {
                     deliveryRequest.getAddress(),
                     deliveryRequest.getMethod()
             );
+
             return orderRepository.save(order);
-        } catch(Exception ex) {
-            nextSequenceService.getPrevSequence("OrderSequence");
-            throw ex;
+        } catch (Exception ex) {
+            throw new DatabaseException(
+                ex,
+                ExceptionTypeEnum.SAVE_ORDER_EXCEPTION
+            );
         }
     }
 
-    public Order saveOrder(PickUpRequest pickUpRequest) throws ItemNotFoundException {
-        double total = 0;
-        List<Item> items = new ArrayList<>();
+    /**
+     * Creates an order document using the PickUp class.
+     * @param pickUpRequest PickUpRequest
+     * @return created Order
+     * @throws DatabaseException 10001L
+     */
+    public Order saveOrder(PickUpRequest pickUpRequest) throws DatabaseException {
         List<Integer> itemIds = pickUpRequest.getContents();
-
-        // Fetching orders one by one
-        for (Integer itemId : itemIds) {
-            if(itemRepository.findById(itemId).isEmpty()) {
-                throw new ItemNotFoundException(itemId);
-            } else {
-                items.add(itemRepository.findItem(itemId));
-            }
-        }
-
-        // Getting total price
-        for (Item item : items) {
-            total += item.getPrice();
-        }
+        List<Item> items = databaseHelper.checkItemsExist(itemIds, itemRepository);
+        double total = databaseHelper.getOrderTotal(items);
 
         try {
             PickUp order = new PickUp(
-                    nextSequenceService.getNextSequence("OrderSequence"),
-                    pickUpRequest.getCustomer(),
-                    items,
-                    total,
-                    LocalDateTime.now(),
-                    false,
-                    false,
-                    false,
-                    pickUpRequest.getPhoneNo(),
-                    pickUpRequest.getEstimatedTime().minusMinutes(LocalTime.now().getMinute())
+                nextSequenceService.getNextSequence("OrderSequence"),
+                pickUpRequest.getCustomer(),
+                items,
+                total,
+                LocalDateTime.now(),
+                false,
+                false,
+                false,
+                pickUpRequest.getPhoneNo(),
+                pickUpRequest.getEstimatedTime().minusMinutes(LocalTime.now().getMinute())
             );
+
             return orderRepository.save(order);
-        } catch(Exception ex) {
-            nextSequenceService.getPrevSequence("OrderSequence");
-            throw ex;
+        } catch (Exception ex) {
+            throw new DatabaseException(
+                ex,
+                ExceptionTypeEnum.SAVE_ORDER_EXCEPTION
+            );
         }
     }
 
-    public Order editOrder(int id, EditOrderRequest editOrderRequest) throws OrderNotFoundException, ItemNotFoundException {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
-        List<Item> items = new ArrayList<>();
+    /**
+     * Overwrites an order document with the specified id.
+     * @param id Integer
+     * @param editOrderRequest EditOrderRequest
+     * @return edited Order
+     * @throws DatabaseException 20002L
+     */
+    public Order editOrder(int id, EditOrderRequest editOrderRequest) throws DatabaseException {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new DatabaseException(
+            String.valueOf(id),
+            ExceptionTypeEnum.ORDER_NOT_FOUND_EXCEPTION
+        ));
         List<Integer> itemIds = editOrderRequest.getContents();
-
-        // Fetching orders one by one
-        for (Integer itemId : itemIds) {
-            if(itemRepository.findById(itemId).isEmpty()) {
-                throw new ItemNotFoundException(itemId);
-            } else {
-                items.add(itemRepository.findItem(itemId));
-            }
-        }
+        List<Item> items = databaseHelper.checkItemsExist(itemIds, itemRepository);
 
         order.setCustomer(editOrderRequest.getCustomer());
         order.setContents(items);
+        order.setPrice(databaseHelper.getOrderTotal(items));
+        order.setDate(LocalDateTime.now());
         order.setPaid(editOrderRequest.isPaid());
         order.setServed(editOrderRequest.isServed());
         order.setCanceled(editOrderRequest.isCanceled());

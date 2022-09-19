@@ -1,7 +1,7 @@
 package com.example.marpos.entity.order;
 
 import com.example.marpos.entity.item.Item;
-import com.example.marpos.enumeration.DeliveryMethod;
+import com.example.marpos.types.DeliveryMethod;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

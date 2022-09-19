@@ -1,11 +1,11 @@
 package com.example.marpos.controller;
 
-import com.example.marpos.dto.item.ItemRequest;
-import com.example.marpos.enumeration.ItemType;
 import com.example.marpos.entity.item.Item;
-import com.example.marpos.exception.item.BadSearchException;
-import com.example.marpos.exception.item.ItemNotFoundException;
+import com.example.marpos.exception.DatabaseException;
+import com.example.marpos.exception.ItemException;
+import com.example.marpos.model.item.ItemRequest;
 import com.example.marpos.service.ItemService;
+import com.example.marpos.types.MenuCategory;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +27,9 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/{type}")
-    public ResponseEntity<List<Item>> getItemsFromCategory(@PathVariable String type) throws BadSearchException {
-        return ResponseEntity.ok(itemService.getItemsFromCategory(ItemType.valueOf(type.toUpperCase())));
+    @GetMapping("/{category}")
+    public ResponseEntity<List<Item>> getItemsFromCategory(@PathVariable String category) throws DatabaseException {
+        return ResponseEntity.ok(itemService.getItemsFromCategory(MenuCategory.valueOf(category.toUpperCase())));
     }
 
 //    @GetMapping
@@ -38,17 +38,17 @@ public class ItemController {
 //    }
 
     @PostMapping("/add")
-    public ResponseEntity<Item> saveItem(@RequestBody @Valid ItemRequest item) {
+    public ResponseEntity<Item> saveItem(@RequestBody @Valid ItemRequest item) throws DatabaseException {
         return new ResponseEntity<>(itemService.saveItem(item), HttpStatus.CREATED);
     }
 
     @PostMapping("/edit/{id}")
-    public ResponseEntity<Item> editItem(@PathVariable int id, @RequestBody @Valid ItemRequest item) throws ItemNotFoundException {
+    public ResponseEntity<Item> editItem(@PathVariable int id, @RequestBody @Valid ItemRequest item) throws DatabaseException {
         return new ResponseEntity<>(itemService.editItem(id, item), HttpStatus.OK);
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity<Item> deleteItem(@PathVariable int id) throws ItemNotFoundException {
+    public ResponseEntity<Item> deleteItem(@PathVariable int id) throws DatabaseException, ItemException {
         return new ResponseEntity<>(itemService.deleteItem(id), HttpStatus.OK);
     }
 }

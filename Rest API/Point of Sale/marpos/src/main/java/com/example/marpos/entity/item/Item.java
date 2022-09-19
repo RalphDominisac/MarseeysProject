@@ -1,7 +1,9 @@
 package com.example.marpos.entity.item;
 
-import com.example.marpos.enumeration.ItemType;
-import lombok.*;
+import com.example.marpos.types.MenuCategory;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,7 +19,7 @@ public class Item {
     private String name;
     private double price;
 //    private List<IngredientRequest> ingredientRequests;
-    private ItemType type;
+    private MenuCategory category;
     private boolean available;
     private boolean deleted;
 }
