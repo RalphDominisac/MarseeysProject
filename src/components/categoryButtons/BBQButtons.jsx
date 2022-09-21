@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import ButtonCategoryStyle from "../ButtonCategoryStyle";
 import ItemsCategoryButton from "../ItemsCategoryButton";
+import ItemsCategoryButton2 from "../ItemsCategoryButton2";
 
 import {
   BrowserRouter as Router,
@@ -21,7 +22,13 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function BBQButtons() {
+export default function BBQButtons(props) {
+
+   const { productsBBQ, onAdd } = props;
+
+
+
+
    const navigate = useNavigate();
 
    const navigateToCustomerListPage = () => {
@@ -31,8 +38,17 @@ export default function BBQButtons() {
 
   return (
     <React.Fragment>
-   
-      <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
+    <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
+      {productsBBQ.map((product) => (
+        <ItemsCategoryButton2
+          key={product.id}
+          product={product}
+          onAdd={onAdd}
+        />
+      ))}
+      </Stack>
+
+      {/* <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
         <ItemsCategoryButton
           title="Hito (Small)"
           price="120.00"
@@ -101,10 +117,7 @@ export default function BBQButtons() {
           price="15.00"
           availables="20"
         />
-      </Stack>
-
-      
-
+      </Stack> */}
 
       <Button
         variant="contained"

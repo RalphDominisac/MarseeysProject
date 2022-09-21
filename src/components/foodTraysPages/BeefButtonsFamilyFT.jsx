@@ -36,7 +36,7 @@ export default function BeefButtonsFamilyFT() {
           price="850.00"
           availables="20"
         />
-
+         
         <ItemsCategoryButton
           title="Beef Caldereta (Family)"
           price="850.00"

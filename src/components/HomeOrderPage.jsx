@@ -73,6 +73,8 @@ import VegetablesButtons from "./categoryButtons/VegetablesButtons(recheck)";
 
 // import OnHoverScrollContainer from "./CustomScrollDiv";
 
+import data from "./data/data";
+
 
 
 
@@ -195,39 +197,36 @@ const mdTheme = createTheme({
 
 
   export default function HomeOrderPage() {
+    const { productsBBQ } = data;
+    const [cartItems, setCartItems] = useState([]);
 
+    // -------------Add and Remove product functionality------------------------------------------
+    const onAdd = (product) => {
+      const exist = cartItems.find((x) => x.id === product.id);
+      if (exist) {
+        setCartItems(
+          cartItems.map((x) =>
+            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          )
+        );
+      } else {
+        setCartItems([...cartItems, { ...product, qty: 1 }]);
+      }
+    };
 
-    // ADD AND DELETE TRIAL AND ERROR
-    // const { products } = data;
-    // const [cartItems, setCartItems] = useState([]);
-
-    // const onAdd = (product) => {
-    //   const exist = cartItems.find((x) => x.id === product.id);
-    //   if (exist) {
-    //     setCartItems(
-    //       cartItems.map((x) =>
-    //         x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-    //       )
-    //     );
-    //   } else {
-    //     setCartItems([...cartItems, { ...product, qty: 1 }]);
-    //   }
-    // };
-
-    // const onRemove = (product) => {
-    //   const exist = cartItems.find((x) => x.id === product.id);
-    //   if (exist.qty === 1) {
-    //     setCartItems(cartItems.filter((x) => x.id !== product.id));
-    //   } else {
-    //     setCartItems(
-    //       cartItems.map((x) =>
-    //         x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-    //       )
-    //     );
-    //   }
-    // };
-
-
+    const onRemove = (product) => {
+      const exist = cartItems.find((x) => x.id === product.id);
+      if (exist.qty === 1) {
+        setCartItems(cartItems.filter((x) => x.id !== product.id));
+      } else {
+        setCartItems(
+          cartItems.map((x) =>
+            x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          )
+        );
+      }
+    };
+    // -------------------------------------------------------------------------------------------
 
 
 
@@ -249,7 +248,7 @@ const mdTheme = createTheme({
       "Sizzling",
       "Solo Meals",
       "Soup",
-      "Vegetables"
+      "Vegetables",
     ];
 
     const [myCategory, setMyCategory] = useState("");
@@ -276,13 +275,10 @@ const mdTheme = createTheme({
 
     //  const [myCategory3, setMyCategory3] = useState("");
 
-
-   
     // const [showtab, setShowtab] = React.useState(1);
     // const handletab = (e) => {
     //   setShowtab(e);
     // }
-
 
     // const [show, setShow] = useState(false);
 
@@ -313,10 +309,9 @@ const mdTheme = createTheme({
       navigate("/discountspage");
     };
 
-
-    // Show Buttons CATEGORY if clicked 
+    // Show Buttons CATEGORY if clicked
     const showBBQButtons = () => {
-      <BBQButtons />
+      <BBQButtons />;
     };
 
     // For left side button pages (events)
@@ -326,10 +321,10 @@ const mdTheme = createTheme({
     };
 
     // For button categories
-     const [selectedIndex2, setSelectedIndex2] = React.useState("");
-     const handleListItemClick2 = (event2, index2) => {
-       setSelectedIndex2(index2);
-     };
+    const [selectedIndex2, setSelectedIndex2] = React.useState("");
+    const handleListItemClick2 = (event2, index2) => {
+      setSelectedIndex2(index2);
+    };
 
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
@@ -662,7 +657,9 @@ const mdTheme = createTheme({
                       </div>
 
                       <div>
-                        {myCategory === "BBQ" && <BBQButtons />}
+                        {myCategory === "BBQ" && (
+                          <BBQButtons onAdd={onAdd} productsBBQ={productsBBQ} />
+                        )}
                         {myCategory === "Beef" && <BeefButtons />}
                         {myCategory === "Bilao" && <BilaoButtons />}
                         {myCategory === "Chicken" && (
@@ -820,38 +817,41 @@ const mdTheme = createTheme({
                     }}
                   >
                     <OrderSidePage
-                      menuItemName={
-                        chickenFood && (
-                          <Typography
-                            sx={{
-                              ml: -0.1,
-                              color: "white",
-                              fontSize: 20,
-                              fontFamily: "Barlow Condensed",
-                              textAlign: "left",
-                              mt: -1,
-                            }}
-                          >
-                            {JSON.stringify(
-                              chickenFood.title,
-                              null,
-                              1
-                            ).replaceAll('"', "")}
-                          </Typography>
-                        )
-                      }
-                      menuItemPrice={
-                        chickenFood && (
-                          <Typography class="menuPriceTag">
-                            Php{" "}
-                            {JSON.stringify(
-                              chickenFood.price,
-                              null,
-                              1
-                            ).replaceAll('"', "")}
-                          </Typography>
-                        )
-                      }
+                      onAdd={onAdd}
+                      onRemove={onRemove}
+                      cartItems={cartItems}
+                      // menuItemName={
+                      //   chickenFood && (
+                      //     <Typography
+                      //       sx={{
+                      //         ml: -0.1,
+                      //         color: "white",
+                      //         fontSize: 20,
+                      //         fontFamily: "Barlow Condensed",
+                      //         textAlign: "left",
+                      //         mt: -1,
+                      //       }}
+                      //     >
+                      //       {JSON.stringify(
+                      //         chickenFood.title,
+                      //         null,
+                      //         1
+                      //       ).replaceAll('"', "")}
+                      //     </Typography>
+                      //   )
+                      // }
+                      // menuItemPrice={
+                      //   chickenFood && (
+                      //     <Typography class="menuPriceTag">
+                      //       Php{" "}
+                      //       {JSON.stringify(
+                      //         chickenFood.price,
+                      //         null,
+                      //         1
+                      //       ).replaceAll('"', "")}
+                      //     </Typography>
+                      //   )
+                      // }
                     />
                   </Paper>
                 </Grid>

@@ -298,23 +298,23 @@ body {
 }
 
 
-.initialPriceTag{
+/* .initialPriceTag{
     color:#FFFFFF;
     font-size: 15px;
     font-family: 'Barlow Condensed', sans-serif;
     margin-top: -80px;
     margin-left: 395px;
 
-}
+} */
 
-.menuPriceTag{
-    color:#FFFFFF;
+/* .menuPriceTag{
+    color:red;
     font-size: 15px;
     font-family: 'Barlow Condensed', sans-serif;
     margin-top: -22px;
     margin-left: 0px;
   
-}
+} */
 
 
 .inputRounded .MuiOutlinedInput-root {

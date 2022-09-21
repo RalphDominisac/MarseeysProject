@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import { AppBar } from "@mui/material";
 
 import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import DecreIncreCounter from "./DecreIncreCounter";
@@ -16,7 +18,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
+  useNavigate,  
 } from "react-router-dom";
 
 
@@ -46,6 +48,13 @@ function preventDefault(event) {
 }
 
 export default function OrderSidePage(props) {
+
+    const { cartItems, onAdd, onRemove } = props;
+
+    const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+    const totalPrice = itemsPrice;
+
+
 
   //Modal State
   // const [modalOpen, setModalOpen] = useState(false);
@@ -203,84 +212,138 @@ export default function OrderSidePage(props) {
           overflowY: "scroll",
         }}
       >
-        <Typography sx={{ mt: -1, ml: -1, mb: 1.8, color: "#504C64" }}>
+        <Typography sx={{ mt: -1, ml: -1, mb: 1, color: "#504C64" }}>
           - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - - - - - - - - - - - -
         </Typography>
+        <div>{cartItems.length === 0 && <div>Order Cart is Empty</div>}</div>
 
-        {/* <div>
-          <div>{props.menuItemName}</div>
-          <div>{props.menuItemPrice}</div>
-        </div> */}
+        {cartItems.map((item) => (
+          <div key={item.id}>
+            <Typography
+              sx={{
+                ml: -0.1,
+                color: "white",
+                fontSize: 20,
+                fontFamily: "Barlow Condensed",
+                textAlign: "left",
+                mt: -1,
+              }}
+            >
+              {item.name}
+            </Typography>
 
-        <Typography
-          sx={{
-            ml: -0.1,
-            color: "white",
-            fontSize: 20,
-            fontFamily: "Barlow Condensed",
-            textAlign: "left",
-            mt: -1,
-          }}
-        >
-          {props.menuItemName}
-        </Typography>
+            <Button
+              onClick={() => onRemove(item)}
+              sx={{
+                ":hover": {
+                  bgcolor: "#D33131", // theme.palette.primary.main
+                },
+                color: "white",
+                backgroundColor: "#9E3F3F",
+                ml: 32,
+                mt: -3,
+                width: 3,
+                borderTopLeftRadius: 10,
+                borderBottomLeftRadius: 10,
+              }}
+              style={{
+                maxWidth: "30px",
+                maxHeight: "30px",
+                minWidth: "30px",
+                minHeight: "50px",
+              }}
+              size="small"
+            >
+              <RemoveIcon />
+            </Button>
 
-        <DecreIncreCounter />
+            <h1 className="counterResult">{item.qty}</h1>
 
-        <Typography class="initialPriceTag">
-          "add calculation""
-        </Typography>
+            <Button
+              onClick={() => onAdd(item)}
+              sx={{
+                ":hover": {
+                  bgcolor: "#55CE6B", // theme.palette.primary.main
+                },
+                color: "white",
+                backgroundColor: "#5D9B68",
+                ml: 41.7,
+                mt: -14.9,
+                width: 10,
+                borderTopRightRadius: 10,
+                borderBottomRightRadius: 10,
+              }}
+              style={{
+                maxWidth: "30px",
+                maxHeight: "30px",
+                minWidth: "30px",
+                minHeight: "50px",
+              }}
+              size="small"
+            >
+              <AddIcon />
+            </Button>
 
-        <Typography> {props.menuItemPrice}</Typography>
+            <Typography class="menuPriceTag">
+              Php {item.price.toFixed(2)}
+            </Typography>
 
-        <TextField
-          className="inputRounded"
-          placeholder="Order Comments"
-          variant="outlined"
-          size="small"
-          sx={{ ml: -0.5, width: 335 }}
-        />
+            <TextField
+              className="inputRounded"
+              placeholder="Order Comments"
+              variant="outlined"
+              size="small"
+              sx={{ ml: -0.5, width: 335 }}
+            />
 
-        <Button
-          onClick={() => {
-            setModalOpenRemoveItem(true);
-          }}
-          sx={{
-            ":hover": {
-              bgcolor: "#D33131", // theme.palette.primary.main
-            },
-            color: "white",
-            backgroundColor: "#9E3F3F",
-            ml: 45,
-            mt: -8.2,
-            width: 10,
-            borderRadius: 5,
-            fontFamily: "Barlow Condensed",
-            fontSize: "17px",
-          }}
-          style={{
-            maxWidth: "30px",
-            maxHeight: "30px",
-            minWidth: "115px",
-            minHeight: "40px",
-          }}
-          size="small"
-        >
-          Remove Item
-        </Button>
-        {modalOpenRemoveItem && (
-          <ModalRemoveItem setOpenModalRemoveItem={setModalOpenRemoveItem} />
+            {/* <Button
+              onClick={() => {
+                setModalOpenRemoveItem(true);
+              }}
+              sx={{
+                ":hover": {
+                  bgcolor: "#D33131", // theme.palette.primary.main
+                },
+                color: "white",
+                backgroundColor: "#9E3F3F",
+                ml: 45,
+                mt: -8.2,
+                width: 10,
+                borderRadius: 5,
+                fontFamily: "Barlow Condensed",
+                fontSize: "17px",
+              }}
+              style={{
+                maxWidth: "30px",
+                maxHeight: "30px",
+                minWidth: "115px",
+                minHeight: "40px",
+              }}
+              size="small"
+            >
+              Remove Item
+            </Button>
+            {modalOpenRemoveItem && (
+              <ModalRemoveItem
+                setOpenModalRemoveItem={setModalOpenRemoveItem}
+              />
+            )} */}
+
+  
+            <Typography sx={{ mt: 1, mb: 1, color: "#504C64" }}>
+              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+              - - - - - - - - - - - - -
+            </Typography>
+          </div>
+        ))}
+
+        {cartItems.length !== 0 && (
+          <Typography class="initialPriceTag">
+            Php {itemsPrice.toFixed(2)}
+          </Typography>
         )}
-
-        <Typography sx={{ mt: -2, color: "#504C64" }}>
-          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          - - - - - - - - - - -
-        </Typography>
       </Container>
-
-      {/* INCREMENT ITEMS (SPACE HERE) */}
-      {/* PUT A NEXT PAGE BUTTON IF NUMBER OF ITEMS EXCEEDS TO 4 */}
 
       <Button
         sx={{
@@ -327,7 +390,7 @@ export default function OrderSidePage(props) {
           fontSize: "18px",
         }}
       >
-        Php 8000.00
+        Php {totalPrice.toFixed(2)}
       </Typography>
 
       <Button
