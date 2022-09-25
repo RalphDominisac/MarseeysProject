@@ -486,7 +486,7 @@ const mdTheme = createTheme({
                   alt="History Icon"
                 />
               </ListItemButton>
-              <ListItemButton
+              {/* <ListItemButton
                 sx={{
                   "&.Mui-selected": {
                     border: "2px solid #F2A42A",
@@ -515,7 +515,7 @@ const mdTheme = createTheme({
                   src="images/discounts.png"
                   alt="discounts Icon"
                 />
-              </ListItemButton>
+              </ListItemButton> */}
 
               <ListItemButton
                 sx={{
@@ -534,9 +534,9 @@ const mdTheme = createTheme({
                   ml: -2,
                   mb: 2,
                 }}
-                selected={selectedIndex === 6}
+                selected={selectedIndex === 4}
                 onClick={
-                  ((event) => handleListItemClick(event, 6), navigateSignInPage)
+                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
                 }
               >
                 <ListItemIcon></ListItemIcon>

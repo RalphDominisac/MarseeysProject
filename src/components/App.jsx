@@ -31,8 +31,7 @@ import VegetablesOrderPage from "./orderPages/VegetablesOrderPage";
 
 
 import DrawerSample from "./DrawerSample";
-import TestSample from "./TestSample";
-import PaymentPage from "./PaymentPage";
+import FinalizeOrderPage from "./FinalizeOrderPage";
 import OrderSummaryPage from "./OrderSummaryPage";
 import CustomerListPage from "./CustomerListPage";
 import PendingOrdersPage from "./PendingOrdersPage";
@@ -79,39 +78,87 @@ function App(){
       // </div>
 
       // ************************************************************
-      // UNCOMMENT THIS TO ACTIVATE ROUTES:    HomeOrderPage is not going to be used anymore(it will be just a testing ground since we now have category order pages each)
+      // UNCOMMENT THIS TO ACTIVATE ROUTES:
       <div>
         <div>
           <Routes>
             <Route path="/" element={<SignInPOS />} />
-            <Route path="/homeorderpage" element={<HomeOrderPage />} /> 
-
-            <Route path="/orderPages/bbqorderpage" element={<BBQOrderPage />} /> 
-            <Route path="/orderPages/beeforderpage" element={<BeefOrderPage />} /> 
-            <Route path="/orderPages/bilaoorderpage" element={<BilaoOrderPage />} /> 
-            <Route path="/orderPages/chickenorderpage" element={<ChickenOrderPage />} /> 
-            <Route path="/orderPages/dessertsorderpage" element={<DessertsOrderPage />} /> 
-            <Route path="/orderPages/drinksorderpage" element={<DrinksOrderPage />} /> 
-            <Route path="/orderPages/foodtraysorderpage" element={<FoodTraysOrderPage />} /> 
-            <Route path="/orderPages/handaanorderpage" element={<HandaanOrderPage />} /> 
-            <Route path="/orderPages/noodlesorderpage" element={<NoodlesOrderPage />} /> 
-            <Route path="/orderPages/picapicaorderpage" element={<PicapicaOrderPage />} /> 
-            <Route path="/orderPages/plattersorderpage" element={<PlattersOrderPage />} /> 
-            <Route path="/orderPages/porkorderpage" element={<PorkOrderPage />} /> 
-            <Route path="/orderPages/riceorderpage" element={<RiceOrderPage />} /> 
-            <Route path="/orderPages/seafoodorderpage" element={<SeafoodOrderPage />} /> 
-            <Route path="/orderPages/sizzlingorderpage" element={<SizzlingOrderPage />} /> 
-            <Route path="/orderPages/solomealsorderpage" element={<SoloMealsOrderPage />} /> 
-            <Route path="/orderPages/souporderpage" element={<SoupOrderPage />} /> 
-            <Route path="/orderPages/vegetablesorderpage" element={<VegetablesOrderPage />} /> 
-     
-
+            <Route path="/homeorderpage" element={<HomeOrderPage />} />
             <Route path="/pendingpage" element={<PendingOrdersPage />} />
             <Route path="/draftspage" element={<DraftsPage />} />
             <Route path="/historypage" element={<HistoryPage />} />
             <Route path="/discountspage" element={<DiscountsPage />} />
             <Route path="/customerlistpage" element={<CustomerListPage />} />
-            <Route path="/paymentpage" element={<PaymentPage />} />
+            <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
+            <Route path="/orderPages/bbqorderpage" element={<BBQOrderPage />} />
+            <Route
+              path="/orderPages/beeforderpage"
+              element={<BeefOrderPage />}
+            />
+            <Route
+              path="/orderPages/bilaoorderpage"
+              element={<BilaoOrderPage />}
+            />
+            <Route
+              path="/orderPages/chickenorderpage"
+              element={<ChickenOrderPage />}
+            />
+            <Route
+              path="/orderPages/dessertsorderpage"
+              element={<DessertsOrderPage />}
+            />
+            <Route
+              path="/orderPages/drinksorderpage"
+              element={<DrinksOrderPage />}
+            />
+            <Route
+              path="/orderPages/foodtraysorderpage"
+              element={<FoodTraysOrderPage />}
+            />
+            <Route
+              path="/orderPages/handaanorderpage"
+              element={<HandaanOrderPage />}
+            />
+            <Route
+              path="/orderPages/noodlesorderpage"
+              element={<NoodlesOrderPage />}
+            />
+            <Route
+              path="/orderPages/picapicaorderpage"
+              element={<PicapicaOrderPage />}
+            />
+            <Route
+              path="/orderPages/plattersorderpage"
+              element={<PlattersOrderPage />}
+            />
+            <Route
+              path="/orderPages/porkorderpage"
+              element={<PorkOrderPage />}
+            />
+            <Route
+              path="/orderPages/riceorderpage"
+              element={<RiceOrderPage />}
+            />
+            <Route
+              path="/orderPages/seafoodorderpage"
+              element={<SeafoodOrderPage />}
+            />
+            <Route
+              path="/orderPages/sizzlingorderpage"
+              element={<SizzlingOrderPage />}
+            />
+            <Route
+              path="/orderPages/solomealsorderpage"
+              element={<SoloMealsOrderPage />}
+            />
+            <Route
+              path="/orderPages/souporderpage"
+              element={<SoupOrderPage />}
+            />
+            <Route
+              path="/orderPages/vegetablesorderpage"
+              element={<VegetablesOrderPage />}
+            />
           </Routes>
         </div>
       </div>

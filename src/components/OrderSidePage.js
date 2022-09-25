@@ -11,6 +11,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import DecreIncreCounter from "./DecreIncreCounter";
+import PaymentPage from "./FinalizeOrderPage";
 
 import TextField from "@mui/material/TextField";
 
@@ -52,6 +53,7 @@ export default function OrderSidePage(props) {
     const { cartItems, onAdd, onRemove } = props;
 
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+    // const discount = 
     const totalPrice = itemsPrice;
 
 
@@ -80,7 +82,7 @@ export default function OrderSidePage(props) {
         Order #0001
       </Typography>
 
-      <Button
+      {/* <Button
         className="openModalBtn"
         onClick={() => {
           setModalOpenDraft(true);
@@ -103,10 +105,9 @@ export default function OrderSidePage(props) {
       >
         Save to Draft
       </Button>
-      {/* {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
-      {modalOpenDraft && <ModalDraft setOpenModalDraft={setModalOpenDraft} />}
+      {modalOpenDraft && <ModalDraft setOpenModalDraft={setModalOpenDraft} />} */}
 
-      <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
+      <Stack spacing={2} direction="row" sx={{ mt: -1, ml: 5 }}>
         <Button
           variant="outlined"
           sx={{
@@ -297,7 +298,27 @@ export default function OrderSidePage(props) {
               sx={{ ml: -0.5, width: 335 }}
             />
 
-            {/* <Button
+            <Typography class="initialPriceTag">
+              Php {(item.price * item.qty).toFixed(2)}
+            </Typography>
+
+            <Typography sx={{ mt: 9, mb: 1, color: "#504C64" }}>
+              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+              - - - - - - - - - - - - -
+            </Typography>
+
+         
+          </div>
+        ))}
+
+        {/* {cartItems.length !== 0 && (
+          <Typography class="initialPriceTag">
+            Php {itemsPrice.toFixed(2)}
+          </Typography>
+        )} */}
+      </Container>
+
+      {/* <Button
               onClick={() => {
                 setModalOpenRemoveItem(true);
               }}
@@ -330,22 +351,7 @@ export default function OrderSidePage(props) {
               />
             )} */}
 
-  
-            <Typography sx={{ mt: 1, mb: 1, color: "#504C64" }}>
-              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-              - - - - - - - - - - - - -
-            </Typography>
-          </div>
-        ))}
-
-        {cartItems.length !== 0 && (
-          <Typography class="initialPriceTag">
-            Php {itemsPrice.toFixed(2)}
-          </Typography>
-        )}
-      </Container>
-
-      <Button
+      {/* <Button
         sx={{
           ":hover": {
             bgcolor: "#FFB644", // theme.palette.primary.main
@@ -367,12 +373,12 @@ export default function OrderSidePage(props) {
         }}
       >
         Apply Voucher
-      </Button>
+      </Button> */}
 
       <Typography
         sx={{
-          ml: 3,
-          mt: 1,
+          ml: 9,
+          mt: 9,
           color: "white",
           fontFamily: "Barlow Condensed",
           fontSize: "18px",
@@ -384,7 +390,7 @@ export default function OrderSidePage(props) {
       <Typography
         sx={{
           ml: 20,
-          mt: -3.2,
+          mt: -3.4,
           color: "white",
           fontFamily: "Barlow Condensed",
           fontSize: "18px",
@@ -406,7 +412,7 @@ export default function OrderSidePage(props) {
           color: "white",
           backgroundColor: "#F2A42A",
           ml: 35,
-          mt: -9.8,
+          mt: -7,
           width: 10,
           borderRadius: 5,
         }}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -33,14 +34,10 @@ import {
 } from "react-router-dom";
 
 
-
-
 import { styled } from "@mui/system";
 
 
 // for custom styling: https://www.youtube.com/watch?v=8TID2i4zksg
-
-
 
 const Colors = {
   primary: "#00adb5",
@@ -64,13 +61,6 @@ const Colors = {
   black: "#000",
 };
 
-
-
-
-
-
-
-
 const theme = createTheme({
     palette: {
       background: {
@@ -83,7 +73,6 @@ const theme = createTheme({
 
     }
   });
-
 
 
 export default function SignInPOS() {
@@ -106,7 +95,7 @@ export default function SignInPOS() {
 
   // -----------------------------------------------------------
  //  ** Password show and not show JS
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     amount: "",
     password: "",
     weight: "",

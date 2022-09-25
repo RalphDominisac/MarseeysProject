@@ -368,7 +368,7 @@ const mdTheme = createTheme({
                   // class="center"
                 />
               </ListItemButton>
-              <ListItemButton
+              {/* <ListItemButton
                 sx={{
                   "&.Mui-selected": {
                     border: "2px solid #F2A42A",
@@ -391,14 +391,14 @@ const mdTheme = createTheme({
                   navigateToDiscountsPage)
                 }
               >
-                <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <img
                   id="discountsIcon"
                   src="images/discounts.png"
                   alt="discounts Icon"
                   // class="center"
                 />
-              </ListItemButton>
+              </ListItemButton> */}
 
               <ListItemButton
                 sx={{
@@ -417,9 +417,9 @@ const mdTheme = createTheme({
                   ml: -2,
                   mb: 2,
                 }}
-                selected={selectedIndex === 6}
+                selected={selectedIndex === 4}
                 onClick={
-                  ((event) => handleListItemClick(event, 6), navigateSignInPage)
+                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
                 }
               >
                 <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>

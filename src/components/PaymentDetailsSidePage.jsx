@@ -23,6 +23,8 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TableNumberButtons from "./TableNumberButtons";
 
+import ModalSaveToDraft from "./ModalSaveToDraft";
+
 
 
 
@@ -36,6 +38,10 @@ function preventDefault(event) {
 }
 
 export default function PaymentDetailsSidePage() {
+
+ const [modalOpenSaveToDraft, setModalOpenSaveToDraft] = useState(false);
+
+
   const [ordertype, setOrderType] = React.useState("");
   const [discount, setDiscount] = React.useState("");
 
@@ -54,6 +60,9 @@ export default function PaymentDetailsSidePage() {
       </Typography>
 
       <Button
+        onClick={() => {
+          setModalOpenSaveToDraft(true);
+        }}
         variant="contained"
         sx={{
           "&:hover": {
@@ -72,8 +81,11 @@ export default function PaymentDetailsSidePage() {
       >
         Save to Draft
       </Button>
+      {modalOpenSaveToDraft && (
+        <ModalSaveToDraft setOpenModalSaveToDraft={setModalOpenSaveToDraft} />
+      )}
 
-      <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
+      {/* <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
         <Button
           variant="outlined"
           sx={{
@@ -155,7 +167,7 @@ export default function PaymentDetailsSidePage() {
         >
           Ar/Credit
         </Button>
-      </Stack>
+      </Stack> */}
 
       <Typography sx={{ ml: 2, mt: 0, mb: -2, color: "#504C64" }}>
         ____________________________________________________
@@ -179,10 +191,10 @@ export default function PaymentDetailsSidePage() {
         value="Juan Pablo"
         variant="outlined"
         size="small"
-        sx={{ ml: 3, width: 310, mt: -2 }}
+        sx={{ ml: 3, width: 460, mt: -2 }}
       />
 
-      <Button
+      {/* <Button
         sx={{
           ":hover": {
             bgcolor: "#787589", // theme.palette.primary.main
@@ -205,7 +217,7 @@ export default function PaymentDetailsSidePage() {
         size="small"
       >
         CHOOSE FROM LIST
-      </Button>
+      </Button> */}
 
       <FormControl
         sx={{

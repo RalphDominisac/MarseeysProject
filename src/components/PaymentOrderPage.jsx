@@ -19,7 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 
-import CustomerListSidePage from "./CustomerListSidePage";
+import OrderSummarySidePage from "./OrderSummarySidePage";
 
 import DateTime from "./DateTime";
 
@@ -45,6 +45,7 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+
 
 
 
@@ -156,39 +157,7 @@ const mdTheme = createTheme({
 
 
 // export default function DashboardContent() {
-  export default function PendingOrdersPage() {
-
-     const navigate = useNavigate();
-     const navigateSignInPage = () => {
-       // 👇️ navigate to /
-       navigate("/");
-     };
-
-     const navigateToHomeOrderPage = () => {
-       navigate("/homeorderpage");
-     };
-
-     const navigateToPendingPage = () => {
-       navigate("/pendingpage");
-     };
-
-     const navigateToDraftsPage = () => {
-       navigate("/draftspage");
-     };
-
-     const navigateToHistoryPage = () => {
-       navigate("/historypage");
-     };
-
-     const navigateToDiscountsPage = () => {
-       navigate("/discountspage");
-     };
-
-
-
-
-
-
+  export default function PaymentOrderPage() {
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
     const handleListItemClick = (event, index) => {
@@ -260,10 +229,7 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 0}
-                onClick={
-                  ((event) => handleListItemClick(event, 0),
-                  navigateToHomeOrderPage)
-                }
+                onClick={(event) => handleListItemClick(event, 0)}
               >
                 <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
 
@@ -293,10 +259,7 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 1}
-                onClick={
-                  ((event) => handleListItemClick(event, 1),
-                  navigateToPendingPage)
-                }
+                onClick={(event) => handleListItemClick(event, 1)}
               >
                 <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
                 <img
@@ -324,10 +287,7 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 2}
-                onClick={
-                  ((event) => handleListItemClick(event, 2),
-                  navigateToDraftsPage)
-                }
+                onClick={(event) => handleListItemClick(event, 2)}
               >
                 <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
                 <img
@@ -355,10 +315,7 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 3}
-                onClick={
-                  ((event) => handleListItemClick(event, 3),
-                  navigateToHistoryPage)
-                }
+                onClick={(event) => handleListItemClick(event, 3)}
               >
                 <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
                 <img
@@ -368,38 +325,6 @@ const mdTheme = createTheme({
                   // class="center"
                 />
               </ListItemButton>
-              {/* <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 4}
-                onClick={
-                  ((event) => handleListItemClick(event, 4),
-                  navigateToDiscountsPage)
-                }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="discountsIcon"
-                  src="images/discounts.png"
-                  alt="discounts Icon"
-                  // class="center"
-                />
-              </ListItemButton> */}
-
               <ListItemButton
                 sx={{
                   "&.Mui-selected": {
@@ -418,9 +343,36 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 4}
-                onClick={
-                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
-                }
+                onClick={(event) => handleListItemClick(event, 4)}
+              >
+                <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+                <img
+                  id="discountsIcon"
+                  src="images/discounts.png"
+                  alt="discounts Icon"
+                  // class="center"
+                />
+              </ListItemButton>
+
+              <ListItemButton
+                sx={{
+                  "&.Mui-selected": {
+                    border: "2px solid #F2A42A",
+                  },
+                  "&.Mui-focusVisible": {
+                    border: "2px solid #F2A42A",
+                  },
+                  ":hover": {
+                    border: "2px solid #F2A42A",
+                  },
+                  borderRadius: 4,
+                  border: "2px solid #3A374B",
+                  height: 90,
+                  ml: -2,
+                  mb: 2,
+                }}
+                selected={selectedIndex === 6}
+                onClick={(event) => handleListItemClick(event, 6)}
               >
                 <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
                 <img
@@ -466,6 +418,31 @@ const mdTheme = createTheme({
                         sx={{ backgroundColor: "#252836" }}
                       >
                         <Toolbar>
+                          <Button
+                            sx={{
+                              ":hover": {
+                                bgcolor: "#787589", // theme.palette.primary.main
+                              },
+                              color: "white",
+                              backgroundColor: "#504C64",
+                              ml: -1,
+                              mt: 5,
+                              mr: 2,
+                              width: 10,
+                              borderRadius: 2,
+                              fontFamily: "Barlow Condensed",
+                              fontSize: "17px",
+                            }}
+                            style={{
+                              maxWidth: "30px",
+                              maxHeight: "30px",
+                              minWidth: "80px",
+                              minHeight: "40px",
+                            }}
+                            size="small"
+                          >
+                            Back
+                          </Button>
                           <Typography
                             variant="h6"
                             noWrap
@@ -475,14 +452,28 @@ const mdTheme = createTheme({
                               display: { xs: "none", sm: "block" },
                               fontFamily: "Barlow Condensed",
                               fontSize: "30px",
-                              mt: 5,
+                              mt: 1,
                             }}
                           >
-                            PENDING ORDERS
+                            Order Summary
                           </Typography>
                         </Toolbar>
                       </AppBar>
-
+                      <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{
+                          flexGrow: 1,
+                          display: { xs: "none", sm: "block" },
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "25px",
+                          mt: -3,
+                          ml: 14,
+                        }}
+                      >
+                        Order #0001
+                      </Typography>
                       <Typography
                         sx={{
                           ml: 5,
@@ -491,23 +482,34 @@ const mdTheme = createTheme({
                           mt: 3,
                         }}
                       >
-                        ORDER #
+                        ITEM NAME
                       </Typography>
 
                       <Typography
                         sx={{
-                          ml: 58,
+                          ml: 63.5,
                           fontFamily: "Barlow Condensed",
                           fontSize: "17px",
                           mt: -3.2,
                         }}
                       >
-                        SUBTOTAL
+                        PRICE
                       </Typography>
 
                       <Typography
                         sx={{
-                          ml: 99,
+                          ml: 81,
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "17px",
+                          mt: -3.2,
+                        }}
+                      >
+                        QTY
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          ml: 100,
                           fontFamily: "Barlow Condensed",
                           fontSize: "17px",
                           mt: -3.2,
@@ -515,7 +517,6 @@ const mdTheme = createTheme({
                       >
                         TOTAL
                       </Typography>
-
                       <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -523,38 +524,127 @@ const mdTheme = createTheme({
                       </Typography>
 
                       <Typography
-                        class="customerListStack"
+                        class="orderSummaryItemStack"
                         sx={{ color: "white" }}
                       >
-                        ORDER #0001
+                        Salted Egg Chicken (Half)
                       </Typography>
 
                       <Typography
                         sx={{
                           fontFamily: "Barlow Condensed",
                           fontSize: 19,
-                          ml: 56,
+                          ml: 60,
                           mt: -6,
                         }}
                       >
-                        Php 10000.00
+                        Php 2000.00
                       </Typography>
 
                       <Typography
                         sx={{
                           fontFamily: "Barlow Condensed",
                           fontSize: 19,
-                          ml: 92,
+                          ml: 81.7,
                           mt: -3.7,
                         }}
                       >
-                        Php 20000.00
+                        2
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontFamily: "Barlow Condensed",
+                          ml: 94,
+                          mt: -3.5,
+                          fontSize: 19,
+                        }}
+                      >
+                        Php 2000.00
                       </Typography>
 
                       <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - -
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          ml: 79,
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "17px",
+                          mt: 2,
+                        }}
+                      >
+                        Sub-total
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontFamily: "Barlow Condensed",
+                          ml: 94,
+                          mt: -3.5,
+                          fontSize: 19,
+                        }}
+                      >
+                        Php 2000.00
+                      </Typography>
+                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        - - - - - - - -
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          ml: 69,
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "17px",
+                          mt: 0,
+                        }}
+                      >
+                        Discount (20% Applied)
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontFamily: "Barlow Condensed",
+                          ml: 93.2,
+                          mt: -3.5,
+                          fontSize: 19,
+                        }}
+                      >
+                        -Php 2000.00
+                      </Typography>
+                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        - - - - - - - -
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          ml: 78.1,
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "17px",
+                          mt: 0,
+                        }}
+                      >
+                        Order Total
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontFamily: "Barlow Condensed",
+                          ml: 94,
+                          mt: -3.5,
+                          fontSize: 19,
+                        }}
+                      >
+                        Php 2000.00
+                      </Typography>
+                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        - - - - - - - -
                       </Typography>
                     </Box>
                   </Paper>
@@ -572,7 +662,7 @@ const mdTheme = createTheme({
                       backgroundColor: "#1F1D2B",
                     }}
                   >
-                    {/* <CustomerListSidePage /> */}
+                    <OrderSummarySidePage />
                   </Paper>
                 </Grid>
               </Grid>

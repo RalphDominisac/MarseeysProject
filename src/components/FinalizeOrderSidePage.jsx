@@ -157,8 +157,11 @@ const mdTheme = createTheme({
 
 
 // export default function DashboardContent() {
-  export default function HomeOrderPage() {
+  export default function FinalizeOrderSidePage(props) {
 
+
+   
+    
 
         const navigate = useNavigate();
         const navigateSignInPage = () => {
@@ -365,6 +368,38 @@ const mdTheme = createTheme({
                 // class="center"
               />
             </ListItemButton>
+            {/* <ListItemButton
+              sx={{
+                "&.Mui-selected": {
+                  border: "2px solid #F2A42A",
+                },
+                "&.Mui-focusVisible": {
+                  border: "2px solid #F2A42A",
+                },
+                ":hover": {
+                  border: "2px solid #F2A42A",
+                },
+                borderRadius: 4,
+                border: "2px solid #3A374B",
+                height: 90,
+                ml: -2,
+                mb: 2,
+              }}
+              selected={selectedIndex === 4}
+              onClick={
+                ((event) => handleListItemClick(event, 4),
+                navigateToDiscountsPage)
+              }
+            >
+              <ListItemIcon></ListItemIcon>
+              <img
+                id="discountsIcon"
+                src="images/discounts.png"
+                alt="discounts Icon"
+                // class="center"
+              />
+            </ListItemButton> */}
+
             <ListItemButton
               sx={{
                 "&.Mui-selected": {
@@ -384,38 +419,7 @@ const mdTheme = createTheme({
               }}
               selected={selectedIndex === 4}
               onClick={
-                ((event) => handleListItemClick(event, 4), navigateToDiscountsPage)
-              }
-            >
-              <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
-              <img
-                id="discountsIcon"
-                src="images/discounts.png"
-                alt="discounts Icon"
-                // class="center"
-              />
-            </ListItemButton>
-
-            <ListItemButton
-              sx={{
-                "&.Mui-selected": {
-                  border: "2px solid #F2A42A",
-                },
-                "&.Mui-focusVisible": {
-                  border: "2px solid #F2A42A",
-                },
-                ":hover": {
-                  border: "2px solid #F2A42A",
-                },
-                borderRadius: 4,
-                border: "2px solid #3A374B",
-                height: 90,
-                ml: -2,
-                mb: 2,
-              }}
-              selected={selectedIndex === 6}
-              onClick={
-                ((event) => handleListItemClick(event, 6), navigateSignInPage)
+                ((event) => handleListItemClick(event, 4), navigateSignInPage)
               }
             >
               <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
@@ -476,7 +480,7 @@ const mdTheme = createTheme({
                         >
                           Order #0001
                         </Typography>
-                        <Button
+                        {/* <Button
                           sx={{
                             ":hover": {
                               bgcolor: "#787589", // theme.palette.primary.main
@@ -499,7 +503,7 @@ const mdTheme = createTheme({
                           size="small"
                         >
                           Save to Draft
-                        </Button>
+                        </Button> */}
                       </Toolbar>
                     </AppBar>
                     <Typography
@@ -541,8 +545,11 @@ const mdTheme = createTheme({
                     </Typography>
                     {/* <CategoryButtons /> */}
 
+                    
+
                     <Typography class="orderItemStack" sx={{ color: "white" }}>
                       Salted Egg Chicken (Half)
+                    
                     </Typography>
 
                     <PaymentDecreIncreCounter />
@@ -551,6 +558,7 @@ const mdTheme = createTheme({
                       sx={{ fontFamily: "Barlow Condensed", ml: 3, mt: -9 }}
                     >
                       Php 2000.00
+                      
                     </Typography>
 
                     {/* <Typography class="menuPriceTag">Php 2000.00</Typography> */}
@@ -566,7 +574,8 @@ const mdTheme = createTheme({
                     <Typography
                       sx={{ fontFamily: "Barlow Condensed", ml: 95.5, mt: -10 }}
                     >
-                      Php 2000.00
+                      {/* Php 2000.00 */}
+                      {props.menuItemInitialPrice}
                     </Typography>
 
                     <Button

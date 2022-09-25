@@ -367,7 +367,7 @@ const mdTheme = createTheme({
                   // class="center"
                 />
               </ListItemButton>
-              <ListItemButton
+              {/* <ListItemButton
                 sx={{
                   "&.Mui-selected": {
                     border: "2px solid #F2A42A",
@@ -390,14 +390,14 @@ const mdTheme = createTheme({
                   navigateToDiscountsPage)
                 }
               >
-                <ListItemIcon>{/* <LayersIcon /> */}</ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <img
                   id="discountsIcon"
                   src="images/discounts.png"
                   alt="discounts Icon"
                   // class="center"
                 />
-              </ListItemButton>
+              </ListItemButton> */}
 
               <ListItemButton
                 sx={{

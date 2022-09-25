@@ -43,7 +43,7 @@ export default function CustomerListSidePage() {
 
   return (
     <React.Fragment>
-      <Typography
+      {/* <Typography
         sx={{
           color: "#FFFFFF",
           fontSize: 30,
@@ -157,7 +157,7 @@ export default function CustomerListSidePage() {
           Php 123,000.00
         </Typography>
       </Box>
-      {/* ---------------------------- */}
+     
       <Box
         border={2}
         borderRadius={2}
@@ -202,7 +202,7 @@ export default function CustomerListSidePage() {
         </Typography>
       </Box>
 
-      {/* ------------ */}
+      
       <Box
         border={2}
         borderRadius={2}
@@ -247,7 +247,7 @@ export default function CustomerListSidePage() {
         </Typography>
       </Box>
 
-      {/* ---------------------------------------------- */}
+    
 
       <Box
         border={2}
@@ -291,7 +291,7 @@ export default function CustomerListSidePage() {
         >
           Php 123,000.00
         </Typography>
-      </Box>
+      </Box> */}
     </React.Fragment>
   );
 }

@@ -9,26 +9,26 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-function ModalProceed({ setOpenModalProceed }) {
-   const navigate = useNavigate();
+function ModalSaveToDraft({ setOpenModalSaveToDraft }) {
+  const navigate = useNavigate();
 
-   const navigateToFinalizeOrderPage = () => {
-     navigate("/finalizeorderpage");
-   };
+  const navigateToDraftsPage = () => {
+    navigate("/draftspage");
+  };
   return (
     <div className="modalBackground">
       <div className="modalContainer">
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setOpenModalProceed(false);
+              setOpenModalSaveToDraft(false);
             }}
           >
             <Typography sx={{ color: "white" }}>X</Typography>
           </button>
         </div>
         <div className="title">
-          <h1>Proceed to Payment?</h1>
+          <h1>Save to Draft?</h1>
         </div>
         {/* <div className="body">
           <p>The next page looks amazing. Hope you want to go there!</p>
@@ -36,17 +36,17 @@ function ModalProceed({ setOpenModalProceed }) {
         <div className="footer">
           <button
             onClick={() => {
-              setOpenModalProceed(false);
+              setOpenModalSaveToDraft(false);
             }}
             id="noBtn"
           >
             No
           </button>
-          <button onClick={navigateToFinalizeOrderPage}>Yes</button>
+          <button onClick={navigateToDraftsPage}>Yes</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default ModalProceed;
+export default ModalSaveToDraft;
