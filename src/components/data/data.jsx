@@ -21,10 +21,23 @@ const data = {
 
     {
       id: "4",
-      name: "Hito (Very Large)",
-      price: 210,
+      name: "Chicken Paa",
+      price: 80,
       availables: 20,
     },
+
+    {
+      id: "5",
+      name: "Chicken Pecho",
+      price: 90,
+      availables: 20,
+    },
+
+   
+
+  
+
+    
   ],
 };
 export default data;

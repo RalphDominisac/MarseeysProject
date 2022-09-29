@@ -44,7 +44,11 @@ import {
   Routes,
   Route,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
+
+
+
 
 
 
@@ -157,13 +161,17 @@ const mdTheme = createTheme({
 
 
 // export default function DashboardContent() {
-  export default function FinalizeOrderPage(props) {
+  export default function FinalizeOrderPage() {
 
 
-   
-    
+
+
+     const location = useLocation();
+
+      const data = location.state;
 
         const navigate = useNavigate();
+
         const navigateSignInPage = () => {
           // 👇️ navigate to /
           navigate("/");
@@ -516,7 +524,6 @@ const mdTheme = createTheme({
                     >
                       ITEM NAME
                     </Typography>
-
                     <Typography
                       sx={{
                         ml: 75,
@@ -527,7 +534,6 @@ const mdTheme = createTheme({
                     >
                       QTY
                     </Typography>
-
                     <Typography
                       sx={{
                         ml: 100,
@@ -543,42 +549,36 @@ const mdTheme = createTheme({
                       - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                       - - - - - - - - - - - - - - - - - - - - - - -
                     </Typography>
-                    {/* <CategoryButtons /> */}
-
-                    
-
-                    <Typography class="orderItemStack" sx={{ color: "white" }}>
-                      Salted Egg Chicken (Half)
-                    
+                    {data?.cartItems.map((item, index) => (
+                      <div key={index} style={{ display: "flex", gap: "8px " }}>
+                        <p>{item.name}</p>
+                        <p> Php {item.price.toFixed(2)}</p>
+                        <p>{item.qty}</p>
+                        <p>{item.price}</p>
+                      </div>
+                    ))}
+                    <Typography sx={{ ml: 3, mt: 1, color: "#504C64" }}>
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     </Typography>
-
-                    <PaymentDecreIncreCounter />
-
-                    <Typography
+                    TOTAL: {data?.totalPrice}
+                    {/* <Typography
                       sx={{ fontFamily: "Barlow Condensed", ml: 3, mt: -9 }}
                     >
                       Php 2000.00
-                      
-                    </Typography>
-
-                    {/* <Typography class="menuPriceTag">Php 2000.00</Typography> */}
-
-                    <TextField
+                    </Typography> */}
+                    {/* <Typography
+                      class="orderItemStack"
+                      sx={{ color: "white" }}
+                    >dfdfdf</Typography>   */}
+                    {/* <TextField
                       className="paymentinputRounded"
                       value="Order request"
                       variant="outlined"
                       size="small"
                       sx={{ ml: 3, mt: 1, width: 480 }}
-                    />
-
-                    <Typography
-                      sx={{ fontFamily: "Barlow Condensed", ml: 95.5, mt: -10 }}
-                    >
-                      {/* Php 2000.00 */}
-                      {props.menuItemInitialPrice}
-                    </Typography>
-
-                    <Button
+                    /> */}
+                    {/* <Button
                       sx={{
                         ":hover": {
                           bgcolor: "#D33131", // theme.palette.primary.main
@@ -601,13 +601,7 @@ const mdTheme = createTheme({
                       size="small"
                     >
                       Remove Item
-                    </Button>
-
-                    <Typography sx={{ ml: 3, mt: 1, color: "#504C64" }}>
-                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                      - - - - - - - - - - - - - - - - - - - - - - -
-                    </Typography>
+                    </Button> */}
                   </Box>
                 </Paper>
               </Grid>

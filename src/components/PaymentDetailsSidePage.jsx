@@ -24,6 +24,8 @@ import Box from "@mui/material/Box";
 import TableNumberButtons from "./TableNumberButtons";
 
 import ModalSaveToDraft from "./ModalSaveToDraft";
+import ModalCancelOrder from "./ModalCancelOrder";
+import ModalConfirmOrder from "./ModalConfirmOrder";
 
 
 
@@ -38,6 +40,10 @@ function preventDefault(event) {
 }
 
 export default function PaymentDetailsSidePage() {
+
+const [modalOpenConfirmOrder, setModalOpenConfirmOrder] = useState(false);
+
+const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
 
  const [modalOpenSaveToDraft, setModalOpenSaveToDraft] = useState(false);
 
@@ -517,6 +523,9 @@ export default function PaymentDetailsSidePage() {
       </Typography>
 
       <Button
+        onClick={() => {
+          setModalOpenConfirmOrder(true);
+        }}
         className="proceedToPaymentButton"
         sx={{
           ":hover": {
@@ -540,8 +549,16 @@ export default function PaymentDetailsSidePage() {
       >
         Confirm Order
       </Button>
+      {modalOpenConfirmOrder && (
+        <ModalConfirmOrder
+          setOpenModalConfirmOrder={setModalOpenConfirmOrder}
+        />
+      )}
 
       <Button
+        onClick={() => {
+          setModalOpenCancelOrder(true);
+        }}
         className="proceedToPaymentButton"
         sx={{
           ":hover": {
@@ -565,6 +582,9 @@ export default function PaymentDetailsSidePage() {
       >
         Cancel Order
       </Button>
+      {modalOpenCancelOrder && (
+        <ModalCancelOrder setOpenModalCancelOrder={setModalOpenCancelOrder} />
+      )}
     </React.Fragment>
   );
 }

@@ -34,16 +34,6 @@ import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 
 
-
-
-
-
-
-
-
-
-
-
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -55,7 +45,6 @@ export default function OrderSidePage(props) {
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     // const discount = 
     const totalPrice = itemsPrice;
-
 
 
   //Modal State
@@ -72,9 +61,14 @@ export default function OrderSidePage(props) {
 
   const navigate = useNavigate();
 
-  const navigateToPaymentsPage = () => {
-    navigate("/paymentpage");
-  };
+ const navigateToFinalizeOrderPage = () => {
+   navigate("/finalizeorderpage", {
+     state: {
+       totalPrice,
+       cartItems,
+     },
+   });
+ };
 
   return (
     <React.Fragment>
@@ -306,8 +300,6 @@ export default function OrderSidePage(props) {
               - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
               - - - - - - - - - - - - -
             </Typography>
-
-         
           </div>
         ))}
 
@@ -428,7 +420,10 @@ export default function OrderSidePage(props) {
         Proceed to Payment
       </Button>
       {modalOpenProceed && (
-        <ModalProceed setOpenModalProceed={setModalOpenProceed} />
+        <ModalProceed
+          setOpenModalProceed={setModalOpenProceed}
+          onClickNav={navigateToFinalizeOrderPage}
+        />
       )}
     </React.Fragment>
   );
