@@ -40,6 +40,10 @@ function preventDefault(event) {
 
 export default function OrderSidePage(props) {
 
+   const [orderComment, setOrderComment] = useState();
+
+    const[orderType, setOrderType] = useState();
+
     const { cartItems, onAdd, onRemove } = props;
 
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
@@ -66,6 +70,8 @@ export default function OrderSidePage(props) {
      state: {
        totalPrice,
        cartItems,
+       orderType,
+       orderComment,
      },
    });
  };
@@ -73,7 +79,7 @@ export default function OrderSidePage(props) {
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Order #0001
+        Order #0001 
       </Typography>
 
       {/* <Button
@@ -103,6 +109,8 @@ export default function OrderSidePage(props) {
 
       <Stack spacing={2} direction="row" sx={{ mt: -1, ml: 5 }}>
         <Button
+          onClick={(e) => setOrderType(e.target.value)}
+          value="Dine In"
           variant="outlined"
           sx={{
             "&.Mui-selected": {},
@@ -130,6 +138,8 @@ export default function OrderSidePage(props) {
           Dine In
         </Button>
         <Button
+          onClick={(e) => setOrderType(e.target.value)}
+          value="Pickup"
           variant="outlined"
           sx={{
             "&.Mui-selected": {},
@@ -157,6 +167,8 @@ export default function OrderSidePage(props) {
           Pickup
         </Button>
         <Button
+          onClick={(e) => setOrderType(e.target.value)}
+          value="Delivery"
           variant="outlined"
           sx={{
             "&.Mui-selected": {},
@@ -285,6 +297,8 @@ export default function OrderSidePage(props) {
             </Typography>
 
             <TextField
+            // know how to assign id to order comment to get unique values
+              onChange={(g) => setOrderComment(g.target.value)}
               className="inputRounded"
               placeholder="Order Comments"
               variant="outlined"

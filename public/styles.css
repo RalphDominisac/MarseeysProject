@@ -323,7 +323,6 @@ body {
 
 .inputRounded .MuiOutlinedInput-root {
   border-radius: 13px;
-  border-color: 'red';
   color:white;
   background-color: #252836;
   font-family: 'Helvetica LT Std'
@@ -335,6 +334,7 @@ body {
 
 .inputRounded .MuiOutlinedInput-notchedOutline{
   border-color:#504C64;
+  border-width: 4px;
 }
 
 
@@ -356,6 +356,8 @@ body {
 .paymentinputRounded .MuiOutlinedInput-notchedOutline{
   border-color:#504C64;
 }
+
+
 
 
 

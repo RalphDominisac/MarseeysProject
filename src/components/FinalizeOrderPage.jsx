@@ -488,6 +488,22 @@ const mdTheme = createTheme({
                         >
                           Order #0001
                         </Typography>
+
+                        <Typography
+                          variant="h6"
+                          noWrap
+                          component="div"
+                          sx={{
+                            flexGrow: 1,
+                            display: { xs: "none", sm: "block" },
+                            fontFamily: "Barlow Condensed",
+                            fontSize: "30px",
+                            mt: 4.5,
+                            ml: 55,
+                          }}
+                        >
+                          Order Type: {data?.orderType}
+                        </Typography>
                         {/* <Button
                           sx={{
                             ":hover": {
@@ -526,6 +542,16 @@ const mdTheme = createTheme({
                     </Typography>
                     <Typography
                       sx={{
+                        ml: 54,
+                        fontFamily: "Barlow Condensed",
+                        fontSize: "17px",
+                        mt: -3.2,
+                      }}
+                    >
+                      ITEM PRICE
+                    </Typography>
+                    <Typography
+                      sx={{
                         ml: 75,
                         fontFamily: "Barlow Condensed",
                         fontSize: "17px",
@@ -536,13 +562,13 @@ const mdTheme = createTheme({
                     </Typography>
                     <Typography
                       sx={{
-                        ml: 100,
+                        ml: 88,
                         fontFamily: "Barlow Condensed",
                         fontSize: "17px",
                         mt: -3.2,
                       }}
                     >
-                      PRICE
+                      ITEM SUBTOTAL
                     </Typography>
                     <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
                       - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -550,18 +576,63 @@ const mdTheme = createTheme({
                       - - - - - - - - - - - - - - - - - - - - - - -
                     </Typography>
                     {data?.cartItems.map((item, index) => (
-                      <div key={index} style={{ display: "flex", gap: "8px " }}>
+                      <div
+                        key={index}
+                        style={{
+                          fontFamily: "Barlow Condensed",
+                          fontSize: "20px",
+                          marginLeft: "29px",
+                          marginTop: "-18px",
+                        }}
+                      >
                         <p>{item.name}</p>
-                        <p> Php {item.price.toFixed(2)}</p>
-                        <p>{item.qty}</p>
-                        <p>{item.price}</p>
+
+                        <p style={{ marginLeft: "400px", marginTop: "-49px" }}>
+                          Php {item.price.toFixed(2)}
+                        </p>
+                        <p style={{ marginLeft: "572px", marginTop: "-50px" }}>
+                          {item.qty}
+                        </p>
+                        <p
+                          style={{ marginLeft: "680px", marginTop: "-50.4px" }}
+                        >
+                          Php {(item.price * item.qty).toFixed(2)}
+                        </p>
+                        <TextField
+                          disabled={true}
+                          className="inputRounded"
+                          value={data?.orderComment}
+                          variant="outlined"
+                          size="small"
+                          sx={{
+                            ml: -0.5,
+                            mt: -2,
+                            width: 335,
+                            "& .MuiInputBase-input.Mui-disabled": {
+                              WebkitTextFillColor: "white",
+                              WebkitBorderColor: "red",
+                            },
+                          }}
+                        />
+
+                        <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
+                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        </Typography>
                       </div>
                     ))}
-                    <Typography sx={{ ml: 3, mt: 1, color: "#504C64" }}>
-                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                      - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                    </Typography>
-                    TOTAL: {data?.totalPrice}
+
+                    <div
+                      style={{
+                        fontFamily: "Barlow Condensed",
+                        fontSize: "20px",
+                        marginLeft: "582px",
+                      }}
+                    >
+                      ORDER SUBTOTAL: Php {data?.totalPrice.toFixed(2)}
+                    </div>
+
                     {/* <Typography
                       sx={{ fontFamily: "Barlow Condensed", ml: 3, mt: -9 }}
                     >
@@ -571,13 +642,7 @@ const mdTheme = createTheme({
                       class="orderItemStack"
                       sx={{ color: "white" }}
                     >dfdfdf</Typography>   */}
-                    {/* <TextField
-                      className="paymentinputRounded"
-                      value="Order request"
-                      variant="outlined"
-                      size="small"
-                      sx={{ ml: 3, mt: 1, width: 480 }}
-                    /> */}
+
                     {/* <Button
                       sx={{
                         ":hover": {

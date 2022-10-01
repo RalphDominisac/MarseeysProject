@@ -225,7 +225,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         CHOOSE FROM LIST
       </Button> */}
 
-      <FormControl
+      {/* <FormControl
         sx={{
           m: 1,
           width: 130,
@@ -273,11 +273,11 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           }}
         >
           <MenuItem value="">Delivery</MenuItem>
-          {/* <MenuItem value={"Delivery"}>Delivery</MenuItem> */}
+          <MenuItem value={"Delivery"}>Delivery</MenuItem>
           <MenuItem value={"Pick-Up"}>Pick-Up</MenuItem>
           <MenuItem value={"Dine In"}>Dine In</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       <FormControl
         sx={{
@@ -287,7 +287,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           borderRadius: 3,
           ml: 20,
           height: 42,
-          mt: -6.2,
+          mt: 1,
           mb: -2,
         }}
       >
@@ -328,12 +328,14 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
             },
           }}
         >
-          <MenuItem value="">Discount Applied: 10%</MenuItem>
+          <MenuItem value="">Select Discount</MenuItem>
           {/* <MenuItem value={10}>Discount Applied: 10%</MenuItem> */}
-          <MenuItem value={20}>Discount Applied: 20%</MenuItem>
-          <MenuItem value={30}>Discount Applied: 30%</MenuItem>
-          <MenuItem value={40}>Discount Applied: 40%</MenuItem>
-          <MenuItem value={50}>Discount Applied: 50%</MenuItem>
+          <MenuItem value={0.05}>Discount: 5% </MenuItem>
+          <MenuItem value={0.10}>Discount: 10% </MenuItem>
+          <MenuItem value={0.15}>Discount: 15% </MenuItem>
+          <MenuItem value={0.20}>Discount: 20% </MenuItem>
+          <MenuItem value={0.20}>Discount (Senior): 20% </MenuItem>
+          <MenuItem value={0.20}>Discount (PWD): 20% </MenuItem>
         </Select>
       </FormControl>
 
@@ -482,7 +484,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           fontSize: 20,
         }}
       >
-        Discount ({discount}%):
+        Discount ({discount * 100}%):
       </Typography>
 
       <Typography
