@@ -2,18 +2,14 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import ButtonCategoryStyle from "./ButtonCategoryStyle";
 import ItemsCategoryButton from "./ItemsCategoryButton";
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
 } from "react-router-dom";
-
-
 
 
 function preventDefault(event) {

@@ -19,9 +19,6 @@ const App = () => {
   };
   return (
     <>
-      {/* <div className="main_div"> */}
-      {/* <div className="center_div"> */}
-      {/* <div className="btn_div"> */}
       <Button
         onClick={DecNum}
         sx={{
@@ -74,10 +71,7 @@ const App = () => {
         >
           <AddIcon />
         </Button>
-    
-      {/* </div> */}
-      {/* </div> */}
-      {/* </div> */}
+        
     </>
   );
 };

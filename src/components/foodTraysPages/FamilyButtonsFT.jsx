@@ -2,18 +2,9 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import ButtonCategoryStyle from "../ButtonCategoryStyle";
 import ItemsCategoryButton from "../ItemsCategoryButton";
 import FoodTraysItemButtonStyle from "../FoodTraysItemButtonStyle";
-
-
-
-
-
-
-
-
 import PastaNoodlesButtonsFT from "../foodTraysPages/PastaNoodlesButtonsFT";
 import DessertsButtonsFT from "../foodTraysPages/DessertsButtonsFT";
 import DessertsButtonsFamilyFT from "../foodTraysPages/DessertsButtonsFamilyFT";

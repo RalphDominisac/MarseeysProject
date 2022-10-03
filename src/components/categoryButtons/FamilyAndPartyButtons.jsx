@@ -27,8 +27,6 @@ import {
 
 
 
-
-
 function preventDefault(event) {
   event.preventDefault();
 }

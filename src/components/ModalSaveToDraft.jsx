@@ -1,7 +1,6 @@
 import React from "react";
 import "./ModalStyle.css";
 import Typography from "@mui/material/Typography";
-
 import {
   BrowserRouter as Router,
   Routes,

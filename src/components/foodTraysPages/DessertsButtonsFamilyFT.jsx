@@ -2,11 +2,8 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-
 import ButtonCategoryStyle from "../ButtonCategoryStyle";
 import ItemsCategoryButton from "../ItemsCategoryButton";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -63,7 +60,7 @@ export default function DessertsButtonsFT() {
       </Stack>
 
     
-      <Button
+      {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}
         sx={{
@@ -81,7 +78,7 @@ export default function DessertsButtonsFT() {
         }}
       >
         Customer List
-      </Button>
+      </Button> */}
     </React.Fragment>
   );
 }

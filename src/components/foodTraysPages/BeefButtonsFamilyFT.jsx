@@ -2,8 +2,6 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-
 import ButtonCategoryStyle from "../ButtonCategoryStyle";
 import ItemsCategoryButton from "../ItemsCategoryButton";
 
@@ -75,7 +73,7 @@ export default function BeefButtonsFamilyFT() {
         />
       </Stack>
 
-      <Button
+      {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}
         sx={{
@@ -93,7 +91,7 @@ export default function BeefButtonsFamilyFT() {
         }}
       >
         Customer List
-      </Button>
+      </Button> */}
     </React.Fragment>
   );
 }

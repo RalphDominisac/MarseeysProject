@@ -17,24 +17,16 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
-
 import PaymentDetailsSidePage from "./PaymentDetailsSidePage";
-
 import DateTime from "./DateTime";
-
-
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-
 import { useState } from "react";
-
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
@@ -56,48 +48,48 @@ import {
 
 const drawerWidth = 120;
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: 14,
-  backgroundColor: "white",
-  color: "black",
-  "&:hover": {
-    backgroundColor: "white",
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
+// const Search = styled("div")(({ theme }) => ({
+//   position: "relative",
+//   borderRadius: 14,
+//   backgroundColor: "white",
+//   color: "black",
+//   "&:hover": {
+//     backgroundColor: "white",
+//   },
+//   marginLeft: 0,
+//   width: "100%",
+//   [theme.breakpoints.up("sm")]: {
+//     marginLeft: theme.spacing(1),
+//     width: "auto",
+//   },
+// }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+// const SearchIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   pointerEvents: "none",
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+// }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-      "&:focus": {
-        width: "25ch",
-      },
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: "inherit",
+//   "& .MuiInputBase-input": {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create("width"),
+//     width: "100%",
+//     [theme.breakpoints.up("sm")]: {
+//       width: "20ch",
+//       "&:focus": {
+//         width: "25ch",
+//       },
+//     },
+//   },
+// }));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -159,12 +151,7 @@ const mdTheme = createTheme({
 });
 
 
-
-// export default function DashboardContent() {
   export default function FinalizeOrderPage() {
-
-
-
 
      const location = useLocation();
 
@@ -243,9 +230,6 @@ const mdTheme = createTheme({
               class="center"
             />
 
-            {/* <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
-              <ChevronLeftIcon />
-            </IconButton> */}
           </Toolbar>
           <Divider />
 
@@ -274,14 +258,14 @@ const mdTheme = createTheme({
                 navigateToHomeOrderPage)
               }
             >
-              <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
+              <ListItemIcon></ListItemIcon>
 
-              {/* <ListItemText primary="ORDER" /> */}
+            
               <img
                 id="orderIcon"
                 src="images/ordericon.png"
                 alt="Order Icon"
-                // class="center"
+              
               />
             </ListItemButton>
             <ListItemButton
@@ -307,12 +291,11 @@ const mdTheme = createTheme({
                 navigateToPendingPage)
               }
             >
-              <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <img
                 id="pendingIcon"
                 src="images/pending.png"
                 alt="Pending Icon"
-                // class="center"
               />
             </ListItemButton>
             <ListItemButton
@@ -337,12 +320,11 @@ const mdTheme = createTheme({
                 ((event) => handleListItemClick(event, 2), navigateToDraftsPage)
               }
             >
-              <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <img
                 id="draftIcon"
                 src="images/draft.png"
                 alt="Draft Icon"
-                // class="center"
               />
             </ListItemButton>
             <ListItemButton
@@ -368,45 +350,15 @@ const mdTheme = createTheme({
                 navigateToHistoryPage)
               }
             >
-              <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <img
                 id="historyIcon"
                 src="images/history.png"
                 alt="History Icon"
-                // class="center"
+             
               />
             </ListItemButton>
-            {/* <ListItemButton
-              sx={{
-                "&.Mui-selected": {
-                  border: "2px solid #F2A42A",
-                },
-                "&.Mui-focusVisible": {
-                  border: "2px solid #F2A42A",
-                },
-                ":hover": {
-                  border: "2px solid #F2A42A",
-                },
-                borderRadius: 4,
-                border: "2px solid #3A374B",
-                height: 90,
-                ml: -2,
-                mb: 2,
-              }}
-              selected={selectedIndex === 4}
-              onClick={
-                ((event) => handleListItemClick(event, 4),
-                navigateToDiscountsPage)
-              }
-            >
-              <ListItemIcon></ListItemIcon>
-              <img
-                id="discountsIcon"
-                src="images/discounts.png"
-                alt="discounts Icon"
-                // class="center"
-              />
-            </ListItemButton> */}
+
 
             <ListItemButton
               sx={{
@@ -430,12 +382,12 @@ const mdTheme = createTheme({
                 ((event) => handleListItemClick(event, 4), navigateSignInPage)
               }
             >
-              <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <img
                 id="logoutIcon"
                 src="images/logout.png"
                 alt="logout Icon"
-                // class="center"
+
               />
             </ListItemButton>
           </List>
@@ -449,17 +401,13 @@ const mdTheme = createTheme({
             height: "100vh",
             overflow: "auto",
           }}
-        >
-          {/* <Toolbar /> */}
-          {/* <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}> */}
-          <Container maxWidth="md" sx={{ ml: -1 }}>
-            <Grid container spacing={2}>
-              {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
+        > 
 
+          <Container maxWidth="md" sx={{ ml: -1 }}>
+            <Grid container spacing={2}>          
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
-                    // p: 1,
                     display: "flex",
                     flexDirection: "column",
                     height: 790,
@@ -504,30 +452,7 @@ const mdTheme = createTheme({
                         >
                           Order Type: {data?.orderType}
                         </Typography>
-                        {/* <Button
-                          sx={{
-                            ":hover": {
-                              bgcolor: "#787589", // theme.palette.primary.main
-                            },
-                            color: "white",
-                            backgroundColor: "#504C64",
-                            ml: 48,
-                            mt: -1,
-                            width: 10,
-                            borderRadius: 5,
-                            fontFamily: "Barlow Condensed",
-                            fontSize: "17px",
-                          }}
-                          style={{
-                            maxWidth: "30px",
-                            maxHeight: "30px",
-                            minWidth: "115px",
-                            minHeight: "40px",
-                          }}
-                          size="small"
-                        >
-                          Save to Draft
-                        </Button> */}
+
                       </Toolbar>
                     </AppBar>
                     <Typography
@@ -598,7 +523,8 @@ const mdTheme = createTheme({
                         >
                           Php {(item.price * item.qty).toFixed(2)}
                         </p>
-                        <TextField
+                        {/* Comment Field: */}
+                        {/* <TextField
                           disabled={true}
                           className="inputRounded"
                           value={data?.orderComment}
@@ -613,7 +539,7 @@ const mdTheme = createTheme({
                               WebkitBorderColor: "red",
                             },
                           }}
-                        />
+                        /> */}
 
                         <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
                           - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -633,16 +559,8 @@ const mdTheme = createTheme({
                       ORDER SUBTOTAL: Php {data?.totalPrice.toFixed(2)}
                     </div>
 
-                    {/* <Typography
-                      sx={{ fontFamily: "Barlow Condensed", ml: 3, mt: -9 }}
-                    >
-                      Php 2000.00
-                    </Typography> */}
-                    {/* <Typography
-                      class="orderItemStack"
-                      sx={{ color: "white" }}
-                    >dfdfdf</Typography>   */}
 
+                      {/* Remove Item Button: */}
                     {/* <Button
                       sx={{
                         ":hover": {
@@ -670,7 +588,7 @@ const mdTheme = createTheme({
                   </Box>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+          
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -687,7 +605,7 @@ const mdTheme = createTheme({
                 </Paper>
               </Grid>
             </Grid>
-            {/* <Copyright sx={{ pt: 4 }} /> */}
+  
           </Container>
         </Box>
       </Box>
@@ -695,4 +613,4 @@ const mdTheme = createTheme({
   );
 }
 
-// export default function Dashboard() {
+

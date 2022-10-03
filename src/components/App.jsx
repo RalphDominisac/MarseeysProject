@@ -1,35 +1,25 @@
 import React from 'react';
 import SignInPOS from './SignInPOS';
-
 import DateTime from "./DateTime";
-
-
 import HomeOrderPage from "./HomeOrderPage";
-import BBQOrderPage from "./orderPages/BBQOrderPage";
-import BeefOrderPage from "./orderPages/BeefOrderPage";
-import BilaoOrderPage from "./orderPages/BilaoOrderPage";
-import ChickenOrderPage from "./orderPages/ChickenOrderPage";
-import DessertsOrderPage from "./orderPages/DessertsOrderPage";
-import DrinksOrderPage from "./orderPages/DrinksOrderPage";
-import FoodTraysOrderPage from "./orderPages/FoodTraysOrderPage";
-import HandaanOrderPage from "./orderPages/HandaanOrderPage";
-import NoodlesOrderPage from "./orderPages/NoodlesOrderPage";
-import PicapicaOrderPage from "./orderPages/PicapicaOrderPage";
-import PlattersOrderPage from "./orderPages/PlattersOrderPage";
-import PorkOrderPage from "./orderPages/PorkOrderPage";
-import RiceOrderPage from "./orderPages/RiceOrderPage";
-import SeafoodOrderPage from "./orderPages/SeafoodOrderPage";
-import SizzlingOrderPage from "./orderPages/SizzlingOrderPage";
-import SoloMealsOrderPage from "./orderPages/SoloMealsOrderPage";
-import SoupOrderPage from "./orderPages/SoupOrderPage";
-import VegetablesOrderPage from "./orderPages/VegetablesOrderPage";
-
-
-
-
-
-
-
+// import BBQOrderPage from "./orderPages/BBQOrderPage";
+// import BeefOrderPage from "./orderPages/BeefOrderPage";
+// import BilaoOrderPage from "./orderPages/BilaoOrderPage";
+// import ChickenOrderPage from "./orderPages/ChickenOrderPage";
+// import DessertsOrderPage from "./orderPages/DessertsOrderPage";
+// import DrinksOrderPage from "./orderPages/DrinksOrderPage";
+// import FoodTraysOrderPage from "./orderPages/FoodTraysOrderPage";
+// import HandaanOrderPage from "./orderPages/HandaanOrderPage";
+// import NoodlesOrderPage from "./orderPages/NoodlesOrderPage";
+// import PicapicaOrderPage from "./orderPages/PicapicaOrderPage";
+// import PlattersOrderPage from "./orderPages/PlattersOrderPage";
+// import PorkOrderPage from "./orderPages/PorkOrderPage";
+// import RiceOrderPage from "./orderPages/RiceOrderPage";
+// import SeafoodOrderPage from "./orderPages/SeafoodOrderPage";
+// import SizzlingOrderPage from "./orderPages/SizzlingOrderPage";
+// import SoloMealsOrderPage from "./orderPages/SoloMealsOrderPage";
+// import SoupOrderPage from "./orderPages/SoupOrderPage";
+// import VegetablesOrderPage from "./orderPages/VegetablesOrderPage";
 import DrawerSample from "./DrawerSample";
 import FinalizeOrderPage from "./FinalizeOrderPage";
 import OrderSummaryPage from "./OrderSummaryPage";
@@ -37,48 +27,12 @@ import CustomerListPage from "./CustomerListPage";
 import PendingOrdersPage from "./PendingOrdersPage";
 import DraftsPage from "./DraftsPage";
 import HistoryPage from "./HistoryPage";
-import DiscountsPage from "./DiscountsPage";
-
+// import DiscountsPage from "./DiscountsPage";
 import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
 
 
 function App(){
     return (
-      // <Router>
-      //   <Routes>
-      //    <Route path="/" element={<SignInPOS/>} />
-      //     <Route path="/homeorderspage" element={<HomeOrderPage/>} />
-      //     <Route path="/pendingpage" element={<PendingOrdersPage/>} />
-      //     <Route path="/draftspage" element={<DraftsPage/>} />
-      //     <Route path="/historypage" element={<HistoryPage/>} />
-      //     <Route path="/discountspage" element={<DiscountsPage/>} />
-      //     <Route path="/signin" element={<SignInPOS/>} />
-      //   </Routes>
-      // </Router>
-      // <div>
-      //   {/* TESTING AREA: */}
-
-      //   {/* <SignInPOS /> */}
-
-      //   {/* <SidebarPOS/> */}
-
-      //   {/* <HomeOrderPage /> */}
-
-      //   {/* <DrawerSample/> */}
-      //   {/* <TestSample /> */}
-
-      //   {/* <PaymentPage/> */}
-      //   {/* <OrderSummaryPage /> */}
-      //   {/* <CustomerListPage /> */}
-
-      //   {/* <PendingOrdersPage /> */}
-      //   {/* <DraftsPage/> */}
-      //   {/* <HistoryPage /> */}
-      //   {/* <DiscountsPage /> */}
-      // </div>
-
-      // ************************************************************
-      // UNCOMMENT THIS TO ACTIVATE ROUTES:
       <div>
         <div>
           <Routes>
@@ -87,10 +41,13 @@ function App(){
             <Route path="/pendingpage" element={<PendingOrdersPage />} />
             <Route path="/draftspage" element={<DraftsPage />} />
             <Route path="/historypage" element={<HistoryPage />} />
-            <Route path="/discountspage" element={<DiscountsPage />} />
+            {/* <Route path="/discountspage" element={<DiscountsPage />} /> */}
             <Route path="/customerlistpage" element={<CustomerListPage />} />
             <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
-            <Route path="/orderPages/bbqorderpage" element={<BBQOrderPage />} />
+          </Routes>
+
+          {
+            /* <Route path="/orderPages/bbqorderpage" element={<BBQOrderPage />} />
             <Route
               path="/orderPages/beeforderpage"
               element={<BeefOrderPage />}
@@ -158,8 +115,36 @@ function App(){
             <Route
               path="/orderPages/vegetablesorderpage"
               element={<VegetablesOrderPage />}
-            />
-          </Routes>
+            /> */
+            // <Router>
+            //   <Routes>
+            //    <Route path="/" element={<SignInPOS/>} />
+            //     <Route path="/homeorderspage" element={<HomeOrderPage/>} />
+            //     <Route path="/pendingpage" element={<PendingOrdersPage/>} />
+            //     <Route path="/draftspage" element={<DraftsPage/>} />
+            //     <Route path="/historypage" element={<HistoryPage/>} />
+            //     <Route path="/discountspage" element={<DiscountsPage/>} />
+            //     <Route path="/signin" element={<SignInPOS/>} />
+            //   </Routes>
+            // </Router>
+            // <div>
+            //   {/* TESTING AREA: */}
+            //   {/* <SignInPOS /> */}
+            //   {/* <SidebarPOS/> */}
+            //   {/* <HomeOrderPage /> */}
+            //   {/* <DrawerSample/> */}
+            //   {/* <TestSample /> */}
+            //   {/* <PaymentPage/> */}
+            //   {/* <OrderSummaryPage /> */}
+            //   {/* <CustomerListPage /> */}
+            //   {/* <PendingOrdersPage /> */}
+            //   {/* <DraftsPage/> */}
+            //   {/* <HistoryPage /> */}
+            //   {/* <DiscountsPage /> */}
+            // </div>
+            // ************************************************************
+            // UNCOMMENT THIS TO ACTIVATE ROUTES:
+          }
         </div>
       </div>
     );

@@ -57,40 +57,6 @@ export default function ChickenButtons({ onSelected }) {
     <React.Fragment>
 
 
-    
-
-
-
-
-      {/* <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
-        <ItemsCategoryButton
-          title="Buffalo Wings"
-          price="200.00"
-          availables="20"
-        />
-        <ItemsCategoryButton
-          title="Battered Chicken (Half)"
-          price="195.00"
-          availables="20"
-        />
-        <ItemsCategoryButton
-          title="Battered Chicken (Whole)"
-          price="380.00"
-          availables="20"
-        />
-        <ItemsCategoryButton
-          title="Garlic Chicken (Half)"
-          price="210.00"
-          availables="20"
-        />
-
-        <ItemsCategoryButton
-          title="Garlic Chicken (Whole)"
-          price="400.00"
-          availables="20"
-        />
-      </Stack> */}
-
       <Stack spacing={0} direction="row">
         {chickenMenuItems.map((chickenMenuItem) => (
           <ItemsCategoryButton
@@ -101,7 +67,7 @@ export default function ChickenButtons({ onSelected }) {
         ))}
       </Stack>
 
-      <Button
+      {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}
         sx={{
@@ -119,7 +85,7 @@ export default function ChickenButtons({ onSelected }) {
         }}
       >
         Customer List
-      </Button>
+      </Button> */}
     </React.Fragment>
   );
 }

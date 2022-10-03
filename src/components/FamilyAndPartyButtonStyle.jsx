@@ -3,8 +3,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function FamilyAndPartyButtonStyle({ title , onClick}) {
-
-
   return (
     <Button
       onClick={onClick}

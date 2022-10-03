@@ -13,8 +13,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput';
@@ -25,7 +23,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -33,9 +30,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-
 import { styled } from "@mui/system";
-
 
 // for custom styling: https://www.youtube.com/watch?v=8TID2i4zksg
 
@@ -70,8 +65,7 @@ const theme = createTheme({
         primary: "#ffffff"
       },
      
-
-    }
+   }
   });
 
 
@@ -80,17 +74,9 @@ export default function SignInPOS() {
   // ROUTING:
   const navigate = useNavigate();
 
-
   const navigateToHomeOrderPage = () => {
     navigate("/homeorderpage");
   };
-
-    // const navigateToBBQOrderPage = () => {
-    //   navigate("/orderPages/bbqorderpage");
-    // };
-
-
-
 
 
   // -----------------------------------------------------------
@@ -217,11 +203,6 @@ export default function SignInPOS() {
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
-                          // sx={{ color: "red", backgroundColor: "black" }}
-
-                          // sx={{ "& :hover": { color: "yellow" } }}
-                          //   sx={{backgroundColor:"white"}}
-                          // style={{ backgroundColor: "#252836" }}
                           style={{ background: "black" }}
                         >
                           {values.showPassword ? (
@@ -238,7 +219,6 @@ export default function SignInPOS() {
             </Grid>
             <Button
               onClick={navigateToHomeOrderPage}
-              // onClick={navigateToBBQOrderPage}
               type="submit"
               fullWidth
               variant="contained"

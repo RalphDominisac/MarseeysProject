@@ -2,9 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-
 import { AppBar } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -12,27 +10,19 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import DecreIncreCounter from "./DecreIncreCounter";
 import PaymentPage from "./FinalizeOrderPage";
-
 import TextField from "@mui/material/TextField";
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,  
 } from "react-router-dom";
-
-
-
 // import Modal from "./Modal";
 import ModalDraft from "./ModalDraft";
 import ModalRemoveItem from "./ModalRemoveItem";
 import ModalProceed from "./ModalProceed";
-
 import { Container } from "@mui/material";
-
 import Box from "@mui/material/Box";
-
 
 function preventDefault(event) {
   event.preventDefault();
@@ -40,7 +30,7 @@ function preventDefault(event) {
 
 export default function OrderSidePage(props) {
 
-   const [orderComment, setOrderComment] = useState();
+   const [orderComment, setOrderComment] = useState([]);
 
     const[orderType, setOrderType] = useState();
 
@@ -82,30 +72,6 @@ export default function OrderSidePage(props) {
         Order #0001 
       </Typography>
 
-      {/* <Button
-        className="openModalBtn"
-        onClick={() => {
-          setModalOpenDraft(true);
-        }}
-        variant="contained"
-        sx={{
-          "&:hover": {
-            // backgroundColor: "#02A7DD",
-            backgroundColor: "#FFB644",
-          },
-          mt: -8,
-          ml: 44,
-          width: 155,
-          height: 30,
-          backgroundColor: "#F2A42A",
-          borderRadius: 3,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
-        }}
-      >
-        Save to Draft
-      </Button>
-      {modalOpenDraft && <ModalDraft setOpenModalDraft={setModalOpenDraft} />} */}
 
       <Stack spacing={2} direction="row" sx={{ mt: -1, ml: 5 }}>
         <Button
@@ -209,7 +175,6 @@ export default function OrderSidePage(props) {
         PRICE
       </Typography>
 
-      {/* <Divider sx={{ mt: -2, backgroundColor: "#504C64", borderRadius: 10 }} /> */}
 
       <Container
         sx={{
@@ -295,8 +260,9 @@ export default function OrderSidePage(props) {
             <Typography class="menuPriceTag">
               Php {item.price.toFixed(2)}
             </Typography>
-
-            <TextField
+             
+              {/* Order Comment Field: */}
+            {/* <TextField
             // know how to assign id to order comment to get unique values
               onChange={(g) => setOrderComment(g.target.value)}
               className="inputRounded"
@@ -304,26 +270,23 @@ export default function OrderSidePage(props) {
               variant="outlined"
               size="small"
               sx={{ ml: -0.5, width: 335 }}
-            />
+            /> */}
 
             <Typography class="initialPriceTag">
               Php {(item.price * item.qty).toFixed(2)}
             </Typography>
 
-            <Typography sx={{ mt: 9, mb: 1, color: "#504C64" }}>
+            <Typography sx={{ mt: 3, mb: 1, color: "#504C64" }}>
               - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
               - - - - - - - - - - - - -
             </Typography>
           </div>
         ))}
 
-        {/* {cartItems.length !== 0 && (
-          <Typography class="initialPriceTag">
-            Php {itemsPrice.toFixed(2)}
-          </Typography>
-        )} */}
+
       </Container>
 
+      {/* Remove Item Button: */}
       {/* <Button
               onClick={() => {
                 setModalOpenRemoveItem(true);
@@ -357,30 +320,7 @@ export default function OrderSidePage(props) {
               />
             )} */}
 
-      {/* <Button
-        sx={{
-          ":hover": {
-            bgcolor: "#FFB644", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#F2A42A",
-          ml: 3,
-          mt: 8,
-          width: 10,
-          borderRadius: 5,
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "220px",
-          minHeight: "40px",
-          fontFamily: "Barlow Condensed",
-          fontSize: "18px",
-        }}
-      >
-        Apply Voucher
-      </Button> */}
-
+      
       <Typography
         sx={{
           ml: 9,
@@ -406,7 +346,6 @@ export default function OrderSidePage(props) {
       </Typography>
 
       <Button
-        // onClick={navigateToPaymentsPage}
         onClick={() => {
           setModalOpenProceed(true);
         }}

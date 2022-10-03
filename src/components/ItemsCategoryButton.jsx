@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 
 export default function ItemsCategoryButton({ title, price, availables, onClick }) {
 
-
   return (
     <Button
       onClick={onClick}

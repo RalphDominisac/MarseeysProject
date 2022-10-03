@@ -2,33 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-
 import { AppBar } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import DecreIncreCounter from "./DecreIncreCounter";
-
 import TextField from "@mui/material/TextField";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
 import Container from "@mui/material/Container";
-
 import Box from "@mui/material/Box";
 import TableNumberButtons from "./TableNumberButtons";
-
-
-
-
-
-
-
 
 
 function preventDefault(event) {
@@ -103,9 +90,8 @@ export default function OrderSummarySidePage() {
             },
           }}
         >
-          <MenuItem value="">Preparing</MenuItem>
-          {/* <MenuItem value={"Delivery"}>Delivery</MenuItem> */}
-          <MenuItem value={"Packing"}>Packing</MenuItem>
+          <MenuItem value="">Select Order Status</MenuItem>
+          <MenuItem value={"Preparing"}>Preparing</MenuItem>
           <MenuItem value={"Done"}>Done</MenuItem>
         </Select>
       </FormControl>

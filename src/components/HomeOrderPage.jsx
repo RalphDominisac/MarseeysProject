@@ -17,28 +17,19 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 import Stack from "@mui/material/Stack";
 import ButtonCategoryStyle from "./ButtonCategoryStyle";
-
-
 import OrderSidePage from "./OrderSidePage";
-
 import DateTime from "./DateTime";
-
-
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-
 import { useState } from "react";
-
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -49,44 +40,26 @@ import {
 // import Modal from "./Modal";
 
 import BBQButtons from "./categoryButtons/BBQButtons";
-import BeefButtons from "./categoryButtons/BeefButtons(none)";
+// import BeefButtons from "./categoryButtons/BeefButtons(none)";
 import BilaoButtons from "./categoryButtons/BilaoButtons";
 import ChickenButtons from "./categoryButtons/ChickenButtons";
-import DessertsButtons from "./categoryButtons/DessertsButtons(none)";
+// import DessertsButtons from "./categoryButtons/DessertsButtons(none)";
 import DrinksButtons from "./categoryButtons/DrinksButtons";
-
-import FoodTraysButtons from "./categoryButtons/FoodTraysButtons(recheck)";
+import FoodTraysButtons from "./categoryButtons/FoodTraysButtons";
 import FamilyAndPartyButtons from "./categoryButtons/FamilyAndPartyButtons";
-
-import HandaanButtons from "./categoryButtons/HandaanButtons(recheck)";
+import HandaanButtons from "./categoryButtons/HandaanButtons";
 import NoodlesButtons from "./categoryButtons/NoodlesButtons";
 import PicapicaButtons from "./categoryButtons/PicapicaButtons";
 import PlattersButtons from "./categoryButtons/PlattersButtons";
 import PorkButtons from "./categoryButtons/PorkButtons";
-
 import RiceButtons from "./categoryButtons/RiceButtons";
 import SeafoodButtons from "./categoryButtons/SeafoodButtons";
 import SizzlingButtons from "./categoryButtons/SizzlingButtons";
 import SoloMealsButtons from "./categoryButtons/SoloMealsButtons";
 import SoupButtons from "./categoryButtons/SoupButtons";
-import VegetablesButtons from "./categoryButtons/VegetablesButtons(recheck)";
-
+import VegetablesButtons from "./categoryButtons/VegetablesButtons";
 // import OnHoverScrollContainer from "./CustomScrollDiv";
-
 import data from "./data/data";
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const drawerWidth = 120; 
@@ -194,8 +167,6 @@ const mdTheme = createTheme({
 });
 
 
-
-
   export default function HomeOrderPage() {
     const { productsBBQ } = data;
     const [cartItems, setCartItems] = useState([]);
@@ -253,35 +224,7 @@ const mdTheme = createTheme({
 
     const [myCategory, setMyCategory] = useState("");
 
-    //  const categories2 = [
-    //    "Food Trays",
-    //    "Handaan",
-    //    "Noodles",
-    //    "Pica-pica",
-    //    "Platters",
-    //    "Pork"
-    //  ];
-
-    //  const [myCategory2, setMyCategory2] = useState("");
-
-    //  const categories3 = [
-    //    "Rice",
-    //    "Seafood",
-    //    "Sizzling",
-    //    "Solo Meals",
-    //    "Soup",
-    //    "Vegetables"
-    //  ];
-
-    //  const [myCategory3, setMyCategory3] = useState("");
-
-    // const [showtab, setShowtab] = React.useState(1);
-    // const handletab = (e) => {
-    //   setShowtab(e);
-    // }
-
-    // const [show, setShow] = useState(false);
-
+    
     // Routing/Navigation
     const navigate = useNavigate();
     const navigateSignInPage = () => {
@@ -337,7 +280,6 @@ const mdTheme = createTheme({
           <CssBaseline />
           <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
 
-          {/* <DrawerLeftMenu/> */}
 
           <Drawer
             variant="permanent"
@@ -486,37 +428,7 @@ const mdTheme = createTheme({
                   alt="History Icon"
                 />
               </ListItemButton>
-              {/* <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 4}
-                onClick={
-                  ((event) => handleListItemClick(event, 4),
-                  navigateToDiscountsPage)
-                }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="discountsIcon"
-                  src="images/discounts.png"
-                  alt="discounts Icon"
-                />
-              </ListItemButton> */}
-
+             
               <ListItemButton
                 sx={{
                   "&.Mui-selected": {
@@ -558,16 +470,13 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
-            {/* <Toolbar /> */}
-            {/* <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}> */}
+        
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
-                {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
-
+         
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper
                     sx={{
-                      // p: 1,
                       display: "flex",
                       flexDirection: "column",
                       height: 790,
@@ -610,42 +519,8 @@ const mdTheme = createTheme({
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - -
                       </Typography>
-                      {/* <Button
-                        className="openModalBtn"
-                        onClick={() => {
-                          setModalOpen(true);
-                        }}
-                        variant="contained"
-                        sx={{
-                          "&:hover": {
-                            // backgroundColor: "#02A7DD",
-                            backgroundColor: "#FFB644",
-                          },
-                          mt: -8,
-                          ml: 44,
-                          width: 155,
-                          height: 30,
-                          backgroundColor: "#F2A42A",
-                          borderRadius: 3,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                        }}
-                      >
-                        Save to Draft
-                      </Button>
-                      {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
-                      {/* <CategoryButtons /> */}
-
-                      {/*     const categories = [
-    "BBQ", 
-    "Beef",
-    "Bilao", 
-    "Chicken", 
-    "Desserts",
-    "Drinks"
-    ]; */}
-
-                      {/* <Stack spacing={0} direction="row"></Stack> */}
+                    
+  
                       <div style={{ marginBottom: "48px" }}>
                         {categories.map((category) => (
                           <ButtonCategoryStyle
@@ -660,12 +535,12 @@ const mdTheme = createTheme({
                         {myCategory === "BBQ" && (
                           <BBQButtons onAdd={onAdd} productsBBQ={productsBBQ} />
                         )}
-                        {myCategory === "Beef" && <BeefButtons />}
+                        {/* {myCategory === "Beef" && <BeefButtons />} */}
                         {myCategory === "Bilao" && <BilaoButtons />}
                         {myCategory === "Chicken" && (
                           <ChickenButtons onSelected={setChickenFood} />
                         )}
-                        {myCategory === "Desserts" && <DessertsButtons />}
+                        {/* {myCategory === "Desserts" && <DessertsButtons />} */}
                         {myCategory === "Drinks" && <DrinksButtons />}
                         {/* {myCategory === "Food Trays" && <FoodTraysButtons />} */}
                         {myCategory === "Food Trays" && (
@@ -688,118 +563,8 @@ const mdTheme = createTheme({
                         )} */}
                       </div>
 
-                      {/* ------------------------------------------------------------------------------------------------- */}
-                      {/* <Stack spacing={0} direction="row">
-                      
-                          <ButtonCategoryStyle  
-                            title="BBQ"       
-                          />
-                      
-                        <ButtonCategoryStyle
-                          title="Beef"
-                        />
-                        <ButtonCategoryStyle
-                          title="Bilao"
                      
-                        />
-                        <ButtonCategoryStyle title="Chicken" />
-                        <ButtonCategoryStyle title="Desserts" />
-                        <ButtonCategoryStyle
-                          title="Drinks"           
-                        />
-                      </Stack>
-                      <Stack spacing={0} direction="row">
-                        <ButtonCategoryStyle title="Food Trays" />
-                        <ButtonCategoryStyle title="Handaan" />
-                        <ButtonCategoryStyle title="Noodles" />
-                        <ButtonCategoryStyle title="Pica-pica" />
-                        <ButtonCategoryStyle title="Platters" />
-                        <ButtonCategoryStyle title="Pork" />
-                      </Stack>
-                      <Stack spacing={0} direction="row" sx={{ mb: 6 }}>
-                        <ButtonCategoryStyle title="Rice" />
-                        <ButtonCategoryStyle title="Seafood" />
-                        <ButtonCategoryStyle title="Sizzling" />
-                        <ButtonCategoryStyle title="Solo Meals" />
-                        <ButtonCategoryStyle title="Soup" />
-                        <ButtonCategoryStyle title="Vegetables" />
-                      </Stack> */}
-                      {/* ------------------------------------------------------------------------------------------------------------------------ */}
-
-                      {/* <div className={showtab === 1}>
-                        <BBQButtons />
-                      </div>
-
-                      <div>
-                        {showtab === 2 ? <BilaoButtons /> : " "}
-                        
-                      </div> */}
-
-                      {/* <div className={showtab === 3}>
-                        <DrinksButtons />
-                      </div>
-
-                      <div className={showtab === 4}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 5}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 6}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 7}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 8}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 9}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 10}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 11}>
-                        <BBQButtons />
-                      </div>
-
-                      <div className={showtab === 12}>
-                        <BBQButtons />
-                      </div> */}
-
-                      {/* {showtab === 2 && <BilaoButtons />}
-                      {showtab === 3 && <DrinksButtons />}
-                      {showtab === 4 && <NoodlesButtons />}
-                      {showtab === 5 && <PicapicaButtons />}
-                      {showtab === 6 && <PlattersButtons />}
-                      {showtab === 7 && <PorkButtons />}
-                      {showtab === 8 && <RiceButtons />}
-                      {showtab === 9 && <SeafoodButtons />}
-                      {showtab === 10 && <SizzlingButtons />}
-                      {showtab === 11 && <SoloMealsButtons />}
-                      {showtab === 12 && <SoupButtons />} */}
-
-                      {/* -------------------------------------------------------- */}
-                      {/*<BBQButtons /> */}
-                      {/*<BilaoButtons /> */}
-                      {/* <DrinksButtons /> */}
-                      {/* <NoodlesButtons/> */}
-                      {/* <PicapicaButtons /> */}
-                      {/* <PlattersButtons /> */}
-                      {/* <PorkButtons /> */}
-                      {/* <RiceButtons /> */}
-                      {/* <SeafoodButtons /> */}
-                      {/* <SizzlingButtons /> */}
-                      {/* <SoloMealsButtons /> */}
-                      {/* <SoupButtons /> */}
+                   
                     </Box>
                   </Paper>
                 </Grid>
@@ -856,22 +621,9 @@ const mdTheme = createTheme({
                   </Paper>
                 </Grid>
 
-                {/* Recent Orders */}
-                {/* <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    width: 750,
-                    height: 370,
-                  }}
-                >
-                  <Orders />
-                </Paper>
-              </Grid> */}
+   
               </Grid>
-              {/* <Copyright sx={{ pt: 4 }} /> */}
+
             </Container>
           </Box>
         </Box>

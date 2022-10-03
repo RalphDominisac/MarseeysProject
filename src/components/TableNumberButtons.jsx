@@ -2,7 +2,6 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import ButtonCategoryStyle from "./ButtonCategoryStyle";
 import ItemsCategoryButton from "./ItemsCategoryButton";
 
@@ -17,7 +16,6 @@ export default function TableNumberButtons({tableNum}) {
         variant="contained"
         sx={{
           "&:hover": {
-            // backgroundColor: "#02A7DD",
             backgroundColor: "#787589",
           },
           mt: 1.5,
@@ -29,7 +27,6 @@ export default function TableNumberButtons({tableNum}) {
           borderRadius: 10,
           padding: 0,
 
-          // fontSize: "12px",
         }}
       >
         <Typography sx={{ fontSize: "19px", fontFamily: "Barlow Condensed" }}>

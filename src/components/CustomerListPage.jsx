@@ -17,24 +17,16 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
-
 import CustomerListSidePage from "./CustomerListSidePage";
-
 import DateTime from "./DateTime";
-
-
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-
 import { useState } from "react";
-
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
@@ -45,10 +37,6 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-
-
-
-
 
 
 const drawerWidth = 120;

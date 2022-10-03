@@ -2,8 +2,6 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-
 import ButtonCategoryStyle from "../ButtonCategoryStyle";
 import ItemsCategoryButton from "../ItemsCategoryButton";
 
@@ -120,7 +118,7 @@ export default function Seafoods2ButtonsFT() {
         />
       </Stack>
 
-      <Button
+      {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}
         sx={{
@@ -138,7 +136,7 @@ export default function Seafoods2ButtonsFT() {
         }}
       >
         Customer List
-      </Button>
+      </Button> */}
     </React.Fragment>
   );
 }

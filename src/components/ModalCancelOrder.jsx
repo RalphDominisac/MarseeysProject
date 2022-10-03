@@ -1,7 +1,6 @@
 import React from "react";
 import "./ModalStyle.css";
 import Typography from "@mui/material/Typography";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,7 +11,6 @@ import { PropaneSharp } from "@mui/icons-material";
 
 function ModalCancelOrder({ setOpenModalCancelOrder}) {
   
-
   const navigate = useNavigate();
 
     const navigateToHomeOrderPage = () => {

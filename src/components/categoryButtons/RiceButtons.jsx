@@ -14,8 +14,6 @@ import {
 } from "react-router-dom";
 
 
-
-
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -30,32 +28,7 @@ export default function RiceButtons() {
 
   return (
     <React.Fragment>
-      {/* <Stack spacing={0} direction="row">
-        <ButtonCategoryStyle title="BBQ" />
-        <ButtonCategoryStyle title="Beef" />
-        <ButtonCategoryStyle title="Bilao" />
-        <ButtonCategoryStyle title="Chicken" />
-        <ButtonCategoryStyle title="Desserts" />
-        <ButtonCategoryStyle title="Drinks" />
-      </Stack>
-      <Stack spacing={0} direction="row">
-        <ButtonCategoryStyle title="Food Trays" />
-        <ButtonCategoryStyle title="Handaan" />
-        <ButtonCategoryStyle title="Noodles" />
-        <ButtonCategoryStyle title="Pica-pica" />
-        <ButtonCategoryStyle title="Platters" />
-        <ButtonCategoryStyle title="Pork" />
-      </Stack>
-      <Stack spacing={0} direction="row" sx={{ mb: 6 }}>
-        <ButtonCategoryStyle title="Rice" />
-        <ButtonCategoryStyle title="Seafood" />
-        <ButtonCategoryStyle title="Sizzling" />
-        <ButtonCategoryStyle title="Solo Meals" />
-        <ButtonCategoryStyle title="Soup" />
-
-        <ButtonCategoryStyle title="Vegetables" />
-      </Stack> */}
-
+      
       <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
         <ItemsCategoryButton
           title="Plain Rice (1 cup)"
@@ -79,7 +52,7 @@ export default function RiceButtons() {
         />
       </Stack>
 
-      <Button
+      {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}
         sx={{
@@ -97,7 +70,7 @@ export default function RiceButtons() {
         }}
       >
         Customer List
-      </Button>
+      </Button> */}
     </React.Fragment>
   );
 }

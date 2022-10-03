@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 export const DateTime = () => {
   var [date, setDate] = useState(new Date());
-
-
 var now = new Date();
 var days = [
   "Sunday",
@@ -28,7 +25,6 @@ var months = [
   "November",
   "December",
 ];
-
 var day = days[now.getDay()];
 var month = months[now.getMonth()];
 var numDay = now.getDate();

@@ -2,38 +2,23 @@ import * as React from "react";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-
 import { AppBar } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import DecreIncreCounter from "./DecreIncreCounter";
-
 import TextField from "@mui/material/TextField";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
 import Container from "@mui/material/Container";
-
 import Box from "@mui/material/Box";
 import TableNumberButtons from "./TableNumberButtons";
-
 import ModalSaveToDraft from "./ModalSaveToDraft";
 import ModalCancelOrder from "./ModalCancelOrder";
 import ModalConfirmOrder from "./ModalConfirmOrder";
-
-
-
-
-
-
-
-
 
 function preventDefault(event) {
   event.preventDefault();
@@ -72,7 +57,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         variant="contained"
         sx={{
           "&:hover": {
-            // backgroundColor: "#02A7DD",
             backgroundColor: "#787589",
           },
           mt: -8,
@@ -91,6 +75,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         <ModalSaveToDraft setOpenModalSaveToDraft={setModalOpenSaveToDraft} />
       )}
 
+      {/* Transfer to PaymentPage */}
       {/* <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
         <Button
           variant="outlined"
@@ -184,7 +169,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         sx={{
           ml: 3,
           mb: 1,
-          // mt: 0,
           fontFamily: "Barlow Condensed",
           fontSize: "19px",
         }}
@@ -200,85 +184,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         sx={{ ml: 3, width: 460, mt: -2 }}
       />
 
-      {/* <Button
-        sx={{
-          ":hover": {
-            bgcolor: "#787589", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#504C64",
-          ml: 43,
-          mt: -5,
-          width: 10,
-          borderRadius: 3,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "140px",
-          minHeight: "40px",
-        }}
-        size="small"
-      >
-        CHOOSE FROM LIST
-      </Button> */}
-
-      {/* <FormControl
-        sx={{
-          m: 1,
-          width: 130,
-          backgroundColor: "#252836",
-          borderRadius: 3,
-          ml: 2.8,
-          height: 42,
-        }}
-      >
-        <Select
-          value={ordertype}
-          onChange={handleChange}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            "&:hover": {
-              "&& fieldset": {
-                border: "1px solid white",
-              },
-            },
-
-            // more accurate dropdown effect
-            // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
-
-            borderRadius: 3,
-            width: 130,
-            height: 42,
-            fontFamily: "Barlow Condensed",
-          }}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                "& .MuiMenuItem-root.Mui-selected": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root.Mui-selected:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                backgroundColor: "#252836",
-              },
-            },
-          }}
-        >
-          <MenuItem value="">Delivery</MenuItem>
-          <MenuItem value={"Delivery"}>Delivery</MenuItem>
-          <MenuItem value={"Pick-Up"}>Pick-Up</MenuItem>
-          <MenuItem value={"Dine In"}>Dine In</MenuItem>
-        </Select>
-      </FormControl> */}
-
+    
       <FormControl
         sx={{
           m: 1,
@@ -329,7 +235,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           }}
         >
           <MenuItem value="">Select Discount</MenuItem>
-          {/* <MenuItem value={10}>Discount Applied: 10%</MenuItem> */}
           <MenuItem value={0.05}>Discount: 5% </MenuItem>
           <MenuItem value={0.10}>Discount: 10% </MenuItem>
           <MenuItem value={0.15}>Discount: 15% </MenuItem>
@@ -345,7 +250,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           ml: 3,
           mb: 1,
           mt: -1,
-          // mt: 0,
           fontFamily: "Barlow Condensed",
           fontSize: "19px",
         }}
@@ -408,7 +312,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           variant="contained"
           sx={{
             "&:hover": {
-              // backgroundColor: "#02A7DD",
               backgroundColor: "#787589",
             },
             mt: -57,
@@ -430,7 +333,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           variant="contained"
           sx={{
             "&:hover": {
-              // backgroundColor: "#02A7DD",
               backgroundColor: "#787589",
             },
             mt: -40.5,
@@ -452,7 +354,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           variant="contained"
           sx={{
             "&:hover": {
-              // backgroundColor: "#02A7DD",
               backgroundColor: "#787589",
             },
             mt: -24,
