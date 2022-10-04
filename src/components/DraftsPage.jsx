@@ -17,24 +17,16 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
-
-import CustomerListSidePage from "./CustomerListSidePage";
-
+// import CustomerListSidePage from "./CustomerListSidePage";
 import DateTime from "./DateTime";
-
-
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-
 import { useState } from "react";
-
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
-
 import Button from "@mui/material/Button";
 import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
@@ -52,48 +44,48 @@ import {
 
 const drawerWidth = 120;
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: 14,
-  backgroundColor: "white",
-  color: "black",
-  "&:hover": {
-    backgroundColor: "white",
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
+// const Search = styled("div")(({ theme }) => ({
+//   position: "relative",
+//   borderRadius: 14,
+//   backgroundColor: "white",
+//   color: "black",
+//   "&:hover": {
+//     backgroundColor: "white",
+//   },
+//   marginLeft: 0,
+//   width: "100%",
+//   [theme.breakpoints.up("sm")]: {
+//     marginLeft: theme.spacing(1),
+//     width: "auto",
+//   },
+// }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+// const SearchIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   pointerEvents: "none",
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+// }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-      "&:focus": {
-        width: "25ch",
-      },
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: "inherit",
+//   "& .MuiInputBase-input": {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create("width"),
+//     width: "100%",
+//     [theme.breakpoints.up("sm")]: {
+//       width: "20ch",
+//       "&:focus": {
+//         width: "25ch",
+//       },
+//     },
+//   },
+// }));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -202,6 +194,8 @@ const mdTheme = createTheme({
 
     return (
       <ThemeProvider theme={mdTheme}>
+        {/* -------------------------------------------------------------------------------------------------------------------------- */}
+        {/* SIDEBAR MENU AND HEADER(Area where time and date is located) */}
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
@@ -234,9 +228,6 @@ const mdTheme = createTheme({
                 class="center"
               />
 
-              {/* <IconButton onClick={toggleDrawer} sx={{ color: "#fff" }}>
-              <ChevronLeftIcon />
-            </IconButton> */}
             </Toolbar>
             <Divider />
 
@@ -265,9 +256,9 @@ const mdTheme = createTheme({
                   navigateToHomeOrderPage)
                 }
               >
-                <ListItemIcon>{/* <DashboardIcon/> */}</ListItemIcon>
+                <ListItemIcon></ListItemIcon>
 
-                {/* <ListItemText primary="ORDER" /> */}
+                
                 <img
                   id="orderIcon"
                   src="images/ordericon.png"

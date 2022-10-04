@@ -24,7 +24,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function PaymentDetailsSidePage() {
+export default function PaymentDetailsSidePage(props) {
 
 const [modalOpenConfirmOrder, setModalOpenConfirmOrder] = useState(false);
 
@@ -47,7 +47,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Payment Details
+        Payment Details 
       </Typography>
 
       <Button
@@ -75,91 +75,6 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         <ModalSaveToDraft setOpenModalSaveToDraft={setModalOpenSaveToDraft} />
       )}
 
-      {/* Transfer to PaymentPage */}
-      {/* <Stack spacing={2} direction="row" sx={{ mt: 3, ml: 5 }}>
-        <Button
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Cash
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Bank/GCash
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Ar/Credit
-        </Button>
-      </Stack> */}
-
       <Typography sx={{ ml: 2, mt: 0, mb: -2, color: "#504C64" }}>
         ____________________________________________________
       </Typography>
@@ -184,14 +99,13 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         sx={{ ml: 3, width: 460, mt: -2 }}
       />
 
-    
       <FormControl
         sx={{
           m: 1,
-          width: 324,
+          width: 230,
           backgroundColor: "#252836",
           borderRadius: 3,
-          ml: 20,
+          ml: 3,
           height: 42,
           mt: 1,
           mb: -2,
@@ -213,7 +127,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
             // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
 
             borderRadius: 3,
-            width: 324,
+            width: 230,
             height: 42,
             fontFamily: "Barlow Condensed",
           }}
@@ -236,11 +150,11 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         >
           <MenuItem value="">Select Discount</MenuItem>
           <MenuItem value={0.05}>Discount: 5% </MenuItem>
-          <MenuItem value={0.10}>Discount: 10% </MenuItem>
+          <MenuItem value={0.1}>Discount: 10% </MenuItem>
           <MenuItem value={0.15}>Discount: 15% </MenuItem>
-          <MenuItem value={0.20}>Discount: 20% </MenuItem>
-          <MenuItem value={0.20}>Discount (Senior): 20% </MenuItem>
-          <MenuItem value={0.20}>Discount (PWD): 20% </MenuItem>
+          <MenuItem value={0.2}>Discount: 20% </MenuItem>
+          <MenuItem value={0.2}>Discount (Senior): 20% </MenuItem>
+          <MenuItem value={0.2}>Discount (PWD): 20% </MenuItem>
         </Select>
       </FormControl>
 
@@ -397,7 +311,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           fontSize: 20,
         }}
       >
-        - Php 800.00
+        - Php {Number(props.subTotalPrice * discount).toFixed(2)}
       </Typography>
 
       <Typography
@@ -422,7 +336,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
           mb: -1,
         }}
       >
-        Php 800.00
+        Php {Number(props.subTotalPrice - (props.subTotalPrice * discount)).toFixed(2)}
       </Typography>
 
       <Button

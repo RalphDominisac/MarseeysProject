@@ -17,7 +17,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import CustomerListSidePage from "./CustomerListSidePage";
+// import CustomerListSidePage from "./CustomerListSidePage";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -149,34 +149,31 @@ const mdTheme = createTheme({
 
 // export default function DashboardContent() {
   export default function PendingOrdersPage() {
+    const navigate = useNavigate();
+    const navigateSignInPage = () => {
+      // 👇️ navigate to /
+      navigate("/");
+    };
 
-     const navigate = useNavigate();
-     const navigateSignInPage = () => {
-       // 👇️ navigate to /
-       navigate("/");
-     };
+    const navigateToHomeOrderPage = () => {
+      navigate("/homeorderpage");
+    };
 
-     const navigateToHomeOrderPage = () => {
-       navigate("/homeorderpage");
-     };
+    const navigateToPendingPage = () => {
+      navigate("/pendingpage");
+    };
 
-     const navigateToPendingPage = () => {
-       navigate("/pendingpage");
-     };
+    const navigateToDraftsPage = () => {
+      navigate("/draftspage");
+    };
 
-     const navigateToDraftsPage = () => {
-       navigate("/draftspage");
-     };
+    const navigateToHistoryPage = () => {
+      navigate("/historypage");
+    };
 
-     const navigateToHistoryPage = () => {
-       navigate("/historypage");
-     };
-
-     const navigateToDiscountsPage = () => {
-       navigate("/discountspage");
-     };
-
-
+    const navigateToDiscountsPage = () => {
+      navigate("/discountspage");
+    };
 
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
@@ -222,8 +219,6 @@ const mdTheme = createTheme({
                 alt="Marseeys Icon"
                 class="center"
               />
-
-
             </Toolbar>
             <Divider />
 
@@ -254,12 +249,10 @@ const mdTheme = createTheme({
               >
                 <ListItemIcon></ListItemIcon>
 
-             
                 <img
                   id="orderIcon"
                   src="images/ordericon.png"
                   alt="Order Icon"
-        
                 />
               </ListItemButton>
               <ListItemButton
@@ -290,7 +283,6 @@ const mdTheme = createTheme({
                   id="pendingIcon"
                   src="images/pending.png"
                   alt="Pending Icon"
-             
                 />
               </ListItemButton>
               <ListItemButton
@@ -317,12 +309,7 @@ const mdTheme = createTheme({
                 }
               >
                 <ListItemIcon></ListItemIcon>
-                <img
-                  id="draftIcon"
-                  src="images/draft.png"
-                  alt="Draft Icon"
-               
-                />
+                <img id="draftIcon" src="images/draft.png" alt="Draft Icon" />
               </ListItemButton>
               <ListItemButton
                 sx={{
@@ -352,10 +339,8 @@ const mdTheme = createTheme({
                   id="historyIcon"
                   src="images/history.png"
                   alt="History Icon"
-                
                 />
               </ListItemButton>
-             
 
               <ListItemButton
                 sx={{
@@ -384,7 +369,6 @@ const mdTheme = createTheme({
                   id="logoutIcon"
                   src="images/logout.png"
                   alt="logout Icon"
-                
                 />
               </ListItemButton>
             </List>
@@ -399,14 +383,11 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
-          
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
-
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper
                     sx={{
-                    
                       display: "flex",
                       flexDirection: "column",
                       height: 790,
@@ -526,12 +507,9 @@ const mdTheme = createTheme({
                       marginLeft: 25,
                       backgroundColor: "#1F1D2B",
                     }}
-                  >
-                  
-                  </Paper>
+                  ></Paper>
                 </Grid>
               </Grid>
-      
             </Container>
           </Box>
         </Box>
