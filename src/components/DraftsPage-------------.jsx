@@ -17,7 +17,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import OrderSummarySidePage from "./OrderSummarySidePage";
+// import CustomerListSidePage from "./CustomerListSidePage";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -28,14 +28,17 @@ import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
-import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
 } from "react-router-dom";
+
+
+
 
 
 const drawerWidth = 120;
@@ -145,7 +148,38 @@ const mdTheme = createTheme({
 
 
 // export default function DashboardContent() {
-  export default function PaymentOrderPage() {
+  export default function DraftsPage() {
+
+     const navigate = useNavigate();
+     const navigateSignInPage = () => {
+       // 👇️ navigate to /
+       navigate("/");
+     };
+
+     const navigateToHomeOrderPage = () => {
+       navigate("/homeorderpage");
+     };
+
+     const navigateToPendingPage = () => {
+       navigate("/pendingpage");
+     };
+
+     const navigateToDraftsPage = () => {
+       navigate("/draftspage");
+     };
+
+     const navigateToHistoryPage = () => {
+       navigate("/historypage");
+     };
+
+     const navigateToDiscountsPage = () => {
+       navigate("/discountspage");
+     };
+
+
+
+
+
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
     const handleListItemClick = (event, index) => {
@@ -159,6 +193,8 @@ const mdTheme = createTheme({
 
     return (
       <ThemeProvider theme={mdTheme}>
+        {/* -------------------------------------------------------------------------------------------------------------------------- */}
+        {/* SIDEBAR MENU AND HEADER(Area where time and date is located) */}
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
@@ -191,7 +227,6 @@ const mdTheme = createTheme({
                 class="center"
               />
 
-    
             </Toolbar>
             <Divider />
 
@@ -215,14 +250,19 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
+                onClick={
+                  ((event) => handleListItemClick(event, 0),
+                  navigateToHomeOrderPage)
+                }
               >
                 <ListItemIcon></ListItemIcon>
 
+                
                 <img
                   id="orderIcon"
                   src="images/ordericon.png"
                   alt="Order Icon"
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -243,14 +283,17 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}
+                onClick={
+                  ((event) => handleListItemClick(event, 1),
+                  navigateToPendingPage)
+                }
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <ShoppingCartIcon /> */}</ListItemIcon>
                 <img
                   id="pendingIcon"
                   src="images/pending.png"
                   alt="Pending Icon"
-               
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -271,14 +314,17 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}
+                onClick={
+                  ((event) => handleListItemClick(event, 2),
+                  navigateToDraftsPage)
+                }
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <PeopleIcon /> */}</ListItemIcon>
                 <img
                   id="draftIcon"
                   src="images/draft.png"
                   alt="Draft Icon"
-             
+                  // class="center"
                 />
               </ListItemButton>
               <ListItemButton
@@ -299,16 +345,51 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+                onClick={
+                  ((event) => handleListItemClick(event, 3),
+                  navigateToHistoryPage)
+                }
               >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <BarChartIcon /> */}</ListItemIcon>
                 <img
                   id="historyIcon"
                   src="images/history.png"
                   alt="History Icon"
-                
+                  // class="center"
                 />
               </ListItemButton>
+              {/* <ListItemButton
+                sx={{
+                  "&.Mui-selected": {
+                    border: "2px solid #F2A42A",
+                  },
+                  "&.Mui-focusVisible": {
+                    border: "2px solid #F2A42A",
+                  },
+                  ":hover": {
+                    border: "2px solid #F2A42A",
+                  },
+                  borderRadius: 4,
+                  border: "2px solid #3A374B",
+                  height: 90,
+                  ml: -2,
+                  mb: 2,
+                }}
+                selected={selectedIndex === 4}
+                onClick={
+                  ((event) => handleListItemClick(event, 4),
+                  navigateToDiscountsPage)
+                }
+              >
+                <ListItemIcon></ListItemIcon>
+                <img
+                  id="discountsIcon"
+                  src="images/discounts.png"
+                  alt="discounts Icon"
+                  // class="center"
+                />
+              </ListItemButton> */}
+
               <ListItemButton
                 sx={{
                   "&.Mui-selected": {
@@ -327,43 +408,16 @@ const mdTheme = createTheme({
                   mb: 2,
                 }}
                 selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
+                onClick={
+                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
+                }
               >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="discountsIcon"
-                  src="images/discounts.png"
-                  alt="discounts Icon"
-           
-                />
-              </ListItemButton>
-
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 6}
-                onClick={(event) => handleListItemClick(event, 6)}
-              >
-                <ListItemIcon></ListItemIcon>
+                <ListItemIcon>{/* <AssignmentIcon /> */}</ListItemIcon>
                 <img
                   id="logoutIcon"
                   src="images/logout.png"
                   alt="logout Icon"
-               
+                  // class="center"
                 />
               </ListItemButton>
             </List>
@@ -378,15 +432,16 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
-          
+            {/* <Toolbar /> */}
+            {/* <Container maxWidth="md" sx={{ mt: 1, mb: 1, ml: 0 }}> */}
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
-              
+                {/* Chart  sx={{ backgroundColor: "#282c34" }}   */}
 
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper
                     sx={{
-                     
+                      // p: 1,
                       display: "flex",
                       flexDirection: "column",
                       height: 790,
@@ -401,31 +456,6 @@ const mdTheme = createTheme({
                         sx={{ backgroundColor: "#252836" }}
                       >
                         <Toolbar>
-                          <Button
-                            sx={{
-                              ":hover": {
-                                bgcolor: "#787589", // theme.palette.primary.main
-                              },
-                              color: "white",
-                              backgroundColor: "#504C64",
-                              ml: -1,
-                              mt: 5,
-                              mr: 2,
-                              width: 10,
-                              borderRadius: 2,
-                              fontFamily: "Barlow Condensed",
-                              fontSize: "17px",
-                            }}
-                            style={{
-                              maxWidth: "30px",
-                              maxHeight: "30px",
-                              minWidth: "80px",
-                              minHeight: "40px",
-                            }}
-                            size="small"
-                          >
-                            Back
-                          </Button>
                           <Typography
                             variant="h6"
                             noWrap
@@ -435,28 +465,14 @@ const mdTheme = createTheme({
                               display: { xs: "none", sm: "block" },
                               fontFamily: "Barlow Condensed",
                               fontSize: "30px",
-                              mt: 1,
+                              mt: 5,
                             }}
                           >
-                            Order Summary
+                            Drafts
                           </Typography>
                         </Toolbar>
                       </AppBar>
-                      <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                          flexGrow: 1,
-                          display: { xs: "none", sm: "block" },
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "25px",
-                          mt: -3,
-                          ml: 14,
-                        }}
-                      >
-                        Order #0001
-                      </Typography>
+
                       <Typography
                         sx={{
                           ml: 5,
@@ -465,41 +481,20 @@ const mdTheme = createTheme({
                           mt: 3,
                         }}
                       >
-                        ITEM NAME
+                        ORDER
                       </Typography>
 
                       <Typography
                         sx={{
-                          ml: 63.5,
+                          ml: 92,
                           fontFamily: "Barlow Condensed",
                           fontSize: "17px",
                           mt: -3.2,
                         }}
                       >
-                        PRICE
+                        TOTAL PRICE
                       </Typography>
 
-                      <Typography
-                        sx={{
-                          ml: 81,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: -3.2,
-                        }}
-                      >
-                        QTY
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          ml: 100,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: -3.2,
-                        }}
-                      >
-                        TOTAL
-                      </Typography>
                       <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -507,127 +502,27 @@ const mdTheme = createTheme({
                       </Typography>
 
                       <Typography
-                        class="orderSummaryItemStack"
+                        class="customerListStack"
                         sx={{ color: "white" }}
                       >
-                        Salted Egg Chicken (Half)
+                        ORDER #0001
                       </Typography>
 
                       <Typography
                         sx={{
                           fontFamily: "Barlow Condensed",
                           fontSize: 19,
-                          ml: 60,
+                          ml: 92,
                           mt: -6,
                         }}
                       >
-                        Php 2000.00
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          fontSize: 19,
-                          ml: 81.7,
-                          mt: -3.7,
-                        }}
-                      >
-                        2
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          ml: 94,
-                          mt: -3.5,
-                          fontSize: 19,
-                        }}
-                      >
-                        Php 2000.00
+                        Php 10000.00
                       </Typography>
 
                       <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - -
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          ml: 79,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: 2,
-                        }}
-                      >
-                        Sub-total
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          ml: 94,
-                          mt: -3.5,
-                          fontSize: 19,
-                        }}
-                      >
-                        Php 2000.00
-                      </Typography>
-                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - -
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          ml: 69,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: 0,
-                        }}
-                      >
-                        Discount (20% Applied)
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          ml: 93.2,
-                          mt: -3.5,
-                          fontSize: 19,
-                        }}
-                      >
-                        -Php 2000.00
-                      </Typography>
-                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - -
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          ml: 78.1,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: 0,
-                        }}
-                      >
-                        Order Total
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          ml: 94,
-                          mt: -3.5,
-                          fontSize: 19,
-                        }}
-                      >
-                        Php 2000.00
-                      </Typography>
-                      <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - -
                       </Typography>
                     </Box>
                   </Paper>
@@ -645,11 +540,11 @@ const mdTheme = createTheme({
                       backgroundColor: "#1F1D2B",
                     }}
                   >
-                    <OrderSummarySidePage />
+                    {/* <CustomerListSidePage /> */}
                   </Paper>
                 </Grid>
               </Grid>
-
+              {/* <Copyright sx={{ pt: 4 }} /> */}
             </Container>
           </Box>
         </Box>

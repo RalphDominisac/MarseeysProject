@@ -15,10 +15,16 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import TableNumberButtons from "./TableNumberButtons";
+import TableNumberButtons from "./cssComponents/TableNumberButtons";
 import ModalSaveToDraft from "./ModalSaveToDraft";
 import ModalCancelOrder from "./ModalCancelOrder";
 import ModalConfirmOrder from "./ModalConfirmOrder";
+import SaveToDraftButtonComponent from "./cssComponents/SaveToDraftButtonComponent";
+import SelectDiscountComponent from "./cssComponents/SelectDiscountComponent";
+import KuboNumButtonComponent from "./cssComponents/KuboNumButtonComponent";
+import DiscountAndOrderTotalComponent from "./cssComponents/DiscountAndOrderTotalComponent";
+import CancelOrderButtonComponent from "./cssComponents/CancelOrderButtonComponent";
+import ConfirmOrderButtonComponent from "./cssComponents/ConfirmOrderButtonComponent";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -47,30 +53,14 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Payment Details 
+        Payment Details
       </Typography>
 
-      <Button
-        onClick={() => {
+      <SaveToDraftButtonComponent
+        saveToDraftModalFunction={() => {
           setModalOpenSaveToDraft(true);
         }}
-        variant="contained"
-        sx={{
-          "&:hover": {
-            backgroundColor: "#787589",
-          },
-          mt: -8,
-          ml: 44,
-          width: 155,
-          height: 30,
-          backgroundColor: "#504C64",
-          borderRadius: 3,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
-        }}
-      >
-        Save to Draft
-      </Button>
+      />
       {modalOpenSaveToDraft && (
         <ModalSaveToDraft setOpenModalSaveToDraft={setModalOpenSaveToDraft} />
       )}
@@ -79,17 +69,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         ____________________________________________________
       </Typography>
 
-      <Typography
-        class="itemNameTag"
-        sx={{
-          ml: 3,
-          mb: 1,
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Customer Name
-      </Typography>
+      <Typography class="itemNameTag">Customer Name</Typography>
 
       <TextField
         className="inputRounded"
@@ -99,77 +79,12 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         sx={{ ml: 3, width: 460, mt: -2 }}
       />
 
-      <FormControl
-        sx={{
-          m: 1,
-          width: 230,
-          backgroundColor: "#252836",
-          borderRadius: 3,
-          ml: 3,
-          height: 42,
-          mt: 1,
-          mb: -2,
-        }}
-      >
-        <Select
-          value={discount}
-          onChange={handleChange2}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            "&:hover": {
-              "&& fieldset": {
-                border: "3px solid white",
-              },
-            },
+      <SelectDiscountComponent
+        discountVal={discount}
+        handleChangeFunction={handleChange2}
+      />
 
-            // more accurate dropdown effect
-            // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
-
-            borderRadius: 3,
-            width: 230,
-            height: 42,
-            fontFamily: "Barlow Condensed",
-          }}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                "& .MuiMenuItem-root.Mui-selected": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root.Mui-selected:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                backgroundColor: "#252836",
-              },
-            },
-          }}
-        >
-          <MenuItem value="">Select Discount</MenuItem>
-          <MenuItem value={0.05}>Discount: 5% </MenuItem>
-          <MenuItem value={0.1}>Discount: 10% </MenuItem>
-          <MenuItem value={0.15}>Discount: 15% </MenuItem>
-          <MenuItem value={0.2}>Discount: 20% </MenuItem>
-          <MenuItem value={0.2}>Discount (Senior): 20% </MenuItem>
-          <MenuItem value={0.2}>Discount (PWD): 20% </MenuItem>
-        </Select>
-      </FormControl>
-
-      <Typography
-        class="itemNameTag"
-        sx={{
-          ml: 3,
-          mb: 1,
-          mt: -1,
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Assign Table Number
-      </Typography>
+      <Typography class="itemNameTag">Assign Table Number</Typography>
 
       <Box
         border={2}
@@ -222,183 +137,37 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
 
         {/* Kubo Numbers: */}
 
-        <Button
-          variant="contained"
-          sx={{
-            "&:hover": {
-              backgroundColor: "#787589",
-            },
-            mt: -57,
-            ml: 41,
-            mb: 0.1,
-            minWidth: 70,
-            height: 70,
-            backgroundColor: "#504C64",
-            borderRadius: 10,
-            padding: 0,
-          }}
-        >
-          <Typography sx={{ fontSize: "19px", fontFamily: "Barlow Condensed" }}>
-            Kubo 1
-          </Typography>
-        </Button>
-
-        <Button
-          variant="contained"
-          sx={{
-            "&:hover": {
-              backgroundColor: "#787589",
-            },
-            mt: -40.5,
-            ml: 41,
-            mb: 0.1,
-            minWidth: 70,
-            height: 70,
-            backgroundColor: "#504C64",
-            borderRadius: 10,
-            padding: 0,
-          }}
-        >
-          <Typography sx={{ fontSize: "19px", fontFamily: "Barlow Condensed" }}>
-            Kubo 2
-          </Typography>
-        </Button>
-
-        <Button
-          variant="contained"
-          sx={{
-            "&:hover": {
-              backgroundColor: "#787589",
-            },
-            mt: -24,
-            ml: 41,
-            mb: 0.1,
-            minWidth: 70,
-            height: 70,
-            backgroundColor: "#504C64",
-            borderRadius: 10,
-            padding: 0,
-          }}
-        >
-          <Typography sx={{ fontSize: "19px", fontFamily: "Barlow Condensed" }}>
-            Kubo 3
-          </Typography>
-        </Button>
+        <KuboNumButtonComponent />
       </Box>
 
       <Typography sx={{ ml: 2, mt: 0, color: "#504C64" }}>
         ____________________________________________________
       </Typography>
 
-      <Typography
-        sx={{
-          mt: 0,
-          ml: 4,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Discount ({discount * 100}%):
-      </Typography>
+      <DiscountAndOrderTotalComponent
+        discountLabel={discount * 100}
+        discountVal={Number(props.subTotalPrice * discount).toFixed(2)}
+        orderTotalVal={Number(
+          props.subTotalPrice - props.subTotalPrice * discount
+        ).toFixed(2)}
+      />
 
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 43,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        - Php {Number(props.subTotalPrice * discount).toFixed(2)}
-      </Typography>
-
-      <Typography
-        sx={{
-          mt: 0,
-          ml: 4,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Order Total:
-      </Typography>
-
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 44.3,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-          mb: -1,
-        }}
-      >
-        Php {Number(props.subTotalPrice - (props.subTotalPrice * discount)).toFixed(2)}
-      </Typography>
-
-      <Button
-        onClick={() => {
+      <ConfirmOrderButtonComponent
+        onClickConfirmModal={() => {
           setModalOpenConfirmOrder(true);
         }}
-        className="proceedToPaymentButton"
-        sx={{
-          ":hover": {
-            bgcolor: "#FFB644", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#F2A42A",
-          ml: 33,
-          mt: 4,
-          width: 10,
-          borderRadius: 5,
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "210px",
-          minHeight: "60px",
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Confirm Order
-      </Button>
+      />
       {modalOpenConfirmOrder && (
         <ModalConfirmOrder
           setOpenModalConfirmOrder={setModalOpenConfirmOrder}
         />
       )}
 
-      <Button
-        onClick={() => {
+      <CancelOrderButtonComponent
+        onClickCancelModal={() => {
           setModalOpenCancelOrder(true);
         }}
-        className="proceedToPaymentButton"
-        sx={{
-          ":hover": {
-            bgcolor: "#D33131", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#9E3F3F",
-          ml: 7,
-          mt: -7.4,
-          width: 10,
-          borderRadius: 5,
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "145px",
-          minHeight: "60px",
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Cancel Order
-      </Button>
+      />
       {modalOpenCancelOrder && (
         <ModalCancelOrder setOpenModalCancelOrder={setModalOpenCancelOrder} />
       )}

@@ -28,7 +28,6 @@ import InputBase from "@mui/material/InputBase";
 import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
-import PaymentDecreIncreCounter from "./PaymentDecreIncreCounter";
 import TextField from "@mui/material/TextField";
 
 import {
@@ -37,54 +36,17 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+import ToolbarUpperRight from "./cssComponents/ToolbarUpperRight";
+import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
+import ToolBarPendingOrdersPageHeader from "./cssComponents/ToolBarPendingOrdersPageHeader";
+import PendingOrderPageHeaderLabels from "./cssComponents/PendingOrderPageHeaderLabels";
+import PendingOrderPageBody from "./cssComponents/PendingOrderPageBody";
 
 
 
 
 const drawerWidth = 120;
 
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-//   borderRadius: 14,
-//   backgroundColor: "white",
-//   color: "black",
-//   "&:hover": {
-//     backgroundColor: "white",
-//   },
-//   marginLeft: 0,
-//   width: "100%",
-//   [theme.breakpoints.up("sm")]: {
-//     marginLeft: theme.spacing(1),
-//     width: "auto",
-//   },
-// }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("sm")]: {
-//       width: "20ch",
-//       "&:focus": {
-//         width: "25ch",
-//       },
-//     },
-//   },
-// }));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -146,8 +108,6 @@ const mdTheme = createTheme({
 });
 
 
-
-// export default function DashboardContent() {
   export default function PendingOrdersPage() {
     const navigate = useNavigate();
     const navigateSignInPage = () => {
@@ -202,175 +162,58 @@ const mdTheme = createTheme({
             }}
           >
             {/* ** Upper Right Part For Logo */}
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
-                backgroundColor: "#1F1D2B",
-                borderRadius: 4,
-                ml: -1.5,
-              }}
-            >
-              <img
-                id="marseeysicon"
-                src="images/marseeys-icon.png"
-                alt="Marseeys Icon"
-                class="center"
-              />
-            </Toolbar>
+            <ToolbarUpperRight />
             <Divider />
 
             {/* SIDEBAR MENU LEFT ******************************************************************************/}
             <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 0}
-                onClick={
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 0}
+                getOnClick={
                   ((event) => handleListItemClick(event, 0),
                   navigateToHomeOrderPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-
-                <img
-                  id="orderIcon"
-                  src="images/ordericon.png"
-                  alt="Order Icon"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 1}
-                onClick={
+                imgID="orderIcon"
+                imgSrc="./images/ordericon.png"
+              />
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 1}
+                getOnClick={
                   ((event) => handleListItemClick(event, 1),
                   navigateToPendingPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="pendingIcon"
-                  src="images/pending.png"
-                  alt="Pending Icon"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 2}
-                onClick={
+                imgID="pendingIcon"
+                imgSrc="./images/pending.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 2}
+                getOnClick={
                   ((event) => handleListItemClick(event, 2),
                   navigateToDraftsPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img id="draftIcon" src="images/draft.png" alt="Draft Icon" />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 3}
-                onClick={
+                imgID="draftIcon"
+                imgSrc="images/draft.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 3}
+                getOnClick={
                   ((event) => handleListItemClick(event, 3),
                   navigateToHistoryPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="historyIcon"
-                  src="images/history.png"
-                  alt="History Icon"
-                />
-              </ListItemButton>
+                imgID="historyIcon"
+                imgSrc="images/history.png"
+              />
 
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 4}
-                onClick={
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 4}
+                getOnClick={
                   ((event) => handleListItemClick(event, 4), navigateSignInPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="logoutIcon"
-                  src="images/logout.png"
-                  alt="logout Icon"
-                />
-              </ListItemButton>
+                imgID="logoutIcon"
+                imgSrc="images/logout.png"
+              />
             </List>
           </Drawer>
 
@@ -401,97 +244,12 @@ const mdTheme = createTheme({
                         position="static"
                         sx={{ backgroundColor: "#252836" }}
                       >
-                        <Toolbar>
-                          <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{
-                              flexGrow: 1,
-                              display: { xs: "none", sm: "block" },
-                              fontFamily: "Barlow Condensed",
-                              fontSize: "30px",
-                              mt: 5,
-                            }}
-                          >
-                            PENDING ORDERS
-                          </Typography>
-                        </Toolbar>
+                        <ToolBarPendingOrdersPageHeader/>
                       </AppBar>
 
-                      <Typography
-                        sx={{
-                          ml: 5,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: 3,
-                        }}
-                      >
-                        ORDER #
-                      </Typography>
+                     <PendingOrderPageHeaderLabels/>
 
-                      <Typography
-                        sx={{
-                          ml: 58,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: -3.2,
-                        }}
-                      >
-                        SUBTOTAL
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          ml: 99,
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "17px",
-                          mt: -3.2,
-                        }}
-                      >
-                        TOTAL
-                      </Typography>
-
-                      <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - -
-                      </Typography>
-
-                      <Typography
-                        class="customerListStack"
-                        sx={{ color: "white" }}
-                      >
-                        ORDER #0001
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          fontSize: 19,
-                          ml: 56,
-                          mt: -6,
-                        }}
-                      >
-                        Php 10000.00
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          fontSize: 19,
-                          ml: 92,
-                          mt: -3.7,
-                        }}
-                      >
-                        Php 20000.00
-                      </Typography>
-
-                      <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - -
-                      </Typography>
+                     <PendingOrderPageBody/>
                     </Box>
                   </Paper>
                 </Grid>

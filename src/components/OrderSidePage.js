@@ -23,6 +23,9 @@ import ModalRemoveItem from "./ModalRemoveItem";
 import ModalProceed from "./ModalProceed";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
+import DineInPickupDeliveryButtons from "./cssComponents/DineInPickupDeliveryButtons";
+import DecrementIncrementCounter from "./DecrementIncrementCounter";
+import SubTotalAndProceedPayment from "./cssComponents/SubTotalAndProceedPayment";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -69,99 +72,12 @@ export default function OrderSidePage(props) {
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Order #0001 
+        Order #0001
       </Typography>
 
-
-      <Stack spacing={2} direction="row" sx={{ mt: -1, ml: 5 }}>
-        <Button
-          onClick={(e) => setOrderType(e.target.value)}
-          value="Dine In"
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Dine In
-        </Button>
-        <Button
-          onClick={(e) => setOrderType(e.target.value)}
-          value="Pickup"
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Pickup
-        </Button>
-        <Button
-          onClick={(e) => setOrderType(e.target.value)}
-          value="Delivery"
-          variant="outlined"
-          sx={{
-            "&.Mui-selected": {},
-            "&.Mui-focusVisible": {
-              border: "3px solid #F2A42A",
-            },
-            ":focus": {
-              border: "3px solid #F2A42A",
-            },
-            ":hover": {
-              border: "3px solid #F2A42A",
-            },
-
-            width: 131,
-            textTransform: "none",
-            height: 42,
-            borderRadius: 3,
-            fontFamily: "Barlow Condensed",
-            fontSize: "22px",
-            backgroundColor: "#252836",
-            borderColor: "#252836",
-            color: "white",
-          }}
-        >
-          Delivery
-        </Button>
-      </Stack>
+      <DineInPickupDeliveryButtons
+        onClickFunction={(e) => setOrderType(e.target.value)}
+      />
 
       <Typography class="itemNameTag" sx={{ ml: 1 }}>
         ITEM NAME
@@ -174,7 +90,6 @@ export default function OrderSidePage(props) {
       <Typography class="deliveryTag" sx={{ ml: 1 }}>
         PRICE
       </Typography>
-
 
       <Container
         sx={{
@@ -205,72 +120,17 @@ export default function OrderSidePage(props) {
               {item.name}
             </Typography>
 
-            <Button
-              onClick={() => onRemove(item)}
-              sx={{
-                ":hover": {
-                  bgcolor: "#D33131", // theme.palette.primary.main
-                },
-                color: "white",
-                backgroundColor: "#9E3F3F",
-                ml: 32,
-                mt: -3,
-                width: 3,
-                borderTopLeftRadius: 10,
-                borderBottomLeftRadius: 10,
-              }}
-              style={{
-                maxWidth: "30px",
-                maxHeight: "30px",
-                minWidth: "30px",
-                minHeight: "50px",
-              }}
-              size="small"
-            >
-              <RemoveIcon />
-            </Button>
-
-            <h1 className="counterResult">{item.qty}</h1>
-
-            <Button
-              onClick={() => onAdd(item)}
-              sx={{
-                ":hover": {
-                  bgcolor: "#55CE6B", // theme.palette.primary.main
-                },
-                color: "white",
-                backgroundColor: "#5D9B68",
-                ml: 41.7,
-                mt: -14.9,
-                width: 10,
-                borderTopRightRadius: 10,
-                borderBottomRightRadius: 10,
-              }}
-              style={{
-                maxWidth: "30px",
-                maxHeight: "30px",
-                minWidth: "30px",
-                minHeight: "50px",
-              }}
-              size="small"
-            >
-              <AddIcon />
-            </Button>
+            <DecrementIncrementCounter
+              onClickRemoveFunctionCounter={() => onRemove(item)}
+              onClickAddFunctionCounter={() => onAdd(item)}
+              itemQtyCounter={item.qty}
+            />
 
             <Typography class="menuPriceTag">
               Php {item.price.toFixed(2)}
             </Typography>
-             
-              {/* Order Comment Field: */}
-            {/* <TextField
-            // know how to assign id to order comment to get unique values
-              onChange={(g) => setOrderComment(g.target.value)}
-              className="inputRounded"
-              placeholder="Order Comments"
-              variant="outlined"
-              size="small"
-              sx={{ ml: -0.5, width: 335 }}
-            /> */}
+
+            {/* Order Comment Field area */}
 
             <Typography class="initialPriceTag">
               Php {(item.price * item.qty).toFixed(2)}
@@ -282,96 +142,16 @@ export default function OrderSidePage(props) {
             </Typography>
           </div>
         ))}
-
-
       </Container>
+              
+      {/* Remove Item Button Area */}
 
-      {/* Remove Item Button: */}
-      {/* <Button
-              onClick={() => {
-                setModalOpenRemoveItem(true);
-              }}
-              sx={{
-                ":hover": {
-                  bgcolor: "#D33131", // theme.palette.primary.main
-                },
-                color: "white",
-                backgroundColor: "#9E3F3F",
-                ml: 45,
-                mt: -8.2,
-                width: 10,
-                borderRadius: 5,
-                fontFamily: "Barlow Condensed",
-                fontSize: "17px",
-              }}
-              style={{
-                maxWidth: "30px",
-                maxHeight: "30px",
-                minWidth: "115px",
-                minHeight: "40px",
-              }}
-              size="small"
-            >
-              Remove Item
-            </Button>
-            {modalOpenRemoveItem && (
-              <ModalRemoveItem
-                setOpenModalRemoveItem={setModalOpenRemoveItem}
-              />
-            )} */}
-
-      
-      <Typography
-        sx={{
-          ml: 9,
-          mt: 9,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: "18px",
-        }}
-      >
-        Sub Total:
-      </Typography>
-
-      <Typography
-        sx={{
-          ml: 20,
-          mt: -3.4,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: "18px",
-        }}
-      >
-        Php {totalPrice.toFixed(2)}
-      </Typography>
-
-      <Button
-        onClick={() => {
+      <SubTotalAndProceedPayment
+        subTotalPriceOrderSide={totalPrice.toFixed(2)}
+        modalFunctionProceedToPayment={() => {
           setModalOpenProceed(true);
         }}
-        className="proceedToPaymentButton"
-        sx={{
-          ":hover": {
-            bgcolor: "#FFB644", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#F2A42A",
-          ml: 35,
-          mt: -7,
-          width: 10,
-          borderRadius: 5,
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "220px",
-          minHeight: "73px",
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Proceed to Payment
-      </Button>
+      />
       {modalOpenProceed && (
         <ModalProceed
           setOpenModalProceed={setModalOpenProceed}

@@ -15,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import TableNumberButtons from "./TableNumberButtons";
+import TableNumberButtons from "./cssComponents/TableNumberButtons";
 
 
 function preventDefault(event) {

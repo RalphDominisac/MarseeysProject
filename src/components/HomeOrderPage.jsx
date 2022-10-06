@@ -61,51 +61,14 @@ import VegetablesButtons from "./categoryButtons/VegetablesButtons";
 // import OnHoverScrollContainer from "./CustomScrollDiv";
 import data from "./data/data";
 
+import ToolbarUpperRight from "./cssComponents/ToolbarUpperRight";
+import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
+import ToolBarHomerOrderPageHeader from "./cssComponents/ToolBarHomerOrderPageHeader";
+// import FinalizeOrderPageHeaderLabels from "./cssComponents/FinalizeOrderPageHeaderLabels";
+
 
 const drawerWidth = 120; 
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: 14,
-  backgroundColor: "white",
-  color: "black",
-  "&:hover": {
-    backgroundColor: "white",
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-      "&:focus": {
-        width: "25ch",
-      },
-    },
-  },
-}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -280,7 +243,6 @@ const mdTheme = createTheme({
           <CssBaseline />
           <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
 
-
           <Drawer
             variant="permanent"
             open={open}
@@ -290,174 +252,59 @@ const mdTheme = createTheme({
               },
             }}
           >
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
-                backgroundColor: "#1F1D2B",
-                borderRadius: 4,
-                ml: -1.5,
-              }}
-            >
-              <img
-                id="marseeysicon"
-                src="images/marseeys-icon.png"
-                alt="Marseeys Icon"
-                class="center"
-              />
-            </Toolbar>
+            {/* ** Upper Right Part For Logo */}
+
+            <ToolbarUpperRight />
             <Divider />
 
             <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 0}
-                onClick={
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 0}
+                getOnClick={
                   ((event) => handleListItemClick(event, 0),
                   navigateToHomeOrderPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-
-                <img
-                  id="orderIcon"
-                  src="images/ordericon.png"
-                  alt="Order Icon"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 1}
-                onClick={
+                imgID="orderIcon"
+                imgSrc="./images/ordericon.png"
+              />
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 1}
+                getOnClick={
                   ((event) => handleListItemClick(event, 1),
                   navigateToPendingPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="pendingIcon"
-                  src="images/pending.png"
-                  alt="Pending Icon"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 2}
-                onClick={
+                imgID="pendingIcon"
+                imgSrc="./images/pending.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 2}
+                getOnClick={
                   ((event) => handleListItemClick(event, 2),
                   navigateToDraftsPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img id="draftIcon" src="images/draft.png" alt="Draft Icon" />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 3}
-                onClick={
+                imgID="draftIcon"
+                imgSrc="images/draft.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 3}
+                getOnClick={
                   ((event) => handleListItemClick(event, 3),
                   navigateToHistoryPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="historyIcon"
-                  src="images/history.png"
-                  alt="History Icon"
-                />
-              </ListItemButton>
-             
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 4}
-                onClick={
+                imgID="historyIcon"
+                imgSrc="images/history.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 4}
+                getOnClick={
                   ((event) => handleListItemClick(event, 4), navigateSignInPage)
                 }
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="logoutIcon"
-                  src="images/logout.png"
-                  alt="logout Icon"
-                />
-              </ListItemButton>
+                imgID="logoutIcon"
+                imgSrc="images/logout.png"
+              />
             </List>
           </Drawer>
 
@@ -470,10 +317,8 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
-        
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
-         
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper
                     sx={{
@@ -490,37 +335,14 @@ const mdTheme = createTheme({
                         position="static"
                         sx={{ backgroundColor: "#252836" }}
                       >
-                        <Toolbar>
-                          <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{
-                              flexGrow: 1,
-                              display: { xs: "none", sm: "block" },
-                            }}
-                          >
-                            <DateTime />
-                          </Typography>
-
-                          <Search>
-                            <SearchIconWrapper>
-                              <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                              placeholder="Search for an item"
-                              inputProps={{ "aria-label": "search" }}
-                            />
-                          </Search>
-                        </Toolbar>
+                        <ToolBarHomerOrderPageHeader />
                       </AppBar>
                       <Typography sx={{ ml: 3, mt: -3, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - - - - - - - - - - - - - - - - - - -
                       </Typography>
-                    
-  
+
                       <div style={{ marginBottom: "48px" }}>
                         {categories.map((category) => (
                           <ButtonCategoryStyle
@@ -535,14 +357,11 @@ const mdTheme = createTheme({
                         {myCategory === "BBQ" && (
                           <BBQButtons onAdd={onAdd} productsBBQ={productsBBQ} />
                         )}
-                        {/* {myCategory === "Beef" && <BeefButtons />} */}
                         {myCategory === "Bilao" && <BilaoButtons />}
                         {myCategory === "Chicken" && (
                           <ChickenButtons onSelected={setChickenFood} />
                         )}
-                        {/* {myCategory === "Desserts" && <DessertsButtons />} */}
                         {myCategory === "Drinks" && <DrinksButtons />}
-                        {/* {myCategory === "Food Trays" && <FoodTraysButtons />} */}
                         {myCategory === "Food Trays" && (
                           <FamilyAndPartyButtons />
                         )}
@@ -558,17 +377,12 @@ const mdTheme = createTheme({
                         {myCategory === "Soup" && <SoupButtons />}
                         {myCategory === "Vegetables" && <VegetablesButtons />}
 
-                        {/* {chickenFood && (
-                          <pre>{JSON.stringify(chickenFood, null, 2)}</pre>
-                        )} */}
-                      </div>
-
                      
-                   
+                      </div>
                     </Box>
                   </Paper>
                 </Grid>
-                {/* Recent Deposits */}
+
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper
                     sx={{
@@ -585,45 +399,10 @@ const mdTheme = createTheme({
                       onAdd={onAdd}
                       onRemove={onRemove}
                       cartItems={cartItems}
-                      // menuItemName={
-                      //   chickenFood && (
-                      //     <Typography
-                      //       sx={{
-                      //         ml: -0.1,
-                      //         color: "white",
-                      //         fontSize: 20,
-                      //         fontFamily: "Barlow Condensed",
-                      //         textAlign: "left",
-                      //         mt: -1,
-                      //       }}
-                      //     >
-                      //       {JSON.stringify(
-                      //         chickenFood.title,
-                      //         null,
-                      //         1
-                      //       ).replaceAll('"', "")}
-                      //     </Typography>
-                      //   )
-                      // }
-                      // menuItemPrice={
-                      //   chickenFood && (
-                      //     <Typography class="menuPriceTag">
-                      //       Php{" "}
-                      //       {JSON.stringify(
-                      //         chickenFood.price,
-                      //         null,
-                      //         1
-                      //       ).replaceAll('"', "")}
-                      //     </Typography>
-                      //   )
-                      // }
                     />
                   </Paper>
                 </Grid>
-
-   
               </Grid>
-
             </Container>
           </Box>
         </Box>
