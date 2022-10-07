@@ -94,6 +94,11 @@ public enum ExceptionType {
                     "No order found: "
     ),
 
+    ORDER_ALREADY_SERVED_EXCEPTION(
+            70003L,
+            "Order already served: "
+    ),
+
     SAVE_PAYMENT_EXCEPTION(
             80001L,
             "Unable to save order."
@@ -137,6 +142,16 @@ public enum ExceptionType {
     BANK_NAME_NOT_FOUND_EXCEPTION(
             110002L,
             "Bank name not found: "
+    ),
+
+    SAVE_INGREDIENT_CATEGORY_EXCEPTION(
+            120001L,
+            "Unable to save ingredient category."
+    ),
+
+    INGREDIENT_CATEGORY_NOT_FOUND_EXCEPTION(
+            120002L,
+            "Ingredient category not found: "
     );
     private final Long id;
     private final String message;

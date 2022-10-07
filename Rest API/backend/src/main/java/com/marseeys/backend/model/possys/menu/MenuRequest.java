@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +24,6 @@ public class MenuRequest {
     @NotBlank(message = "Please indicate a valid category for the item.")
     private String category;
 
-//    @NotEmpty(message = "Please provide a list of ingredients")
-//    private List<@Valid IngredientRequest> ingredientRequests;
+    @NotEmpty(message = "Please provide a list of ingredients")
+    private Map<Integer, Integer> ingredients;
 }

@@ -5,7 +5,7 @@ import com.marseeys.backend.entity.possys.payment.*;
 import com.marseeys.backend.exception.CashException;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.helper.CalculationHelper;
-import com.marseeys.backend.helper.DatabaseHelper;
+import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.model.possys.payment.*;
 import com.marseeys.backend.repository.possys.BankNameRepository;
 import com.marseeys.backend.repository.possys.OrderRepository;
@@ -24,7 +24,7 @@ public class CashService {
     private final BankNameRepository bankNameRepository;
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
-    private final DatabaseHelper databaseHelper;
+    private final FindHelper findHelper;
     private final CalculationHelper calculationHelper;
 
     public BankName saveBankName(BankNameRequest bankNameRequest) throws DatabaseException {
@@ -48,13 +48,13 @@ public class CashService {
     }
 
     public void deleteBankName(BankNameRequest bankNameRequest) throws DatabaseException {
-        BankName bank = databaseHelper.findBank(bankNameRequest.getName());
+        BankName bank = findHelper.findBank(bankNameRequest.getName());
 
         bankNameRepository.delete(bank);
     }
 
     public Cash saveCash(CashRequest cashRequest) throws DatabaseException, CashException {
-        Order order = databaseHelper.findOrder(cashRequest.getOrderId());
+        Order order = findHelper.findOrder(cashRequest.getOrderId());
         double change = calculationHelper.calculateChange(order, cashRequest.getAmount());
 
         try {
@@ -77,7 +77,7 @@ public class CashService {
     }
 
     public Credit saveCash(CreditRequest creditRequest) throws DatabaseException, CashException {
-        Order order = databaseHelper.findOrder(creditRequest.getOrderId());
+        Order order = findHelper.findOrder(creditRequest.getOrderId());
         double change = calculationHelper.calculateChange(order, creditRequest.getAmount());
 
         try {
@@ -102,7 +102,7 @@ public class CashService {
     }
 
     public BankTransfer saveCash(BankTransferRequest bankTransferRequest) throws DatabaseException, CashException {
-        Order order = databaseHelper.findOrder(bankTransferRequest.getOrderId());
+        Order order = findHelper.findOrder(bankTransferRequest.getOrderId());
         double change = calculationHelper.calculateChange(order, bankTransferRequest.getAmount());
 
         try {
@@ -111,7 +111,7 @@ public class CashService {
                     order,
                     bankTransferRequest.getAmount(),
                     change,
-                    databaseHelper.findBank(bankTransferRequest.getBankName()),
+                    findHelper.findBank(bankTransferRequest.getBankName()),
                     bankTransferRequest.getAccountNo(),
                     bankTransferRequest.getContactNo()
             );
@@ -128,7 +128,7 @@ public class CashService {
     }
 
     public DigitalWallet saveCash(DigitalWalletRequest digitalWalletRequest) throws DatabaseException, CashException {
-        Order order = databaseHelper.findOrder(digitalWalletRequest.getOrderId());
+        Order order = findHelper.findOrder(digitalWalletRequest.getOrderId());
         double change = calculationHelper.calculateChange(order, digitalWalletRequest.getAmount());
 
         try {

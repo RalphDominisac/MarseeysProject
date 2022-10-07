@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class Delivery extends Order {
     private String address;
     private DeliveryMethod method;
 
-    public Delivery(int id, String customer, List<Menu> contents, double price, String address, DeliveryMethod method) {
+    public Delivery(int id, String customer, Map<Menu, Integer> contents, double price, String address, DeliveryMethod method) {
         super(id, customer, contents, price);
         this.address = address;
         this.method = method;

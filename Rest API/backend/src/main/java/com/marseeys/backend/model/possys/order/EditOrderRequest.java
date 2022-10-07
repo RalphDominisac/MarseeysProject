@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class EditOrderRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private List<Integer> contents;
+    private Map<Integer, Integer> contents;
 
     private boolean paid;
     private boolean served;

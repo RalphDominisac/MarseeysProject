@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
-import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class DineInRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private List<Integer> contents;
+    private Map<Integer, Integer> contents;
 
     @NotNull(message = "Please enter a table number.")
     @Min(value = 1, message = "Minimum value is one.")

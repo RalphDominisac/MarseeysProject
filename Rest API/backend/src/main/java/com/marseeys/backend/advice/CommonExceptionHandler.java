@@ -25,13 +25,23 @@ public class CommonExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({HttpMessageNotReadableException.class, IllegalArgumentException.class})
-    public Map<String, String> handleTypeError(HttpMessageNotReadableException objEx, IllegalArgumentException urlEx) {
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public Map<String, String> handleObjTypeError(HttpMessageNotReadableException objEx) {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put("message", "Invalid data type passed.");
-        if (urlEx != null) errorMap.put("cause", "In URL, " + urlEx.getMessage());
-        if (objEx != null) errorMap.put("cause", "In object, " + objEx.getMessage());
+        errorMap.put("cause", "In object, " + objEx.getMessage());
+
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, String> handleUrlTypeError(IllegalArgumentException urlEx) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        errorMap.put("message", "Invalid data type passed.");
+        errorMap.put("cause", "In URL, " + urlEx.getMessage());
 
         return errorMap;
     }

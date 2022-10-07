@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Service
@@ -16,7 +16,7 @@ public class PickUp extends Order {
     private String phoneNo;
     private int estimatedTime;
 
-    public PickUp(int id, String customer, List<Menu> contents, double price, String phoneNo, LocalTime estimatedTime) {
+    public PickUp(int id, String customer, Map<Menu, Integer> contents, double price, String phoneNo, LocalTime estimatedTime) {
         super(id, customer, contents, price);
         this.phoneNo = phoneNo;
         this.estimatedTime = estimatedTime.getMinute();

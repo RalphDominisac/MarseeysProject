@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -21,7 +21,7 @@ public class Order {
     private int id;
     private String customer;
     @DocumentReference(collection = "Menu")
-    private List<Menu> contents;
+    private Map<Menu, Integer> contents;
     private double price;
     @CreatedDate
     private LocalDateTime date;
@@ -29,7 +29,7 @@ public class Order {
     private boolean served;
     private boolean canceled;
 
-    public Order(int id, String customer, List<Menu> contents, double price) {
+    public Order(int id, String customer, Map<Menu, Integer> contents, double price) {
         this.id = id;
         this.customer = customer;
         this.contents = contents;

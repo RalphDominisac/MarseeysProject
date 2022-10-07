@@ -2,6 +2,7 @@ package com.marseeys.backend.advice;
 
 import com.marseeys.backend.exception.CashException;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.exception.MenuException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,6 +37,16 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CashException.class)
     public Map<String, String> handlePaymentException(CashException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        errorMap.put(ex.getErrorId(), ex.getMessage());
+
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IngredientException.class)
+    public Map<String, String> handlePaymentException(IngredientException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());

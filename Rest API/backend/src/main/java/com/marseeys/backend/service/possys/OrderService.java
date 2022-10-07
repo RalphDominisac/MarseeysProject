@@ -7,26 +7,32 @@ import com.marseeys.backend.entity.possys.order.PickUp;
 import com.marseeys.backend.entity.possys.order.base.DeliveryMethod;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.exception.OrderExecption;
 import com.marseeys.backend.helper.CalculationHelper;
 import com.marseeys.backend.helper.DatabaseHelper;
+import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.model.possys.order.*;
 import com.marseeys.backend.repository.possys.DeliveryMethodRepository;
 import com.marseeys.backend.repository.possys.OrderRepository;
 import com.marseeys.backend.service.NextSequenceService;
+import com.marseeys.backend.service.invsys.TransactionService;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class OrderService {
     private final NextSequenceService nextSequenceService;
+    private final TransactionService transactionService;
     private final OrderRepository orderRepository;
     private final DeliveryMethodRepository deliveryMethodRepository;
     private final DatabaseHelper databaseHelper;
+    private final FindHelper findHelper;
     private final CalculationHelper calculationHelper;
 
     public DeliveryMethod saveDeliveryMethod(DeliveryMethodRequest deliveryMethodRequest) throws DatabaseException {
@@ -50,7 +56,7 @@ public class OrderService {
     }
 
     public void deleteDeliveryMethod(DeliveryMethodRequest deliveryMethodRequest) throws DatabaseException {
-        DeliveryMethod method = databaseHelper.findMethod(deliveryMethodRequest.getName());
+        DeliveryMethod method = findHelper.findMethod(deliveryMethodRequest.getName());
 
         deliveryMethodRepository.delete(method);
     }
@@ -60,7 +66,7 @@ public class OrderService {
     }
 
     public Order saveOrder(DineInRequest dineInRequest) throws DatabaseException {
-        List<Menu> contents = databaseHelper.checkContentsExist(dineInRequest.getContents());
+        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(dineInRequest.getContents());
 
         try {
             DineIn order = new DineIn(
@@ -81,7 +87,7 @@ public class OrderService {
     }
 
     public Order saveOrder(DeliveryRequest deliveryRequest) throws DatabaseException {
-        List<Menu> contents = databaseHelper.checkContentsExist(deliveryRequest.getContents());
+        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(deliveryRequest.getContents());
 
         try {
             Delivery order = new Delivery(
@@ -90,7 +96,7 @@ public class OrderService {
                     contents,
                     calculationHelper.getOrderTotal(contents),
                     deliveryRequest.getAddress(),
-                    databaseHelper.findMethod(deliveryRequest.getDeliveryMethod())
+                    findHelper.findMethod(deliveryRequest.getDeliveryMethod())
             );
 
             return orderRepository.save(order);
@@ -103,7 +109,7 @@ public class OrderService {
     }
 
     public Order saveOrder(PickUpRequest pickUpRequest) throws DatabaseException {
-        List<Menu> contents = databaseHelper.checkContentsExist(pickUpRequest.getContents());
+        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(pickUpRequest.getContents());
 
         try {
             PickUp order = new PickUp(
@@ -125,9 +131,9 @@ public class OrderService {
     }
 
     public Order editOrder(int id, EditOrderRequest editOrderRequest) throws DatabaseException {
-        Order order = databaseHelper.findOrder(id);
+        Order order = findHelper.findOrder(id);
 
-        List<Menu> contents = databaseHelper.checkContentsExist(editOrderRequest.getContents());
+        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(editOrderRequest.getContents());
 
         order.setCustomer(editOrderRequest.getCustomer());
         order.setContents(contents);
@@ -137,6 +143,19 @@ public class OrderService {
         order.setServed(editOrderRequest.isServed());
         order.setCanceled(editOrderRequest.isCanceled());
 
+        return orderRepository.save(order);
+    }
+
+    public Order serveOrder(int id) throws DatabaseException, OrderExecption {
+        Order order = findHelper.findOrder(id);
+
+        if (order.isServed()) throw new OrderExecption(
+                String.valueOf(id),
+                ExceptionType.ORDER_ALREADY_SERVED_EXCEPTION
+        );
+        order.setServed(!order.isServed());
+
+        transactionService.saveTransaction(order);
         return orderRepository.save(order);
     }
 }

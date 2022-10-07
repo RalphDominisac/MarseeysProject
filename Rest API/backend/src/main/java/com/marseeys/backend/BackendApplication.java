@@ -15,12 +15,11 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 public class BackendApplication {
-	// TODO Merge backend for Inventory
 	// TODO Merge backend for HR
 	// TODO Add security filter to POS
 	// TODO Add security filter to Inventory
 	// TODO Add security filter to HR
-	// TODO Change contents in Order class from List to Map because duplicate ids get lost
+	// TODO Configure code below to reflect proper documentation
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);

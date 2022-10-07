@@ -1,10 +1,12 @@
 package com.marseeys.backend.service.possys;
 
+import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.menu.MenuCategory;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.MenuException;
 import com.marseeys.backend.helper.DatabaseHelper;
+import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.model.possys.menu.MenuCategoryRequest;
 import com.marseeys.backend.model.possys.menu.MenuRequest;
 import com.marseeys.backend.repository.possys.MenuCategoryRepository;
@@ -15,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -24,6 +27,7 @@ public class MenuService {
     private final MenuRepository menuRepository;
     private final MenuCategoryRepository menuCategoryRepository;
     private final DatabaseHelper databaseHelper;
+    private final FindHelper findHelper;
 
     public MenuCategory saveMenuCategory(MenuCategoryRequest menuCategoryRequest) throws DatabaseException {
         try {
@@ -46,7 +50,7 @@ public class MenuService {
     }
 
     public void deleteMenuCategory(MenuCategoryRequest menuCategoryRequest) throws DatabaseException {
-        MenuCategory category = databaseHelper.findCategory(menuCategoryRequest.getName());
+        MenuCategory category = findHelper.findCategory(menuCategoryRequest.getName());
 
         menuCategoryRepository.delete(category);
     }
@@ -56,7 +60,7 @@ public class MenuService {
     }
 
     public List<Menu> getMenuFromCategory(String category) throws DatabaseException {
-        MenuCategory menuCategory = databaseHelper.findCategory(category);
+        MenuCategory menuCategory = findHelper.findCategory(category);
         List<Menu> items = menuRepository.findMenusByCategoryEquals(menuCategory.getId());
 
         if (items.isEmpty()) {
@@ -70,13 +74,16 @@ public class MenuService {
     }
 
     public Menu saveMenu(MenuRequest menuRequest) throws DatabaseException {
+        Map<Ingredient, Integer> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
+
         try {
-            MenuCategory category = databaseHelper.findCategory(menuRequest.getCategory());
+            MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
             Menu menu = new Menu(
                     nextSequenceService.getNextSequence("MenuSequece"),
                     menuRequest.getName(),
                     menuRequest.getPrice(),
-                    category
+                    category,
+                    ingredients
             );
 
             return menuRepository.save(menu);
@@ -89,18 +96,20 @@ public class MenuService {
     }
 
     public Menu editMenu(int id, MenuRequest menuRequest) throws DatabaseException {
-        Menu menu = databaseHelper.findMenu(id);
-        MenuCategory category = databaseHelper.findCategory(menuRequest.getCategory());
+        Menu menu = findHelper.findMenu(id);
+        MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
+        Map<Ingredient, Integer> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
 
         menu.setName(menuRequest.getName());
         menu.setPrice(menuRequest.getPrice());
         menu.setCategory(category);
+        menu.setIngredients(ingredients);
 
         return menuRepository.save(menu);
     }
 
     public Menu deleteMenu(int id) throws DatabaseException, MenuException {
-        Menu menu = databaseHelper.findMenu(id);
+        Menu menu = findHelper.findMenu(id);
 
         if (menu.isDeleted()) throw new MenuException(
                 String.valueOf(id),

@@ -7,16 +7,17 @@ import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Map;
 
 @Component
 @AllArgsConstructor
 public class CalculationHelper {
-    public double getOrderTotal(List<Menu> contents) {
+
+    public double getOrderTotal(Map<Menu, Integer> contents) {
         double total = 0;
 
-        for (Menu content : contents) {
-            total += content.getPrice();
+        for (Map.Entry<Menu, Integer> entry : contents.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
         }
 
         return total;

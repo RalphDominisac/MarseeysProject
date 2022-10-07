@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class PickUpRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private List<Integer> contents;
+    private Map<Integer, Integer> contents;
 
     @NotBlank(message = "Please provide a phone number.")
     @Size(min = 11, max = 11, message = "Please input a valid phone number.")
