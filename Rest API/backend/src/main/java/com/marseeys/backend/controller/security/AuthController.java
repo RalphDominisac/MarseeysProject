@@ -1,4 +1,4 @@
-package com.marseeys.backend.controller;
+package com.marseeys.backend.controller.security;
 
 import com.marseeys.backend.entity.security.role.Role;
 import com.marseeys.backend.entity.security.user.User;
@@ -8,8 +8,8 @@ import com.marseeys.backend.model.security.response.JwtResponse;
 import com.marseeys.backend.model.security.response.MessageResponse;
 import com.marseeys.backend.model.security.user.LoginRequest;
 import com.marseeys.backend.model.security.user.SignupRequest;
-import com.marseeys.backend.repository.RoleRepository;
-import com.marseeys.backend.repository.UserRepository;
+import com.marseeys.backend.repository.security.RoleRepository;
+import com.marseeys.backend.repository.security.UserRepository;
 import com.marseeys.backend.types.RoleEnum;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -104,32 +104,30 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case "admin" -> {
                         Role adminRole = roleRepository.findByRole(RoleEnum.ROLE_ADMIN).orElseThrow(
                                 () -> new RuntimeException(
                                         "Error: Role is not found."
                                 )
                         );
-
                         roles.add(adminRole);
-                        break;
-                    case "mod":
+                    }
+                    case "mod" -> {
                         Role modRole = roleRepository.findByRole(RoleEnum.ROLE_MODERATOR).orElseThrow(
                                 () -> new RuntimeException(
                                         "Error: Role is not found."
                                 )
                         );
-
                         roles.add(modRole);
-                        break;
-                    default:
+                    }
+                    default -> {
                         Role userRole = roleRepository.findByRole(RoleEnum.ROLE_USER).orElseThrow(
                                 () -> new RuntimeException(
                                         "Error: Role is not found."
                                 )
                         );
-
                         roles.add(userRole);
+                    }
                 }
             });
         }

@@ -64,22 +64,22 @@ public enum ExceptionType {
             "Unable to save transaction."
     ),
 
-    SAVE_ITEM_EXCEPTION(
+    SAVE_MENU_EXCEPTION(
             60001L,
                     "Unable to save item."
     ),
 
-    ITEM_NOT_FOUND_EXCEPTION(
+    MENU_NOT_FOUND_EXCEPTION(
             60002L,
                     "No item found: "
     ),
 
-    EMPTY_ITEM_CATEGORY_EXCEPTION(
+    EMPTY_MENU_CATEGORY_EXCEPTION(
             60003L,
                     "Category is empty: "
     ),
 
-    ITEM_ALREADY_DELETED_EXCEPTION(
+    MENU_ALREADY_DELETED_EXCEPTION(
             60004L,
                     "Item already deleted: "
     ),
@@ -94,14 +94,49 @@ public enum ExceptionType {
                     "No order found: "
     ),
 
+    SAVE_PAYMENT_EXCEPTION(
+            80001L,
+            "Unable to save order."
+    ),
+
     PAYMENT_ALREADY_MADE_EXCEPTION(
-            70001L,
+            80002L,
                     "Order already paid: "
     ),
 
     PAYMENT_INSUFFICIENT_EXCEPTION(
-            80002L,
+            80003L,
                     "Insufficient amount paid."
+    ),
+
+    SAVE_MENU_CATEGORY_EXCEPTION(
+            90001L,
+            "Unable to save menu category."
+    ),
+
+    MENU_CATEGORY_NOT_FOUND_EXCEPTION(
+            90002L,
+            "Menu category not found: "
+    ),
+
+    SAVE_DELIVERY_METHOD_EXCEPTION(
+            100001L,
+            "Unable to save delivery method."
+    ),
+
+    DELIVERY_METHOD_NOT_FOUND_EXCEPTION(
+            100002L,
+            "Delivery method not found: "
+    ),
+
+    SAVE_BANK_NAME_EXCEPTION(
+            110001L,
+            "Unable to save bank name."
+    ),
+
+    BANK_NAME_NOT_FOUND_EXCEPTION(
+            110002L,
+            "Bank name not found: "
     );
     private final Long id;
     private final String message;

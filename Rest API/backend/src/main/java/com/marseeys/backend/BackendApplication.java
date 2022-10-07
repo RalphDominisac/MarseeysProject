@@ -15,32 +15,38 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 public class BackendApplication {
+	// TODO Merge backend for Inventory
+	// TODO Merge backend for HR
+	// TODO Add security filter to POS
+	// TODO Add security filter to Inventory
+	// TODO Add security filter to HR
+	// TODO Change contents in Order class from List to Map because duplicate ids get lost
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
-	@Bean
-	public Docket swaggerConfiguration() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.paths(PathSelectors.ant("/api/*"))
-				.apis(RequestHandlerSelectors.basePackage("com.marseeys"))
-				.build()
-				.apiInfo(apiDetails());
-	}
-
-	private ApiInfo apiDetails() {
-		return new ApiInfo(
-				"Marseey's API",
-				"API for the Marseey's backend",
-				"1.0",
-				"For Marseey's only",
-				null,
-				"API License",
-				null,
-				Collections.emptyList()
-		);
-	}
+//	@Bean
+//	public Docket swaggerConfiguration() {
+//		return new Docket(DocumentationType.SWAGGER_2)
+//				.select()
+//				.paths(PathSelectors.ant("/api/*"))
+//				.apis(RequestHandlerSelectors.basePackage("com.marseeys"))
+//				.build()
+//				.apiInfo(apiDetails());
+//	}
+//
+//	private ApiInfo apiDetails() {
+//		return new ApiInfo(
+//				"Marseey's API",
+//				"API for the Marseey's backend",
+//				"1.0",
+//				"For Marseey's only",
+//				null,
+//				"API License",
+//				null,
+//				Collections.emptyList()
+//		);
+//	}
 
 }

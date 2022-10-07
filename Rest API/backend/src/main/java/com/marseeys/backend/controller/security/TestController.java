@@ -1,4 +1,4 @@
-package com.marseeys.backend.controller;
+package com.marseeys.backend.controller.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

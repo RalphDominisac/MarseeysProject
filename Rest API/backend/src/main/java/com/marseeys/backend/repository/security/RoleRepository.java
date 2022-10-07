@@ -1,4 +1,4 @@
-package com.marseeys.backend.repository;
+package com.marseeys.backend.repository.security;
 
 import com.marseeys.backend.entity.security.role.Role;
 import com.marseeys.backend.types.RoleEnum;

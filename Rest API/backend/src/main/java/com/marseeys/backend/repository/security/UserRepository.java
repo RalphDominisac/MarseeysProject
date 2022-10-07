@@ -1,4 +1,4 @@
-package com.marseeys.backend.repository;
+package com.marseeys.backend.repository.security;
 
 import com.marseeys.backend.entity.security.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

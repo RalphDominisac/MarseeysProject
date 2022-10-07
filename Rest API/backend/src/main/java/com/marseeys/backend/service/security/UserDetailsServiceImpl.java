@@ -2,7 +2,7 @@ package com.marseeys.backend.service.security;
 
 import com.marseeys.backend.entity.security.user.User;
 import com.marseeys.backend.entity.security.user.UserDetailsImpl;
-import com.marseeys.backend.repository.UserRepository;
+import com.marseeys.backend.repository.security.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
