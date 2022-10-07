@@ -11,6 +11,9 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+import AddMenuItemButtonBBQComponent from "../cssComponents/AddMenuItemButtonBBQComponent";
+import ModalAddNewItemBBQ from "../modals/ModalAddNewItemBBQ";
+import { useState } from "react";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -25,20 +28,33 @@ export default function BBQButtons(props) {
      navigate("/customerlistpage");
    };
 
+ const [modalOpenAddNewItemBBQ, setModalOpenAddNewItemBBQ] = useState(false);
+
 
   return (
     <React.Fragment>
-    <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
-      {productsBBQ.map((product) => (
-        <ItemsCategoryButton2
-          key={product.id}
-          product={product}
-          onAdd={onAdd}
-        />
-      ))}
+      <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
+        {productsBBQ.map((product) => (
+          <ItemsCategoryButton2
+            key={product.id}
+            product={product}
+            onAdd={onAdd}
+          />
+        ))}
       </Stack>
 
-    {/* Customer List Button: */}
+      <AddMenuItemButtonBBQComponent
+        addNewItemBBQModalFunction={() => {
+          setModalOpenAddNewItemBBQ(true);
+        }}
+      />
+      {modalOpenAddNewItemBBQ && (
+        <ModalAddNewItemBBQ
+          setOpenModalAddNewItemBBQ={setModalOpenAddNewItemBBQ}
+        />
+      )}
+
+      {/* Customer List Button: */}
       {/* <Button
         variant="contained"
         onClick={navigateToCustomerListPage}

@@ -186,7 +186,7 @@ const mdTheme = createTheme({
                 imgSrc="./images/pending.png"
               />
 
-              <ListItemButtonComponent
+              {/* <ListItemButtonComponent
                 getSelected={selectedIndex === 2}
                 getOnClick={
                   ((event) => handleListItemClick(event, 2),
@@ -194,7 +194,7 @@ const mdTheme = createTheme({
                 }
                 imgID="draftIcon"
                 imgSrc="images/draft.png"
-              />
+              /> */}
 
               <ListItemButtonComponent
                 getSelected={selectedIndex === 3}

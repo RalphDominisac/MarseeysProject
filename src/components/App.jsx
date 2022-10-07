@@ -7,7 +7,7 @@ import FinalizeOrderPage from "./FinalizeOrderPage";
 import OrderSummaryPage from "./OrderSummaryPage----------";
 // import CustomerListPage from "./CustomerListPage";
 import PendingOrdersPage from "./PendingOrdersPage";
-import DraftsPage from "./DraftsPage-------------";
+// import DraftsPage from "./DraftsPage-------------";
 import HistoryPage from "./HistoryPage";
 // import DiscountsPage from "./DiscountsPage";
 import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
@@ -21,7 +21,7 @@ function App(){
             <Route path="/" element={<SignInPOS />} />
             <Route path="/homeorderpage" element={<HomeOrderPage />} />
             <Route path="/pendingpage" element={<PendingOrdersPage />} />
-            <Route path="/draftspage" element={<DraftsPage />} />
+            {/* <Route path="/draftspage" element={<DraftsPage />} /> */}
             <Route path="/historypage" element={<HistoryPage />} />
             {/* <Route path="/discountspage" element={<DiscountsPage />} /> */}
             {/* <Route path="/customerlistpage" element={<CustomerListPage />} /> */}
