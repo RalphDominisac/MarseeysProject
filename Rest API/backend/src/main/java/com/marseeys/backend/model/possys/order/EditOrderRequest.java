@@ -16,7 +16,7 @@ public class EditOrderRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private Map<Integer, Integer> contents;
+    private Map<String, Integer> contents;
 
     private boolean paid;
     private boolean served;

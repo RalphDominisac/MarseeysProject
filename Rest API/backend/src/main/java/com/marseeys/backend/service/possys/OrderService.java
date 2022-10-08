@@ -1,12 +1,12 @@
 package com.marseeys.backend.service.possys;
 
-import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.order.Delivery;
 import com.marseeys.backend.entity.possys.order.DineIn;
 import com.marseeys.backend.entity.possys.order.PickUp;
 import com.marseeys.backend.entity.possys.order.base.DeliveryMethod;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.exception.OrderExecption;
 import com.marseeys.backend.helper.CalculationHelper;
 import com.marseeys.backend.helper.DatabaseHelper;
@@ -65,19 +65,41 @@ public class OrderService {
         return orderRepository.findPendingOrders();
     }
 
-    public Order saveOrder(DineInRequest dineInRequest) throws DatabaseException {
-        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(dineInRequest.getContents());
+    public Order saveOrder(DineInRequest dineInRequest) throws DatabaseException, IngredientException {
+        Map<String, Integer> contents = databaseHelper.checkMenusExist(dineInRequest.getContents());
+        DineIn order = new DineIn(
+                nextSequenceService.getNextSequence("OrderSequence"),
+                dineInRequest.getCustomer(),
+                contents,
+                calculationHelper.getOrderTotal(contents),
+                dineInRequest.getTableNo()
+        );
 
+        transactionService.saveTransaction(order);
         try {
-            DineIn order = new DineIn(
-                    nextSequenceService.getNextSequence("OrderSequence"),
-                    dineInRequest.getCustomer(),
-                    contents,
-                    calculationHelper.getOrderTotal(contents),
-                    dineInRequest.getTableNo()
+            return orderRepository.save(order);
+        } catch (Exception ex) {
+            throw new DatabaseException(
+                    ex,
+                    ExceptionType.SAVE_ORDER_EXCEPTION
             );
-            transactionService.saveTransaction(order);
+        }
 
+    }
+
+    public Order saveOrder(DeliveryRequest deliveryRequest) throws DatabaseException, IngredientException {
+        Map<String, Integer> contents = databaseHelper.checkMenusExist(deliveryRequest.getContents());
+        Delivery order = new Delivery(
+                nextSequenceService.getNextSequence("OrderSequence"),
+                deliveryRequest.getCustomer(),
+                contents,
+                calculationHelper.getOrderTotal(contents),
+                deliveryRequest.getAddress(),
+                findHelper.findMethod(deliveryRequest.getDeliveryMethod())
+        );
+
+        transactionService.saveTransaction(order);
+        try {
             return orderRepository.save(order);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -87,43 +109,19 @@ public class OrderService {
         }
     }
 
-    public Order saveOrder(DeliveryRequest deliveryRequest) throws DatabaseException {
-        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(deliveryRequest.getContents());
+    public Order saveOrder(PickUpRequest pickUpRequest) throws DatabaseException, IngredientException {
+        Map<String, Integer> contents = databaseHelper.checkMenusExist(pickUpRequest.getContents());
+        PickUp order = new PickUp(
+                nextSequenceService.getNextSequence("OrderSequence"),
+                pickUpRequest.getCustomer(),
+                contents,
+                calculationHelper.getOrderTotal(contents),
+                pickUpRequest.getPhoneNo(),
+                pickUpRequest.getEstimatedTime()
+        );
 
+        transactionService.saveTransaction(order);
         try {
-            Delivery order = new Delivery(
-                    nextSequenceService.getNextSequence("OrderSequence"),
-                    deliveryRequest.getCustomer(),
-                    contents,
-                    calculationHelper.getOrderTotal(contents),
-                    deliveryRequest.getAddress(),
-                    findHelper.findMethod(deliveryRequest.getDeliveryMethod())
-            );
-            transactionService.saveTransaction(order);
-
-            return orderRepository.save(order);
-        } catch (Exception ex) {
-            throw new DatabaseException(
-                    ex,
-                    ExceptionType.SAVE_ORDER_EXCEPTION
-            );
-        }
-    }
-
-    public Order saveOrder(PickUpRequest pickUpRequest) throws DatabaseException {
-        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(pickUpRequest.getContents());
-
-        try {
-            PickUp order = new PickUp(
-                    nextSequenceService.getNextSequence("OrderSequence"),
-                    pickUpRequest.getCustomer(),
-                    contents,
-                    calculationHelper.getOrderTotal(contents),
-                    pickUpRequest.getPhoneNo(),
-                    pickUpRequest.getEstimatedTime()
-            );
-            transactionService.saveTransaction(order);
-
             return orderRepository.save(order);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -136,7 +134,7 @@ public class OrderService {
     public Order editOrder(int id, EditOrderRequest editOrderRequest) throws DatabaseException {
         Order order = findHelper.findOrder(id);
 
-        Map<Menu, Integer> contents = databaseHelper.checkMenusExist(editOrderRequest.getContents());
+        Map<String, Integer> contents = databaseHelper.checkMenusExist(editOrderRequest.getContents());
 
         order.setCustomer(editOrderRequest.getCustomer());
         order.setContents(contents);

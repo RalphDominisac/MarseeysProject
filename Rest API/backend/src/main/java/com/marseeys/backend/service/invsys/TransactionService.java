@@ -53,13 +53,13 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> saveTransaction(Order order) throws IngredientException {
+    public List<Transaction> saveTransaction(Order order) throws IngredientException, DatabaseException {
         List<Transaction> orderTransaction = new ArrayList<>();
         List<Ingredient> ingredientChanges = new ArrayList<>();
-        Map<Ingredient, Double> totalDeductions = databaseHelper.getTotalDeductions(order);
+        Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(order);
 
-        for (Map.Entry<Ingredient, Double> entry : totalDeductions.entrySet()) {
-            Ingredient ingredient = entry.getKey();
+        for (Map.Entry<String, Double> entry : totalDeductions.entrySet()) {
+            Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(entry.getKey()));
             double deduction = entry.getValue();
 
             if (ingredient.getQuantity() - deduction < 0) {
@@ -69,8 +69,8 @@ public class TransactionService {
             ingredientChanges.add(ingredient);
 
             Transaction transaction = new Transaction(
-                    entry.getKey(),
-                    entry.getValue(),
+                    ingredient,
+                    deduction,
                     false
             );
 

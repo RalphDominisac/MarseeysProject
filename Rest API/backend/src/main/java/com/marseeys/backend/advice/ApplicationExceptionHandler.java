@@ -20,6 +20,9 @@ public class ApplicationExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());
+        if (ex.getCause() != null) {
+            errorMap.put(ex.getCause().getClass().getSimpleName(), ex.getCause().getLocalizedMessage());
+        }
 
         return errorMap;
     }
@@ -30,6 +33,9 @@ public class ApplicationExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());
+        if (ex.getCause() != null) {
+            errorMap.put(ex.getCause().getClass().getSimpleName(), ex.getCause().getLocalizedMessage());
+        }
 
         return errorMap;
     }
@@ -40,6 +46,9 @@ public class ApplicationExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());
+        if (ex.getCause() != null) {
+            errorMap.put(ex.getCause().getClass().getSimpleName(), ex.getCause().getLocalizedMessage());
+        }
 
         return errorMap;
     }
@@ -50,6 +59,9 @@ public class ApplicationExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());
+        if (ex.getCause() != null) {
+            errorMap.put(ex.getCause().getClass().getSimpleName(), ex.getCause().getLocalizedMessage());
+        }
 
         return errorMap;
     }

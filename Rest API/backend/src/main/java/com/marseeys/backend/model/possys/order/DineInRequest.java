@@ -15,7 +15,7 @@ public class DineInRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private Map<Integer, Integer> contents;
+    private Map<String, Integer> contents;
 
     @NotNull(message = "Please enter a table number.")
     @Min(value = 1, message = "Minimum value is one.")

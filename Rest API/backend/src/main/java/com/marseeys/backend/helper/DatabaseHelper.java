@@ -15,40 +15,51 @@ import java.util.Map;
 public class DatabaseHelper {
     private final FindHelper findHelper;
 
-    public Map<Ingredient, Double> checkIngredientsExist(Map<Integer, Double> ingredientIds) throws DatabaseException {
-        Map<Ingredient, Double> ingredientContents = new HashMap<>();
+    public Map<String, Double> checkIngredientsExist(Map<String, Double> ingredientIds) throws DatabaseException {
+        Map<String, Double> ingredientContents = new HashMap<>();
 
-        for (Map.Entry<Integer, Double> entry : ingredientIds.entrySet()) {
-            ingredientContents.put(findHelper.findIngredient(entry.getKey()), entry.getValue());
+        for (Map.Entry<String, Double> entry : ingredientIds.entrySet()) {
+            Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(entry.getKey()));
+            ingredientContents.put(String.valueOf(ingredient.getId()), entry.getValue());
         }
 
         return ingredientContents;
     }
 
-    public Map<Menu, Integer> checkMenusExist(Map<Integer, Integer> menuIds) throws DatabaseException {
-        Map<Menu, Integer> contents = new HashMap<>();
+    public Map<String, Integer> checkMenusExist(Map<String, Integer> menuIds) throws DatabaseException {
+        Map<String, Integer> contents = new HashMap<>();
 
-        for (Map.Entry<Integer, Integer> entry : menuIds.entrySet()) {
-            contents.put(findHelper.findMenu((entry.getKey())), entry.getValue());
+        for (Map.Entry<String, Integer> entry : menuIds.entrySet()) {
+            Menu menu = findHelper.findMenu(Integer.parseInt(entry.getKey()));
+            contents.put(String.valueOf(menu.getId()), entry.getValue());
         }
 
         return contents;
     }
 
-    public Map<Ingredient, Double> getTotalDeductions(Order order) {
-        Map<Ingredient, Double> totalDeductions = new HashMap<>();
+    public Map<String, Double> getTotalDeductions(Order order) throws DatabaseException {
+        Map<String, Double> totalDeductions = new HashMap<>();
 
-        for (Map.Entry<Menu, Integer> menuEntry : order.getContents().entrySet()) {
+        for (Map.Entry<String, Integer> menuEntry : order.getContents().entrySet()) {
+            Menu menu = findHelper.findMenu(Integer.parseInt(menuEntry.getKey()));
             int menuQuantity = menuEntry.getValue();
 
-
-            for (Map.Entry<Ingredient, Double> ingredientEntry : menuEntry.getKey().getIngredients().entrySet()) {
-                Ingredient ingredient = ingredientEntry.getKey();
+            for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {
+                Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(ingredientEntry.getKey()));
                 double ingredientQuantity = ingredientEntry.getValue();
                 double ingredientDeduction = menuQuantity * ingredientQuantity;
 
-                if (!totalDeductions.containsKey(ingredient)) totalDeductions.put(ingredient, ingredientDeduction);
-                else totalDeductions.put(ingredient, totalDeductions.get(ingredient) + ingredientDeduction);
+                if (!totalDeductions.containsKey(String.valueOf(ingredient.getId()))) {
+                    totalDeductions.put(
+                            String.valueOf(ingredient.getId()),
+                            ingredientDeduction
+                    );
+                } else {
+                    totalDeductions.put(
+                            String.valueOf(ingredient.getId()),
+                            totalDeductions.get(String.valueOf(ingredient.getId())) + ingredientDeduction)
+                    ;
+                }
             }
         }
 

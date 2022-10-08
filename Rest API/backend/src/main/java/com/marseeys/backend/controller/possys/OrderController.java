@@ -2,6 +2,7 @@ package com.marseeys.backend.controller.possys;
 
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.model.possys.order.DeliveryRequest;
 import com.marseeys.backend.model.possys.order.DineInRequest;
 import com.marseeys.backend.model.possys.order.EditOrderRequest;
@@ -28,17 +29,17 @@ public class OrderController {
     }
 
     @PostMapping("/add/dine")
-    public ResponseEntity<Order> saveOrder(@RequestBody @Valid DineInRequest dineInRequest) throws DatabaseException {
+    public ResponseEntity<Order> saveOrder(@RequestBody @Valid DineInRequest dineInRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(orderService.saveOrder(dineInRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/add/delivery")
-    public ResponseEntity<Order> saveOrder(@RequestBody @Valid DeliveryRequest deliveryRequest) throws DatabaseException {
+    public ResponseEntity<Order> saveOrder(@RequestBody @Valid DeliveryRequest deliveryRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(orderService.saveOrder(deliveryRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/add/pickup")
-    public ResponseEntity<Order> saveOrder(@RequestBody @Valid PickUpRequest pickUpRequest) throws DatabaseException {
+    public ResponseEntity<Order> saveOrder(@RequestBody @Valid PickUpRequest pickUpRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(orderService.saveOrder(pickUpRequest), HttpStatus.CREATED);
     }
 

@@ -16,7 +16,7 @@ public class PickUpRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private Map<Integer, Integer> contents;
+    private Map<String, Integer> contents;
 
     @NotBlank(message = "Please provide a phone number.")
     @Size(min = 11, max = 11, message = "Please input a valid phone number.")

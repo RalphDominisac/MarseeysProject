@@ -1,6 +1,5 @@
 package com.marseeys.backend.service.possys;
 
-import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.menu.MenuCategory;
 import com.marseeys.backend.exception.DatabaseException;
@@ -74,7 +73,7 @@ public class MenuService {
     }
 
     public Menu saveMenu(MenuRequest menuRequest) throws DatabaseException {
-        Map<Ingredient, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
+        Map<String, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
 
         try {
             MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
@@ -98,7 +97,7 @@ public class MenuService {
     public Menu editMenu(int id, MenuRequest menuRequest) throws DatabaseException {
         Menu menu = findHelper.findMenu(id);
         MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
-        Map<Ingredient, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
+        Map<String, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
 
         menu.setName(menuRequest.getName());
         menu.setPrice(menuRequest.getPrice());

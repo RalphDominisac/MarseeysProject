@@ -16,7 +16,7 @@ public class DeliveryRequest {
     private String customer;
 
     @NotEmpty(message = "Please provide a list of items.")
-    private Map<Integer, Integer> contents;
+    private Map<String, Integer> contents;
 
     @NotBlank(message = "Please provide a delivery address.")
     private String address;

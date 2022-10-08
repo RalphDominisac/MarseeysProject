@@ -25,5 +25,5 @@ public class MenuRequest {
     private String category;
 
     @NotEmpty(message = "Please provide a list of ingredients")
-    private Map<Integer, Double> ingredients;
+    private Map<String, Double> ingredients;
 }

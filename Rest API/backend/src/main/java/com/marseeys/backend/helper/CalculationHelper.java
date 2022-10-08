@@ -3,6 +3,7 @@ package com.marseeys.backend.helper;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.CashException;
+import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,12 +13,14 @@ import java.util.Map;
 @Component
 @AllArgsConstructor
 public class CalculationHelper {
+    private final FindHelper findHelper;
 
-    public double getOrderTotal(Map<Menu, Integer> contents) {
+    public double getOrderTotal(Map<String, Integer> contents) throws DatabaseException {
         double total = 0;
 
-        for (Map.Entry<Menu, Integer> entry : contents.entrySet()) {
-            total += entry.getKey().getPrice() * entry.getValue();
+        for (Map.Entry<String, Integer> entry : contents.entrySet()) {
+            Menu menu = findHelper.findMenu(Integer.parseInt(entry.getKey()));
+            total += menu.getPrice() * entry.getValue();
         }
 
         return total;
