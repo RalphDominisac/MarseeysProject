@@ -59,6 +59,11 @@ public enum ExceptionType {
             "Ingredient already deleted: "
     ),
 
+    INSUFFICIENT_INGREDIENTS_EXCEPTION(
+            40004L,
+            "Not enough ingredients for this order."
+    ),
+
     SAVE_TRANSACTION_EXCEPTION(
             50001L,
             "Unable to save transaction."

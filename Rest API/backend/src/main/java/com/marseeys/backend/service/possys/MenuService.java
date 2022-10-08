@@ -74,7 +74,7 @@ public class MenuService {
     }
 
     public Menu saveMenu(MenuRequest menuRequest) throws DatabaseException {
-        Map<Ingredient, Integer> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
+        Map<Ingredient, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
 
         try {
             MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
@@ -98,7 +98,7 @@ public class MenuService {
     public Menu editMenu(int id, MenuRequest menuRequest) throws DatabaseException {
         Menu menu = findHelper.findMenu(id);
         MenuCategory category = findHelper.findCategory(menuRequest.getCategory());
-        Map<Ingredient, Integer> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
+        Map<Ingredient, Double> ingredients = databaseHelper.checkIngredientsExist(menuRequest.getIngredients());
 
         menu.setName(menuRequest.getName());
         menu.setPrice(menuRequest.getPrice());

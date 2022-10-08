@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Document(collection = "Transactions")
 public class Transaction {
     @Id
-    private int id;
+    private String id;
     @DocumentReference(collection = "Ingredients")
     private Ingredient ingredient;
     private double quantity;
@@ -25,8 +25,7 @@ public class Transaction {
     @CreatedDate
     private LocalDateTime date;
 
-    public Transaction(int id, Ingredient ingredient, double quantity, boolean add) {
-        this.id = id;
+    public Transaction(Ingredient ingredient, double quantity, boolean add) {
         this.ingredient = ingredient;
         this.quantity = quantity;
         this.add = add;

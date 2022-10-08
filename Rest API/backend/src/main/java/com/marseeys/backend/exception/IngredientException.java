@@ -10,14 +10,15 @@ public class IngredientException extends Exception{
         this.exceptionType = exceptionType;
     }
 
+    public IngredientException(ExceptionType exceptionType) {
+        super(exceptionType.getMessage());
+        this.exceptionType = exceptionType;
+    }
+
     public String getErrorId() {
         return exceptionType.getId().toString();
     }
 
-//    public IngredientException(ExceptionType exceptionType) {
-//        this.exceptionType = exceptionType;
-//    }
-//
 //    public IngredientException(String message, Throwable cause, ExceptionType exceptionType) {
 //        super(message, cause);
 //        this.exceptionType = exceptionType;
