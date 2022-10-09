@@ -262,34 +262,48 @@ const mdTheme = createTheme({
                       />
                     </AppBar>
 
+                    <FinalizeOrderPageHeaderLabels />
 
-                     <FinalizeOrderPageHeaderLabels/>
-                     
-                    {data?.cartItems.map((item, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          fontFamily: "Barlow Condensed",
-                          fontSize: "20px",
-                          marginLeft: "29px",
-                          marginTop: "-18px",
-                        }}
-                      >
-                        <p>{item.name}</p>
-
-                        <p style={{ marginLeft: "400px", marginTop: "-49px" }}>
-                          Php {item.price.toFixed(2)}
-                        </p>
-                        <p style={{ marginLeft: "572px", marginTop: "-50px" }}>
-                          {item.qty}
-                        </p>
-                        <p
-                          style={{ marginLeft: "680px", marginTop: "-50.4px" }}
+                    <Container
+                      sx={{
+                        width: 830,
+                        height: 450,
+                        overflow: "hidden",
+                        overflowY: "scroll",
+                      }}
+                    >
+                      {data?.cartItems.map((item, index) => (
+                        <div
+                          key={index}
+                          style={{
+                            fontFamily: "Barlow Condensed",
+                            fontSize: "20px",
+                            marginLeft: "-9px",
+                            marginTop: "-18px",
+                          }}
                         >
-                          Php {(item.price * item.qty).toFixed(2)}
-                        </p>
-                        {/* Comment Field: */}
-                        {/* <TextField
+                          <p>{item.name}</p>
+
+                          <p
+                            style={{ marginLeft: "400px", marginTop: "-49px" }}
+                          >
+                            Php {item.price.toFixed(2)}
+                          </p>
+                          <p
+                            style={{ marginLeft: "572px", marginTop: "-50px" }}
+                          >
+                            {item.qty}
+                          </p>
+                          <p
+                            style={{
+                              marginLeft: "680px",
+                              marginTop: "-50.4px",
+                            }}
+                          >
+                            Php {(item.price * item.qty).toFixed(2)}
+                          </p>
+                          {/* Comment Field: */}
+                          {/* <TextField
                           disabled={true}
                           className="inputRounded"
                           value={data?.orderComment}
@@ -305,13 +319,14 @@ const mdTheme = createTheme({
                             },
                           }}
                         /> */}
-                        <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
-                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                          - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        </Typography>
-                      </div>
-                    ))}
+                          <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
+                            - - - - - - - - - - - - - - - - - - - - - - - - - -
+                            - - - - - - - - - - - - - - - - - - - - - - - - - -
+                            - - - - - - - - - - - - - - - - - - - - - - 
+                          </Typography>
+                        </div>
+                      ))}
+                    </Container>
 
                     <div
                       style={{
@@ -322,8 +337,6 @@ const mdTheme = createTheme({
                     >
                       ORDER SUBTOTAL: Php {data?.totalPrice.toFixed(2)}
                     </div>
-
-                    
                   </Box>
                 </Paper>
               </Grid>

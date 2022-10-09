@@ -19,6 +19,7 @@ export default function ItemsCategoryButton2(props) {
         textTransform: "none",
         borderRadius: 3,
         backgroundColor: "#402C2C",
+        marginBottom: "40px"
       }}
     >
       <Typography sx={{ fontFamily: "Barlow Condensed", fontSize: "20px" }}>

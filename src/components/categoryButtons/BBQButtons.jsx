@@ -33,7 +33,7 @@ export default function BBQButtons(props) {
 
   return (
     <React.Fragment>
-      <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
+      {/* <Stack spacing={0} direction="row" sx={{ mb: 4.5 }}>
         {productsBBQ.map((product) => (
           <ItemsCategoryButton2
             key={product.id}
@@ -41,7 +41,22 @@ export default function BBQButtons(props) {
             onAdd={onAdd}
           />
         ))}
-      </Stack>
+      </Stack> */}
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 1fr)",
+        }}
+      >
+        {productsBBQ.map((product) => (
+          <ItemsCategoryButton2
+            key={product.id}
+            product={product}
+            onAdd={onAdd}
+          />
+        ))}
+      </div>
 
       <AddMenuItemButtonBBQComponent
         addNewItemBBQModalFunction={() => {
