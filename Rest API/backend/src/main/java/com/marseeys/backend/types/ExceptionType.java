@@ -157,6 +157,16 @@ public enum ExceptionType {
     INGREDIENT_CATEGORY_NOT_FOUND_EXCEPTION(
             120002L,
             "Ingredient category not found: "
+    ),
+
+    USERNAME_ALREADY_TAKEN_EXCEPTION(
+            130001L,
+            "Username is already taken: "
+    ),
+
+    EMAIL_ALREADY_TAKEN_EXCEPTION(
+            130002L,
+            "Email is already taken: "
     );
     private final Long id;
     private final String message;

@@ -1,9 +1,7 @@
 package com.marseeys.backend.advice;
 
-import com.marseeys.backend.exception.CashException;
-import com.marseeys.backend.exception.DatabaseException;
-import com.marseeys.backend.exception.IngredientException;
-import com.marseeys.backend.exception.MenuException;
+import com.marseeys.backend.exception.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,6 +54,19 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IngredientException.class)
     public Map<String, String> handlePaymentException(IngredientException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+
+        errorMap.put(ex.getErrorId(), ex.getMessage());
+        if (ex.getCause() != null) {
+            errorMap.put(ex.getCause().getClass().getSimpleName(), ex.getCause().getLocalizedMessage());
+        }
+
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DuplicateException.class)
+    public Map<String, String> handlePaymentException(@NotNull DuplicateException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
         errorMap.put(ex.getErrorId(), ex.getMessage());

@@ -3,17 +3,23 @@ package com.marseeys.backend.helper;
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.order.base.Order;
+import com.marseeys.backend.entity.security.role.Role;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.repository.security.RoleRepository;
+import com.marseeys.backend.types.RoleEnum;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 @AllArgsConstructor
 public class DatabaseHelper {
     private final FindHelper findHelper;
+    private final RoleRepository roleRepository;
 
     public Map<String, Double> checkIngredientsExist(Map<String, Double> ingredientIds) throws DatabaseException {
         Map<String, Double> ingredientContents = new HashMap<>();
@@ -64,5 +70,48 @@ public class DatabaseHelper {
         }
 
         return totalDeductions;
+    }
+
+    public Set<Role> getRoles(Set<String> roles) {
+        Set<Role> userRoles = new HashSet<>();
+
+        if (roles.isEmpty()) {
+            Role role = roleRepository.findByRole(RoleEnum.ROLE_USER).orElseThrow(() -> new RuntimeException(
+                    "Error: Role is not found."
+            ));
+
+            userRoles.add(role);
+        } else {
+            roles.forEach(role -> {
+                switch (role) {
+                    case "admin" -> {
+                        Role adminRole = roleRepository.findByRole(RoleEnum.ROLE_ADMIN).orElseThrow(
+                                () -> new RuntimeException(
+                                        "Error: Role is not found."
+                                )
+                        );
+                        userRoles.add(adminRole);
+                    }
+                    case "mod" -> {
+                        Role modRole = roleRepository.findByRole(RoleEnum.ROLE_MODERATOR).orElseThrow(
+                                () -> new RuntimeException(
+                                        "Error: Role is not found."
+                                )
+                        );
+                        userRoles.add(modRole);
+                    }
+                    default -> {
+                        Role userRole = roleRepository.findByRole(RoleEnum.ROLE_USER).orElseThrow(
+                                () -> new RuntimeException(
+                                        "Error: Role is not found."
+                                )
+                        );
+                        userRoles.add(userRole);
+                    }
+                }
+            });
+        }
+
+        return userRoles;
     }
 }
