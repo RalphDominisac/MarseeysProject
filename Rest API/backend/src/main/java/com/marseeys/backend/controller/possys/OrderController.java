@@ -3,9 +3,10 @@ package com.marseeys.backend.controller.possys;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
+import com.marseeys.backend.exception.OrderExecption;
 import com.marseeys.backend.model.possys.order.DeliveryRequest;
 import com.marseeys.backend.model.possys.order.DineInRequest;
-import com.marseeys.backend.model.possys.order.EditOrderRequest;
+import com.marseeys.backend.model.possys.order.AdditionalOrderRequest;
 import com.marseeys.backend.model.possys.order.PickUpRequest;
 import com.marseeys.backend.service.possys.OrderService;
 import lombok.AllArgsConstructor;
@@ -43,8 +44,18 @@ public class OrderController {
         return new ResponseEntity<>(orderService.saveOrder(pickUpRequest), HttpStatus.CREATED);
     }
 
-    @PostMapping("/edit/{id}")
-    public ResponseEntity<Order> editOrder(@PathVariable int id, @RequestBody @Valid EditOrderRequest editOrderRequest) throws DatabaseException {
-        return new ResponseEntity<>(orderService.editOrder(id, editOrderRequest), HttpStatus.OK);
+    @PostMapping("/{id}/additional")
+    public ResponseEntity<Order> addToOrder(@PathVariable int id, @RequestBody @Valid AdditionalOrderRequest additionalOrderRequest) throws DatabaseException, OrderExecption, IngredientException {
+        return ResponseEntity.ok(orderService.editOrder(id, additionalOrderRequest));
+    }
+
+    @PostMapping("/{id}/serve")
+    public ResponseEntity<Order> serveOrder(@PathVariable int id) throws DatabaseException, OrderExecption {
+        return ResponseEntity.ok(orderService.serveOrder(id));
+    }
+
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<Order> cancelOrder(@PathVariable int id) throws DatabaseException, OrderExecption {
+        return ResponseEntity.ok(orderService.cancelOrder(id));
     }
 }

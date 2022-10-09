@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -131,19 +132,31 @@ public class OrderService {
         }
     }
 
-    public Order editOrder(int id, EditOrderRequest editOrderRequest) throws DatabaseException {
+    public Order editOrder(int id, AdditionalOrderRequest additionalOrderRequest) throws DatabaseException, OrderExecption, IngredientException {
         Order order = findHelper.findOrder(id);
+        if (!order.getClass().equals(DineIn.class)) {
+            throw new OrderExecption(ExceptionType.NOT_DINE_IN_EXCEPTION);
+        }
 
-        Map<String, Integer> contents = databaseHelper.checkMenusExist(editOrderRequest.getContents());
+        Map<String, Integer> addedContents = databaseHelper.checkMenusExist(additionalOrderRequest.getContents());
+        Map<String, Integer> contents = order.getContents();
+        Map<String, Integer> newContents = new HashMap<>(contents);
 
-        order.setCustomer(editOrderRequest.getCustomer());
-        order.setContents(contents);
-        order.setPrice(calculationHelper.getOrderTotal(contents));
+        addedContents.forEach((menu, quantity) -> {
+            if (newContents.containsKey(menu)) {
+                newContents.put(menu, newContents.get(menu) + quantity);
+            } else {
+                newContents.put(menu, quantity);
+            }
+        });
+
+        order.setContents(newContents);
+        order.setPrice(calculationHelper.getOrderTotal(newContents));
         order.setDate(LocalDateTime.now());
-        order.setPaid(editOrderRequest.isPaid());
-        order.setServed(editOrderRequest.isServed());
-        order.setCanceled(editOrderRequest.isCanceled());
+        order.setPaid(false);
+        order.setServed(false);
 
+        transactionService.saveTransaction(addedContents);
         return orderRepository.save(order);
     }
 
@@ -155,6 +168,18 @@ public class OrderService {
                 ExceptionType.ORDER_ALREADY_SERVED_EXCEPTION
         );
         order.setServed(!order.isServed());
+
+        return orderRepository.save(order);
+    }
+
+    public Order cancelOrder(int id) throws DatabaseException, OrderExecption {
+        Order order = findHelper.findOrder(id);
+
+        if (order.isServed()) throw new OrderExecption(
+                String.valueOf(id),
+                ExceptionType.ORDER_ALREADY_CANCELED_EXCEPTION
+        );
+        order.setServed(!order.isCanceled());
 
         return orderRepository.save(order);
     }

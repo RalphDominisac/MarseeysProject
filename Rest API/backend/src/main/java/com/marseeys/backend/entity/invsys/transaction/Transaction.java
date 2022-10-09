@@ -20,6 +20,7 @@ public class Transaction {
     private Ingredient ingredient;
     private double quantity;
     private boolean add;
+//    private Map<String, Double> ingredientChanges;
 //    @CreatedBy
 //    private User user;
     @CreatedDate

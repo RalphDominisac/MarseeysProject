@@ -80,4 +80,32 @@ public class TransactionService {
         ingredientRepository.saveAll(ingredientChanges);
         return transactionRepository.saveAll(orderTransaction);
     }
+
+    public List<Transaction> saveTransaction(Map<String, Integer> additionalContents) throws DatabaseException, IngredientException {
+        List<Transaction> orderTransaction = new ArrayList<>();
+        List<Ingredient> ingredientChanges = new ArrayList<>();
+        Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(additionalContents);
+
+        for (Map.Entry<String, Double> entry : totalDeductions.entrySet()) {
+            Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(entry.getKey()));
+            double deduction = entry.getValue();
+
+            if (ingredient.getQuantity() - deduction < 0) {
+                throw new IngredientException(ExceptionType.INSUFFICIENT_INGREDIENTS_EXCEPTION);
+            }
+            ingredient.setQuantity(ingredient.getQuantity() - deduction);
+            ingredientChanges.add(ingredient);
+
+            Transaction transaction = new Transaction(
+                    ingredient,
+                    deduction,
+                    false
+            );
+
+            orderTransaction.add(transaction);
+        }
+
+        ingredientRepository.saveAll(ingredientChanges);
+        return transactionRepository.saveAll(orderTransaction);
+    }
 }

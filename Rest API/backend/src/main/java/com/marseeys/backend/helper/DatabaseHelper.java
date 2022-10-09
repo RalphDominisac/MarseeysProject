@@ -72,6 +72,35 @@ public class DatabaseHelper {
         return totalDeductions;
     }
 
+    public Map<String, Double> getTotalDeductions(Map<String, Integer> additionalContents) throws DatabaseException {
+        Map<String, Double> totalDeductions = new HashMap<>();
+
+        for (Map.Entry<String, Integer> menuEntry : additionalContents.entrySet()) {
+            Menu menu = findHelper.findMenu(Integer.parseInt(menuEntry.getKey()));
+            int menuQuantity = menuEntry.getValue();
+
+            for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {
+                Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(ingredientEntry.getKey()));
+                double ingredientQuantity = ingredientEntry.getValue();
+                double ingredientDeduction = menuQuantity * ingredientQuantity;
+
+                if (!totalDeductions.containsKey(String.valueOf(ingredient.getId()))) {
+                    totalDeductions.put(
+                            String.valueOf(ingredient.getId()),
+                            ingredientDeduction
+                    );
+                } else {
+                    totalDeductions.put(
+                            String.valueOf(ingredient.getId()),
+                            totalDeductions.get(String.valueOf(ingredient.getId())) + ingredientDeduction)
+                    ;
+                }
+            }
+        }
+
+        return totalDeductions;
+    }
+
     public Set<Role> getRoles(Set<String> roles) {
         Set<Role> userRoles = new HashSet<>();
 

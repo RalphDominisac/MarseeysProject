@@ -104,6 +104,16 @@ public enum ExceptionType {
             "Order already served: "
     ),
 
+    ORDER_ALREADY_CANCELED_EXCEPTION(
+            70004L,
+            "Order already canceled: "
+    ),
+
+    NOT_DINE_IN_EXCEPTION(
+            70005L,
+            "Order cannot be edited."
+    ),
+
     SAVE_PAYMENT_EXCEPTION(
             80001L,
             "Unable to save order."
