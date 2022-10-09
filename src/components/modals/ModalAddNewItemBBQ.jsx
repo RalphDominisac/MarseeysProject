@@ -1,5 +1,5 @@
 import React from "react";
-import "./ModalStyle.css";
+import "./ModalAddMenuItemStyle.css";
 import Typography from "@mui/material/Typography";
 import {
   BrowserRouter as Router,
@@ -10,7 +10,7 @@ import {
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ, categoryName }) {
+function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ}) {
   const navigate = useNavigate();
 
   const[itemNameBBQ, setItemNameBBQ] = useState("");
@@ -20,9 +20,9 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ, categoryName }) {
     navigate("/draftspage");
   };
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <div className="titleCloseBtn">
+    <div className="modalBackground3">
+      <div className="modalContainer3">
+        <div className="titleCloseBtn3">
           <button
             onClick={() => {
               setOpenModalAddNewItemBBQ(false);
@@ -32,7 +32,7 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ, categoryName }) {
           </button>
         </div>
         <div className="title">
-          <h1>Add New Item ({categoryName})</h1>
+          <h1>Add New Item (BBQ)</h1>
         </div>
         <div className="body">
           <TextField
@@ -48,6 +48,7 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ, categoryName }) {
             placeholder="Item Price"
             variant="outlined"
             size="small"
+            sx={{ width: 100 }}
           />
         </div>
         <div className="footer">
@@ -55,9 +56,9 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ, categoryName }) {
             onClick={() => {
               setOpenModalAddNewItemBBQ(false);
             }}
-            id="noBtn"
+            id="noBtn3"
           >
-            Cancel
+            Cancel  
           </button>
           <button onClick={navigateToDraftsPage}>Add</button>
         </div>

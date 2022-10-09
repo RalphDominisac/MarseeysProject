@@ -16,9 +16,9 @@ import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TableNumberButtons from "./cssComponents/TableNumberButtons";
-import ModalSaveToDraft from "./categoryButtons/modals/ModalSaveToDraft";
-import ModalCancelOrder from "./categoryButtons/modals/ModalCancelOrder";
-import ModalConfirmOrder from "./categoryButtons/modals/ModalConfirmOrder";
+import ModalSaveToDraft from "./modals/ModalSaveToDraft";
+import ModalCancelOrder from "./modals/ModalCancelOrder";
+import ModalConfirmOrder from "./modals/ModalConfirmOrder";
 import SaveToDraftButtonComponent from "./cssComponents/SaveToDraftButtonComponent";
 import SelectDiscountComponent from "./cssComponents/SelectDiscountComponent";
 import KuboNumButtonComponent from "./cssComponents/KuboNumButtonComponent";
@@ -56,14 +56,14 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
         Payment Details
       </Typography>
 
-      <SaveToDraftButtonComponent
+      {/* <SaveToDraftButtonComponent
         saveToDraftModalFunction={() => {
           setModalOpenSaveToDraft(true);
         }}
       />
       {modalOpenSaveToDraft && (
         <ModalSaveToDraft setOpenModalSaveToDraft={setModalOpenSaveToDraft} />
-      )}
+      )} */}
 
       <Typography sx={{ ml: 2, mt: 0, mb: -2, color: "#504C64" }}>
         ____________________________________________________
@@ -73,7 +73,7 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
 
       <TextField
         className="inputRounded"
-        value="Juan Pablo"
+        placeholder="Enter name"
         variant="outlined"
         size="small"
         sx={{ ml: 3, width: 460, mt: -2 }}

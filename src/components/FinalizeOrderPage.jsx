@@ -132,9 +132,9 @@ const mdTheme = createTheme({
           navigate("/pendingpage");
         };
 
-        const navigateToDraftsPage = () => {
-          navigate("/draftspage");
-        };
+        // const navigateToDraftsPage = () => {
+        //   navigate("/draftspage");
+        // };
 
         const navigateToHistoryPage = () => {
           navigate("/historypage");
@@ -199,14 +199,14 @@ const mdTheme = createTheme({
               imgSrc="./images/pending.png"
             />
 
-            <ListItemButtonComponent
+            {/* <ListItemButtonComponent
               getSelected={selectedIndex === 2}
               getOnClick={
                 ((event) => handleListItemClick(event, 2), navigateToDraftsPage)
               }
               imgID="draftIcon"
               imgSrc="images/draft.png"
-            />
+            /> */}
 
             <ListItemButtonComponent
               getSelected={selectedIndex === 3}

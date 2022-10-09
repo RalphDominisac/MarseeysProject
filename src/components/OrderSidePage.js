@@ -18,9 +18,9 @@ import {
   useNavigate,  
 } from "react-router-dom";
 // import Modal from "./Modal";
-import ModalDraft from "./categoryButtons/modals/ModalDraft";
-import ModalRemoveItem from "./categoryButtons/modals/ModalRemoveItem";
-import ModalProceed from "./categoryButtons/modals/ModalProceed";
+import ModalDraft from "./modals/ModalDraft";
+import ModalRemoveItem from "./modals/ModalRemoveItem";
+import ModalProceed from "./modals/ModalProceed";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import DineInPickupDeliveryButtons from "./cssComponents/DineInPickupDeliveryButtons";
