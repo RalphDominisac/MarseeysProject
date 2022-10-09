@@ -1,0 +1,12 @@
+package com.marseeys.backend.repository.invsys;
+
+import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+import java.util.List;
+
+public interface IngredientRepository extends MongoRepository<Ingredient, Integer> {
+    @Query("{'deleted': false}")
+    List<Ingredient> viewIngredients();
+}
