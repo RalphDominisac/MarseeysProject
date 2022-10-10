@@ -13,6 +13,7 @@ export default function TableNumberButtons({tableNum}) {
   return (
     <React.Fragment>
       <Button
+        value={tableNum}
         variant="contained"
         sx={{
           "&:hover": {
@@ -26,7 +27,6 @@ export default function TableNumberButtons({tableNum}) {
           backgroundColor: "#504C64",
           borderRadius: 10,
           padding: 0,
-
         }}
       >
         <Typography sx={{ fontSize: "19px", fontFamily: "Barlow Condensed" }}>

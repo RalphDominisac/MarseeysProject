@@ -6,6 +6,7 @@ export default function KuboNumButtonComponent() {
   return (
     <React.Fragment>
       <Button
+        value=" Kubo 1"
         variant="contained"
         sx={{
           "&:hover": {
@@ -26,6 +27,7 @@ export default function KuboNumButtonComponent() {
         </Typography>
       </Button>
       <Button
+        value=" Kubo 2"
         variant="contained"
         sx={{
           "&:hover": {
@@ -46,6 +48,7 @@ export default function KuboNumButtonComponent() {
         </Typography>
       </Button>
       <Button
+        value=" Kubo 3"
         variant="contained"
         sx={{
           "&:hover": {
