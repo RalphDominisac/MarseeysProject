@@ -1,31 +1,11 @@
 import React from 'react'
 import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import OrderButtonPendingStyle from "./OrderButtonPendingStyle";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import OrderButtonHistoryStyle from "./OrderButtonHistoryStyle";
 
-
-export default function PendingOrderPageBody() {
-    const navigate = useNavigate();
-
-     const navigateToOrderSummaryPage = () => {
-       navigate("/ordersummarypage");
-     };
-
+export default function HistoryPageBody() {
   return (
     <React.Fragment>
-      {/* <Typography class="customerListStack" sx={{ color: "white" }}>
-        ORDER #0001
-      </Typography> */}
-      <OrderButtonPendingStyle
-        title="ORDER #0001"
-        onClickFunc={navigateToOrderSummaryPage}
-      />
+      <OrderButtonHistoryStyle title="ORDER #0001" />
 
       <Typography
         sx={{

@@ -127,7 +127,7 @@ export default function OrderSidePage(props) {
             />
 
             <Typography class="menuPriceTag">
-              Php {item.price.toFixed(2)}
+              Php {Number(item.price).toFixed(2)}
             </Typography>
 
             {/* Order Comment Field area */}

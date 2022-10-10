@@ -21,15 +21,18 @@ function preventDefault(event) {
 
 export default function BBQButtons(props) {
    const { productsBBQ, onAdd } = props;
+   const [updatedProductListBBQ, addProdBBQ] = useState(productsBBQ);
 
-   const navigate = useNavigate();
+  const [modalOpenAddNewItemBBQ, setModalOpenAddNewItemBBQ] = useState(false);
 
-   const navigateToCustomerListPage = () => {
-     navigate("/customerlistpage");
-   };
+  const sendDataBBQ = (name, price) => {
+    addProdBBQ([...updatedProductListBBQ, { name, price }]);
+  };
 
- const [modalOpenAddNewItemBBQ, setModalOpenAddNewItemBBQ] = useState(false);
-
+  //  const navigate = useNavigate();
+  //  const navigateToCustomerListPage = () => {
+  //    navigate("/customerlistpage");
+  //  };
 
   return (
     <React.Fragment>
@@ -49,13 +52,21 @@ export default function BBQButtons(props) {
           gridTemplateColumns: "repeat(5, 1fr)",
         }}
       >
-        {productsBBQ.map((product) => (
+        {/* {productsBBQ.map((product) => (
           <ItemsCategoryButton2
             key={product.id}
             product={product}
             onAdd={onAdd}
           />
-        ))}
+        ))} */}
+        {updatedProductListBBQ.length &&
+          updatedProductListBBQ.map((product) => (
+            <ItemsCategoryButton2
+              key={product.id}
+              product={product}
+              onAdd={onAdd}
+            />
+          ))}
       </div>
 
       <AddMenuItemButtonBBQComponent
@@ -65,6 +76,7 @@ export default function BBQButtons(props) {
       />
       {modalOpenAddNewItemBBQ && (
         <ModalAddNewItemBBQ
+          sendDataBBQ={sendDataBBQ}
           setOpenModalAddNewItemBBQ={setModalOpenAddNewItemBBQ}
         />
       )}

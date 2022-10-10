@@ -4,7 +4,7 @@ import DateTime from "./DateTime";
 import HomeOrderPage from "./HomeOrderPage";
 import DrawerSample from "./DrawerSample";
 import FinalizeOrderPage from "./FinalizeOrderPage";
-import OrderSummaryPage from "./OrderSummaryPage----------";
+import OrderSummaryPage from "./OrderSummaryPage";
 // import CustomerListPage from "./CustomerListPage";
 import PendingOrdersPage from "./PendingOrdersPage";
 // import DraftsPage from "./DraftsPage-------------";
@@ -21,15 +21,16 @@ function App(){
             <Route path="/" element={<SignInPOS />} />
             <Route path="/homeorderpage" element={<HomeOrderPage />} />
             <Route path="/pendingpage" element={<PendingOrdersPage />} />
-            {/* <Route path="/draftspage" element={<DraftsPage />} /> */}
+            <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
+            <Route path="/ordersummarypage" element={<OrderSummaryPage />} />
             <Route path="/historypage" element={<HistoryPage />} />
+            {/* <Route path="/draftspage" element={<DraftsPage />} /> */}
+
             {/* <Route path="/discountspage" element={<DiscountsPage />} /> */}
             {/* <Route path="/customerlistpage" element={<CustomerListPage />} /> */}
-            <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
           </Routes>
 
           {
-          
             // <Router>
             //   <Routes>
             //    <Route path="/" element={<SignInPOS/>} />

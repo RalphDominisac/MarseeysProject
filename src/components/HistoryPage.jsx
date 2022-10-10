@@ -39,6 +39,7 @@ import ToolbarUpperRight from "./cssComponents/ToolbarUpperRight";
 import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
 import ToolBarHistoryPageHeader from "./cssComponents/ToolBarHistoryPageHeader";
 import HistoryPageHeaderLabels from "./cssComponents/HistoryPageHeaderLabels";
+import HistoryPageBody from "./cssComponents/HistoryPageBody";
 
 
 
@@ -251,6 +252,7 @@ const mdTheme = createTheme({
                       </AppBar>
 
                       <HistoryPageHeaderLabels />
+                      <HistoryPageBody/>
                     </Box>
                   </Paper>
                 </Grid>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ModalAddMenuItemStyle.css";
+import "./ModalAddMenuBBQStyle.css";
 import Typography from "@mui/material/Typography";
 import {
   BrowserRouter as Router,
@@ -10,8 +10,9 @@ import {
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ}) {
+function ModalAddNewItemBBQ(props) {
   const navigate = useNavigate();
+  const { setOpenModalAddNewItemBBQ} = props;
 
   const[itemNameBBQ, setItemNameBBQ] = useState("");
   const[itemPriceBBQ, setItemPriceBBQ] = useState("");
@@ -19,6 +20,12 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ}) {
   const navigateToDraftsPage = () => {
     navigate("/draftspage");
   };
+
+    const sendDataToParentBBQ = () => {
+      props.sendDataBBQ(itemNameBBQ, itemPriceBBQ);
+    };
+
+
   return (
     <div className="modalBackground3">
       <div className="modalContainer3">
@@ -52,15 +59,15 @@ function ModalAddNewItemBBQ({ setOpenModalAddNewItemBBQ}) {
           />
         </div>
         <div className="footer">
-          <button
+          {/* <button
             onClick={() => {
               setOpenModalAddNewItemBBQ(false);
             }}
             id="noBtn3"
           >
             Cancel  
-          </button>
-          <button onClick={navigateToDraftsPage}>Add</button>
+          </button> */}
+          <button onClick={sendDataToParentBBQ}>Add</button>
         </div>
       </div>
     </div>

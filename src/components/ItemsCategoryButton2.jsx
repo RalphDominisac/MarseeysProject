@@ -19,7 +19,7 @@ export default function ItemsCategoryButton2(props) {
         textTransform: "none",
         borderRadius: 3,
         backgroundColor: "#402C2C",
-        marginBottom: "40px"
+        marginBottom: "40px",
       }}
     >
       <Typography sx={{ fontFamily: "Barlow Condensed", fontSize: "20px" }}>
@@ -28,8 +28,10 @@ export default function ItemsCategoryButton2(props) {
       <Typography sx={{ fontFamily: "Barlow Condensed", fontSize: "14px" }}>
         Php {product.price}
       </Typography>
+
+      {/* MUST BE BOOLEAN: DEPENDING ON THE INVENTORY STOCK FOR ITS AVAILABILITY, DISABLE BUTTON IF ITS INSUFFICIENT  */}
       <Typography sx={{ fontFamily: "Barlow Condensed", fontSize: "14px" }}>
-        {product.availables} available
+        {/* {product.availables}  */} available
       </Typography>
     </Button>
   );

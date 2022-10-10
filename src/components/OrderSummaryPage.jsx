@@ -17,7 +17,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import OrderSummarySidePage from "./OrderSummarySidePage-------";
+import OrderSummarySidePage from "./OrderSummarySidePage";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -35,52 +35,13 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+import ToolbarUpperRight from "./cssComponents/ToolbarUpperRight";
+import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
 
 
 const drawerWidth = 120;
 
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-//   borderRadius: 14,
-//   backgroundColor: "white",
-//   color: "black",
-//   "&:hover": {
-//     backgroundColor: "white",
-//   },
-//   marginLeft: 0,
-//   width: "100%",
-//   [theme.breakpoints.up("sm")]: {
-//     marginLeft: theme.spacing(1),
-//     width: "auto",
-//   },
-// }));
 
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("sm")]: {
-//       width: "20ch",
-//       "&:focus": {
-//         width: "25ch",
-//       },
-//     },
-//   },
-// }));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -155,6 +116,31 @@ const mdTheme = createTheme({
     const toggleDrawer = () => {
       setOpen(!open);
     };
+    const navigate = useNavigate();
+    const navigateSignInPage = () => {
+      // 👇️ navigate to /
+      navigate("/");
+    };
+
+    const navigateToHomeOrderPage = () => {
+      navigate("/homeorderpage");
+    };
+
+    const navigateToPendingPage = () => {
+      navigate("/pendingpage");
+    };
+
+    const navigateToDraftsPage = () => {
+      navigate("/draftspage");
+    };
+
+    const navigateToHistoryPage = () => {
+      navigate("/historypage");
+    };
+
+    const navigateToDiscountsPage = () => {
+      navigate("/discountspage");
+    };
 
     return (
       <ThemeProvider theme={mdTheme}>
@@ -172,200 +158,58 @@ const mdTheme = createTheme({
             }}
           >
             {/* ** Upper Right Part For Logo */}
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
-                backgroundColor: "#1F1D2B",
-                borderRadius: 4,
-                ml: -1.5,
-              }}
-            >
-              <img
-                id="marseeysicon"
-                src="images/marseeys-icon.png"
-                alt="Marseeys Icon"
-                class="center"
-              />
-
-            </Toolbar>
+            <ToolbarUpperRight />
             <Divider />
 
             {/* SIDEBAR MENU LEFT ******************************************************************************/}
             <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}
-              >
-                <ListItemIcon></ListItemIcon>
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 0}
+                getOnClick={
+                  ((event) => handleListItemClick(event, 0),
+                  navigateToHomeOrderPage)
+                }
+                imgID="orderIcon"
+                imgSrc="./images/ordericon.png"
+              />
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 1}
+                getOnClick={
+                  ((event) => handleListItemClick(event, 1),
+                  navigateToPendingPage)
+                }
+                imgID="pendingIcon"
+                imgSrc="./images/pending.png"
+              />
 
-          
-                <img
-                  id="orderIcon"
-                  src="images/ordericon.png"
-                  alt="Order Icon"
-         
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="pendingIcon"
-                  src="images/pending.png"
-                  alt="Pending Icon"
-               
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="draftIcon"
-                  src="images/draft.png"
-                  alt="Draft Icon"
-               
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="historyIcon"
-                  src="images/history.png"
-                  alt="History Icon"
-                
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="discountsIcon"
-                  src="images/discounts.png"
-                  alt="discounts Icon"
-                 
-                />
-              </ListItemButton>
+              {/* <ListItemButtonComponent
+                getSelected={selectedIndex === 2}
+                getOnClick={
+                  ((event) => handleListItemClick(event, 2),
+                  navigateToDraftsPage)
+                }
+                imgID="draftIcon"
+                imgSrc="images/draft.png"
+              /> */}
 
-              <ListItemButton
-                sx={{
-                  "&.Mui-selected": {
-                    border: "2px solid #F2A42A",
-                  },
-                  "&.Mui-focusVisible": {
-                    border: "2px solid #F2A42A",
-                  },
-                  ":hover": {
-                    border: "2px solid #F2A42A",
-                  },
-                  borderRadius: 4,
-                  border: "2px solid #3A374B",
-                  height: 90,
-                  ml: -2,
-                  mb: 2,
-                }}
-                selected={selectedIndex === 6}
-                onClick={(event) => handleListItemClick(event, 6)}
-              >
-                <ListItemIcon></ListItemIcon>
-                <img
-                  id="logoutIcon"
-                  src="images/logout.png"
-                  alt="logout Icon"
-             
-                />
-              </ListItemButton>
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 3}
+                getOnClick={
+                  ((event) => handleListItemClick(event, 3),
+                  navigateToHistoryPage)
+                }
+                imgID="historyIcon"
+                imgSrc="images/history.png"
+              />
+
+              <ListItemButtonComponent
+                getSelected={selectedIndex === 4}
+                getOnClick={
+                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
+                }
+                imgID="logoutIcon"
+                imgSrc="images/logout.png"
+              />
             </List>
           </Drawer>
 
@@ -378,10 +222,8 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
-          
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
-             
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper
                     sx={{
@@ -400,6 +242,7 @@ const mdTheme = createTheme({
                       >
                         <Toolbar>
                           <Button
+                            onClick={navigateToPendingPage}
                             sx={{
                               ":hover": {
                                 bgcolor: "#787589", // theme.palette.primary.main
@@ -647,7 +490,6 @@ const mdTheme = createTheme({
                   </Paper>
                 </Grid>
               </Grid>
-
             </Container>
           </Box>
         </Box>

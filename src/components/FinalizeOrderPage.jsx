@@ -287,7 +287,7 @@ const mdTheme = createTheme({
                           <p
                             style={{ marginLeft: "400px", marginTop: "-49px" }}
                           >
-                            Php {item.price.toFixed(2)}
+                            Php {Number(item.price).toFixed(2)}
                           </p>
                           <p
                             style={{ marginLeft: "572px", marginTop: "-50px" }}
@@ -322,7 +322,7 @@ const mdTheme = createTheme({
                           <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
                             - - - - - - - - - - - - - - - - - - - - - - - - - -
                             - - - - - - - - - - - - - - - - - - - - - - - - - -
-                            - - - - - - - - - - - - - - - - - - - - - - 
+                            - - - - - - - - - - - - - - - - - - - - - -
                           </Typography>
                         </div>
                       ))}
