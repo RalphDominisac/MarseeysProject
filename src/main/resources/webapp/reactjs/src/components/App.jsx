@@ -12,8 +12,14 @@ import HistoryPage from "./HistoryPage";
 // import DiscountsPage from "./DiscountsPage";
 import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
 
+// importing React's useEffect for axios purposes
+import { useEffect } from 'react';
+// importing axios
+import axios from 'axios';
+
 
 function App(){
+  
     return (
       <div>
         <div>

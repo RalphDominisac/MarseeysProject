@@ -1,18 +1,7 @@
 import React from 'react'
 import Typography from "@mui/material/Typography";
 
-// importing axios
-import axios from 'axios';
-
 export default function PendingOrderPageBody() {
-  // creating axios constructor
-  constructor(props) {
-    super(props);
-    this.state = {
-      Order : []
-    };
-  }
-
   return (
     <React.Fragment>
       <Typography class="customerListStack" sx={{ color: "white" }}>

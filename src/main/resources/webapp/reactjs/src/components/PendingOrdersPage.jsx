@@ -107,7 +107,6 @@ const mdTheme = createTheme({
   },
 });
 
-
   export default function PendingOrdersPage() {
     const navigate = useNavigate();
     const navigateSignInPage = () => {
