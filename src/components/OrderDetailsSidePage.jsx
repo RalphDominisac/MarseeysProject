@@ -53,8 +53,10 @@ const [modalOpenCancelOrder, setModalOpenCancelOrder] = useState(false);
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Payment Details
+        Order Details
       </Typography>
+
+      (textfield/forms below will vary, depending on order type)
 
       {/* <SaveToDraftButtonComponent
         saveToDraftModalFunction={() => {

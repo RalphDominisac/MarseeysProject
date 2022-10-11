@@ -16,6 +16,15 @@ import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TableNumberButtons from "./cssComponents/TableNumberButtons";
+import PrintReceiptModal from "./modals/PrintReceiptModal";
+import FinalizePaymentModal from "./modals/FinalizePaymentModal";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import PaymentMethodButtons from "./cssComponents/PaymentMethodButtons";
 
 
 function preventDefault(event) {
@@ -26,6 +35,11 @@ export default function OrderSummarySidePage() {
   const [ordertype, setOrderType] = React.useState("");
   const [discount, setDiscount] = React.useState("");
 
+ const [modalOpenFinalizePayment, setModalOpenFinalizePayment] = useState(false);
+
+    const navigate = useNavigate();
+   
+
   const handleChange = (event) => {
     setOrderType(event.target.value);
   };
@@ -34,10 +48,17 @@ export default function OrderSummarySidePage() {
     setDiscount(event.target.value);
   };
 
+          const navigateToPrintReceiptFormatPage = () => {
+            navigate("/printreceiptformatpage");
+          };
+
+
+
+
   return (
     <React.Fragment>
       <Typography
-        sx={{ ml: 1, mt: 5, fontFamily: "Barlow Condensed", fontSize: 25 }}
+        sx={{ ml: 1, mt: 1, fontFamily: "Barlow Condensed", fontSize: 25 }}
       >
         Status
       </Typography>
@@ -45,7 +66,7 @@ export default function OrderSummarySidePage() {
       <FormControl
         sx={{
           m: 1,
-          width: 130,
+          width: 200,
           backgroundColor: "#252836",
           borderRadius: 3,
           ml: 10,
@@ -69,7 +90,7 @@ export default function OrderSummarySidePage() {
             // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
 
             borderRadius: 3,
-            width: 130,
+            width: 200,
             height: 42,
             fontFamily: "Barlow Condensed",
           }}
@@ -98,7 +119,7 @@ export default function OrderSummarySidePage() {
 
       <Typography
         sx={{
-          mt: 0,
+          mt: -0.5,
           ml: 1,
           color: "white",
           fontFamily: "Barlow Condensed",
@@ -155,13 +176,13 @@ export default function OrderSummarySidePage() {
           fontSize: 20,
         }}
       >
-        Table No.:
+        Table Number:
       </Typography>
 
       <Typography
         sx={{
           mt: -3.7,
-          ml: 11,
+          ml: 15,
           color: "white",
           fontFamily: "Barlow Condensed",
           fontSize: 20,
@@ -171,31 +192,13 @@ export default function OrderSummarySidePage() {
         4
       </Typography>
 
-      <Typography
-        sx={{
-          mt: 0,
-          ml: 1,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Comments:
-      </Typography>
-
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 12,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        No Shrimp
-      </Typography>
+ 
+      <PaymentMethodButtons />
 
       <Button
+        onClick={() => {
+          setModalOpenFinalizePayment(true);
+        }}
         className="proceedToPaymentButton"
         sx={{
           ":hover": {
@@ -203,7 +206,7 @@ export default function OrderSummarySidePage() {
           },
           color: "white",
           backgroundColor: "#F2A42A",
-          ml: 33,
+          ml: 20,
           mt: 8,
           width: 10,
           borderRadius: 5,
@@ -217,33 +220,14 @@ export default function OrderSummarySidePage() {
           fontSize: "19px",
         }}
       >
-        Finalize Order
+        Finalize Payment
       </Button>
-
-      <Button
-        className="proceedToPaymentButton"
-        sx={{
-          ":hover": {
-            bgcolor: "#A8E267", // theme.palette.primary.main
-          },
-          color: "white",
-          backgroundColor: "#8EC154",
-          ml: 7,
-          mt: -7.4,
-          width: 10,
-          borderRadius: 5,
-        }}
-        style={{
-          maxWidth: "30px",
-          maxHeight: "30px",
-          minWidth: "145px",
-          minHeight: "60px",
-          fontFamily: "Barlow Condensed",
-          fontSize: "19px",
-        }}
-      >
-        Print Receipt
-      </Button>
+      {modalOpenFinalizePayment && (
+        <FinalizePaymentModal
+          setOpenModalFinalizePayment={setModalOpenFinalizePayment}
+          onClickFinalizePayment={navigateToPrintReceiptFormatPage}
+        />
+      )}
     </React.Fragment>
   );
 }

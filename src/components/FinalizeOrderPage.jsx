@@ -17,7 +17,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import PaymentDetailsSidePage from "./PaymentDetailsSidePage";
+import OrderDetailsSidePage from "./OrderDetailsSidePage";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -353,7 +353,7 @@ const mdTheme = createTheme({
                     backgroundColor: "#1F1D2B",
                   }}
                 >
-                  <PaymentDetailsSidePage
+                  <OrderDetailsSidePage
                     subTotalPrice={data?.totalPrice.toFixed(2)}
                   />
                 </Paper>

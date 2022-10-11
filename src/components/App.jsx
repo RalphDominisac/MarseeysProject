@@ -9,6 +9,7 @@ import OrderSummaryPage from "./OrderSummaryPage";
 import PendingOrdersPage from "./PendingOrdersPage";
 // import DraftsPage from "./DraftsPage-------------";
 import HistoryPage from "./HistoryPage";
+import PrintReceiptFormatPage from "./PrintReceiptFormatPage";
 // import DiscountsPage from "./DiscountsPage";
 import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
 
@@ -24,6 +25,8 @@ function App(){
             <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
             <Route path="/ordersummarypage" element={<OrderSummaryPage />} />
             <Route path="/historypage" element={<HistoryPage />} />
+            <Route path="/printreceiptformatpage" element={<PrintReceiptFormatPage />}
+            />
             {/* <Route path="/draftspage" element={<DraftsPage />} /> */}
 
             {/* <Route path="/discountspage" element={<DiscountsPage />} /> */}

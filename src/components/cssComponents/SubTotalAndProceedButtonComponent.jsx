@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 
-export default function SubTotalAndProceedPayment({subTotalPriceOrderSide, modalFunctionProceedToPayment}) {
+export default function SubTotalAndProceedPayment({subTotalPriceOrderSide, buttonFunctionProceedToConfirm}) {
   return (
     <React.Fragment>
       <Typography
@@ -29,7 +29,7 @@ export default function SubTotalAndProceedPayment({subTotalPriceOrderSide, modal
         Php {subTotalPriceOrderSide}
       </Typography>
       <Button
-        onClick={modalFunctionProceedToPayment}
+        onClick={buttonFunctionProceedToConfirm}
         className="proceedToPaymentButton"
         sx={{
           ":hover": {
@@ -51,7 +51,7 @@ export default function SubTotalAndProceedPayment({subTotalPriceOrderSide, modal
           fontSize: "19px",
         }}
       >
-        Proceed to Payment
+        Proceed
       </Button>
     </React.Fragment>
   );

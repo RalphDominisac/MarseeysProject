@@ -9,12 +9,12 @@ import {
 } from "react-router-dom";
 import { PropaneSharp } from "@mui/icons-material";
 
-function ModalProceed({ setOpenModalProceed, onClickNav }) {
-   const navigate = useNavigate();
+function ModalProceed({ setOpenModalProceed, onClickNav, modalTitle }) {
+  const navigate = useNavigate();
 
-   const navigateToFinalizeOrderPage = () => {
-     navigate("/finalizeorderpage");
-   };
+  const navigateToFinalizeOrderPage = () => {
+    navigate("/finalizeorderpage");
+  };
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -28,7 +28,7 @@ function ModalProceed({ setOpenModalProceed, onClickNav }) {
           </button>
         </div>
         <div className="title">
-          <h1>Proceed to Payment?</h1>
+          <h1>{modalTitle}</h1>
         </div>
         {/* <div className="body">
           <p>The next page looks amazing. Hope you want to go there!</p>

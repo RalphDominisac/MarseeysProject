@@ -25,7 +25,7 @@ import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import DineInPickupDeliveryButtons from "./cssComponents/DineInPickupDeliveryButtons";
 import DecrementIncrementCounter from "./DecrementIncrementCounter";
-import SubTotalAndProceedPayment from "./cssComponents/SubTotalAndProceedPayment";
+import SubTotalAndProceedButtonComponent from "./cssComponents/SubTotalAndProceedButtonComponent";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -143,12 +143,12 @@ export default function OrderSidePage(props) {
           </div>
         ))}
       </Container>
-              
+
       {/* Remove Item Button Area */}
 
-      <SubTotalAndProceedPayment
+      <SubTotalAndProceedButtonComponent
         subTotalPriceOrderSide={totalPrice.toFixed(2)}
-        modalFunctionProceedToPayment={() => {
+        buttonFunctionProceedToConfirm={() => {
           setModalOpenProceed(true);
         }}
       />
@@ -156,6 +156,7 @@ export default function OrderSidePage(props) {
         <ModalProceed
           setOpenModalProceed={setModalOpenProceed}
           onClickNav={navigateToFinalizeOrderPage}
+          modalTitle={"Proceed to Confirm Order?"}
         />
       )}
     </React.Fragment>

@@ -40,9 +40,13 @@ import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
 import BackButtonHeaderComponent from "./cssComponents/BackButtonHeaderComponent";
 import HeaderLabelsOrderSummary from "./cssComponents/HeaderLabelsOrderSummary";
 import OrderSummaryPageBody from "./cssComponents/OrderSummaryPageBody";
+import PrintReceiptFormatBody from "./cssComponents/PrintReceiptFormatBody";
+
 
 
 const drawerWidth = 120;
+
+
 
 
 
@@ -144,6 +148,9 @@ const mdTheme = createTheme({
     const navigateToDiscountsPage = () => {
       navigate("/discountspage");
     };
+     const navigateToOrderSummaryPage = () => {
+       navigate("/ordersummarypage");
+     };
 
     return (
       <ThemeProvider theme={mdTheme}>
@@ -244,13 +251,11 @@ const mdTheme = createTheme({
                         sx={{ backgroundColor: "#252836" }}
                       >
                         <BackButtonHeaderComponent
-                          onClickNavPath={navigateToPendingPage}
+                          onClickNavPath={navigateToOrderSummaryPage}
                         />
                       </AppBar>
 
-                      <HeaderLabelsOrderSummary />
-
-                      <OrderSummaryPageBody />
+                      <PrintReceiptFormatBody />
                     </Box>
                   </Paper>
                 </Grid>
@@ -267,7 +272,7 @@ const mdTheme = createTheme({
                       backgroundColor: "#1F1D2B",
                     }}
                   >
-                    <OrderSummarySidePage />
+                    {/* <OrderSummarySidePage /> */}
                   </Paper>
                 </Grid>
               </Grid>
