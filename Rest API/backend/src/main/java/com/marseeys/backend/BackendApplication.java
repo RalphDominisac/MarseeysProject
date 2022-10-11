@@ -19,6 +19,7 @@ public class BackendApplication {
 	// TODO Add security filter to POS
 	// TODO Add security filter to Inventory
 	// TODO Add security filter to HR
+	// TODO Create a user account everytime we create employee accounts
 	// TODO Configure code below to reflect proper documentation
 
 	public static void main(String[] args) {

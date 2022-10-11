@@ -15,6 +15,7 @@ import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,6 +56,18 @@ public class IngredientService {
         return ingredientRepository.viewIngredients();
     }
 
+    public List<Ingredient> getNeedsRestocking(){
+        List<Ingredient> needsRestocking = new ArrayList<>();
+
+        for (Ingredient ingredient : ingredientRepository.viewIngredients()) {
+            if (ingredient.getQuantity() < ingredient.getThreshold()) {
+                needsRestocking.add(ingredient);
+            }
+        }
+
+        return needsRestocking;
+    }
+
     public Ingredient saveIngredient(IngredientRequest ingredientRequest) throws DatabaseException {
         IngredientCategory ingredientCategory = findHelper.findIngredientCategory(ingredientRequest.getIngredientCategory());
 
@@ -64,9 +77,7 @@ public class IngredientService {
                     ingredientRequest.getName(),
                     ingredientCategory,
                     ingredientRequest.getUnitMeasure(),
-                    ingredientRequest.getQuantity(),
-                    ingredientRequest.getThreshold(),
-                    ingredientRequest.getExpiryDate()
+                    ingredientRequest.getThreshold()
             );
             return ingredientRepository.save(ingredient);
         } catch (Exception ex) {

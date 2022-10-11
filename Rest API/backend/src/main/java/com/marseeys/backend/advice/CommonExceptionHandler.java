@@ -17,7 +17,7 @@ public class CommonExceptionHandler {
     public Map<String, String> handleInvalidInputs(MethodArgumentNotValidException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
-        errorMap.put("name", ex.getClass().getSimpleName());
+        errorMap.put("errorName", ex.getClass().getSimpleName());
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errorMap.put(error.getField(), error.getDefaultMessage())
         );
@@ -30,9 +30,9 @@ public class CommonExceptionHandler {
     public Map<String, String> handleObjTypeError(HttpMessageNotReadableException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
-        errorMap.put("name", ex.getClass().getSimpleName());
-        errorMap.put("message", "Invalid data type passed.");
-        errorMap.put("cause", "In object, " + ex.getLocalizedMessage());
+        errorMap.put("errorName", ex.getClass().getSimpleName());
+        errorMap.put("errorMessage", "Invalid data type passed.");
+        errorMap.put("errorCause", "In object, " + ex.getLocalizedMessage());
 
         return errorMap;
     }
@@ -42,9 +42,9 @@ public class CommonExceptionHandler {
     public Map<String, String> handleUrlTypeError(IllegalArgumentException ex) {
         Map<String, String> errorMap = new HashMap<>();
 
-        errorMap.put("name", ex.getClass().getSimpleName());
-        errorMap.put("message", "Invalid data type passed.");
-        errorMap.put("cause", "In URL, " + ex.getLocalizedMessage());
+        errorMap.put("errorName", ex.getClass().getSimpleName());
+        errorMap.put("errorMessage", "Invalid data type passed.");
+        errorMap.put("errorCause", "In URL, " + ex.getLocalizedMessage());
 
         return errorMap;
     }

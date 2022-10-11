@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -27,19 +28,19 @@ public class Ingredient {
     private double threshold;
     private boolean deleted;
     @DateTimeFormat
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
     @LastModifiedDate
     private LocalDateTime lastUpdate;
 
-    public Ingredient(int id, String name, IngredientCategory ingredientCategory, UnitMeasure unitMeasure, double quantity, double threshold, LocalDateTime expiryDate) {
+    public Ingredient(int id, String name, IngredientCategory ingredientCategory, UnitMeasure unitMeasure, double threshold) {
         this.id = id;
         this.name = name;
         this.ingredientCategory = ingredientCategory;
         this.unitMeasure = unitMeasure;
-        this.quantity = quantity;
+        this.quantity = 0;
         this.threshold = threshold;
         this.deleted = false;
-        this.expiryDate = expiryDate;
+        this.expiryDate = null;
         this.lastUpdate = LocalDateTime.now();
     }
 }

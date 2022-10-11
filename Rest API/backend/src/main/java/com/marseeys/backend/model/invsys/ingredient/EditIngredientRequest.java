@@ -9,6 +9,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,5 +30,5 @@ public class EditIngredientRequest {
 
     @Future(message = "Please enter a valid date")
     @NotNull(message = "Date cannot be null")
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
 }

@@ -26,6 +26,11 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.getIngredients());
     }
 
+    @GetMapping("/report")
+    public ResponseEntity<List<Ingredient>> getNeedsRestocking() {
+        return ResponseEntity.ok(ingredientService.getNeedsRestocking());
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Ingredient> saveIngredient(@RequestBody @Valid IngredientRequest ingredientRequest) throws DatabaseException {
         return new ResponseEntity<>(ingredientService.saveIngredient(ingredientRequest), HttpStatus.CREATED);

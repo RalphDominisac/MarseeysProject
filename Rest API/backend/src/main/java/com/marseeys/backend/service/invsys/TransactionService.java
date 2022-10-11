@@ -2,12 +2,15 @@ package com.marseeys.backend.service.invsys;
 
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
-import com.marseeys.backend.model.invsys.transaction.TransactionRequest;
+import com.marseeys.backend.helper.TransactionHelper;
+import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
+import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
 import com.marseeys.backend.types.ExceptionType;
@@ -24,24 +27,26 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final IngredientRepository ingredientRepository;
     private final DatabaseHelper databaseHelper;
+    private final TransactionHelper transactionHelper;
     private final FindHelper findHelper;
 
-    public List<Transaction> getTransactions() {
-        return transactionRepository.findAll();
+    public List<TransactionIn> getTransactions() {
+        return transactionRepository.findRelevantTransactions();
     }
 
-    public Transaction saveTransaction(TransactionRequest transactionRequest) throws DatabaseException {
-        int id = transactionRequest.getIngredient();
+    public TransactionIn saveTransactionIn(TransactionInRequest transactionInRequest) throws DatabaseException {
+        int id = transactionInRequest.getIngredient();
         Ingredient ingredient = findHelper.findIngredient(id);
 
         try {
-            Transaction transaction = new Transaction(
+            TransactionIn transaction = new TransactionIn(
                     ingredient,
-                    transactionRequest.getQuantity(),
-                    transactionRequest.isAdd()
+                    transactionInRequest.getQuantity(),
+                    transactionInRequest.getRemarks(),
+                    transactionInRequest.getExpiryDate()
             );
-            if (transactionRequest.isAdd()) ingredient.setQuantity(ingredient.getQuantity() + transactionRequest.getQuantity());
-            else ingredient.setQuantity(ingredient.getQuantity() - transactionRequest.getQuantity());
+            ingredient.setQuantity(ingredient.getQuantity() + transactionInRequest.getQuantity());
+            ingredient.setExpiryDate(transactionInRequest.getExpiryDate());
 
             ingredientRepository.save(ingredient);
             return transactionRepository.save(transaction);
@@ -53,7 +58,30 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> saveTransaction(Order order) throws IngredientException, DatabaseException {
+    public Transaction saveTransactionOut(TransactionOutRequest transactionOutRequest) throws DatabaseException {
+        int id = transactionOutRequest.getIngredient();
+        Ingredient ingredient = findHelper.findIngredient(id);
+
+        try {
+            Transaction transaction = new Transaction(
+                    ingredient,
+                    transactionOutRequest.getQuantity(),
+                    transactionOutRequest.getRemarks()
+            );
+            ingredient.setQuantity(ingredient.getQuantity() - transactionOutRequest.getQuantity());
+            transactionHelper.reflectTransaction(transaction);
+
+            ingredientRepository.save(ingredient);
+            return transactionRepository.save(transaction);
+        } catch (Exception ex) {
+            throw new DatabaseException(
+                    ex,
+                    ExceptionType.SAVE_TRANSACTION_EXCEPTION
+            );
+        }
+    }
+
+    public List<Transaction> saveTransactionOut(Order order) throws IngredientException, DatabaseException {
         List<Transaction> orderTransaction = new ArrayList<>();
         List<Ingredient> ingredientChanges = new ArrayList<>();
         Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(order);
@@ -71,17 +99,18 @@ public class TransactionService {
             Transaction transaction = new Transaction(
                     ingredient,
                     deduction,
-                    false
+                    "Order number: " + order.getId()
             );
 
             orderTransaction.add(transaction);
         }
 
         ingredientRepository.saveAll(ingredientChanges);
+        transactionHelper.reflectTransactions(orderTransaction);
         return transactionRepository.saveAll(orderTransaction);
     }
 
-    public List<Transaction> saveTransaction(Map<String, Integer> additionalContents) throws DatabaseException, IngredientException {
+    public List<Transaction> saveTransactionOut(int id, Map<String, Integer> additionalContents) throws DatabaseException, IngredientException {
         List<Transaction> orderTransaction = new ArrayList<>();
         List<Ingredient> ingredientChanges = new ArrayList<>();
         Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(additionalContents);
@@ -99,13 +128,14 @@ public class TransactionService {
             Transaction transaction = new Transaction(
                     ingredient,
                     deduction,
-                    false
+                    "Additional items for order number: " + id
             );
 
             orderTransaction.add(transaction);
         }
 
         ingredientRepository.saveAll(ingredientChanges);
+        transactionHelper.reflectTransactions(orderTransaction);
         return transactionRepository.saveAll(orderTransaction);
     }
 }

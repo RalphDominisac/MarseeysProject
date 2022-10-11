@@ -177,6 +177,26 @@ public enum ExceptionType {
     EMAIL_ALREADY_TAKEN_EXCEPTION(
             130002L,
             "Email is already taken: "
+    ),
+
+    SAVE_EMPLOYEE_EXCEPTION(
+            140001L,
+            "Unable to save employee."
+    ),
+
+    EMPLOYEE_NOT_FOUND_EXCEPTION(
+            140002L,
+            "Employee not found: "
+    ),
+
+    SAVE_SHIFT_EXCEPTION(
+            150001L,
+            "Unable to save shift."
+    ),
+
+    SHIFT_NOT_FOUND_EXCEPTION(
+            150002L,
+            "Shift not found: "
     );
     private final Long id;
     private final String message;

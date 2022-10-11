@@ -13,23 +13,23 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Document(collection = "Transactions")
-public class Transaction {
+public class Transaction{
     @Id
     private String id;
     @DocumentReference(collection = "Ingredients")
     private Ingredient ingredient;
     private double quantity;
-    private boolean add;
-//    private Map<String, Double> ingredientChanges;
+    private String remarks;
 //    @CreatedBy
 //    private User user;
     @CreatedDate
     private LocalDateTime date;
+    private boolean relevant;
 
-    public Transaction(Ingredient ingredient, double quantity, boolean add) {
+    public Transaction(Ingredient ingredient, double quantity, String remarks) {
         this.ingredient = ingredient;
         this.quantity = quantity;
-        this.add = add;
-        this.date = LocalDateTime.now();
+        this.remarks = remarks;
+        this.relevant = true;
     }
 }
