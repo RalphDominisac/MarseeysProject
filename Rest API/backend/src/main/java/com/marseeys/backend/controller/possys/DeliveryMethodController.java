@@ -8,6 +8,7 @@ import com.marseeys.backend.service.possys.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,16 +22,19 @@ public class DeliveryMethodController {
     private final OrderService orderService;
 
     @GetMapping()
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<List<DeliveryMethod>> getDeliveryMethods() {
         return ResponseEntity.ok(orderService.getMethods());
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<DeliveryMethod> saveDeliveryMethod(@RequestBody @Valid DeliveryMethodRequest deliveryMethodRequest) throws DatabaseException {
         return new ResponseEntity<>(orderService.saveDeliveryMethod(deliveryMethodRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<String> deleteDeliveryMethod(@RequestBody @Valid DeliveryMethodRequest deliveryMethodRequest) throws DatabaseException {
         orderService.deleteDeliveryMethod(deliveryMethodRequest);
         return ResponseEntity.ok("Successfully deleted!");

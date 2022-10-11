@@ -7,6 +7,7 @@ import com.marseeys.backend.service.possys.MenuService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,16 +21,19 @@ public class MenuCategoryController {
     private final MenuService menuService;
 
     @GetMapping()
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<List<MenuCategory>> getCategories() {
         return ResponseEntity.ok(menuService.getCategories());
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<MenuCategory> saveMenuCategory(@RequestBody @Valid MenuCategoryRequest categoryRequest) throws DatabaseException {
         return new ResponseEntity<>(menuService.saveMenuCategory(categoryRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<String> deleteMenuCategory(@RequestBody @Valid MenuCategoryRequest categoryRequest) throws DatabaseException {
         menuService.deleteMenuCategory(categoryRequest);
         return ResponseEntity.ok("Successfully deleted!");

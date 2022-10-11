@@ -10,12 +10,18 @@ import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ShiftService {
     private final ShiftRepository shiftRepository;
     private final NextSequenceService nextSequenceService;
     private final FindHelper findHelper;
+
+    public List<Shift> getShifts() {
+        return shiftRepository.findAll();
+    }
 
     public Shift saveShift(ShiftRequest shiftRequest) throws DatabaseException {
         Shift shift = new Shift(

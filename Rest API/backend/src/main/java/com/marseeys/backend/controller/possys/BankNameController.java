@@ -7,6 +7,7 @@ import com.marseeys.backend.service.possys.CashService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,17 +21,20 @@ public class BankNameController {
     private final CashService cashService;
 
     @GetMapping()
-    public ResponseEntity<List<BankName>> getCategories() {
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<List<BankName>> getBanks() {
         return ResponseEntity.ok(cashService.getBankNames());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<BankName> saveMenuCategory(@RequestBody @Valid BankNameRequest bankNameRequest) throws DatabaseException {
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<BankName> saveBank(@RequestBody @Valid BankNameRequest bankNameRequest) throws DatabaseException {
         return new ResponseEntity<>(cashService.saveBankName(bankNameRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<String> deleteMenuCategory(@RequestBody @Valid BankNameRequest bankNameRequest) throws DatabaseException {
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<String> deleteBank(@RequestBody @Valid BankNameRequest bankNameRequest) throws DatabaseException {
         cashService.deleteBankName(bankNameRequest);
         return ResponseEntity.ok("Successfully deleted!");
     }

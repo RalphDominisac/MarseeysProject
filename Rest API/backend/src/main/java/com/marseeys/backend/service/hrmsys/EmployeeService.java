@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -51,9 +50,9 @@ public class EmployeeService {
                 LocalDate.now().getMonthValue() +
                 employeeRequest.getLastName() +
                 employeeRequest.getFirstName();
-        String password = LocalTime.now().getHour() +
-                LocalTime.now().getSecond() +
-                LocalTime.now().getMinute() +
+        String password = employeeRequest.getBirthday().getMonthValue() +
+                employeeRequest.getBirthday().getDayOfYear() +
+                employeeRequest.getBirthday().getYear() +
                 employeeRequest.getFirstName().substring(0, 2) +
                 employeeRequest.getLastName().substring(0, 2);
 

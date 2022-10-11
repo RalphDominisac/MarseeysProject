@@ -8,6 +8,7 @@ import com.marseeys.backend.service.hrmsys.DepartmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,26 +22,31 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping()
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<List<Department>> getDepartments() {
         return ResponseEntity.ok(departmentService.getDepartments());
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<Department> addDepartment(@RequestBody @Valid DepartmentRequest departmentRequest) throws DatabaseException {
         return new ResponseEntity<>(departmentService.saveDepartment(departmentRequest), HttpStatus.CREATED);
     }
 
     @PostMapping("/{deptId}/{empId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Department> setDepartmentHead(@PathVariable int deptId, @PathVariable String empId) throws DatabaseException {
         return new ResponseEntity<>(departmentService.setHead(deptId, empId), HttpStatus.OK);
     }
 
     @PostMapping("/{deptId}/staff/add")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<Department> setDepartmentStaff(@PathVariable int deptId, @RequestBody @Valid StaffRequest staffRequest) throws DatabaseException {
         return new ResponseEntity<>(departmentService.setStaff(deptId, staffRequest), HttpStatus.OK);
     }
 
     @PostMapping("/delete/{deptId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Department> deleteDepartment(@PathVariable int deptId) throws DatabaseException {
         return new ResponseEntity<>(departmentService.deleteDepartment(deptId), HttpStatus.OK);
     }

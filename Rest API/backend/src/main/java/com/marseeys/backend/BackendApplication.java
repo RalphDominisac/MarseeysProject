@@ -15,12 +15,8 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 public class BackendApplication {
-	// TODO Merge backend for HR
-	// TODO Add security filter to POS
-	// TODO Add security filter to Inventory
-	// TODO Add security filter to HR
-	// TODO Create a user account everytime we create employee accounts
 	// TODO Configure code below to reflect proper documentation
+	// TODO Add supplier name to ingredient in inventory
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -48,5 +44,4 @@ public class BackendApplication {
 //				Collections.emptyList()
 //		);
 //	}
-
 }

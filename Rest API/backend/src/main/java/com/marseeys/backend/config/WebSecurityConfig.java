@@ -52,7 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/api/v1/test/**").permitAll()
-                .antMatchers("/api/v1/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -61,11 +60,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers(
-                "/v2/api-docs",
-                "/configuration/ui",
+                "/api/v1/**",
+                "/v2/api-docs/**",
+                "/configuration/**",
                 "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
+                "/swagger-ui/**",
                 "/webjars/**"
         );
     }
