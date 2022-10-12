@@ -1,4 +1,5 @@
 import * as React from "react";
+import Axios from "../axios/Axios.tsx";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -112,6 +113,7 @@ const mdTheme = createTheme({
 
 
   export default function FinalizeOrderPage() {
+    const axios = new Axios();
 
      const location = useLocation();
 

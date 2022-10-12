@@ -1,4 +1,5 @@
 import * as React from "react";
+import Axios from "../axios/Axios.tsx";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
@@ -31,6 +32,7 @@ function preventDefault(event) {
 }
 
 export default function PaymentDetailsSidePage(props) {
+  const axios = new Axios();
 
 const [modalOpenConfirmOrder, setModalOpenConfirmOrder] = useState(false);
 

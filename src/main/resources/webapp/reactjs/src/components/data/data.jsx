@@ -1,3 +1,5 @@
+// actually no why would i import axios here lmao
+
 const data = {
   productsBBQ: [
     {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Axios from "../axios/Axios.tsx";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -17,6 +18,8 @@ function preventDefault(event) {
 }
 
 export default function CategoryButtons() {
+  const axios = new Axios();
+
    const navigate = useNavigate();
 
    const navigateToCustomerListPage = () => {
@@ -52,7 +55,7 @@ export default function CategoryButtons() {
         <ButtonCategoryStyle title="Vegetables" />
       </Stack>
 
-      <Stack spacing={0} direction="row">
+      {/* <Stack spacing={0} direction="row">
         <ItemsCategoryButton
           title="Buffalo Wings"
           price="200.00"
@@ -79,7 +82,7 @@ export default function CategoryButtons() {
           price="400.00"
           availables="20"
         />
-      </Stack>
+  </Stack> */}
 
       <Button
         variant="contained"
