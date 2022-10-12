@@ -22,7 +22,7 @@ export default function ButtonCategoryStyle({ title, onClick }) {
         ml: 1,
         width: 131,
         textTransform: "none",
-        backgroundColor: "#1F1D2B",
+        backgroundColor: "#1F1D2B",   
         borderColor: "#252836",
         borderRadius: 3,
         color: "white",

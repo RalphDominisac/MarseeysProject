@@ -52,7 +52,7 @@ export default function CategoryButtons() {
         <ButtonCategoryStyle title="Vegetables" />
       </Stack>
 
-      <Stack spacing={0} direction="row">
+      {/* <Stack spacing={0} direction="row">
         <ItemsCategoryButton
           title="Buffalo Wings"
           price="200.00"
@@ -79,7 +79,7 @@ export default function CategoryButtons() {
           price="400.00"
           availables="20"
         />
-      </Stack>
+      </Stack> */}
 
       <Button
         variant="contained"

@@ -16,7 +16,7 @@ export default function PrintReceiptModal({ setOpenModalPrintReceipt, onClickPri
           </button>
         </div>
         <div className="title">
-          <h1>Create Receipt?</h1>
+          <h1 style={{color: "white", fontFamily:"Barlow Condensed"}}>Create Receipt?</h1>
         </div>
         {/* <div className="body">
           <p>The next page looks amazing. Hope you want to go there!</p>

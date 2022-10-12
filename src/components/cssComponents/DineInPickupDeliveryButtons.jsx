@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 export default function DineInPickupDeliveryButtons({onClickFunction}) {
   return (
     <React.Fragment>
-      {" "}
+ 
       <Stack spacing={2} direction="row" sx={{ mt: -1, ml: 5 }}>
         <Button
           onClick={onClickFunction}

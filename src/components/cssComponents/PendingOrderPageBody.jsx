@@ -31,8 +31,33 @@ export default function PendingOrderPageBody() {
         sx={{
           fontFamily: "Barlow Condensed",
           fontSize: 19,
-          ml: 56,
+          ml: 24,
           mt: -8,
+          mb: 1,
+        }}
+      >
+        Dine In
+      </Typography>
+
+      <Typography
+        sx={{
+          fontFamily: "Barlow Condensed",
+          fontSize: 19,
+          ml: 39,
+          mt: -4.5,
+          mb: 1,
+        }}
+      >
+        Preparing
+      </Typography>
+
+
+      <Typography
+        sx={{
+          fontFamily: "Barlow Condensed",
+          fontSize: 19,
+          ml: 72,
+          mt: -4.5,
           mb: 1,
         }}
       >

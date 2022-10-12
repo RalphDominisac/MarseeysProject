@@ -17,7 +17,30 @@ export default function PendingOrderPageHeaderLabels() {
 
       <Typography
         sx={{
-          ml: 58,
+          ml: 23,
+          fontFamily: "Barlow Condensed",
+          fontSize: "17px",
+          mt: -3.1,
+        }}
+      >
+        ORDER TYPE
+      </Typography>
+
+      <Typography
+        sx={{
+          ml: 38,
+          fontFamily: "Barlow Condensed",
+          fontSize: "17px",
+          mt: -3.2,
+        }}
+      >
+        ORDER STATUS
+      </Typography>
+
+
+      <Typography
+        sx={{
+          ml: 74,
           fontFamily: "Barlow Condensed",
           fontSize: "17px",
           mt: -3.2,

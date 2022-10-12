@@ -355,6 +355,7 @@ const mdTheme = createTheme({
                 >
                   <OrderDetailsSidePage
                     subTotalPrice={data?.totalPrice.toFixed(2)}
+                    orderTypeSet={data?.orderType}
                   />
                 </Paper>
               </Grid>

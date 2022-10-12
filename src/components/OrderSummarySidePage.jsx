@@ -24,7 +24,14 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-import PaymentMethodButtons from "./cssComponents/PaymentMethodButtons";
+
+
+
+import PaymentMethodButtonsStyle from "./cssComponents/PaymentMethodButtonsStyle";
+import ARCreditMethodFields from "./cssComponents/ARCreditMethodFields";
+import BankGCashMethodFields from "./cssComponents/BankMethodFields";
+import CashMethodFields from "./cssComponents/CashMethodFields";
+import EWalletMethodFields from "./cssComponents/EWalletMethodFields";
 
 
 function preventDefault(event) {
@@ -52,6 +59,12 @@ export default function OrderSummarySidePage() {
             navigate("/printreceiptformatpage");
           };
 
+        const paymentMethod = ["Cash", "Bank", "AR/Credit", "E-wallet"];
+
+        const [myPaymentMethod, setMyPaymentMethod] = useState("");
+
+
+
 
 
 
@@ -62,7 +75,6 @@ export default function OrderSummarySidePage() {
       >
         Status
       </Typography>
-
       <FormControl
         sx={{
           m: 1,
@@ -116,7 +128,6 @@ export default function OrderSummarySidePage() {
           <MenuItem value={"Done"}>Done</MenuItem>
         </Select>
       </FormControl>
-
       <Typography
         sx={{
           mt: -0.5,
@@ -128,7 +139,6 @@ export default function OrderSummarySidePage() {
       >
         Customer:
       </Typography>
-
       <Typography
         sx={{
           mt: -3.7,
@@ -141,7 +151,6 @@ export default function OrderSummarySidePage() {
       >
         Juan Pablo
       </Typography>
-
       <Typography
         sx={{
           mt: 0,
@@ -153,7 +162,6 @@ export default function OrderSummarySidePage() {
       >
         Type:
       </Typography>
-
       <Typography
         sx={{
           mt: -3.7,
@@ -166,7 +174,6 @@ export default function OrderSummarySidePage() {
       >
         Dine In
       </Typography>
-
       <Typography
         sx={{
           mt: 0,
@@ -178,7 +185,6 @@ export default function OrderSummarySidePage() {
       >
         Table Number:
       </Typography>
-
       <Typography
         sx={{
           mt: -3.7,
@@ -191,9 +197,29 @@ export default function OrderSummarySidePage() {
       >
         4
       </Typography>
-
- 
-      <PaymentMethodButtons />
+      <Typography
+        sx={{ ml: 1, mt: 1, fontFamily: "Barlow Condensed", fontSize: 25 }}
+      >
+        Payment Method:
+      </Typography>
+      {/* PaymentMethodButtons:  */}
+      <Stack spacing={2} direction="row">
+        {paymentMethod.map((method) => (
+          <PaymentMethodButtonsStyle
+            title={method.toLocaleUpperCase()}
+            key={method}
+            onClick={() => setMyPaymentMethod(method)}
+          />
+        ))}
+      </Stack>
+      <div>
+        <p>
+          {myPaymentMethod === "Cash" && <CashMethodFields />}
+          {myPaymentMethod === "Bank" && <BankGCashMethodFields />}
+          {myPaymentMethod === "AR/Credit" && <ARCreditMethodFields />}
+          {myPaymentMethod === "E-wallet" && <EWalletMethodFields />}
+        </p>
+      </div>
 
       <Button
         onClick={() => {
