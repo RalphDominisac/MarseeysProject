@@ -20,7 +20,7 @@ As you can see, the backend server is hosted online via Heroku.
 
 ``` npm start ```
 
-** Happy exploring! **
+**Happy exploring!**
 
 # ReactJS Documentation
 
