@@ -1,4 +1,30 @@
-# Getting Started with Create React App
+### Marseey's Grill and Resto: POS System, pos-axios branch
+
+## Useful info while working on this branch:
+
+- If the file doesn't appear, make a file named `.env.local` in the main folder and write the following line of code:
+
+``` NEXT_PUBLIC_INITIAL_URL=https://warm-shore-95735.herokuapp.com/api/v1 ```
+
+As you can see, the backend server is hosted online via Heroku.
+
+- Type this in the terminal to install the React app: 
+
+``` npm install ```
+
+- Type this in the terminal to install Axios and React-Toastify:
+
+``` npm install axios react-toastify ```
+
+- Then finally type this to run the React app on your browser:
+
+``` npm start ```
+
+** Happy exploring! **
+
+### ReactJS Documentation
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
