@@ -20,6 +20,9 @@ As you can see, the backend server is hosted online via Heroku.
 
 ``` npm start ```
 
+- Useful list of API requests by Shaun Leonar
+- [Useful list of API requests by Shaun Leonar](https://warm-shore-95735.herokuapp.com/swagger-ui.html "Swagger UI")
+
 **Happy exploring!**
 
 # ReactJS Documentation
