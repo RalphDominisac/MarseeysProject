@@ -1,0 +1,30 @@
+package com.marseeys.backend.model.possys.payment;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ApiModel(description = "Credentials to be used for signing up.")
+public class CreditRequest {
+    @ApiModelProperty(notes = "The id of the order.")
+    @NotNull(message = "Please provide an order ID.")
+    private Integer orderId;
+
+    @ApiModelProperty(notes = "The amount the customer is paying.")
+    @NotNull(message = "Please input the amount that you are paying.")
+    private Double amount;
+
+    @ApiModelProperty(notes = "The card number of the customer.")
+    @NotBlank(message = "Please input the customer's card number.")
+    @Size(min = 16, max = 16, message = "Please input a valid card number.")
+    private String cardNo;
+}
