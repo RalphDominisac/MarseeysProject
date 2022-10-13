@@ -1,4 +1,8 @@
 import React from 'react'
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import OrderButtonPendingStyle from "./OrderButtonPendingStyle";
@@ -11,6 +15,9 @@ import {
 
 
 export default function PendingOrderPageBody() {
+  // creating axios instance
+  const axios = new Axios();
+  
     const navigate = useNavigate();
 
      const navigateToOrderSummaryPage = () => {

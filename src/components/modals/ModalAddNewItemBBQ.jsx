@@ -1,4 +1,8 @@
 import React from "react";
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import "./ModalAddMenuBBQStyle.css";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,6 +15,9 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 function ModalAddNewItemBBQ(props) {
+  // creating axios instance
+  const axios = new Axios();
+  
   const navigate = useNavigate();
   const { setOpenModalAddNewItemBBQ} = props;
 

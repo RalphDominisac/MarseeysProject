@@ -1,4 +1,8 @@
 import React, { useRef } from "react";
+
+// importing axios
+import Axios from "../axios/Axios.tsx";
+
 import { useReactToPrint } from "react-to-print";
 import BackButtonHeaderComponent from "./cssComponents/BackButtonHeaderComponent";
 import {
@@ -53,6 +57,9 @@ const PrintReceiptFormatPage = () => {
   const navigateToOrderSummaryPage = () => {
     navigate("/ordersummarypage");
   };
+
+  // creating axios instance
+  const axios = new Axios();
 
   return (
     <React.Fragment>

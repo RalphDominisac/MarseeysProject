@@ -1,4 +1,8 @@
 import React from "react";
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import "./ModalStyle.css";
 import Typography from "@mui/material/Typography";
 import {
@@ -10,6 +14,9 @@ import {
 import { PropaneSharp } from "@mui/icons-material";
 
 function ModalConfirmOrder({ setOpenModalConfirmOrder }) {
+  // creating axios instance
+  const axios = new Axios();
+  
   const navigate = useNavigate();
 
   const navigateToPendingPage = () => {

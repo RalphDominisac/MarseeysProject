@@ -1,4 +1,8 @@
 import React from 'react';
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import Typography from "@mui/material/Typography";
 import "./ModalStyleFinalizePayment.css";
 
@@ -6,6 +10,10 @@ export default function FinalizePaymentModal({
   setOpenModalFinalizePayment,
   onClickFinalizePayment,
 }) {
+  
+  // creating axios instance
+  const axios = new Axios();
+
   return (
     <div className="modalBackgroundFinalizePayment">
       <div className="modalContainerFinalizePayment">

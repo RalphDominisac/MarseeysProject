@@ -1,3 +1,5 @@
+// will not need this anymore once backend has been connected
+
 const data = {
   productsBBQ: [
     {

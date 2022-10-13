@@ -1,4 +1,8 @@
 import * as React from 'react';
+
+// importing axios
+import Axios from "../axios/Axios.tsx";
+
 import { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -70,6 +74,8 @@ const theme = createTheme({
 
 
 export default function SignInPOS() {
+  // creating axios instance
+  const axios = new Axios();
 
   // ROUTING:
   const navigate = useNavigate();

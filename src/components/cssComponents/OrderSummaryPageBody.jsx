@@ -1,7 +1,14 @@
 import React from 'react';
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import Typography from "@mui/material/Typography";
 
 export default function OrderSummaryPageBody() {
+  // creating axios instance
+  const axios = new Axios();
+  
   return (
     <React.Fragment>
       {/* BODY CONTENT: */}

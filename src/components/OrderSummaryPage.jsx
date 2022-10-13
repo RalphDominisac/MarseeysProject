@@ -1,4 +1,8 @@
 import * as React from "react";
+
+// importing axios
+import Axios from "../axios/Axios.tsx";
+
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -109,6 +113,9 @@ const mdTheme = createTheme({
 
 // export default function DashboardContent() {
   export default function OrderSummaryPage() {
+    // creating axios instance
+  const axios = new Axios();
+  
     const [selectedIndex, setSelectedIndex] = React.useState("");
 
     const handleListItemClick = (event, index) => {

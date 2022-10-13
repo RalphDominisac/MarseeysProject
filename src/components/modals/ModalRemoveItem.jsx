@@ -1,8 +1,15 @@
 import React from "react";
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import "./ModalStyleRemove.css";
 import Typography from "@mui/material/Typography";
 
 function ModalRemoveItem({ setOpenModalRemoveItem }) {
+  // creating axios instance
+  const axios = new Axios();
+  
   return (
     <div className="modalBackground2">
       <div className="modalContainer2">

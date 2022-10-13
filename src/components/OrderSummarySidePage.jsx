@@ -1,4 +1,8 @@
 import * as React from "react";
+
+// importing axios
+import Axios from "../axios/Axios.tsx";
+
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
@@ -39,6 +43,9 @@ function preventDefault(event) {
 }
 
 export default function OrderSummarySidePage() {
+  // creating axios instance
+  const axios = new Axios();
+  
   const [ordertype, setOrderType] = React.useState("");
   const [discount, setDiscount] = React.useState("");
 

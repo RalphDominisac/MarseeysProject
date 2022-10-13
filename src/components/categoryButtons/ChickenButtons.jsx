@@ -1,4 +1,8 @@
 import * as React from "react";
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -47,6 +51,9 @@ const chickenMenuItems = [
 ];
 
 export default function ChickenButtons({ onSelected }) {
+  // creating axios instance
+  const axios = new Axios();
+  
   const navigate = useNavigate();
 
   const navigateToCustomerListPage = () => {

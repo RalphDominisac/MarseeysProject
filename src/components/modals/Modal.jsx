@@ -1,8 +1,15 @@
 import React from "react";
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import "./ModalStyle.css";
 import Typography from "@mui/material/Typography";
 
 function Modal({ setOpenModal }) {
+  // creating axios instance
+  const axios = new Axios();
+  
   return (
     <div className="modalBackground">
       <div className="modalContainer">

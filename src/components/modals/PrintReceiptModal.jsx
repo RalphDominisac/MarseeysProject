@@ -1,4 +1,8 @@
 import React from 'react';
+
+// importing axios
+import Axios from "../../axios/Axios.tsx";
+
 import Typography from "@mui/material/Typography";
 import "./PrintReceiptModalStyle.css";
 
