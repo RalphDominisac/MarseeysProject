@@ -60,7 +60,7 @@ public class IngredientService {
         List<Ingredient> needsRestocking = new ArrayList<>();
 
         for (Ingredient ingredient : ingredientRepository.viewIngredients()) {
-            if (ingredient.getQuantity() < ingredient.getThreshold()) {
+            if (ingredient.getQuantity() <= ingredient.getThreshold()) {
                 needsRestocking.add(ingredient);
             }
         }

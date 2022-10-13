@@ -8,6 +8,7 @@ import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.model.hrmsys.employee.EmployeeRequest;
+import com.marseeys.backend.repository.hrmsys.DepartmentRepository;
 import com.marseeys.backend.repository.hrmsys.EmployeeRepository;
 import com.marseeys.backend.repository.security.UserRepository;
 import com.marseeys.backend.types.ExceptionType;
@@ -22,6 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final DepartmentRepository departmentRepository;
     private final UserRepository userRepository;
     private final DatabaseHelper databaseHelper;
     private final FindHelper findHelper;
@@ -53,8 +55,8 @@ public class EmployeeService {
         String password = employeeRequest.getBirthday().getMonthValue() +
                 employeeRequest.getBirthday().getDayOfYear() +
                 employeeRequest.getBirthday().getYear() +
-                employeeRequest.getFirstName().substring(0, 2) +
-                employeeRequest.getLastName().substring(0, 2);
+                employeeRequest.getFirstName().substring(0, 2).toLowerCase() +
+                employeeRequest.getLastName().substring(0, 2).toLowerCase();
 
         User user = new User(
                 employeeRequest.getEmail(),
@@ -77,8 +79,9 @@ public class EmployeeService {
         Employee employee = findHelper.findEmployee(empId);
         Department department = findHelper.findDepartment(deptId);
 
-        employee.setDepartment(department);
+        databaseHelper.updateDepartmentStaff(deptId, empId);
 
+        departmentRepository.save(department);
         return employeeRepository.save(employee);
     }
 

@@ -53,12 +53,13 @@ public class DepartmentService {
     }
 
     public Department setStaff(int deptId, StaffRequest staffRequest) throws DatabaseException {
-        Department department = findHelper.findDepartment(deptId);
         List<Employee> staff = databaseHelper.checkEmployeesExist(staffRequest.getEmpIds());
 
-        department.setStaff(staff);
+        for (Employee employee : staff) {
+            databaseHelper.updateDepartmentStaff(deptId, employee.getId());
+        }
 
-        return departmentRepository.save(department);
+        return findHelper.findDepartment(deptId);
     }
 
     public Department deleteDepartment(int id) throws DatabaseException {

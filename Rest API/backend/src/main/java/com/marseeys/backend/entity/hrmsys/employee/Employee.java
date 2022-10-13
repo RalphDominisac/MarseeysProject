@@ -4,6 +4,7 @@ import com.marseeys.backend.entity.hrmsys.department.Department;
 import com.marseeys.backend.types.CivilStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -32,6 +33,8 @@ public class Employee {
     private Department department;
     @DocumentReference(collection = "Employees")
     private Employee backup;
+    @CreatedDate
+    private LocalDate created;
     private boolean active;
 
     public Employee(String firstName, String lastName, String contactNo, String address, String email, LocalDate birthday, CivilStatus civilStatus, List<Shift> shift) {
@@ -45,6 +48,7 @@ public class Employee {
         this.shift = shift;
         this.department = null;
         this.backup = null;
+        this.created = LocalDate.now();
         this.active = true;
     }
 }

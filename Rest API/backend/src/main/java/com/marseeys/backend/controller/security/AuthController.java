@@ -36,6 +36,12 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
+    @ApiOperation(
+            value = "Registers an account with the provided email, username, password, and roles.",
+            notes = "Roles is optional and may contain multiple roles. Available roles are admin, mod, and user. " +
+                    "Passing empty or non-existent roles will default to user.",
+            response = String.class
+    )
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signupRequest) throws DuplicateException {
         userService.userSignup(signupRequest);
         return new ResponseEntity<>("User successfully registered!", HttpStatus.CREATED);

@@ -1,13 +1,14 @@
 package com.marseeys.backend.helper;
 
+import com.marseeys.backend.entity.hrmsys.department.Department;
 import com.marseeys.backend.entity.hrmsys.employee.Employee;
 import com.marseeys.backend.entity.hrmsys.employee.Shift;
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
-import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.entity.security.role.Role;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.repository.hrmsys.DepartmentRepository;
 import com.marseeys.backend.repository.security.RoleRepository;
 import com.marseeys.backend.types.RoleEnum;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.*;
 public class DatabaseHelper {
     private final FindHelper findHelper;
     private final RoleRepository roleRepository;
+    private final DepartmentRepository departmentRepository;
 
     public Map<String, Double> checkIngredientsExist(Map<String, Double> ingredientIds) throws DatabaseException {
         Map<String, Double> ingredientContents = new HashMap<>();
@@ -119,6 +121,16 @@ public class DatabaseHelper {
         }
 
         return totalDeductions;
+    }
+
+    public Department updateDepartmentStaff(int deptId, String empId) throws DatabaseException {
+        Department department = findHelper.findDepartment(deptId);
+        List<Employee> staff = department.getStaff();
+
+        staff.add(findHelper.findEmployee(empId));
+        department.setStaff(staff);
+
+        return departmentRepository.save(department);
     }
 
     public Set<Role> getRoles(Set<String> roles) {

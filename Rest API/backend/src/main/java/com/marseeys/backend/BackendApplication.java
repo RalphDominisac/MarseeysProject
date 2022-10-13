@@ -15,8 +15,6 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 public class BackendApplication {
-	// TODO Configure code below to reflect proper documentation
-	// TODO Add supplier name to ingredient in inventory
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
