@@ -1,4 +1,4 @@
-### Marseey's Grill and Resto: POS System, pos-axios branch
+# Marseey's Grill and Resto: POS System, pos-axios branch
 
 ## Useful info while working on this branch:
 
@@ -22,7 +22,7 @@ As you can see, the backend server is hosted online via Heroku.
 
 ** Happy exploring! **
 
-### ReactJS Documentation
+# ReactJS Documentation
 
 ## Getting Started with Create React App
 
