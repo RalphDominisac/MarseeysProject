@@ -25,6 +25,7 @@ public class Transaction{
     @CreatedDate
     private LocalDateTime date;
     private boolean relevant;
+    private boolean deleted;
 
     public Transaction(Ingredient ingredient, double quantity, String remarks) {
         this.ingredient = ingredient;
@@ -32,5 +33,6 @@ public class Transaction{
         this.remarks = remarks;
         this.date = LocalDateTime.now();
         this.relevant = true;
+        this.deleted = false;
     }
 }

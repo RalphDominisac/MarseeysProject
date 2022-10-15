@@ -1,13 +1,11 @@
 package com.marseeys.backend.helper;
 
-import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class TransactionHelper {
 
     public void reflectTransaction(Transaction transaction) {
         List<TransactionIn> relevantTransactions = transactionRepository.findRelevantTransactions();
-        Collections.sort(relevantTransactions, Comparator.comparing(transactionIn -> transactionIn.getExpiryDate()));
+        relevantTransactions.sort(Comparator.comparing(TransactionIn::getExpiryDate));
 
         double toDeduct = transaction.getQuantity();
         for (int index = 0; toDeduct != 0; ) {
@@ -31,12 +29,11 @@ public class TransactionHelper {
                 index++;
                 toDeduct += transactionIn.getAmountUsed() - transactionIn.getQuantity();
 
-                transactionIn.setAmountUsed(transaction.getQuantity());
+                transactionIn.setAmountUsed(transactionIn.getAmountUsed() - toDeduct);
                 transactionIn.setRelevant(!transactionIn.isRelevant());
             } else if (transactionIn.getAmountUsed() == transactionIn.getQuantity()) {
                 index++;
 
-                transactionIn.setAmountUsed(transaction.getQuantity());
                 transactionIn.setRelevant(!transactionIn.isRelevant());
             }
 

@@ -1,6 +1,8 @@
 package com.marseeys.backend.controller.invsys;
 
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
+import com.marseeys.backend.entity.invsys.transaction.Transaction;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
@@ -24,15 +26,63 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     @GetMapping()
-////    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ApiOperation(
             value = "Retrieves all the ingredient items.",
             notes = "",
-            response = Ingredient.class,
+            response = TransactionIn.class,
             responseContainer = "List"
     )
-    public ResponseEntity<List<Ingredient>> getIngredients() {
+    public ResponseEntity<List<TransactionIn>> getIngredients() {
         return ResponseEntity.ok(ingredientService.getIngredients());
+    }
+
+    @GetMapping("/sort/name")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by name.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getIngredientsByName() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByName());
+    }
+
+    @GetMapping("/sort/category")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by category.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getIngredientsByCategory() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByCategory());
+    }
+
+    @GetMapping("/sort/quantity")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by quantity.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getIngredientsByQuantity() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByQuantity());
+    }
+
+    @GetMapping("/sort/expiry")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by expiry date.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getIngredientsByExpiry() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByExpiry());
     }
 
     @GetMapping("/report")
@@ -41,7 +91,7 @@ public class IngredientController {
             value = "Retrieves all the ingredient items that have quantities less " +
                     "than or equal to the set threshold.",
             notes = "",
-            response = Ingredient.class,
+            response = TransactionIn.class,
             responseContainer = "List"
     )
     public ResponseEntity<List<Ingredient>> getNeedsRestocking() {
@@ -65,9 +115,9 @@ public class IngredientController {
     @ApiOperation(
             value = "Edits the ingredient with the specified id.",
             notes = "",
-            response = Ingredient.class
+            response = Transaction.class
     )
-    public ResponseEntity<Ingredient> editIngredient(@PathVariable int id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
+    public ResponseEntity<Transaction> editIngredient(@PathVariable String id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
         return new ResponseEntity<>(ingredientService.editIngredient(id, editIngredientRequest), HttpStatus.OK);
     }
 
@@ -78,7 +128,7 @@ public class IngredientController {
             notes = "",
             response = Ingredient.class
     )
-    public ResponseEntity<Ingredient> deleteIngredient(@PathVariable int id) throws DatabaseException, IngredientException {
+    public ResponseEntity<Transaction> deleteIngredient(@PathVariable String id) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(ingredientService.deleteIngredient(id), HttpStatus.OK);
     }
 }

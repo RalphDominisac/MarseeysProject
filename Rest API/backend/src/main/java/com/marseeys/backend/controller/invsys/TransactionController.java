@@ -2,6 +2,7 @@ package com.marseeys.backend.controller.invsys;
 
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.exception.DatabaseException;
+import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.service.invsys.TransactionService;
@@ -54,7 +55,7 @@ public class TransactionController {
                     "existing quantity of the ingredient.",
             response = Transaction.class
     )
-    public ResponseEntity<Transaction> deductFromIngredient(@RequestBody @Valid TransactionOutRequest transactionRequest) throws DatabaseException {
+    public ResponseEntity<Transaction> deductFromIngredient(@RequestBody @Valid TransactionOutRequest transactionRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(transactionService.saveTransactionOut(transactionRequest), HttpStatus.CREATED);
     }
 }

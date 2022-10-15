@@ -20,6 +20,7 @@ public class DatabaseException extends Exception{
     }
 
 //    public DatabaseException(ExceptionType exceptionType) {
+//        super(exceptionType.getMessage());
 //        this.exceptionType = exceptionType;
 //    }
 //

@@ -46,7 +46,6 @@ public class TransactionService {
                     transactionInRequest.getExpiryDate()
             );
             ingredient.setQuantity(ingredient.getQuantity() + transactionInRequest.getQuantity());
-            ingredient.setExpiryDate(transactionInRequest.getExpiryDate());
 
             ingredientRepository.save(ingredient);
             return transactionRepository.save(transaction);
@@ -58,16 +57,23 @@ public class TransactionService {
         }
     }
 
-    public Transaction saveTransactionOut(TransactionOutRequest transactionOutRequest) throws DatabaseException {
+    public Transaction saveTransactionOut(TransactionOutRequest transactionOutRequest) throws DatabaseException, IngredientException {
         int id = transactionOutRequest.getIngredient();
         Ingredient ingredient = findHelper.findIngredient(id);
 
-        try {
-            Transaction transaction = new Transaction(
-                    ingredient,
-                    transactionOutRequest.getQuantity(),
-                    transactionOutRequest.getRemarks()
+        if (ingredient.getQuantity() - transactionOutRequest.getQuantity() < 0) {
+            throw new IngredientException(
+                    ExceptionType.INSUFFICIENT_INGREDIENTS_EXCEPTION
             );
+        }
+
+        Transaction transaction = new Transaction(
+                ingredient,
+                transactionOutRequest.getQuantity(),
+                transactionOutRequest.getRemarks()
+        );
+
+        try {
             ingredient.setQuantity(ingredient.getQuantity() - transactionOutRequest.getQuantity());
             transactionHelper.reflectTransaction(transaction);
 

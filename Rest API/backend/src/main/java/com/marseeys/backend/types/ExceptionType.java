@@ -61,12 +61,17 @@ public enum ExceptionType {
 
     INSUFFICIENT_INGREDIENTS_EXCEPTION(
             40004L,
-            "Not enough ingredients for this order."
+            "Not enough ingredients."
     ),
 
     SAVE_TRANSACTION_EXCEPTION(
             50001L,
             "Unable to save transaction."
+    ),
+
+    TRANSACTION_NOT_FOUND_EXCEPTION(
+            50002L,
+            "Transaction not found: "
     ),
 
     SAVE_MENU_EXCEPTION(
@@ -78,14 +83,8 @@ public enum ExceptionType {
             60002L,
                     "No item found: "
     ),
-
-    EMPTY_MENU_CATEGORY_EXCEPTION(
-            60003L,
-                    "Category is empty: "
-    ),
-
     MENU_ALREADY_DELETED_EXCEPTION(
-            60004L,
+            60003L,
                     "Item already deleted: "
     ),
 
