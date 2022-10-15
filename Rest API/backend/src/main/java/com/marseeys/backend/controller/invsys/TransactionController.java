@@ -1,7 +1,6 @@
 package com.marseeys.backend.controller.invsys;
 
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
-import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
@@ -31,7 +30,7 @@ public class TransactionController {
             response = Transaction.class,
             responseContainer = "List"
     )
-    public ResponseEntity<List<TransactionIn>> getTransactions() {
+    public ResponseEntity<List<Transaction>> getTransactions() {
         return ResponseEntity.ok(transactionService.getTransactions());
     }
 

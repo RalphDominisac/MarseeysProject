@@ -30,8 +30,8 @@ public class TransactionService {
     private final TransactionHelper transactionHelper;
     private final FindHelper findHelper;
 
-    public List<TransactionIn> getTransactions() {
-        return transactionRepository.findRelevantTransactions();
+    public List<Transaction> getTransactions() {
+        return transactionRepository.findTransactions();
     }
 
     public TransactionIn saveTransactionIn(TransactionInRequest transactionInRequest) throws DatabaseException {

@@ -8,7 +8,8 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface TransactionRepository extends MongoRepository<Transaction, Integer> {
-//    "{ $and: [ {'relevant' : true}, {'_class': 'com.marseeys.backend.entity.invsys.transaction.TransactionIn'} ] }"
+    @Query("{ $or: [ {'relevant' : true}. {'relevant' : false} ] }")
+    List<Transaction> findTransactions();
     @Query("{ $and: [ {'relevant' : true}, {'_class': 'com.marseeys.backend.entity.invsys.transaction.TransactionIn'} ] }")
     List<TransactionIn> findRelevantTransactions();
 }
