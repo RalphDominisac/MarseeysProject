@@ -30,6 +30,7 @@ public class Transaction{
         this.ingredient = ingredient;
         this.quantity = quantity;
         this.remarks = remarks;
+        this.date = LocalDateTime.now();
         this.relevant = true;
     }
 }
