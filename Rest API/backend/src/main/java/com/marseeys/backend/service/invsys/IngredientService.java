@@ -2,6 +2,8 @@ package com.marseeys.backend.service.invsys;
 
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.ingredient.IngredientCategory;
+import com.marseeys.backend.entity.invsys.transaction.Transaction;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.helper.FindHelper;
@@ -10,12 +12,19 @@ import com.marseeys.backend.model.invsys.ingredient.IngredientCategoryRequest;
 import com.marseeys.backend.model.invsys.ingredient.IngredientRequest;
 import com.marseeys.backend.repository.invsys.IngredientCategoryRepository;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
+import com.marseeys.backend.repository.invsys.TransactionRepository;
 import com.marseeys.backend.service.NextSequenceService;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByCategory;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByExpiry;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByName;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByQuantity;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,6 +32,7 @@ import java.util.List;
 public class IngredientService {
     private final NextSequenceService nextSequenceService;
     private final IngredientRepository ingredientRepository;
+    private final TransactionRepository transactionRepository;
     private final IngredientCategoryRepository ingredientCategoryRepository;
     private final FindHelper findHelper;
 
@@ -88,15 +98,17 @@ public class IngredientService {
         }
     }
 
-    public Ingredient editIngredient(int id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
-        Ingredient ingredient = findHelper.findIngredient(id);
+    public Ingredient editIngredient(String id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
+        TransactionIn transaction = findHelper.findTransaction(id);
+        Ingredient ingredient = transaction.getIngredient();
 
         ingredient.setName(editIngredientRequest.getName());
         ingredient.setIngredientCategory(findHelper.findIngredientCategory(editIngredientRequest.getIngredientCategory()));
-        ingredient.setUnitMeasure(editIngredientRequest.getUnitMeasure());
         ingredient.setThreshold(editIngredientRequest.getThreshold());
-        ingredient.setExpiryDate(editIngredientRequest.getExpiryDate());
+        ingredient.setUnitMeasure(editIngredientRequest.getUnitMeasure());
+        transaction.setExpiryDate(editIngredientRequest.getExpiryDate());
 
+        transactionRepository.save(transaction);
         return ingredientRepository.save(ingredient);
     }
 
@@ -108,7 +120,7 @@ public class IngredientService {
                 ExceptionType.INGREDIENT_ALREADY_DELETED_EXCEPTION
         );
 
-        ingredient.setDeleted(true);
+        ingredient.setDeleted(!ingredient.isDeleted());
 
         return ingredientRepository.save(ingredient);
     }

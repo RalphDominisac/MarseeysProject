@@ -8,9 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -27,8 +25,6 @@ public class Ingredient {
     private double quantity;
     private double threshold;
     private boolean deleted;
-    @DateTimeFormat
-    private LocalDate expiryDate;
     @LastModifiedDate
     private LocalDateTime lastUpdate;
 
@@ -40,7 +36,6 @@ public class Ingredient {
         this.quantity = 0;
         this.threshold = threshold;
         this.deleted = false;
-        this.expiryDate = null;
         this.lastUpdate = LocalDateTime.now();
     }
 }

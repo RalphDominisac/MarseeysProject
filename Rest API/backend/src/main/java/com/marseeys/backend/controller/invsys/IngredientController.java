@@ -1,6 +1,7 @@
 package com.marseeys.backend.controller.invsys;
 
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
@@ -24,11 +25,11 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     @GetMapping()
-////    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ApiOperation(
             value = "Retrieves all the ingredient items.",
             notes = "",
-            response = Ingredient.class,
+            response = TransactionIn.class,
             responseContainer = "List"
     )
     public ResponseEntity<List<Ingredient>> getIngredients() {
@@ -67,7 +68,7 @@ public class IngredientController {
             notes = "",
             response = Ingredient.class
     )
-    public ResponseEntity<Ingredient> editIngredient(@PathVariable int id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
+    public ResponseEntity<Ingredient> editIngredient(@PathVariable String id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
         return new ResponseEntity<>(ingredientService.editIngredient(id, editIngredientRequest), HttpStatus.OK);
     }
 

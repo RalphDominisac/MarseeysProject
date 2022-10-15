@@ -5,6 +5,7 @@ import com.marseeys.backend.entity.hrmsys.employee.Employee;
 import com.marseeys.backend.entity.hrmsys.employee.Shift;
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.ingredient.IngredientCategory;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.menu.MenuCategory;
 import com.marseeys.backend.entity.possys.order.base.DeliveryMethod;
@@ -16,6 +17,7 @@ import com.marseeys.backend.repository.hrmsys.EmployeeRepository;
 import com.marseeys.backend.repository.hrmsys.ShiftRepository;
 import com.marseeys.backend.repository.invsys.IngredientCategoryRepository;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
+import com.marseeys.backend.repository.invsys.TransactionRepository;
 import com.marseeys.backend.repository.possys.*;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
@@ -34,6 +36,7 @@ public class FindHelper {
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
     private final ShiftRepository shiftRepository;
+    private final TransactionRepository transactionRepository;
 
     public Menu findMenu(int id) throws DatabaseException {
         return menuRepository.findMenu(id)
@@ -112,6 +115,14 @@ public class FindHelper {
                 .orElseThrow(() -> new DatabaseException(
                         String.valueOf(id),
                         ExceptionType.SHIFT_NOT_FOUND_EXCEPTION
+                ));
+    }
+
+    public TransactionIn findTransaction(String id) throws DatabaseException {
+        return transactionRepository.findTransactionIn(id)
+                .orElseThrow(() -> new DatabaseException(
+                    id,
+                    ExceptionType.SAVE_TRANSACTION_EXCEPTION
                 ));
     }
 }

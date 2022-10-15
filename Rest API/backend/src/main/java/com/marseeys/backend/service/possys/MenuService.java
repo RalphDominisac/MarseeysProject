@@ -60,16 +60,7 @@ public class MenuService {
 
     public List<Menu> getMenuFromCategory(String category) throws DatabaseException {
         MenuCategory menuCategory = findHelper.findCategory(category);
-        List<Menu> items = menuRepository.findMenusByCategoryEquals(menuCategory.getId());
-
-        if (items.isEmpty()) {
-            throw new DatabaseException(
-                    String.valueOf(category),
-                    ExceptionType.EMPTY_MENU_CATEGORY_EXCEPTION
-            );
-        } else {
-            return items;
-        }
+        return menuRepository.findMenusByCategoryEquals(menuCategory.getId());
     }
 
     public Menu saveMenu(MenuRequest menuRequest) throws DatabaseException {
