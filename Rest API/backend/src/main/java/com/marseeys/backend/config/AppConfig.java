@@ -3,6 +3,7 @@ package com.marseeys.backend.config;
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
+import com.marseeys.backend.helper.TransactionHelper;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,6 +21,7 @@ import java.util.List;
 public class AppConfig {
     private final IngredientRepository ingredientRepository;
     private final TransactionRepository transactionRepository;
+    private final TransactionHelper transactionHelper;
 
     @Scheduled(cron = "0 0 0 * * ?", zone = "GMT+8")
     public void dailyInventoryCheck() {
@@ -38,6 +39,7 @@ public class AppConfig {
                 );
 
                 ingredient.setQuantity(ingredient.getQuantity() - spoilage);
+                transactionHelper.reflectTransaction(spoil);
 
                 transactionRepository.save(spoil);
                 ingredientRepository.save(ingredient);
