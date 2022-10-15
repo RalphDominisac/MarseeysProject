@@ -28,7 +28,7 @@ public class AppConfig {
         transactions.sort(Comparator.comparing(TransactionIn::getExpiryDate));
 
         for (TransactionIn transaction : transactions) {
-            if (transaction.getExpiryDate().isAfter(LocalDate.now())) {
+            if (transaction.getExpiryDate().isBefore(LocalDate.now())) {
                 double spoilage = transaction.getQuantity() - transaction.getAmountUsed();
                 Ingredient ingredient = transaction.getIngredient();
                 Transaction spoil = new Transaction(
