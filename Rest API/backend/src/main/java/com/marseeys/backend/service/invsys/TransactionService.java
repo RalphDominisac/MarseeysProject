@@ -9,10 +9,15 @@ import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.helper.TransactionHelper;
+import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByCategory;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByExpiry;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByName;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByQuantity;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +37,42 @@ public class TransactionService {
 
     public List<Transaction> getTransactions() {
         return transactionRepository.findTransactions();
+    }
+
+    public List<TransactionIn> getRelevantTransactions() {
+        return transactionRepository.findRelevantTransactions();
+    }
+
+    public List<TransactionIn> getTransactionsByName() {
+        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
+
+        stockIns.sort(new SortByName());
+
+        return stockIns;
+    }
+
+    public List<TransactionIn> getTransactionsByCategory() {
+        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
+
+        stockIns.sort(new SortByCategory());
+
+        return stockIns;
+    }
+
+    public List<TransactionIn> getTransactionsByQuantity() {
+        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
+
+        stockIns.sort(new SortByQuantity());
+
+        return stockIns;
+    }
+
+    public List<TransactionIn> getTransactionsByExpiry() {
+        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
+
+        stockIns.sort(new SortByExpiry());
+
+        return stockIns;
     }
 
     public TransactionIn saveTransactionIn(TransactionInRequest transactionInRequest) throws DatabaseException {
@@ -143,5 +184,22 @@ public class TransactionService {
         ingredientRepository.saveAll(ingredientChanges);
         transactionHelper.reflectTransactions(orderTransaction);
         return transactionRepository.saveAll(orderTransaction);
+    }
+
+    public Transaction deleteRelevantTransaction(String id) throws DatabaseException, IngredientException {
+        TransactionIn transaction = findHelper.findTransaction(id);
+        Ingredient ingredient = transaction.getIngredient();
+
+        if (transaction.isDeleted()) throw new IngredientException(
+                String.valueOf(id),
+                ExceptionType.INGREDIENT_ALREADY_DELETED_EXCEPTION
+        );
+
+        transaction.setDeleted(!transaction.isDeleted());
+        transaction.setRelevant(!transaction.isRelevant());
+        ingredient.setQuantity(ingredient.getQuantity() - (transaction.getQuantity() - transaction.getAmountUsed()));
+
+        ingredientRepository.save(ingredient);
+        return transactionRepository.save(transaction);
     }
 }

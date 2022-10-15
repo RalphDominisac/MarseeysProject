@@ -1,8 +1,10 @@
 package com.marseeys.backend.controller.invsys;
 
 import com.marseeys.backend.entity.invsys.transaction.Transaction;
+import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
+import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.service.invsys.TransactionService;
@@ -10,7 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,66 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping()
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getRelevantTransactions() {
+        return ResponseEntity.ok(transactionService.getRelevantTransactions());
+    }
+
+    @GetMapping("/sort/name")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by name.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getTransactionsByName() {
+        return ResponseEntity.ok(transactionService.getTransactionsByName());
+    }
+
+    @GetMapping("/sort/category")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by category.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getTransactionsByCategory() {
+        return ResponseEntity.ok(transactionService.getTransactionsByCategory());
+    }
+
+    @GetMapping("/sort/quantity")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by quantity.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getTransactionsByQuantity() {
+        return ResponseEntity.ok(transactionService.getTransactionsByQuantity());
+    }
+
+    @GetMapping("/sort/expiry")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by expiry date.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<TransactionIn>> getTransactionsByExpiry() {
+        return ResponseEntity.ok(transactionService.getTransactionsByExpiry());
+    }
+
+    @GetMapping("/history")
 //    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ApiOperation(
             value = "Retrieves all the transactions made on the inventory.",
@@ -57,5 +118,16 @@ public class TransactionController {
     )
     public ResponseEntity<Transaction> deductFromIngredient(@RequestBody @Valid TransactionOutRequest transactionRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(transactionService.saveTransactionOut(transactionRequest), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/delete/{id}")
+//    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Marks the specified ingredient as deleted.",
+            notes = "",
+            response = Transaction.class
+    )
+    public ResponseEntity<Transaction> deleteIngredient(@PathVariable String id) throws DatabaseException, IngredientException {
+        return new ResponseEntity<>(transactionService.deleteRelevantTransaction(id), HttpStatus.OK);
     }
 }

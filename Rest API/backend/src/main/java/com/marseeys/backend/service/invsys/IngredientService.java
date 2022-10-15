@@ -62,40 +62,8 @@ public class IngredientService {
         ingredientCategoryRepository.delete(ingredientCategory);
     }
 
-    public List<TransactionIn> getIngredients() {
-        return transactionRepository.findRelevantTransactions();
-    }
-
-    public List<TransactionIn> getIngredientsByName() {
-        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
-
-        stockIns.sort(new SortByName());
-
-        return stockIns;
-    }
-
-    public List<TransactionIn> getIngredientsByCategory() {
-        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
-
-        stockIns.sort(new SortByCategory());
-
-        return stockIns;
-    }
-
-    public List<TransactionIn> getIngredientsByQuantity() {
-        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
-
-        stockIns.sort(new SortByQuantity());
-
-        return stockIns;
-    }
-
-    public List<TransactionIn> getIngredientsByExpiry() {
-        List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
-
-        stockIns.sort(new SortByExpiry());
-
-        return stockIns;
+    public List<Ingredient> getIngredients() {
+        return ingredientRepository.viewIngredients();
     }
 
     public List<Ingredient> getNeedsRestocking(){
@@ -130,7 +98,7 @@ public class IngredientService {
         }
     }
 
-    public Transaction editIngredient(String id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
+    public Ingredient editIngredient(String id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
         TransactionIn transaction = findHelper.findTransaction(id);
         Ingredient ingredient = transaction.getIngredient();
 
@@ -140,24 +108,20 @@ public class IngredientService {
         ingredient.setUnitMeasure(editIngredientRequest.getUnitMeasure());
         transaction.setExpiryDate(editIngredientRequest.getExpiryDate());
 
-        ingredientRepository.save(ingredient);
-        return transactionRepository.save(transaction);
+        transactionRepository.save(transaction);
+        return ingredientRepository.save(ingredient);
     }
 
-    public Transaction deleteIngredient(String id) throws DatabaseException, IngredientException {
-        TransactionIn transaction = findHelper.findTransaction(id);
-        Ingredient ingredient = transaction.getIngredient();
+    public Ingredient deleteIngredient(int id) throws DatabaseException, IngredientException {
+        Ingredient ingredient = findHelper.findIngredient(id);
 
-        if (transaction.isDeleted()) throw new IngredientException(
+        if (ingredient.isDeleted()) throw new IngredientException(
                 String.valueOf(id),
                 ExceptionType.INGREDIENT_ALREADY_DELETED_EXCEPTION
         );
 
-        transaction.setDeleted(!transaction.isDeleted());
-        transaction.setRelevant(!transaction.isRelevant());
-        ingredient.setQuantity(ingredient.getQuantity() - (transaction.getQuantity() - transaction.getAmountUsed()));
+        ingredient.setDeleted(!ingredient.isDeleted());
 
-        ingredientRepository.save(ingredient);
-        return transactionRepository.save(transaction);
+        return ingredientRepository.save(ingredient);
     }
 }
