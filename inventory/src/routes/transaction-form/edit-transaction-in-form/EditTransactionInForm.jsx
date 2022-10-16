@@ -1,15 +1,19 @@
 import { Card, Form, Button, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axios';
 
-export default function AddIngredientForm() {
+export default function EditTransactionInForm(props) {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const transactionIn = location.state;
 	const [ingredientRequest, setIngredientRequest] = useState({
 		name: '',
 		ingredientCategory: '',
 		threshold: '',
 		unitMeasure: '',
+		expiryDate: '',
 	});
-	const [show, setShow] = useState(false);
 	const [ingredientCategories, setIngredientCategories] = useState([]);
 	const [unitMeasures] = useState([
 		'KG',
@@ -36,6 +40,14 @@ export default function AddIngredientForm() {
 				});
 		}
 
+		setIngredientRequest({
+			name: transactionIn.ingredient.name,
+			ingredientCategory: transactionIn.ingredient.ingredientCategory.name,
+			threshold: transactionIn.ingredient.threshold,
+			unitMeasure: transactionIn.ingredient.unitMeasure,
+			expiryDate: transactionIn.expiryDate,
+		});
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -43,25 +55,15 @@ export default function AddIngredientForm() {
 		event.preventDefault();
 
 		axiosInstance
-			.post('/ingredient/add', ingredientRequest)
+			.post('/ingredient/edit/' + transactionIn.id, ingredientRequest)
 			.then((response) => {
 				if (response.data !== null) {
-					setShow(true);
-					resetForm();
+					navigate('/inventory');
 				}
 			})
 			.catch((error) => {
 				console.log('Error: ', error);
 			});
-	}
-
-	function resetForm() {
-		setIngredientRequest({
-			name: '',
-			ingredientCategory: '',
-			threshold: '',
-			unitMeasure: '',
-		});
 	}
 
 	function handleChange(event) {
@@ -73,33 +75,32 @@ export default function AddIngredientForm() {
 
 	return (
 		<div>
-			<div></div>
 			<Card className="border border-dark bg-dark text-white">
 				<Card.Header>
 					<i className="fa fa-plus-square" /> Ingredient
 				</Card.Header>
-				<Form
-					onReset={resetForm}
-					onSubmit={submitIngredientRequest}
-					id="ingredientFormId"
-				>
+				<Form onSubmit={submitIngredientRequest} id="ingredientFormId">
 					<Card.Body>
 						<Row>
-							<Form.Group as={Col} controlId="formGridName">
+							<Form.Group as={Col} controlId="formGridName" className="col-6">
 								<Form.Label>Name</Form.Label>
 								<Form.Control
 									type="text"
 									name="name"
-									required
+									required disabled
 									autoComplete="off"
 									value={ingredientRequest.name}
-									className="bg-dark text-white"
+									className="bg-dark text-muted"
 									placeholder="Enter name"
 									onChange={handleChange}
 								/>
 							</Form.Group>
 
-							<Form.Group as={Col} controlId="formGridCategory">
+							<Form.Group
+								as={Col}
+								controlId="formGridCategory"
+								className="col-3"
+							>
 								<Form.Label>Category</Form.Label>
 								<Form.Control
 									as="select"
@@ -119,23 +120,12 @@ export default function AddIngredientForm() {
 									))}
 								</Form.Control>
 							</Form.Group>
-						</Row>
-						<Row>
-							<Form.Group as={Col} controlId="formGridQuantity">
-								<Form.Label>Reorder Point</Form.Label>
-								<Form.Control
-									type="number"
-									name="threshold"
-									value={ingredientRequest.threshold}
-									required
-									autoComplete="off"
-									className="bg-dark text-white"
-									placeholder="Enter reorder point"
-									onChange={handleChange}
-								/>
-							</Form.Group>
 
-							<Form.Group as={Col} controlId="formGridMeasure">
+							<Form.Group
+								as={Col}
+								controlId="formGridMeasure"
+								className="col-3"
+							>
 								<Form.Label>Unit Measure</Form.Label>
 								<Form.Control
 									as="select"
@@ -156,14 +146,46 @@ export default function AddIngredientForm() {
 								</Form.Control>
 							</Form.Group>
 						</Row>
+						<Row>
+							<Form.Group
+								as={Col}
+								controlId="formGridQuantity"
+								className="col-6"
+							>
+								<Form.Label>Reorder Point</Form.Label>
+								<Form.Control
+									type="number"
+									name="threshold"
+									value={ingredientRequest.threshold}
+									required
+									autoComplete="off"
+									className="bg-dark text-white"
+									placeholder="Enter a reorder point"
+									onChange={handleChange}
+								/>
+							</Form.Group>
+
+							<Form.Group
+								as={Col}
+								controlId="formGridQuantity"
+								className="col-6"
+							>
+								<Form.Label>Expiry Date</Form.Label>
+								<Form.Control
+									type="date"
+									name="expiryDate"
+									value={ingredientRequest.expiryDate}
+									required
+									className="bg-dark text-white"
+									onChange={handleChange}
+									min={new Date().toISOString().split("T")[0]}
+								/>
+							</Form.Group>
+						</Row>
 					</Card.Body>
 					<Card.Footer>
 						<Button size="sm" variant="success" type="submit">
 							<i className="fa fa-save" /> Submit
-						</Button>
-						{'  '}
-						<Button size="sm" variant="info" type="reset">
-							<i className="fa fa-undo" /> Clear
 						</Button>
 					</Card.Footer>
 				</Form>
