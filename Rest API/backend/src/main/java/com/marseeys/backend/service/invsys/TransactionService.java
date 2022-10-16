@@ -13,15 +13,15 @@ import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByCategory;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByExpiry;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByName;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByQuantity;
+import com.marseeys.backend.service.invsys.transactioninsort.SortByCategory;
+import com.marseeys.backend.service.invsys.transactioninsort.SortByName;
+import com.marseeys.backend.service.invsys.transactioninsort.SortByQuantity;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +35,18 @@ public class TransactionService {
     private final FindHelper findHelper;
 
     public List<Transaction> getTransactions() {
-        return transactionRepository.findTransactions();
+        List<Transaction> transactions = transactionRepository.findAll();
+
+        transactions.sort(Comparator.comparing(Transaction::getDate));
+
+        return transactions;
     }
 
     public List<TransactionIn> getRelevantTransactions() {
+        List<TransactionIn> stockIns = transactionRepository.findRelevantTransactions();
+
+        stockIns.sort(Comparator.comparing(Transaction::getDate));
+
         return transactionRepository.findRelevantTransactions();
     }
 
@@ -69,7 +77,7 @@ public class TransactionService {
     public List<TransactionIn> getTransactionsByExpiry() {
         List<TransactionIn> stockIns =  transactionRepository.findRelevantTransactions();
 
-        stockIns.sort(new SortByExpiry());
+        stockIns.sort(Comparator.comparing(TransactionIn::getExpiryDate));
 
         return stockIns;
     }

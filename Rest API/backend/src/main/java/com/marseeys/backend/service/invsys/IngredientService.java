@@ -13,6 +13,9 @@ import com.marseeys.backend.repository.invsys.IngredientCategoryRepository;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
 import com.marseeys.backend.service.NextSequenceService;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByCategory;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByName;
+import com.marseeys.backend.service.invsys.ingredientsort.SortByQuantity;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -57,6 +60,30 @@ public class IngredientService {
 
     public List<Ingredient> getIngredients() {
         return ingredientRepository.viewIngredients();
+    }
+
+    public List<Ingredient> getIngredientsByName() {
+        List<Ingredient> ingredients = getNeedsRestocking();
+
+        ingredients.sort(new SortByName());
+
+        return ingredients;
+    }
+
+    public List<Ingredient> getIngredientsByCategory() {
+        List<Ingredient> ingredients = getNeedsRestocking();
+
+        ingredients.sort(new SortByCategory());
+
+        return ingredients;
+    }
+
+    public List<Ingredient> getIngredientsByQuantity() {
+        List<Ingredient> ingredients = getNeedsRestocking();
+
+        ingredients.sort(new SortByQuantity());
+
+        return ingredients;
     }
 
     public List<Ingredient> getNeedsRestocking(){
