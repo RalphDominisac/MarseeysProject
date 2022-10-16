@@ -9,7 +9,6 @@ import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.helper.TransactionHelper;
-import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
@@ -187,19 +186,28 @@ public class TransactionService {
     }
 
     public Transaction deleteRelevantTransaction(String id) throws DatabaseException, IngredientException {
-        TransactionIn transaction = findHelper.findTransaction(id);
-        Ingredient ingredient = transaction.getIngredient();
+        TransactionIn transactionBefore = findHelper.findTransaction(id);
+        Ingredient ingredient = transactionBefore.getIngredient();
 
-        if (transaction.isDeleted()) throw new IngredientException(
+        if (transactionBefore.isDeleted()) throw new IngredientException(
                 String.valueOf(id),
                 ExceptionType.INGREDIENT_ALREADY_DELETED_EXCEPTION
         );
 
-        transaction.setDeleted(!transaction.isDeleted());
-        transaction.setRelevant(!transaction.isRelevant());
-        ingredient.setQuantity(ingredient.getQuantity() - (transaction.getQuantity() - transaction.getAmountUsed()));
+        Transaction deleteTransaction = new Transaction(
+                ingredient,
+                transactionBefore.getQuantity() - transactionBefore.getAmountUsed(),
+                "Deleted by action"
+        );
+
+        ingredient.setQuantity(ingredient.getQuantity() - (transactionBefore.getQuantity() - transactionBefore.getAmountUsed()));
+        transactionHelper.reflectTransaction(deleteTransaction);
+
+        TransactionIn transactionAfter = findHelper.findTransaction(id);
+        transactionAfter.setDeleted(!transactionAfter.isDeleted());
 
         ingredientRepository.save(ingredient);
-        return transactionRepository.save(transaction);
+        transactionRepository.save(deleteTransaction);
+        return transactionRepository.save(transactionAfter);
     }
 }
