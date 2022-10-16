@@ -14,6 +14,5 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(description = "Details to be used when adding a new delivery method.")
 public class DeliveryMethodRequest {
     @ApiModelProperty(notes = "The name of the delivery method to be registered.")
-    @NotBlank(message = "Please enter a name for the delivery method.")
     private String name;
 }

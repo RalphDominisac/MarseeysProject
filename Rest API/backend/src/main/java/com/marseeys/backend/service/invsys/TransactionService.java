@@ -186,7 +186,7 @@ public class TransactionService {
     }
 
     public Transaction deleteRelevantTransaction(String id) throws DatabaseException, IngredientException {
-        TransactionIn transactionBefore = findHelper.findTransaction(id);
+        TransactionIn transactionBefore = findHelper.findTransactionIn(id);
         Ingredient ingredient = transactionBefore.getIngredient();
 
         if (transactionBefore.isDeleted()) throw new IngredientException(
@@ -203,7 +203,7 @@ public class TransactionService {
         ingredient.setQuantity(ingredient.getQuantity() - (transactionBefore.getQuantity() - transactionBefore.getAmountUsed()));
         transactionHelper.reflectTransaction(deleteTransaction);
 
-        TransactionIn transactionAfter = findHelper.findTransaction(id);
+        TransactionIn transactionAfter = findHelper.findTransactionIn(id);
         transactionAfter.setDeleted(!transactionAfter.isDeleted());
 
         ingredientRepository.save(ingredient);

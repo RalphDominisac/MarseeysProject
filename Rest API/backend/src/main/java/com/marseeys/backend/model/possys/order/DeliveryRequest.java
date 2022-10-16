@@ -16,7 +16,6 @@ import java.util.Map;
 @ApiModel(description = "Details to be used when a customer orders a delivery.")
 public class DeliveryRequest {
     @ApiModelProperty(notes = "The name of the customer.")
-    @NotBlank(message = "Please enter a name for the customer.")
     private String customer;
 
     @ApiModelProperty(notes = "The ids of the menu items the customer would like to add " +

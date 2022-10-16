@@ -2,7 +2,6 @@ package com.marseeys.backend.service.invsys;
 
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.invsys.ingredient.IngredientCategory;
-import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
@@ -14,17 +13,11 @@ import com.marseeys.backend.repository.invsys.IngredientCategoryRepository;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
 import com.marseeys.backend.repository.invsys.TransactionRepository;
 import com.marseeys.backend.service.NextSequenceService;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByCategory;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByExpiry;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByName;
-import com.marseeys.backend.service.invsys.ingredientsort.SortByQuantity;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -99,7 +92,7 @@ public class IngredientService {
     }
 
     public Ingredient editIngredient(String id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
-        TransactionIn transaction = findHelper.findTransaction(id);
+        TransactionIn transaction = findHelper.findTransactionIn(id);
         Ingredient ingredient = transaction.getIngredient();
 
         ingredient.setName(editIngredientRequest.getName());
