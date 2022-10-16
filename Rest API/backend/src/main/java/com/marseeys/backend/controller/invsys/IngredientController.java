@@ -36,6 +36,42 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.getIngredients());
     }
 
+    @GetMapping("/sort/name")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by name.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Ingredient>> getIngredientsByName() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByName());
+    }
+
+    @GetMapping("/sort/category")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by category.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Ingredient>> getIngredientsByCategory() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByCategory());
+    }
+
+    @GetMapping("/sort/quantity")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the ingredient items sorted by quantity.",
+            notes = "",
+            response = TransactionIn.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Ingredient>> getIngredientsByQuantity() {
+        return ResponseEntity.ok(ingredientService.getIngredientsByQuantity());
+    }
+
     @GetMapping("/report")
 //    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ApiOperation(

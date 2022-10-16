@@ -22,6 +22,11 @@ public class TransactionHelper {
         for (int index = 0; toDeduct != 0; ) {
             TransactionIn transactionIn = relevantTransactions.get(index);
 
+            if (!transactionIn.getIngredient().getName().equals(transaction.getIngredient().getName())) {
+                index++;
+                continue;
+            }
+
             transactionIn.setAmountUsed(transactionIn.getAmountUsed() + toDeduct);
             toDeduct = 0;
 

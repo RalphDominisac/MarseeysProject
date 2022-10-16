@@ -118,7 +118,7 @@ public class FindHelper {
                 ));
     }
 
-    public TransactionIn findTransaction(String id) throws DatabaseException {
+    public TransactionIn findTransactionIn(String id) throws DatabaseException {
         return transactionRepository.findTransactionIn(id)
                 .orElseThrow(() -> new DatabaseException(
                     id,
