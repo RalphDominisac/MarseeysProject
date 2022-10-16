@@ -10,7 +10,6 @@ export default function TransactionIn() {
 		expiryDate: '',
 	});
 	const [ingredients, setIngredients] = useState([]);
-	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		if (ingredients.length === 0) {
@@ -23,6 +22,8 @@ export default function TransactionIn() {
 					console.log('Error: ', error);
 				});
 		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	function submitTransactionInRequest(event) {
@@ -32,7 +33,6 @@ export default function TransactionIn() {
 			.post('/transactions/create/in', transactionInRequest)
 			.then((response) => {
 				if (response.data !== null) {
-					setShow(true);
 					resetForm();
 				}
 			})
@@ -126,6 +126,7 @@ export default function TransactionIn() {
 									type="text"
 									name="remarks"
                                     required 
+									autoComplete="off"
 									value={transactionInRequest.remarks}
 									className="bg-dark text-white"
 									onChange={handleChange}

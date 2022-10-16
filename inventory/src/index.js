@@ -8,26 +8,29 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ErrorPage from './routes/error-page/ErrorPage';
 import EmptyPage from './routes/empty-page/EmptyPage';
-import IngredientList from './routes/ingredient-list/IngredientList';
+import TransactionInList from './routes/transaction-in-list/TransactionInList';
+import EditTransactionInForm from './routes/transaction-form/edit-transaction-in-form/EditTransactionInForm';
 import AddIngredientForm from './routes/ingredient-form/add-ingredient-form/AddIngredientForm';
-import EditIngredientForm from './routes/ingredient-form/edit-ingredient-form/EditIngredientForm';
 import TransactionList from './routes/transaction-list/TransactionList';
 import TransactionIn from './routes/transaction-form/transaction-in/TransactionIn';
 import TransactionOut from './routes/transaction-form/transaction-out/TransactionOut';
+import Login from './routes/login-page/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
+				<Route path="login" element={<Login />}></Route>
+				<Route path="signup" element={<Login />}></Route>
 				<Route path="/" element={<App />}>
-					<Route path="" element={<IngredientList />}></Route>
-					<Route path="edit" element={<EditIngredientForm />} />
+					<Route path="inventory" element={<TransactionInList />}></Route>
+					<Route path="edit" element={<EditTransactionInForm />}></Route>
 					<Route path="create" element={<AddIngredientForm />}></Route>
 					<Route path="transactions" element={<TransactionList />}></Route>
 					<Route path="stock-in" element={<TransactionIn />}></Route>
 					<Route path="stock-out" element={<TransactionOut />}></Route>
-					<Route path="*" element={<EmptyPage />}></Route>
+					<Route path="*" element={<ErrorPage />}></Route>
 				</Route>
 			</Routes>
 		</BrowserRouter>

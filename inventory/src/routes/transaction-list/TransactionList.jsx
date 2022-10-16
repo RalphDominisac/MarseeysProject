@@ -8,7 +8,7 @@ export default function TransactionList() {
 	useEffect(() => {
 		if (transactions.length === 0) {
 			axiosInstance
-				.get('/transactions')
+				.get('/transactions/history')
 				.then((response) => {
 					setTransactions(response.data);
 				})
@@ -23,7 +23,14 @@ export default function TransactionList() {
 	return (
 		<Card className="border border-dark bg-dark text-white">
 			<Card.Header>Transaction List</Card.Header>
-			<Card.Body>
+			<Card.Body
+				style={{
+					overflow: 'auto',
+					maxHeight: '50em',
+					scrollbarWidth: 'none',
+					msOverflowStyle: 'none',
+				}}
+			>
 				<Table striped bordered hover variant="dark">
 					<thead>
 						<tr>
@@ -31,7 +38,7 @@ export default function TransactionList() {
 							<th>Ingredient</th>
 							<th>Remarks</th>
 							<th>Quantity Involved</th>
-							<th>Current Quantity</th>
+							<th>Quantity Used</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -49,9 +56,9 @@ export default function TransactionList() {
 										{transaction.quantity} {transaction.ingredient.unitMeasure}
 									</td>
 									<td>
-										{transaction.quantity - transaction.amountUsed >= 0 && (
+										{transaction.amountUsed >= 0 && (
 											<span>
-												{transaction.quantity - transaction.amountUsed}{' '}
+												{transaction.amountUsed}{' '}
 												{transaction.ingredient.unitMeasure}
 											</span>
 										)}
