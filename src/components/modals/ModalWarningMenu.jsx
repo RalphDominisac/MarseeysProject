@@ -1,5 +1,5 @@
 import React from "react";
-import "./ModalStyle.css";
+import "./ModalWarningMenuStyle.css";
 import Typography from "@mui/material/Typography";
 import {
   BrowserRouter as Router,
@@ -7,47 +7,47 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-import { PropaneSharp } from "@mui/icons-material";
 
-function ModalCancelOrder({ setOpenModalCancelOrder}) {
-  
+function ModalWarningMenu({ setOpenModalWarningMenu }) {
   const navigate = useNavigate();
 
-    const navigateToHomeOrderPage = () => {
-      navigate("/homeorderpage");
-    };
+  // const navigateToHomeOrderPage = () => {
+  //   navigate("/homeorderpage");
+  // };
+
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <div className="titleCloseBtn">
+    <div className="modalBackgroundWarningMenu">
+      <div className="modalContainerWarningMenu">
+        <div className="titleCloseBtnWarningMenu">
           <button
             onClick={() => {
-              setOpenModalCancelOrder(false);
+              setOpenModalWarningMenu(false);
             }}
           >
             <Typography sx={{ color: "white" }}>X</Typography>
           </button>
         </div>
         <div className="title">
-          <h1>Cancel Order?</h1>
-        </div>  
+          <h1>Warning!</h1>
+        </div>
         {/* <div className="body">
           <p>The next page looks amazing. Hope you want to go there!</p>
         </div> */}
         <div className="footer">
           <button
             onClick={() => {
-              setOpenModalCancelOrder(false);
+              setOpenModalWarningMenu(false);
             }}
-            id="noBtn"
+            id="noBtnWarningMenu"
           >
-            No
+            Fill up fields
           </button>
-          <button onClick={navigateToHomeOrderPage}>Yes</button>
+          {/* <button onClick={navigateToHomeOrderPage}>Yes</button> */}
+          {/* <button>Yes</button> */}
         </div>
-      </div>    
+      </div>
     </div>
   );
 }
 
-export default ModalCancelOrder;
+export default ModalWarningMenu;

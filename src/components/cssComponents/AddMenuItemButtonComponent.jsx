@@ -1,11 +1,11 @@
 import React from 'react';
 import Button from "@mui/material/Button";
 
-export default function AddMenuItemButtonBBQComponent({ addNewItemBBQModalFunction }) {
+export default function AddMenuItemButtonBBQComponent({ addNewItemFunction }) {
   return (
     <Button
       variant="outlined"
-      onClick={addNewItemBBQModalFunction}
+      onClick={addNewItemFunction}
       sx={{
         "&.Mui-selected": {},
         "&.Mui-focusVisible": {

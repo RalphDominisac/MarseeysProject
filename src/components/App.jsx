@@ -12,6 +12,8 @@ import HistoryPage from "./HistoryPage";
 import PrintReceiptFormatPage from "./PrintReceiptFormatPage";
 // import DiscountsPage from "./DiscountsPage";
 import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-dom";
+import AddMenuItemPage from './AddMenuItemPage';
+import AddCategoryPage from './AddCategoryPage';
 
 
 function App(){
@@ -25,8 +27,12 @@ function App(){
             <Route path="/finalizeorderpage" element={<FinalizeOrderPage />} />
             <Route path="/ordersummarypage" element={<OrderSummaryPage />} />
             <Route path="/historypage" element={<HistoryPage />} />
-            <Route path="/printreceiptformatpage" element={<PrintReceiptFormatPage />}
+            <Route
+              path="/printreceiptformatpage"
+              element={<PrintReceiptFormatPage />}
             />
+            <Route path="/addmenuitempage" element={<AddMenuItemPage />} />
+            <Route path="/addcategorypage" element={<AddCategoryPage />} />
             {/* <Route path="/draftspage" element={<DraftsPage />} /> */}
 
             {/* <Route path="/discountspage" element={<DiscountsPage />} /> */}

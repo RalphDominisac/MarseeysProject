@@ -25,9 +25,9 @@ export default function BBQButtons(props) {
 
   const [modalOpenAddNewItemBBQ, setModalOpenAddNewItemBBQ] = useState(false);
 
-  const sendDataBBQ = (name, price) => {
-    addProdBBQ([...updatedProductListBBQ, { name, price }]);
-  };
+  // const sendDataBBQ = (name, price) => {
+  //   addProdBBQ([...updatedProductListBBQ, { name, price }]);
+  // };
 
   //  const navigate = useNavigate();
   //  const navigateToCustomerListPage = () => {
@@ -52,21 +52,22 @@ export default function BBQButtons(props) {
           gridTemplateColumns: "repeat(5, 1fr)",
         }}
       >
-        {/* {productsBBQ.map((product) => (
+        {productsBBQ.map((product) => (
           <ItemsCategoryButton2
             key={product.id}
             product={product}
             onAdd={onAdd}
           />
-        ))} */}
-        {updatedProductListBBQ.length &&
+        ))}
+
+        {/* {updatedProductListBBQ.length &&
           updatedProductListBBQ.map((product) => (
             <ItemsCategoryButton2
               key={product.id}
               product={product}
               onAdd={onAdd}
             />
-          ))}
+          ))} */}
       </div>
 
       <AddMenuItemButtonBBQComponent
@@ -76,31 +77,12 @@ export default function BBQButtons(props) {
       />
       {modalOpenAddNewItemBBQ && (
         <ModalAddNewItemBBQ
-          sendDataBBQ={sendDataBBQ}
+         // sendDataBBQ={sendDataBBQ}
           setOpenModalAddNewItemBBQ={setModalOpenAddNewItemBBQ}
         />
       )}
 
-      {/* Customer List Button: */}
-      {/* <Button
-        variant="contained"
-        onClick={navigateToCustomerListPage}
-        sx={{
-          ":hover": {
-            bgcolor: "#FFB644", // theme.palette.primary.main
-          },
-          mt: 2,
-          ml: 85,
-          width: 160,
-          textTransform: "none",
-          bgcolor: "#F2A42A",
-          fontFamily: "Barlow Condensed",
-          fontSize: "18px",
-          height: "32px",
-        }}
-      >
-        Customer List
-      </Button> */}
+
     </React.Fragment>
   );
 }

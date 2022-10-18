@@ -255,6 +255,22 @@ body {
    font-family: 'Barlow Condensed', sans-serif;
 }
 
+.counterResultIngredient {
+  color: white;
+  background: transparent;
+  width: 14%;
+  height: 50px;
+  background-color: #252836;
+  border-color: "red";
+  /* padding: 10px 0 2px 0; */
+  /* padding: 10px; */
+  /* margin-bottom: 10px; */
+  text-align: center;
+  margin-top: -68px;
+  margin-left: 439px;
+   font-family: 'Barlow Condensed', sans-serif;
+}
+
 .paymentcounterResult {
   color: white;
   background: transparent;

@@ -21,7 +21,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -29,25 +29,25 @@ import CategoryButtons from "./CategoryButtons";
 import { autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
-  useLocation,
 } from "react-router-dom";
 import ToolbarUpperRight from "./cssComponents/ToolbarUpperRight";
 import ListItemButtonComponent from "./cssComponents/ListItemButtonComponent";
-import ToolBarPendingOrdersPageHeader from "./cssComponents/ToolBarPendingOrdersPageHeader";
-import PendingOrderPageHeaderLabels from "./cssComponents/PendingOrderPageHeaderLabels";
-import PendingOrderPageBody from "./cssComponents/PendingOrderPageBody";
-import axiosInstance from "../helpers/axios";
+import ToolBarHistoryPageHeader from "./cssComponents/ToolBarHistoryPageHeader";
+import HistoryPageHeaderLabels from "./cssComponents/HistoryPageHeaderLabels";
+import HistoryPageBody from "./cssComponents/HistoryPageBody";
+import ToolBarAddCategoryPageHeader from "./cssComponents/ToolBarAddCategoryPageHeader";
+
 
 
 
 
 const drawerWidth = 120;
+
 
 
 const AppBar = styled(MuiAppBar, {
@@ -110,35 +110,7 @@ const mdTheme = createTheme({
 });
 
 
-  export default function PendingOrdersPage() {
-    const [pendingOrders, setPendingOrders] = useState([])
-
-    useEffect(() => {
-      axiosInstance.get("/orders")
-      .then((response) => {
-        setPendingOrders(response.data)
-      })
-      .catch((error) => {
-        console.log("Error: ", error)
-      })
-    }, [])
-
-    const markServed = (id) => {
-      axiosInstance.post('/orders/' + id + '/serve')
-      .then((response) => {
-        if (response !== null) {
-          axiosInstance.get('/orders')
-          .then((response) => {
-            setPendingOrders(response.data);
-          }).catch((error) => {
-            console.log("Error: ", error);
-          })
-        }
-      }).catch((error) => {
-        console.log("Error: ", error);
-      })
-     }
-
+  export default function AddCategoryPage() {
     const navigate = useNavigate();
     const navigateSignInPage = () => {
       // 👇️ navigate to /
@@ -175,6 +147,8 @@ const mdTheme = createTheme({
     const toggleDrawer = () => {
       setOpen(!open);
     };
+  const [category, setCategory] = useState("");
+
 
     return (
       <ThemeProvider theme={mdTheme}>
@@ -193,6 +167,7 @@ const mdTheme = createTheme({
           >
             {/* ** Upper Right Part For Logo */}
             <ToolbarUpperRight />
+
             <Divider />
 
             {/* SIDEBAR MENU LEFT ******************************************************************************/}
@@ -215,16 +190,6 @@ const mdTheme = createTheme({
                 imgID="pendingIcon"
                 imgSrc="./images/pending.png"
               />
-
-              {/* <ListItemButtonComponent
-                getSelected={selectedIndex === 2}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 2),
-                  navigateToDraftsPage)
-                }
-                imgID="draftIcon"
-                imgSrc="images/draft.png"
-              /> */}
 
               <ListItemButtonComponent
                 getSelected={selectedIndex === 3}
@@ -274,12 +239,21 @@ const mdTheme = createTheme({
                         position="static"
                         sx={{ backgroundColor: "#252836" }}
                       >
-                        <ToolBarPendingOrdersPageHeader/>
+                        <ToolBarAddCategoryPageHeader />
                       </AppBar>
 
-                     <PendingOrderPageHeaderLabels/>
+                      {/* <HistoryPageHeaderLabels /> */}
+                      {/* <HistoryPageBody /> */}
 
-                     <PendingOrderPageBody markServed={markServed} orders={pendingOrders} />
+                      <TextField
+                        onChange={(g1) => setCategory(g1.target.value)}
+                        className="inputRounded"
+                        placeholder="Category Name"
+                        variant="outlined"
+                        size="small"
+                      />
+
+                      <button>Add</button>
                     </Box>
                   </Paper>
                 </Grid>

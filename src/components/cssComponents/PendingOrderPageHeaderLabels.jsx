@@ -23,12 +23,12 @@ export default function PendingOrderPageHeaderLabels() {
           mt: -3.1,
         }}
       >
-        ORDER TYPE
+        PAYMENT STATUS
       </Typography>
 
       <Typography
         sx={{
-          ml: 38,
+          ml: 42,
           fontFamily: "Barlow Condensed",
           fontSize: "17px",
           mt: -3.2,

@@ -71,6 +71,7 @@ import AddCategoryComponent from "./cssComponents/AddCategoryComponent";
 import ModalAddCategory from "./modals/ModalAddCategory";
 import AddMenuItemButtonComponent from "./cssComponents/AddMenuItemButtonComponent";
 import ModalAddNewMenuItem from "./modals/ModalAddNewMenuItem";
+import MenuItemButtons from "./categoryButtons/MenuItemButtons";
 
 
 
@@ -234,6 +235,19 @@ const mdTheme = createTheme({
     
 
     const [myCategory, setMyCategory] = useState("");
+    const [products, setProducts] = useState([])
+
+    const categoryClicked = (categoryName) => {
+      axiosInstance
+        .get('/menu/' + categoryName)
+        .then((response) => {
+          setProducts(response.data)
+        })
+        .error((error) => {
+          console.log("Error: ", error)
+        })
+      setMyCategory(categoryName)
+    }
 
     
     // Routing/Navigation
@@ -261,6 +275,14 @@ const mdTheme = createTheme({
 
     const navigateToDiscountsPage = () => {
       navigate("/discountspage");
+    };
+
+     const navigateToAddMenuItemPage = () => {
+      navigate("/addmenuitempage");
+    };
+
+    const navigateToAddCategoryPage = () => {
+      navigate("/addcategorypage");
     };
 
     // Show Buttons CATEGORY if clicked
@@ -393,49 +415,50 @@ const mdTheme = createTheme({
 
                       <div style={{ marginBottom: "48px" }}>
                         <AddCategoryComponent
-                          addCategoryModalFunction={() => {
-                            setModalOpenAddCategory(true);
-                          }}
+                          addCategoryFunction={navigateToAddCategoryPage}
                         />
-                        {modalOpenAddCategory && (
+                        {/* {modalOpenAddCategory && (
                           <ModalAddCategory
                             // sendDataCategory={sendDataCategory}
                             setOpenModalAddCategory={setModalOpenAddCategory}
                           />
-                        )}
+                        )} */}
 
                         {categories.map((category) => (
                           <ButtonCategoryStyle
                             title={category.name}
                             key={category.name}
-                            onClick={() => setMyCategory(category.name)}
+                            onClick={categoryClicked.bind(this, category.name)}
                           />
                         ))}
 
                         <AddMenuItemButtonComponent
-                          addNewItemBBQModalFunction={() => {
-                            setModalOpenAddNewItemBBQ(true);
-                          }}
+                          addNewItemFunction={navigateToAddMenuItemPage}
                         />
-                        {modalOpenAddNewItemBBQ && (
+                        {/* {modalOpenAddNewItemBBQ && (
                           <ModalAddNewMenuItem
                             //  sendDataBBQ={sendDataBBQ}
                             setOpenModalAddNewItemBBQ={
                               setModalOpenAddNewItemBBQ
                             }
                           />
-                        )}
+                        )} */}
                       </div>
 
                       <div>
-                        {myCategory === "Bbq" && (
+                        {/* When category button is clicked, there is a BACKEND BUG: Uncaught TypeError: _helpers_axios__WEBPACK_IMPORTED_MODULE_26__.default.get(...).then(...).error is not a function */}
+                        {myCategory != "" && (
+                          <MenuItemButtons onAdd={onAdd} products={products} />
+                        )}
+
+                        {/* {myCategory === "Bbq" && (
                           <BBQButtons onAdd={onAdd} productsBBQ={productsBBQ} />
                         )}
-                        {myCategory === "Bilao" && <BilaoButtons />}
+                        {myCategory === "Bilao" && <BilaoButtons onAdd={onAdd}  />}
                         {myCategory === "Chicken" && (
-                          <ChickenButtons onSelected={setChickenFood} />
+                          <ChickenButtons onAdd={onAdd} onSelected={setChickenFood} />
                         )}
-                        {myCategory === "Drinks" && <DrinksButtons />}
+                        {myCategory === "Drinks" && <DrinksButtons onAdd={onAdd}  />}
                         {myCategory === "Food Trays" && (
                           <FamilyAndPartyButtons />
                         )}
@@ -449,7 +472,7 @@ const mdTheme = createTheme({
                         {myCategory === "Sizzling" && <SizzlingButtons />}
                         {myCategory === "Solo Meals" && <SoloMealsButtons />}
                         {myCategory === "Soup" && <SoupButtons />}
-                        {myCategory === "Vegetables" && <VegetablesButtons />}
+                        {myCategory === "Vegetables" && <VegetablesButtons />} */}
                       </div>
                     </Box>
                   </Paper>

@@ -22,8 +22,11 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
+  useNavigate, 
+  useLocation
 } from "react-router-dom";
+import {useEffect } from "react";
+
 
 
 
@@ -39,30 +42,57 @@ function preventDefault(event) {
 }
 
 export default function OrderSummarySidePage() {
-  const [ordertype, setOrderType] = React.useState("");
-  const [discount, setDiscount] = React.useState("");
+  const location = useLocation();
+  const data = location.state;
 
  const [modalOpenFinalizePayment, setModalOpenFinalizePayment] = useState(false);
+ const [orderRequest, setOrderRequest] = useState({
+  id: '', 
+  contents: '',
+  customer: '',
+  tableNo: '',
+  deliveryMethod: '',
+  address: '', 
+  phoneNo: '', 
+  estimatedTime: '',
+  discount: '',
+  price: '', 
+})
+
+//  useEffect(() => {
+//   setOrderRequest({
+//     id: data.id, 
+//     contents: data.contents, 
+//     customer: data?.customer, 
+//     tableNo: data?.tableNo,
+//     deliveryMethod: data?.deliveryMethod,
+//     address: data?.address, 
+//     phoneNo: data?.phoneNo, 
+//     estimatedTime: data?.estimatedTime,
+//     discount: data.discount,
+//     price: data.price, 
+//   })
+//  }, [])
 
     const navigate = useNavigate();
    
 
-  const handleChange = (event) => {
-    setOrderType(event.target.value);
+  // const handleChange = (event) => {
+  //   setOrderType(event.target.value);
+  // };
+
+  // const handleChange2 = (event) => {
+  //   setDiscount(event.target.value);
+  // };
+
+  const navigateToPrintReceiptFormatPage = () => {
+    navigate("/printreceiptformatpage");
   };
 
-  const handleChange2 = (event) => {
-    setDiscount(event.target.value);
-  };
+  // const paymentMethod = ["Cash", "Bank", "AR/Credit", "E-wallet"];
+  const paymentMethod = ["Cash", "E-wallet"];
 
-          const navigateToPrintReceiptFormatPage = () => {
-            navigate("/printreceiptformatpage");
-          };
-
-        // const paymentMethod = ["Cash", "Bank", "AR/Credit", "E-wallet"];
-        const paymentMethod = ["Cash", "E-wallet"];
-
-        const [myPaymentMethod, setMyPaymentMethod] = useState("");
+  const [myPaymentMethod, setMyPaymentMethod] = useState("");
 
 
 
@@ -72,64 +102,6 @@ export default function OrderSummarySidePage() {
   return (
     <React.Fragment>
       <Typography
-        sx={{ ml: 1, mt: 1, fontFamily: "Barlow Condensed", fontSize: 25 }}
-      >
-        Status
-      </Typography>
-      <FormControl
-        sx={{
-          m: 1,
-          width: 200,
-          backgroundColor: "#252836",
-          borderRadius: 3,
-          ml: 10,
-          height: 42,
-          mt: -5,
-        }}
-      >
-        <Select
-          value={ordertype}
-          onChange={handleChange}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            "&:hover": {
-              "&& fieldset": {
-                border: "1px solid white",
-              },
-            },
-
-            // more accurate dropdown effect
-            // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
-
-            borderRadius: 3,
-            width: 200,
-            height: 42,
-            fontFamily: "Barlow Condensed",
-          }}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                "& .MuiMenuItem-root.Mui-selected": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                "& .MuiMenuItem-root.Mui-selected:hover": {
-                  backgroundColor: "#3F4351",
-                },
-                backgroundColor: "#252836",
-              },
-            },
-          }}
-        >
-          <MenuItem value="">Select Order Status</MenuItem>
-          <MenuItem value={"Preparing"}>Preparing</MenuItem>
-          <MenuItem value={"Done"}>Done</MenuItem>
-        </Select>
-      </FormControl>
-      <Typography
         sx={{
           mt: -0.5,
           ml: 1,
@@ -138,19 +110,7 @@ export default function OrderSummarySidePage() {
           fontSize: 20,
         }}
       >
-        Customer:
-      </Typography>
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 11,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-          mb: 1,
-        }}
-      >
-        Juan Pablo
+        Customer: Juan Pablo
       </Typography>
       <Typography
         sx={{
@@ -161,42 +121,7 @@ export default function OrderSummarySidePage() {
           fontSize: 20,
         }}
       >
-        Type:
-      </Typography>
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 7,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-          mb: 1,
-        }}
-      >
-        Dine In
-      </Typography>
-      <Typography
-        sx={{
-          mt: 0,
-          ml: 1,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Table Number:
-      </Typography>
-      <Typography
-        sx={{
-          mt: -3.7,
-          ml: 15,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-          mb: 1,
-        }}
-      >
-        4
+        Table Number: 4
       </Typography>
       <Typography
         sx={{ ml: 1, mt: 1, fontFamily: "Barlow Condensed", fontSize: 25 }}

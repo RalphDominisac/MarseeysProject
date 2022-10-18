@@ -1,5 +1,5 @@
 import React from "react";
-import "./ModalStyle.css";
+import "./ModalConfirmMenuStyle.css";
 import Typography from "@mui/material/Typography";
 import {
   BrowserRouter as Router,
@@ -7,47 +7,47 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-import { PropaneSharp } from "@mui/icons-material";
 
-function ModalCancelOrder({ setOpenModalCancelOrder}) {
-  
+function ModalConfirmMenu({ setOpenModalConfirmMenu, pushFunctionality }) {
   const navigate = useNavigate();
 
-    const navigateToHomeOrderPage = () => {
-      navigate("/homeorderpage");
-    };
+  // const navigateToHomeOrderPage = () => {
+  //   navigate("/homeorderpage");
+  // };
+
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <div className="titleCloseBtn">
+    <div className="modalBackgroundConfirmMenu">
+      <div className="modalContainerConfirmMenu">
+        <div className="titleCloseBtnConfirmMenu">
           <button
             onClick={() => {
-              setOpenModalCancelOrder(false);
+              setOpenModalConfirmMenu(false);
             }}
           >
             <Typography sx={{ color: "white" }}>X</Typography>
           </button>
         </div>
         <div className="title">
-          <h1>Cancel Order?</h1>
-        </div>  
+          <h1>Confirm Menu Item?</h1>
+        </div>
         {/* <div className="body">
           <p>The next page looks amazing. Hope you want to go there!</p>
         </div> */}
         <div className="footer">
           <button
             onClick={() => {
-              setOpenModalCancelOrder(false);
+              setOpenModalConfirmMenu(false);
             }}
-            id="noBtn"
+            id="noBtnConfirmMenu"
           >
             No
           </button>
-          <button onClick={navigateToHomeOrderPage}>Yes</button>
+          {/* <button onClick={navigateToHomeOrderPage}>Yes</button> */}
+          <button onClick={pushFunctionality}>Yes</button>
         </div>
-      </div>    
+      </div>
     </div>
   );
 }
 
-export default ModalCancelOrder;
+export default ModalConfirmMenu;

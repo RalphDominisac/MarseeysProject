@@ -8,11 +8,12 @@ import {
   useNavigate,
 } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axiosInstance from "../../helpers/axios";
 
 function ModalAddNewMenuItem(props) {
   const [menuIngredient, setMenuIngredient] = React.useState("");
@@ -31,7 +32,22 @@ function ModalAddNewMenuItem(props) {
     props.sendDataBBQ(itemNameBBQ, itemPriceBBQ);
   };
 
-  const [ingredient, setIngredient] = React.useState("");
+  const [ingredients, setIngredients] = React.useState([]);
+
+
+  useEffect(() => {
+		if (ingredients.length === 0) {
+			axiosInstance
+				.get('/ingredient')
+				.then((response) => {
+					setIngredients(response.data);
+				})
+				.catch((error) => {
+					console.log('Error: ', error);
+				});
+		}
+  }, []);
+  
 
   const handleChangeIngredient = (event) => {
     setMenuIngredient(event.target.value);
@@ -131,14 +147,15 @@ function ModalAddNewMenuItem(props) {
                 },
               }}
             >
-              <MenuItem value="">Select Ingredients</MenuItem>
-              <MenuItem value={"Onion"}>Onion</MenuItem>
-              <MenuItem value={"Garlic"}>Garlic</MenuItem>
-              <MenuItem value={"Butter"}>Butter</MenuItem>
-              <MenuItem value={"Tomato"}>Tomato</MenuItem>
-              <MenuItem value={"Salmon"}>Salmon</MenuItem>
+              {ingredients.map((ingredient) => (
+                <MenuItem key={ingredient.id} value={ingredient.id}>
+                  {ingredient.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
+
+          {/* DISPLAY QTY AND UNIT MEASURE HERE */}
 
           {/* <FormControl fullWidth sx={{mt: -1, mb: 2}}>
             <InputLabel id="demo-simple-select-label">

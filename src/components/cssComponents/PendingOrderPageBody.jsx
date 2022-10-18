@@ -9,6 +9,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axiosInstance from "../../helpers/axios";
+
 
 
 
@@ -56,10 +58,11 @@ export default function PendingOrderPageBody(props) {
               sx={{
                 fontFamily: "Barlow Condensed",
                 fontSize: 19,
-                ml: 39,
+                ml: 43,
                 mt: -4.5,
                 mb: 1,
               }}
+              onCLick={props.markServed.bind(this, order.id)}
             >
               {order.served === true ? (
                 <div>
@@ -70,19 +73,6 @@ export default function PendingOrderPageBody(props) {
                   Not Served
                 </div>
               )}
-            </Typography>
-
-
-            <Typography
-              sx={{
-                fontFamily: "Barlow Condensed",
-                fontSize: 19,
-                ml: 72,
-                mt: -4.5,
-                mb: 1,
-              }}
-            >
-              Php {order.price}
             </Typography>
 
             <Typography
@@ -127,7 +117,7 @@ export default function PendingOrderPageBody(props) {
         sx={{
           fontFamily: "Barlow Condensed",
           fontSize: 19,
-          ml: 39,
+          ml: 43,
           mt: -4.5,
           mb: 1,
         }}
@@ -135,30 +125,7 @@ export default function PendingOrderPageBody(props) {
         Preparing
       </Typography>
 
-
-      <Typography
-        sx={{
-          fontFamily: "Barlow Condensed",
-          fontSize: 19,
-          ml: 72,
-          mt: -4.5,
-          mb: 1,
-        }}
-      >
-        Php 10000.00
-      </Typography>
-
-      <Typography
-        sx={{
-          fontFamily: "Barlow Condensed",
-          fontSize: 19,
-          ml: 92,
-          mt: -4.7,
-          mb: 1,
-        }}
-      >
-        Php 20000.00
-      </Typography>
+  
 
       <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
