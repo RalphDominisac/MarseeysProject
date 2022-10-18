@@ -68,11 +68,18 @@ public class OrderService {
 
     public Order saveOrder(DineInRequest dineInRequest) throws DatabaseException, IngredientException {
         Map<String, Integer> contents = databaseHelper.checkMenusExist(dineInRequest.getContents());
+        double price = calculationHelper.getOrderTotal(contents);
+
+        if (dineInRequest.getDiscount() > 0) {
+            price = price * (1 - dineInRequest.getDiscount());
+        }
+
         DineIn order = new DineIn(
                 nextSequenceService.getNextSequence("OrderSequence"),
                 dineInRequest.getCustomer(),
                 contents,
-                calculationHelper.getOrderTotal(contents),
+                price,
+                dineInRequest.getDiscount(),
                 dineInRequest.getTableNo()
         );
 
@@ -85,16 +92,22 @@ public class OrderService {
                     ExceptionType.SAVE_ORDER_EXCEPTION
             );
         }
-
     }
 
     public Order saveOrder(DeliveryRequest deliveryRequest) throws DatabaseException, IngredientException {
         Map<String, Integer> contents = databaseHelper.checkMenusExist(deliveryRequest.getContents());
+        double price = calculationHelper.getOrderTotal(contents);
+
+        if (deliveryRequest.getDiscount() > 0) {
+            price = price * (1 - deliveryRequest.getDiscount());
+        }
+
         Delivery order = new Delivery(
                 nextSequenceService.getNextSequence("OrderSequence"),
                 deliveryRequest.getCustomer(),
                 contents,
-                calculationHelper.getOrderTotal(contents),
+                price,
+                deliveryRequest.getDiscount(),
                 deliveryRequest.getAddress(),
                 findHelper.findMethod(deliveryRequest.getDeliveryMethod())
         );
@@ -112,11 +125,18 @@ public class OrderService {
 
     public Order saveOrder(PickUpRequest pickUpRequest) throws DatabaseException, IngredientException {
         Map<String, Integer> contents = databaseHelper.checkMenusExist(pickUpRequest.getContents());
+        double price = calculationHelper.getOrderTotal(contents);
+
+        if (pickUpRequest.getDiscount() > 0) {
+            price = price * (1 - pickUpRequest.getDiscount());
+        }
+
         PickUp order = new PickUp(
                 nextSequenceService.getNextSequence("OrderSequence"),
                 pickUpRequest.getCustomer(),
                 contents,
-                calculationHelper.getOrderTotal(contents),
+                price,
+                pickUpRequest.getDiscount(),
                 pickUpRequest.getPhoneNo(),
                 pickUpRequest.getEstimatedTime()
         );
@@ -150,8 +170,14 @@ public class OrderService {
             }
         });
 
+        double price = calculationHelper.getOrderTotal(newContents);
+
+        if (order.getDiscount() > 0) {
+            price = price * (1 - order.getDiscount());
+        }
+
         order.setContents(newContents);
-        order.setPrice(calculationHelper.getOrderTotal(newContents));
+        order.setPrice(price);
         order.setDate(LocalDateTime.now());
         order.setPaid(false);
         order.setServed(false);

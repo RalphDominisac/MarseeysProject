@@ -20,17 +20,19 @@ public class Order {
     private String customer;
     private Map<String, Integer> contents;
     private double price;
+    private double discount;
     @CreatedDate
     private LocalDateTime date;
     private boolean paid;
     private boolean served;
     private boolean canceled;
 
-    public Order(int id, String customer, Map<String, Integer> contents, double price) {
+    public Order(int id, String customer, Map<String, Integer> contents, double price, double discount) {
         this.id = id;
         this.customer = customer;
         this.contents = contents;
         this.price = price;
+        this.discount = discount;
         this.date = LocalDateTime.now();
         this.paid = false;
         this.served = false;

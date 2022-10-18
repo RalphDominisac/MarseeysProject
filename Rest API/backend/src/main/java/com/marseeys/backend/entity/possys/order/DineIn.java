@@ -13,8 +13,8 @@ import java.util.Map;
 public class DineIn extends Order {
     private int tableNo;
 
-    public DineIn(int id, String customer, Map<String, Integer> contents, double price, int tableNo) {
-        super(id, customer, contents, price);
+    public DineIn(int id, String customer, Map<String, Integer> contents, double price, double discount, int tableNo) {
+        super(id, customer, contents, price, discount);
         this.tableNo = tableNo;
     }
 }

@@ -23,6 +23,9 @@ public class PickUpRequest {
     @NotEmpty(message = "Please provide a list of items.")
     private Map<String, Integer> contents;
 
+    @ApiModelProperty(notes = "The discount placed on the order.")
+    private double discount;
+
     @ApiModelProperty(notes = "The contact number of the customer.")
     @NotBlank(message = "Please provide a phone number.")
     @Size(min = 11, max = 11, message = "Please input a valid phone number.")

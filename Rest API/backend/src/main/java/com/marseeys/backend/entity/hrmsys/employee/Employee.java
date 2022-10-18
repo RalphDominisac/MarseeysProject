@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +20,7 @@ public class Employee {
     private String id;
     private String firstName;
     private String lastName;
+    private String sex;
     private String contactNo;
     private String address;
     private String email;
@@ -28,7 +28,7 @@ public class Employee {
     private LocalDate birthday;
     private CivilStatus civilStatus;
     @DocumentReference(collection = "Shifts")
-    private List<Shift> shift;
+    private Shift shift;
     @DocumentReference(collection = "Departments")
     private Department department;
     @DocumentReference(collection = "Employees")
@@ -37,9 +37,10 @@ public class Employee {
     private LocalDate created;
     private boolean active;
 
-    public Employee(String firstName, String lastName, String contactNo, String address, String email, LocalDate birthday, CivilStatus civilStatus, List<Shift> shift) {
+    public Employee(String firstName, String lastName, String sex, String contactNo, String address, String email, LocalDate birthday, CivilStatus civilStatus, Shift shift) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sex = sex;
         this.contactNo = contactNo;
         this.address = address;
         this.email = email;

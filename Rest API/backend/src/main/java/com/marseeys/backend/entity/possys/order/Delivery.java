@@ -15,8 +15,8 @@ public class Delivery extends Order {
     private String address;
     private DeliveryMethod method;
 
-    public Delivery(int id, String customer, Map<String, Integer> contents, double price, String address, DeliveryMethod method) {
-        super(id, customer, contents, price);
+    public Delivery(int id, String customer, Map<String, Integer> contents, double price, double discount, String address, DeliveryMethod method) {
+        super(id, customer, contents, price, discount);
         this.address = address;
         this.method = method;
     }

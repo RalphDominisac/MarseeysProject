@@ -23,6 +23,9 @@ public class DeliveryRequest {
     @NotEmpty(message = "Please provide a list of items.")
     private Map<String, Integer> contents;
 
+    @ApiModelProperty(notes = "The discount placed on the order.")
+    private double discount;
+
     @ApiModelProperty(notes = "The destination of the delivery.")
     @NotBlank(message = "Please provide a delivery address.")
     private String address;

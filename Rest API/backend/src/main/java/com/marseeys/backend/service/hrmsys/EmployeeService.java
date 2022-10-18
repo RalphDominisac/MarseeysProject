@@ -34,11 +34,12 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(EmployeeRequest employeeRequest) throws DatabaseException {
-        List<Shift> shift = databaseHelper.checkShiftsExist(employeeRequest.getShift());
+        Shift shift = findHelper.findShift(employeeRequest.getShift());
 
         Employee employee = new Employee(
                 employeeRequest.getFirstName(),
                 employeeRequest.getLastName(),
+                employeeRequest.getSex(),
                 employeeRequest.getContactNo(),
                 employeeRequest.getAddress(),
                 employeeRequest.getEmail(),
@@ -73,6 +74,23 @@ public class EmployeeService {
                     ExceptionType.SAVE_EMPLOYEE_EXCEPTION
             );
         }
+    }
+
+    public Employee editEmployee(String empId, EmployeeRequest employeeRequest) throws DatabaseException {
+        Employee employee = findHelper.findEmployee(empId);
+        Shift shift = findHelper.findShift(employeeRequest.getShift());
+
+        employee.setFirstName(employeeRequest.getFirstName());
+        employee.setLastName(employeeRequest.getLastName());
+        employee.setSex(employeeRequest.getSex());
+        employee.setContactNo(employeeRequest.getContactNo());
+        employee.setAddress(employeeRequest.getAddress());
+        employee.setEmail(employeeRequest.getEmail());
+        employee.setBirthday(employeeRequest.getBirthday());
+        employee.setCivilStatus(employeeRequest.getCivilStatus());
+        employee.setShift(shift);
+
+        return employeeRepository.save(employee);
     }
 
     public Employee setEmployeeDepartment(String empId, int deptId) throws DatabaseException {
