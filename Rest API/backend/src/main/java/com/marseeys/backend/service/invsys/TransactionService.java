@@ -194,28 +194,27 @@ public class TransactionService {
     }
 
     public Transaction deleteRelevantTransaction(String id) throws DatabaseException, IngredientException {
-        TransactionIn transactionBefore = findHelper.findTransactionIn(id);
-        Ingredient ingredient = transactionBefore.getIngredient();
+        TransactionIn transaction = findHelper.findTransactionIn(id);
+        Ingredient ingredient = transaction.getIngredient();
 
-        if (transactionBefore.isDeleted()) throw new IngredientException(
+        if (transaction.isDeleted()) throw new IngredientException(
                 String.valueOf(id),
                 ExceptionType.INGREDIENT_ALREADY_DELETED_EXCEPTION
         );
 
         Transaction deleteTransaction = new Transaction(
                 ingredient,
-                transactionBefore.getQuantity() - transactionBefore.getAmountUsed(),
+                transaction.getQuantity() - transaction.getAmountUsed(),
                 "Deleted by action"
         );
 
-        ingredient.setQuantity(ingredient.getQuantity() - (transactionBefore.getQuantity() - transactionBefore.getAmountUsed()));
-        transactionHelper.reflectTransaction(deleteTransaction);
-
-        TransactionIn transactionAfter = findHelper.findTransactionIn(id);
-        transactionAfter.setDeleted(!transactionAfter.isDeleted());
+        ingredient.setQuantity(ingredient.getQuantity() - (transaction.getQuantity() - transaction.getAmountUsed()));
+        transaction.setAmountUsed(transaction.getQuantity());
+        transaction.setRelevant(!transaction.isRelevant());
+        transaction.setDeleted(!transaction.isDeleted());
 
         ingredientRepository.save(ingredient);
         transactionRepository.save(deleteTransaction);
-        return transactionRepository.save(transactionAfter);
+        return transactionRepository.save(transaction);
     }
 }
