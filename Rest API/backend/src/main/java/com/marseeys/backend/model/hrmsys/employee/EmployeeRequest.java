@@ -38,6 +38,10 @@ public class EmployeeRequest {
     @NotNull(message = "Please input the employee's civil status.")
     private CivilStatus civilStatus;
 
-    @NotEmpty(message = "Please assign a shift to the employee.")
+    @NotNull(message = "Please select a shift for the employee.")
     private int shift;
+
+    @NotNull(message = "Please select a department for the employee.")
+    private int department;
+
 }

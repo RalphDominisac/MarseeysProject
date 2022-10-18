@@ -38,8 +38,8 @@ public class DatabaseHelper {
         Map<String, Integer> contents = new HashMap<>();
 
         for (Map.Entry<String, Integer> entry : menuIds.entrySet()) {
-            Menu menu = findHelper.findMenu(Integer.parseInt(entry.getKey()));
-            contents.put(String.valueOf(menu.getId()), entry.getValue());
+            Menu menu = findHelper.findMenu(entry.getKey());
+            contents.put(String.valueOf(menu.getName()), entry.getValue());
         }
 
         return contents;
@@ -69,7 +69,7 @@ public class DatabaseHelper {
         Map<String, Double> totalDeductions = new HashMap<>();
 
         for (Map.Entry<String, Integer> menuEntry : order.getContents().entrySet()) {
-            Menu menu = findHelper.findMenu(Integer.parseInt(menuEntry.getKey()));
+            Menu menu = findHelper.findMenu(menuEntry.getKey());
             int menuQuantity = menuEntry.getValue();
 
             for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {
@@ -98,7 +98,7 @@ public class DatabaseHelper {
         Map<String, Double> totalDeductions = new HashMap<>();
 
         for (Map.Entry<String, Integer> menuEntry : additionalContents.entrySet()) {
-            Menu menu = findHelper.findMenu(Integer.parseInt(menuEntry.getKey()));
+            Menu menu = findHelper.findMenu(menuEntry.getKey());
             int menuQuantity = menuEntry.getValue();
 
             for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {

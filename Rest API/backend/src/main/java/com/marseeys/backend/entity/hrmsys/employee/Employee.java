@@ -37,7 +37,7 @@ public class Employee {
     private LocalDate created;
     private boolean active;
 
-    public Employee(String firstName, String lastName, String sex, String contactNo, String address, String email, LocalDate birthday, CivilStatus civilStatus, Shift shift) {
+    public Employee(String firstName, String lastName, String sex, String contactNo, String address, String email, LocalDate birthday, CivilStatus civilStatus, Shift shift, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
@@ -47,7 +47,7 @@ public class Employee {
         this.birthday = birthday;
         this.civilStatus = civilStatus;
         this.shift = shift;
-        this.department = null;
+        this.department = department;
         this.backup = null;
         this.created = LocalDate.now();
         this.active = true;

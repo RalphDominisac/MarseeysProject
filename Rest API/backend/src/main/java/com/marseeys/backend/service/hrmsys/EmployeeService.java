@@ -11,6 +11,8 @@ import com.marseeys.backend.model.hrmsys.employee.EmployeeRequest;
 import com.marseeys.backend.repository.hrmsys.DepartmentRepository;
 import com.marseeys.backend.repository.hrmsys.EmployeeRepository;
 import com.marseeys.backend.repository.security.UserRepository;
+import com.marseeys.backend.service.hrmsys.employeesort.SortByDepartment;
+import com.marseeys.backend.service.hrmsys.employeesort.SortByName;
 import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,8 +35,25 @@ public class EmployeeService {
         return employeeRepository.viewEmployees();
     }
 
+    public List<Employee> getEmployeesByName() {
+        List<Employee> employees = employeeRepository.viewEmployees();
+
+        employees.sort(new SortByName());
+
+        return employees;
+    }
+
+    public List<Employee> getEmployeesByDepartment() {
+        List<Employee> employees = employeeRepository.viewEmployees();
+
+        employees.sort(new SortByDepartment());
+
+        return employees;
+    }
+
     public Employee saveEmployee(EmployeeRequest employeeRequest) throws DatabaseException {
         Shift shift = findHelper.findShift(employeeRequest.getShift());
+        Department department = findHelper.findDepartment(employeeRequest.getDepartment());
 
         Employee employee = new Employee(
                 employeeRequest.getFirstName(),
@@ -45,7 +64,8 @@ public class EmployeeService {
                 employeeRequest.getEmail(),
                 employeeRequest.getBirthday(),
                 employeeRequest.getCivilStatus(),
-                shift
+                shift,
+                department
         );
 
         String username = LocalDate.now().getYear() +
@@ -65,8 +85,10 @@ public class EmployeeService {
                 passwordEncoder.encode(password)
         );
 
-        userRepository.save(user);
         try {
+            userRepository.save(user);
+            String empId = employeeRepository.save(employee).getId();
+            databaseHelper.updateDepartmentStaff(department.getId(), empId);
             return employeeRepository.save(employee);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -79,6 +101,7 @@ public class EmployeeService {
     public Employee editEmployee(String empId, EmployeeRequest employeeRequest) throws DatabaseException {
         Employee employee = findHelper.findEmployee(empId);
         Shift shift = findHelper.findShift(employeeRequest.getShift());
+        Department department = findHelper.findDepartment(employeeRequest.getDepartment());
 
         employee.setFirstName(employeeRequest.getFirstName());
         employee.setLastName(employeeRequest.getLastName());
@@ -89,6 +112,7 @@ public class EmployeeService {
         employee.setBirthday(employeeRequest.getBirthday());
         employee.setCivilStatus(employeeRequest.getCivilStatus());
         employee.setShift(shift);
+        employee.setDepartment(department);
 
         return employeeRepository.save(employee);
     }

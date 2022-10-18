@@ -38,6 +38,14 @@ public class FindHelper {
     private final ShiftRepository shiftRepository;
     private final TransactionRepository transactionRepository;
 
+    public Menu findMenu(String name) throws DatabaseException {
+        return menuRepository.findMenu(name)
+                .orElseThrow(() -> new DatabaseException(
+                        name,
+                        ExceptionType.MENU_NOT_FOUND_EXCEPTION
+                ));
+    }
+
     public Menu findMenu(int id) throws DatabaseException {
         return menuRepository.findMenu(id)
                 .orElseThrow(() -> new DatabaseException(

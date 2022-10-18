@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface MenuRepository extends MongoRepository<Menu, Integer> {
     @Query("{$and: [ {'category': ?0}, {'deleted': false} ]}")
     List<Menu> findMenusByCategoryEquals(int category);
+    @Query("{$and: [ {'name': ?0}, {'deleted': false}] }")
+    Optional<Menu> findMenu(String name);
     @Query("{$and: [ {'_id': ?0}, {'deleted': false}] }")
     Optional<Menu> findMenu(int id);
     @Query("{ 'deleted': false }")

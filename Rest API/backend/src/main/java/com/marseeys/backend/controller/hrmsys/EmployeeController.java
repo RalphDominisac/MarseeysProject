@@ -33,6 +33,30 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployees());
     }
 
+    @GetMapping("/sort/name")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the employees sorted by name.",
+            notes = "",
+            response = Employee.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Employee>> getEmployeesByName() {
+        return ResponseEntity.ok(employeeService.getEmployeesByName());
+    }
+
+    @GetMapping("/sort/department")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the employees sorted by department.",
+            notes = "",
+            response = Employee.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Employee>> getEmployeesByDepartment() {
+        return ResponseEntity.ok(employeeService.getEmployeesByDepartment());
+    }
+
     @PostMapping("/add")
 //    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(
