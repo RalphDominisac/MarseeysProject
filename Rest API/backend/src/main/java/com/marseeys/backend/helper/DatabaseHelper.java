@@ -55,15 +55,15 @@ public class DatabaseHelper {
         return employees;
     }
 
-    public List<Shift> checkShiftsExist(List<Integer> ids) throws DatabaseException {
-        List<Shift> shifts = new ArrayList<>();
-
-        for (Integer id : ids) {
-            shifts.add(findHelper.findShift(id));
-        }
-
-        return shifts;
-    }
+//    public List<Shift> checkShiftsExist(List<Integer> ids) throws DatabaseException {
+//        List<Shift> shifts = new ArrayList<>();
+//
+//        for (Integer id : ids) {
+//            shifts.add(findHelper.findShift(id));
+//        }
+//
+//        return shifts;
+//    }
 
     public Map<String, Double> getTotalDeductions(Order order) throws DatabaseException {
         Map<String, Double> totalDeductions = new HashMap<>();

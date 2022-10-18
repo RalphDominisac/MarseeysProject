@@ -22,6 +22,9 @@ public class DineInRequest {
     @NotEmpty(message = "Please provide a list of items.")
     private Map<String, Integer> contents;
 
+    @ApiModelProperty(notes = "The discount placed on the order.")
+    private double discount;
+
     @ApiModelProperty(notes = "The table number referring to where the customer is sitting.")
     @NotNull(message = "Please enter a table number.")
     @Min(value = 1, message = "Minimum value is one.")

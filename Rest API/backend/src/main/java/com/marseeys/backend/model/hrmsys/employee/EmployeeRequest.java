@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +17,9 @@ public class EmployeeRequest {
 
     @NotBlank(message = "Please input the employee's last name.")
     private String lastName;
+
+    @NotBlank(message = "Please input the employee's sex.")
+    private String sex;
 
     @NotBlank(message = "Please input the employee's contact number.")
     @Size(min = 11, max = 11, message = "Please input a valid contact number.")
@@ -37,5 +39,5 @@ public class EmployeeRequest {
     private CivilStatus civilStatus;
 
     @NotEmpty(message = "Please assign a shift to the employee.")
-    private List<Integer> shift;
+    private int shift;
 }

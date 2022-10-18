@@ -15,8 +15,8 @@ public class PickUp extends Order {
     private String phoneNo;
     private int estimatedTime;
 
-    public PickUp(int id, String customer, Map<String, Integer> contents, double price, String phoneNo, LocalTime estimatedTime) {
-        super(id, customer, contents, price);
+    public PickUp(int id, String customer, Map<String, Integer> contents, double price, double discount, String phoneNo, LocalTime estimatedTime) {
+        super(id, customer, contents, price, discount);
         this.phoneNo = phoneNo;
         this.estimatedTime = estimatedTime.getMinute();
     }

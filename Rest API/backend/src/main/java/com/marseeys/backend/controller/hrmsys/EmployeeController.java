@@ -1,6 +1,5 @@
 package com.marseeys.backend.controller.hrmsys;
 
-import com.marseeys.backend.entity.hrmsys.department.Department;
 import com.marseeys.backend.entity.hrmsys.employee.Employee;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.model.hrmsys.employee.EmployeeRequest;
@@ -46,6 +45,17 @@ public class EmployeeController {
     )
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Valid EmployeeRequest employeeRequest) throws DatabaseException {
         return new ResponseEntity<>(employeeService.saveEmployee(employeeRequest), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/edit/{empId}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Edits the specified employee based on the given object.",
+            notes = "",
+            response = Employee.class
+    )
+    public ResponseEntity<Employee> editEmployee(@PathVariable String empId, @RequestBody @Valid EmployeeRequest employeeRequest) throws DatabaseException {
+        return new ResponseEntity<>(employeeService.editEmployee(empId, employeeRequest), HttpStatus.OK);
     }
 
     @PostMapping("/{empId}/department/{deptId}")
