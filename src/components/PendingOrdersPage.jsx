@@ -111,35 +111,6 @@ const mdTheme = createTheme({
 
 
   export default function PendingOrdersPage() {
-    const [pendingOrders, setPendingOrders] = useState([])
-
-    useEffect(() => {
-      axiosInstance.get("/orders")
-      .then((response) => {
-        setPendingOrders(response.data)
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log("Error: ", error)
-      })
-    }, [])
-
-    const markServed = (id) => {
-      axiosInstance.post('/orders/' + id + '/serve')
-      .then((response) => {
-        if (response !== null) {
-          axiosInstance.get('/orders')
-          .then((response) => {
-            setPendingOrders(response.data);
-          }).catch((error) => {
-            console.log("Error: ", error);
-          })
-        }
-      }).catch((error) => {
-        console.log("Error: ", error);
-      })
-     }
-
     const navigate = useNavigate();
     const navigateSignInPage = () => {
       // 👇️ navigate to /
@@ -280,7 +251,7 @@ const mdTheme = createTheme({
 
                      <PendingOrderPageHeaderLabels/>
 
-                     <PendingOrderPageBody markServed={markServed} orders={pendingOrders} />
+                     <PendingOrderPageBody/>
                     </Box>
                   </Paper>
                 </Grid>

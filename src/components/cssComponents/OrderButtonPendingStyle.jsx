@@ -4,9 +4,11 @@ import { useState } from "react";
 
 
 
-export default function OrderButtonPendingStyle({title,onClickFunc}) {
+
+export default function OrderButtonPendingStyle({title,onClickFunc,key}) {
   return (
     <Button
+      key={key}
       variant="outlined"
       onClick={onClickFunc}
       sx={{

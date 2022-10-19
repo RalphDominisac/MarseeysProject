@@ -180,7 +180,6 @@ export default function HomeOrderPage() {
         .get("/menu/categories")
         .then((response) => {
           setCategories(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           console.log("Error: ", error);
@@ -224,7 +223,6 @@ export default function HomeOrderPage() {
       .get("/menu/" + categoryName)
       .then((response) => {
         setProducts(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log("Error: ", error);

@@ -1,52 +1,67 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
+import { useLocation } from "react-router-dom"
+import { useState, useEffect } from "react";
+import axiosInstance from "../../helpers/axios";
 
-export default function OrderSummaryPageBody() {
+export default function OrderSummaryPageBody({itemName, price, qty, total, subTotal, discount, orderTotal}) {
+
+
   return (
     <React.Fragment>
       {/* BODY CONTENT: */}
-      <Typography class="orderSummaryItemStack" sx={{ color: "white" }}>
-        Salted Egg Chicken (Half)
-      </Typography>
 
-      <Typography
+      <Container
         sx={{
-          fontFamily: "Barlow Condensed",
-          fontSize: 19,
-          ml: 60,
-          mt: -6,
+          width: 830,
+          height: 450,
+          overflow: "hidden",
+          overflowY: "scroll",
         }}
       >
-        Php 2000.00
-      </Typography>
+        <Typography class="orderSummaryItemStack" sx={{ color: "white" }}>
+          {itemName}
+        </Typography>
 
-      <Typography
-        sx={{
-          fontFamily: "Barlow Condensed",
-          fontSize: 19,
-          ml: 81.7,
-          mt: -3.7,
-        }}
-      >
-        2
-      </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Barlow Condensed",
+            fontSize: 19,
+            ml: 60,
+            mt: -6,
+          }}
+        >
+          {price}
+        </Typography>
 
-      <Typography
-        sx={{
-          fontFamily: "Barlow Condensed",
-          ml: 94,
-          mt: -3.5,
-          fontSize: 19,
-        }}
-      >
-        Php 2000.00
-      </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Barlow Condensed",
+            fontSize: 19,
+            ml: 81.7,
+            mt: -3.7,
+          }}
+        >
+          {qty}
+        </Typography>
 
-      <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
-        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        - - - - - - - - -
-      </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Barlow Condensed",
+            ml: 94,
+            mt: -3.5,
+            fontSize: 19,
+          }}
+        >
+          {total}
+        </Typography>
+
+        <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - - - - - - - - - - -
+        </Typography>
+      </Container>
 
       {/* FOOTER, consists of TOTALS: */}
       <Typography
@@ -67,7 +82,7 @@ export default function OrderSummaryPageBody() {
           fontSize: 19,
         }}
       >
-        Php 2000.00
+        {subTotal}
       </Typography>
       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -81,7 +96,7 @@ export default function OrderSummaryPageBody() {
           mt: 0,
         }}
       >
-        Discount (20% Applied)
+        Discount
       </Typography>
 
       <Typography
@@ -92,7 +107,7 @@ export default function OrderSummaryPageBody() {
           fontSize: 19,
         }}
       >
-        -Php 2000.00
+        {discount}
       </Typography>
       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -117,7 +132,7 @@ export default function OrderSummaryPageBody() {
           fontSize: 19,
         }}
       >
-        Php 2000.00
+        {orderTotal}
       </Typography>
       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -125,3 +140,48 @@ export default function OrderSummaryPageBody() {
     </React.Fragment>
   );
 }
+
+
+
+
+{/* <Container
+  sx={{
+    width: 830,
+    height: 450,
+    overflow: "hidden",
+    overflowY: "scroll",
+  }}
+>
+  {data?.cartItems.map((item, index) => (
+    <div
+      key={index}
+      style={{
+        fontFamily: "Barlow Condensed",
+        fontSize: "20px",
+        marginLeft: "-9px",
+        marginTop: "-18px",
+      }}
+    >
+      <p>{item.name}</p>
+
+      <p style={{ marginLeft: "400px", marginTop: "-49px" }}>
+        Php {Number(item.price).toFixed(2)}
+      </p>
+      <p style={{ marginLeft: "572px", marginTop: "-50px" }}>{item.qty}</p>
+      <p
+        style={{
+          marginLeft: "680px",
+          marginTop: "-50.4px",
+        }}
+      >
+        Php {(item.price * item.qty).toFixed(2)}
+      </p>
+     
+      <Typography sx={{ ml: -1, mt: -1, color: "#504C64" }}>
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        - -
+      </Typography>
+    </div>
+  ))}
+</Container> */}

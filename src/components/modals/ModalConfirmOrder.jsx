@@ -15,32 +15,36 @@ function ModalConfirmOrder(props) {
   const [orderRequest, setOrderRequest] = useState(props.orderRequest);
   const orderType = props.orderType;
 
-  useEffect(() => {})
+  useEffect(() => {
+    setOrderRequest({
+      ...orderRequest,
+      discount: props.discount,
+  });
+  }, [])
 
   const sendOrder = () => {
-    console.log("Sending...")
     if (orderType === "Dine In") {
       axiosInstance.post('/orders/add/dine', orderRequest).then((response) => {
-        console.log("Order: ", orderRequest)
-        navigate("/pendingpage", {  state: response.data  })
-      }).catch((error) => {
-        console.log("Order Request: ", orderRequest)
+      }).then(
+        navigate("/pendingpage")
+        )
+        .catch((error) => {
         console.log("Error: ", error)
       })
     } else if (orderType === "Delivery") {
       axiosInstance.post('/orders/add/delivery', orderRequest).then((response) => {
-        console.log("Order: ", orderRequest)
-        navigate("/pendingpage", {  state: response.data  })
-      }).catch((error) => {
-        console.log("Order Request: ", orderRequest)
+      }).then(
+        navigate("/pendingpage")
+        )
+        .catch((error) => {
         console.log("Error: ", error)
       })
     } else if (orderType === "Pickup") {
       axiosInstance.post('/orders/add/pickup', orderRequest).then((response) => {
-        console.log("Order: ", orderRequest)
-        navigate("/pendingpage", {  state: response.data  })
-      }).catch((error) => {
-        console.log("Order Request: ", orderRequest)
+      }).then(
+        navigate("/pendingpage")
+        )
+      .catch((error) => {
         console.log("Error: ", error)
     })
     }
