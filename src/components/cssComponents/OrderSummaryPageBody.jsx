@@ -3,6 +3,8 @@ import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axiosInstance from "../../helpers/axios";
+import Container from "@mui/material/Container";
+
 
 export default function OrderSummaryPageBody({itemName, price, qty, total, subTotal, discount, orderTotal}) {
 

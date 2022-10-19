@@ -1,13 +1,14 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 
-export default function CashMethodFields() {
+export default function CashMethodFields(props) {
+  
   return (
     <React.Fragment>
       <TextField
-        // onChange={(g1) => setOrderComment(g1.target.value)}
+        onChange={(event) => props.handleChangePaidAmount(event.target.value)}
         className="inputRounded"
-        placeholder="Cash Amount to be Payed"
+        placeholder="Cash Amount to be Paid"
         variant="outlined"
         size="small"
         sx={{ ml: -0.5, width: 335 }}

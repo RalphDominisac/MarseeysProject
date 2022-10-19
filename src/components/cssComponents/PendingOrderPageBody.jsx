@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../helpers/axios";
+import OrderStatusButton from './OrderStatusButton';
 
 
 
@@ -18,7 +19,10 @@ export default function PendingOrderPageBody() {
     const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
 
+    
+
      const viewOrder = (order) => {
+      console.log(order)
        navigate("/ordersummarypage", { state: order });
      };
 
@@ -30,6 +34,7 @@ export default function PendingOrderPageBody() {
       axiosInstance.get("/orders")
       .then((response) => {
         setOrders(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.log("Error: ", error)
@@ -46,7 +51,11 @@ export default function PendingOrderPageBody() {
       ) : (
         orders.map((order) => (
           <div>
-            <OrderButtonPendingStyle key={order.id} title={order.id} onClickFunc={viewOrder.bind(this, order)} />
+            <OrderButtonPendingStyle
+              key={order.id}
+              title={order.id}
+              onClickFunc={viewOrder.bind(this, order)}
+            />
 
             <Typography
               sx={{
@@ -57,15 +66,7 @@ export default function PendingOrderPageBody() {
                 mb: 1,
               }}
             >
-              {order.paid === true ? (
-                <div>
-                  Paid
-                </div>
-              ) : (
-                <div>
-                  Not Paid
-                </div>
-              )}
+              {order.paid ? <div>Paid</div> : <div>Not Paid</div>}
             </Typography>
 
             <Typography
@@ -78,13 +79,13 @@ export default function PendingOrderPageBody() {
               }}
               // onCLick={props.markServed.bind(this, order.id)}
             >
-              {order.served === true ? (
+              {order.served ? (
                 <div>
                   Served
                 </div>
               ) : (
                 <div>
-                  Not Served
+                    Not Served
                 </div>
               )}
             </Typography>
@@ -102,16 +103,13 @@ export default function PendingOrderPageBody() {
             </Typography>
 
             <Typography sx={{ ml: 3, mt: 0, color: "#504C64" }}>
-              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-              - - - - - - - - -
+              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+              - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+              - - - - - - - - - - - - - - -
             </Typography>
           </div>
-          
         ))
       )}
-
-
 
       {/* STATICS: */}
       {/* <OrderButtonPendingStyle

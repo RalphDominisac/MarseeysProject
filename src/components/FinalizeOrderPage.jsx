@@ -337,9 +337,9 @@ const mdTheme = createTheme({
                         overflowY: "scroll",
                       }}
                     >
-                      {data?.cartItems.map((item, index) => (
+                      {data?.cartItems.map((item, quantity) => (
                         <div
-                          key={index}
+                          key={item.id}
                           style={{
                             fontFamily: "Barlow Condensed",
                             fontSize: "20px",

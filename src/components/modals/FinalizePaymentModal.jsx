@@ -2,17 +2,15 @@ import React from 'react';
 import Typography from "@mui/material/Typography";
 import "./ModalStyleFinalizePayment.css";
 
-export default function FinalizePaymentModal({
-  setOpenModalFinalizePayment,
-  onClickFinalizePayment,
-}) {
+export default function FinalizePaymentModal(props) {
+
   return (
     <div className="modalBackgroundFinalizePayment">
       <div className="modalContainerFinalizePayment">
         <div className="titleCloseBtnFinalizePayment">
           <button
             onClick={() => {
-              setOpenModalFinalizePayment(false);
+              props.setOpenModalFinalizePayment(false);
             }}
           >
             <Typography sx={{ color: "white" }}>X</Typography>
@@ -27,13 +25,13 @@ export default function FinalizePaymentModal({
         <div className="footer">
           <button
             onClick={() => {
-              setOpenModalFinalizePayment(false);
+              props.setOpenModalFinalizePayment(false);
             }}
             id="noBtnFinalizePayment"
           >
             No
           </button>
-          <button onClick={onClickFinalizePayment}>Yes</button>
+          <button onClick={props.onClickFinalizePayment}>Yes</button>
         </div>
       </div>
     </div>

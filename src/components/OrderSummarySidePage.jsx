@@ -26,6 +26,7 @@ import {
   useLocation
 } from "react-router-dom";
 import {useEffect } from "react";
+import axiosInstance from "../helpers/axios";
 
 
 
@@ -35,29 +36,23 @@ import ARCreditMethodFields from "./cssComponents/ARCreditMethodFields";
 import BankGCashMethodFields from "./cssComponents/BankMethodFields";
 import CashMethodFields from "./cssComponents/CashMethodFields";
 import EWalletMethodFields from "./cssComponents/EWalletMethodFields";
+import OrderStatusButton from "./cssComponents/OrderStatusButton";
 
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function OrderSummarySidePage() {
-  const location = useLocation();
-  const data = location.state;
+export default function OrderSummarySidePage(props) {
 
- const [modalOpenFinalizePayment, setModalOpenFinalizePayment] = useState(false);
- const [orderRequest, setOrderRequest] = useState({
-  id: '', 
-  contents: '',
-  customer: '',
-  tableNo: '',
-  deliveryMethod: '',
-  address: '', 
-  phoneNo: '', 
-  estimatedTime: '',
-  discount: '',
-  price: '', 
-})
+const [modalOpenFinalizePayment, setModalOpenFinalizePayment] = useState(false);
+
+
+const tableNo = props.order?.tableNo
+const deliveryMethod = props.order?.deliveryMethod
+const address = props.order?.address
+const phoneNo = props.order?.phoneNo
+const estimatedTime = props.order?.estimatedTime
 
 //  useEffect(() => {
 //   setOrderRequest({
@@ -86,43 +81,134 @@ export default function OrderSummarySidePage() {
   // };
 
   const navigateToPrintReceiptFormatPage = () => {
-    navigate("/printreceiptformatpage");
+    if (myPaymentMethod === "Cash") {
+      axiosInstance.post('/pay/cash', paymentRequest)
+      .then((response) => {
+        if (response.status === 201) {
+          navigate("/printreceiptformatpage");
+        }
+        console.log(response)
+      }).catch((error) => {
+        console.log(paymentRequest)
+        console.log("Error: ", error)
+      })
+    } else if (myPaymentMethod === "E-wallet") {
+      axiosInstance.post('/pay/e-wallet', paymentRequest)
+      .then((response) => {
+        if (response.status === 201) {
+          navigate("/printreceiptformatpage");
+        }
+      }).catch((error) => {
+        console.log("Error: ", error)
+      })
+    }
   };
 
   // const paymentMethod = ["Cash", "Bank", "AR/Credit", "E-wallet"];
   const paymentMethod = ["Cash", "E-wallet"];
 
   const [myPaymentMethod, setMyPaymentMethod] = useState("");
+  const [paymentRequest, setPaymentRequest] = useState({
+    amount: '', 
+    orderId: props.order.id, 
+    mobileNo: '', 
+    platform: '', 
+  });
 
+  function handleChangePaidAmount(amount) {
+    setPaymentRequest({
+      ...paymentRequest, 
+      amount: amount
+    })
+  }
 
+  function handleChangeMobileNo(mobileNo) {
+    setPaymentRequest({
+      ...paymentRequest, 
+      mobileNo: mobileNo
+    })
+  }
 
-
+  function handleChangePlatform(platform) {
+    setPaymentRequest({
+      ...paymentRequest, 
+      platform: platform
+    })
+  }
 
 
   return (
     <React.Fragment>
-      <Typography
-        sx={{
-          mt: -0.5,
-          ml: 1,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Customer: Juan Pablo
-      </Typography>
-      <Typography
-        sx={{
-          mt: 0,
-          ml: 1,
-          color: "white",
-          fontFamily: "Barlow Condensed",
-          fontSize: 20,
-        }}
-      >
-        Table Number: 4
-      </Typography>
+      {tableNo && (
+        <Typography
+          sx={{
+            mt: 0,
+            ml: 1,
+            color: "white",
+            fontFamily: "Barlow Condensed",
+            fontSize: 20,
+          }}
+        >
+          Table Number: {tableNo}
+        </Typography>
+      )}
+
+      {deliveryMethod && (
+        <Typography
+          sx={{
+            mt: 0,
+            ml: 1,
+            color: "white",
+            fontFamily: "Barlow Condensed",
+            fontSize: 20,
+          }}
+        >
+          Delivery Method: {deliveryMethod}
+        </Typography>
+      )}
+
+      {address && (
+        <Typography
+          sx={{
+            mt: 0,
+            ml: 1,
+            color: "white",
+            fontFamily: "Barlow Condensed",
+            fontSize: 20,
+          }}
+        >
+          Delivery Address: {address}
+        </Typography>
+      )}
+
+      {phoneNo && (
+        <Typography
+          sx={{
+            mt: 0,
+            ml: 1,
+            color: "white",
+            fontFamily: "Barlow Condensed",
+            fontSize: 20,
+          }}
+        >
+          Phone # : {phoneNo}
+        </Typography>
+      )}
+
+      {estimatedTime && (
+        <Typography
+          sx={{
+            mt: 0,
+            ml: 1,
+            color: "white",
+            fontFamily: "Barlow Condensed",
+            fontSize: 20,
+          }}
+        >
+          Estimated Ready Time: {estimatedTime} minute/s
+        </Typography>
+      )}
+
       <Typography
         sx={{ ml: 1, mt: 1, fontFamily: "Barlow Condensed", fontSize: 25 }}
       >
@@ -140,10 +226,10 @@ export default function OrderSummarySidePage() {
       </Stack>
       <div>
         <p>
-          {myPaymentMethod === "Cash" && <CashMethodFields />}
+          {myPaymentMethod === "Cash" && <CashMethodFields handleChangePaidAmount={handleChangePaidAmount} />}
           {/* {myPaymentMethod === "Bank" && <BankGCashMethodFields />}
           {myPaymentMethod === "AR/Credit" && <ARCreditMethodFields />} */}
-          {myPaymentMethod === "E-wallet" && <EWalletMethodFields />}
+          {myPaymentMethod === "E-wallet" && <EWalletMethodFields handleChangePaidAmount={handleChangePaidAmount} handleChangeMobileNo={handleChangeMobileNo} handleChangePlatform={handleChangePlatform} />}
         </p>
       </div>
 
@@ -180,6 +266,8 @@ export default function OrderSummarySidePage() {
           onClickFinalizePayment={navigateToPrintReceiptFormatPage}
         />
       )}
+
+      <OrderStatusButton/>
     </React.Fragment>
   );
 }

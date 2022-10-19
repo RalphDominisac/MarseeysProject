@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from "@mui/material/Typography";
 
 
-export default function HeaderLabelsOrderSummary() {
+export default function HeaderLabelsOrderSummary({orderNum}) {
   return (
     <React.Fragment>
       <Typography
@@ -15,7 +15,7 @@ export default function HeaderLabelsOrderSummary() {
           fontFamily: "Barlow Condensed",
           fontSize: "30px",
           mt: -6,
-          ml: 14
+          ml: 14,
         }}
       >
         Order Summary
@@ -33,7 +33,7 @@ export default function HeaderLabelsOrderSummary() {
           ml: 14,
         }}
       >
-        (Order #0001)
+        (Order #{orderNum})
       </Typography>
 
       <Typography

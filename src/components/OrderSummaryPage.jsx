@@ -114,34 +114,13 @@ const mdTheme = createTheme({
 
       const location = useLocation();
       const data = location.state;
+      const [order, setOrder] = useState(data);
 
       //GET REQUEST:
       // /api/v1/orders{id}
 
-    //      useEffect(() => {
-    //     let itemsMap = {}
-
-    //     data.cartItems.map((item) => {
-    //       itemsMap[item.name] = item.qty
-    //     })
-
-    //     setOrderRequest({
-    //       ...orderRequest, 
-    //       contents: itemsMap,
-    //     })
-    // }, [])
-
       // useEffect(() => {
-      //   let ordersMap = {};
-
-      //   data.cartItems.map((item) => {
-      //     ordersMap[item.name] = item.qty;
-      //   });
-
-      //   setOrderRequest({  
-      //     ...orderRequest,
-      //     contents: ordersMap,
-      //   });
+      //   console.log(order.contents)
       // }, []);
 
     
@@ -257,6 +236,7 @@ const mdTheme = createTheme({
               overflow: "auto",
             }}
           >
+        
             <Container maxWidth="md" sx={{ ml: -1 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={8} lg={9}>
@@ -280,13 +260,13 @@ const mdTheme = createTheme({
                         />
                       </AppBar>
 
-                      <HeaderLabelsOrderSummary />
+                      <HeaderLabelsOrderSummary orderNum={order.id} />
 
                       {/* ORDERSUMMARYPAGE BODY: */}
                       {/* <OrderSummaryPageBody/> */}
                       {/* <OrderSummaryPageBody itemName={} price={} qty={} total={} subTotal={} discount={} orderTotal={} /> */}
 
-                      {/* <Container
+                      <Container
                         sx={{
                           width: 855,
                           height: 450,
@@ -294,16 +274,16 @@ const mdTheme = createTheme({
                           overflowY: "scroll",
                         }}
                       >
-                        {data?.order.map((orderItem, index) => (
-                          <div key={index}>
+                        {Object.keys(order.contents).map((itemName) => (
+                          <div key={itemName}>
                             <Typography
                               class="orderSummaryItemStack"
                               sx={{ color: "white" }}
                             >
-                              Order Name
+                              {itemName}
                             </Typography>
 
-                            <Typography
+                            {/* <Typography 
                               sx={{
                                 fontFamily: "Barlow Condensed",
                                 fontSize: 19,
@@ -311,7 +291,7 @@ const mdTheme = createTheme({
                                 mt: -6,
                               }}
                             >
-                              {orderItem.price}
+                             2nd typography
                             </Typography>
 
                             <Typography
@@ -322,8 +302,8 @@ const mdTheme = createTheme({
                                 mt: -3.7,
                               }}
                             >
-                              2
-                            </Typography>
+                              3rd typography
+                            </Typography> */}
 
                             <Typography
                               sx={{
@@ -333,7 +313,7 @@ const mdTheme = createTheme({
                                 fontSize: 19,
                               }}
                             >
-                              1000
+                              {order.contents[itemName]}
                             </Typography>
 
                             <Typography
@@ -358,16 +338,32 @@ const mdTheme = createTheme({
                       >
                         Sub-total
                       </Typography>
-                      <Typography
-                        sx={{
-                          fontFamily: "Barlow Condensed",
-                          ml: 94,
-                          mt: -3.5,
-                          fontSize: 19,
-                        }}
-                      >
-                        5656
-                      </Typography>
+                      
+                        {order.discount === 0 ? (
+                          <Typography
+                          sx={{
+                            fontFamily: "Barlow Condensed",
+                            ml: 94,
+                            mt: -3.5,
+                            fontSize: 19,
+                          }}
+                        >
+                          {order.price}
+
+                        </Typography>
+                        ) : (
+                          <Typography
+                          sx={{
+                            fontFamily: "Barlow Condensed",
+                            ml: 94,
+                            mt: -3.5,
+                            fontSize: 19,
+                          }}
+                        >
+                          {order.price / (1 - order.discount)}
+
+                        </Typography>
+                        )}
                       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - -
@@ -392,7 +388,7 @@ const mdTheme = createTheme({
                           fontSize: 19,
                         }}
                       >
-                        -565656
+                        {order.discount * 100}%
                       </Typography>
                       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -418,12 +414,12 @@ const mdTheme = createTheme({
                           fontSize: 19,
                         }}
                       >
-                        23232323
+                        {order.price}
                       </Typography>
                       <Typography sx={{ ml: 60, mt: 0, color: "#504C64" }}>
                         - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                         - - - - - - - -
-                      </Typography> */}
+                      </Typography>
                     </Box>
                   </Paper>
                 </Grid>
@@ -440,7 +436,7 @@ const mdTheme = createTheme({
                       backgroundColor: "#1F1D2B",
                     }}
                   >
-                    <OrderSummarySidePage />
+                    <OrderSummarySidePage order={order} />
                   </Paper>
                 </Grid>
               </Grid>
