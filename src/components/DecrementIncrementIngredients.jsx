@@ -7,6 +7,7 @@ export default function DecrementIncrementIngredients({
   onClickRemoveFunctionCounter,
   onClickAddFunctionCounter,
   itemQtyCounter,
+  itemUnit
 }) {
   return (
     <React.Fragment>
@@ -18,7 +19,7 @@ export default function DecrementIncrementIngredients({
           },
           color: "white",
           backgroundColor: "#9E3F3F",
-          ml: 56,
+          ml: 52,
           mt: -8,
           width: 3,
           borderTopLeftRadius: 10,
@@ -35,7 +36,7 @@ export default function DecrementIncrementIngredients({
         <RemoveIcon />
       </Button>
 
-      <h1 className="counterResultIngredient">{itemQtyCounter}</h1>
+      <h1 className="counterResultIngredient">{itemQtyCounter} {itemUnit}</h1>
 
       <Button
         onClick={onClickAddFunctionCounter}
@@ -45,7 +46,7 @@ export default function DecrementIncrementIngredients({
           },
           color: "white",
           backgroundColor: "#5D9B68",
-          ml: 65,
+          ml: 69,
           mt: -14.9,
           width: 10,
           borderTopRightRadius: 10,

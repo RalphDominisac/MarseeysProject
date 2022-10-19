@@ -73,12 +73,7 @@ import AddMenuItemButtonComponent from "./cssComponents/AddMenuItemButtonCompone
 import ModalAddNewMenuItem from "./modals/ModalAddNewMenuItem";
 import MenuItemButtons from "./categoryButtons/MenuItemButtons";
 
-
-
-
-
-const drawerWidth = 120; 
-
+const drawerWidth = 120;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -98,7 +93,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { 
+const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
@@ -133,221 +128,208 @@ const mdTheme = createTheme({
       primary: "#ffffff",
     },
     paper: {
-    background: "red",
-  },
-    
+      background: "red",
+    },
   },
 });
 
-
-  export default function HomeOrderPage() {
-
-
+export default function HomeOrderPage() {
   const [modalOpenAddNewItemBBQ, setModalOpenAddNewItemBBQ] = useState(false);
 
-   const [modalOpenAddCategory, setModalOpenAddCategory] = useState(false);
+  const [modalOpenAddCategory, setModalOpenAddCategory] = useState(false);
 
+  const { productsBBQ } = data;
+  const [cartItems, setCartItems] = useState([]);
 
+  // -------------Add and Remove product functionality------------------------------------------
+  const onAdd = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
 
-    const { productsBBQ } = data;
-    const [cartItems, setCartItems] = useState([]);
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+  // -------------------------------------------------------------------------------------------
 
-    // -------------Add and Remove product functionality------------------------------------------
-    const onAdd = (product) => {
-      const exist = cartItems.find((x) => x.id === product.id);
-      if (exist) {
-        setCartItems(
-          cartItems.map((x) =>
-            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-          )
-        );
-      } else {
-        setCartItems([...cartItems, { ...product, qty: 1 }]);
-      }
-    };
+  const [chickenFood, setChickenFood] = useState(null);
 
-    const onRemove = (product) => {
-      const exist = cartItems.find((x) => x.id === product.id);
-      if (exist.qty === 1) {
-        setCartItems(cartItems.filter((x) => x.id !== product.id));
-      } else {
-        setCartItems(
-          cartItems.map((x) =>
-            x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-          )
-        );
-      }
-    };
-    // -------------------------------------------------------------------------------------------
+  // Update the prices for each menu items (Sept 7 2022 received new menu pics)
+  const [categories, setCategories] = useState([]);
 
-
-    
-
-    const [chickenFood, setChickenFood] = useState(null);
-
-    // Update the prices for each menu items (Sept 7 2022 received new menu pics)
-    const [categories, setCategories] = useState([]);
-
-    useEffect(() => {
-      if (categories.length === 0) {
-        axiosInstance.get('/menu/categories').then((response) => {
+  useEffect(() => {
+    if (categories.length === 0) {
+      axiosInstance
+        .get("/menu/categories")
+        .then((response) => {
           setCategories(response.data);
           console.log(response.data);
-        }).catch((error) => {
+        })
+        .catch((error) => {
           console.log("Error: ", error);
-        })
-      }
-    }, [])
-
-        //AXIOS FUNCTIONS:
-    // function getMenuItems(name) {
-    //   axiosInstance
-    //     .get("/menu/" + name)
-    //     .then((response) => {
-    //       setMenuItems(response.data);
-    //       console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log("Error: ", error);
-    //     });
-    // }
-
-    // function addToCart(item) {
-    //   console.log(item);
-    //   const exist = cartItems.find((x) => x.id === item.id);
-    //   if (exist) {
-    //     setCartItems(
-    //       cartItems.map((x) =>
-    //         x.id === item.id ? { ...exist, qty: exist.qty + 1 } : x
-    //       )
-    //     );
-    //   } else {
-    //     setCartItems([...cartItems, { ...item, qty: 1 }]);
-    //   }
-    //   console.log(cartItems);
-    // }
-
-
-
-
-
-
-    
-
-    const [myCategory, setMyCategory] = useState("");
-    const [products, setProducts] = useState([])
-
-    const categoryClicked = (categoryName) => {
-      axiosInstance
-        .get('/menu/' + categoryName)
-        .then((response) => {
-          setProducts(response.data)
-        })
-        .error((error) => {
-          console.log("Error: ", error)
-        })
-      setMyCategory(categoryName)
+        });
     }
+  }, []);
 
-    
-    // Routing/Navigation
-    const navigate = useNavigate();
-    const navigateSignInPage = () => {
-      // 👇️ navigate to /
-      navigate("/");
-    };
+  //AXIOS FUNCTIONS:
+  // function getMenuItems(name) {
+  //   axiosInstance
+  //     .get("/menu/" + name)
+  //     .then((response) => {
+  //       setMenuItems(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error: ", error);
+  //     });
+  // }
 
-    const navigateToHomeOrderPage = () => {
-      navigate("/homeorderpage");
-    };
+  // function addToCart(item) {
+  //   console.log(item);
+  //   const exist = cartItems.find((x) => x.id === item.id);
+  //   if (exist) {
+  //     setCartItems(
+  //       cartItems.map((x) =>
+  //         x.id === item.id ? { ...exist, qty: exist.qty + 1 } : x
+  //       )
+  //     );
+  //   } else {
+  //     setCartItems([...cartItems, { ...item, qty: 1 }]);
+  //   }
+  //   console.log(cartItems);
+  // }
 
-    const navigateToPendingPage = () => {
-      navigate("/pendingpage");
-    };
+  const [myCategory, setMyCategory] = useState("");
+  const [products, setProducts] = useState([]);
 
-    const navigateToDraftsPage = () => {
-      navigate("/draftspage");
-    };
+  function categoryClicked(categoryName) {
+    axiosInstance
+      .get("/menu/" + categoryName)
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+    setMyCategory(categoryName);
+  }
 
-    const navigateToHistoryPage = () => {
-      navigate("/historypage");
-    };
+  // Routing/Navigation
+  const navigate = useNavigate();
+  const navigateSignInPage = () => {
+    // 👇️ navigate to /
+    navigate("/");
+  };
 
-    const navigateToDiscountsPage = () => {
-      navigate("/discountspage");
-    };
+  const navigateToHomeOrderPage = () => {
+    navigate("/homeorderpage");
+  };
 
-     const navigateToAddMenuItemPage = () => {
-      navigate("/addmenuitempage");
-    };
+  const navigateToPendingPage = () => {
+    navigate("/pendingpage");
+  };
 
-    const navigateToAddCategoryPage = () => {
-      navigate("/addcategorypage");
-    };
+  const navigateToDraftsPage = () => {
+    navigate("/draftspage");
+  };
 
-    // Show Buttons CATEGORY if clicked
-    const showBBQButtons = () => {
-      <BBQButtons />;
-    };
+  const navigateToHistoryPage = () => {
+    navigate("/historypage");
+  };
 
-    // For left side button pages (events)
-    const [selectedIndex, setSelectedIndex] = React.useState("");
-    const handleListItemClick = (event, index) => {
-      setSelectedIndex(index);
-    };
+  const navigateToDiscountsPage = () => {
+    navigate("/discountspage");
+  };
 
-    // For button categories
-    const [selectedIndex2, setSelectedIndex2] = React.useState("");
-    const handleListItemClick2 = (event2, index2) => {
-      setSelectedIndex2(index2);
-    };
+  const navigateToAddMenuItemPage = () => {
+    navigate("/addmenuitempage");
+  };
 
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
+  const navigateToAddCategoryPage = () => {
+    navigate("/addcategorypage");
+  };
 
-    return (
-      <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: "flex" }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
+  // Show Buttons CATEGORY if clicked
+  const showBBQButtons = () => {
+    <BBQButtons />;
+  };
 
-          <Drawer
-            variant="permanent"
-            open={open}
-            PaperProps={{
-              sx: {
-                backgroundColor: "#252836",
-              },
-            }}
-          >
-            {/* ** Upper Right Part For Logo */}
+  // For left side button pages (events)
+  const [selectedIndex, setSelectedIndex] = React.useState("");
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
 
-            <ToolbarUpperRight />
-            <Divider />
+  // For button categories
+  const [selectedIndex2, setSelectedIndex2] = React.useState("");
+  const handleListItemClick2 = (event2, index2) => {
+    setSelectedIndex2(index2);
+  };
 
-            <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 0}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 0),
-                  navigateToHomeOrderPage)
-                }
-                imgID="orderIcon"
-                imgSrc="./images/ordericon.png"
-              />
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 1}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 1),
-                  navigateToPendingPage)
-                }
-                imgID="pendingIcon"
-                imgSrc="./images/pending.png"
-              />
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
-              {/* <ListItemButtonComponent
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
+
+        <Drawer
+          variant="permanent"
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "#252836",
+            },
+          }}
+        >
+          {/* ** Upper Right Part For Logo */}
+
+          <ToolbarUpperRight />
+          <Divider />
+
+          <List component="nav" sx={{ backgroundColor: "#252836" }}>
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 0}
+              getOnClick={
+                ((event) => handleListItemClick(event, 0),
+                navigateToHomeOrderPage)
+              }
+              imgID="orderIcon"
+              imgSrc="./images/ordericon.png"
+            />
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 1}
+              getOnClick={
+                ((event) => handleListItemClick(event, 1),
+                navigateToPendingPage)
+              }
+              imgID="pendingIcon"
+              imgSrc="./images/pending.png"
+            />
+
+            {/* <ListItemButtonComponent
                 getSelected={selectedIndex === 2}
                 getOnClick={
                   ((event) => handleListItemClick(event, 2),
@@ -357,85 +339,85 @@ const mdTheme = createTheme({
                 imgSrc="images/draft.png"
               /> */}
 
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 3}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 3),
-                  navigateToHistoryPage)
-                }
-                imgID="historyIcon"
-                imgSrc="images/history.png"
-              />
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 3}
+              getOnClick={
+                ((event) => handleListItemClick(event, 3),
+                navigateToHistoryPage)
+              }
+              imgID="historyIcon"
+              imgSrc="images/history.png"
+            />
 
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 4}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
-                }
-                imgID="logoutIcon"
-                imgSrc="images/logout.png"
-              />
-            </List>
-          </Drawer>
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 4}
+              getOnClick={
+                ((event) => handleListItemClick(event, 4), navigateSignInPage)
+              }
+              imgID="logoutIcon"
+              imgSrc="images/logout.png"
+            />
+          </List>
+        </Drawer>
 
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: "#252836",
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto",
-            }}
-          >
-            <Container maxWidth="md" sx={{ ml: -1 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 850,
-                      backgroundColor: "#252836",
-                    }}
-                  >
-                    <Box sx={{ flexGrow: 1, ml: -1 }}>
-                      <AppBar
-                        elevation={0}
-                        position="static"
-                        sx={{ backgroundColor: "#252836" }}
-                      >
-                        <ToolBarHomerOrderPageHeader />
-                      </AppBar>
-                      <Typography sx={{ ml: 3, mt: -3, color: "#504C64" }}>
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                        - - - - - - - - - - - - - - - - - - - - - - - - -
-                      </Typography>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: "#252836",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="md" sx={{ ml: -1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 850,
+                    backgroundColor: "#252836",
+                  }}
+                >
+                  <Box sx={{ flexGrow: 1, ml: -1 }}>
+                    <AppBar
+                      elevation={0}
+                      position="static"
+                      sx={{ backgroundColor: "#252836" }}
+                    >
+                      <ToolBarHomerOrderPageHeader />
+                    </AppBar>
+                    <Typography sx={{ ml: 3, mt: -3, color: "#504C64" }}>
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                    </Typography>
 
-                      <div style={{ marginBottom: "48px" }}>
-                        <AddCategoryComponent
-                          addCategoryFunction={navigateToAddCategoryPage}
-                        />
-                        {/* {modalOpenAddCategory && (
+                    <div style={{ marginBottom: "48px" }}>
+                      <AddCategoryComponent
+                        addCategoryFunction={navigateToAddCategoryPage}
+                      />
+                      {/* {modalOpenAddCategory && (
                           <ModalAddCategory
                             // sendDataCategory={sendDataCategory}
                             setOpenModalAddCategory={setModalOpenAddCategory}
                           />
                         )} */}
 
-                        {categories.map((category) => (
-                          <ButtonCategoryStyle
-                            title={category.name}
-                            key={category.name}
-                            onClick={categoryClicked.bind(this, category.name)}
-                          />
-                        ))}
-
-                        <AddMenuItemButtonComponent
-                          addNewItemFunction={navigateToAddMenuItemPage}
+                      {categories.map((category) => (
+                        <ButtonCategoryStyle
+                          title={category.name}
+                          key={category.name}
+                          onClick={categoryClicked.bind(this, category.name)}
                         />
-                        {/* {modalOpenAddNewItemBBQ && (
+                      ))}
+
+                      <AddMenuItemButtonComponent
+                        addNewItemFunction={navigateToAddMenuItemPage}
+                      />
+                      {/* {modalOpenAddNewItemBBQ && (
                           <ModalAddNewMenuItem
                             //  sendDataBBQ={sendDataBBQ}
                             setOpenModalAddNewItemBBQ={
@@ -443,15 +425,15 @@ const mdTheme = createTheme({
                             }
                           />
                         )} */}
-                      </div>
+                    </div>
 
-                      <div>
-                        {/* When category button is clicked, there is a BACKEND BUG: Uncaught TypeError: _helpers_axios__WEBPACK_IMPORTED_MODULE_26__.default.get(...).then(...).error is not a function */}
-                        {myCategory != "" && (
-                          <MenuItemButtons onAdd={onAdd} products={products} />
-                        )}
+                    <div>
+                      {/* When category button is clicked, there is a BACKEND BUG: Uncaught TypeError: _helpers_axios__WEBPACK_IMPORTED_MODULE_26__.default.get(...).then(...).error is not a function */}
+                      {myCategory != "" && (
+                        <MenuItemButtons onAdd={onAdd} products={products} />
+                      )}
 
-                        {/* {myCategory === "Bbq" && (
+                      {/* {myCategory === "Bbq" && (
                           <BBQButtons onAdd={onAdd} productsBBQ={productsBBQ} />
                         )}
                         {myCategory === "Bilao" && <BilaoButtons onAdd={onAdd}  />}
@@ -473,35 +455,34 @@ const mdTheme = createTheme({
                         {myCategory === "Solo Meals" && <SoloMealsButtons />}
                         {myCategory === "Soup" && <SoupButtons />}
                         {myCategory === "Vegetables" && <VegetablesButtons />} */}
-                      </div>
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 549,
-                      marginLeft: 25,
-                      backgroundColor: "#1F1D2B",
-                    }}
-                  >
-                    <OrderSidePage
-                      onAdd={onAdd}
-                      onRemove={onRemove}
-                      cartItems={cartItems}
-                    />
-                  </Paper>
-                </Grid>
+                    </div>
+                  </Box>
+                </Paper>
               </Grid>
-            </Container>
-          </Box>
-        </Box>
-      </ThemeProvider>
-    );
-  }
 
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 549,
+                    marginLeft: 25,
+                    backgroundColor: "#1F1D2B",
+                  }}
+                >
+                  <OrderSidePage
+                    onAdd={onAdd}
+                    onRemove={onRemove}
+                    cartItems={cartItems}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}

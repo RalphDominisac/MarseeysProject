@@ -117,6 +117,7 @@ const mdTheme = createTheme({
       axiosInstance.get("/orders")
       .then((response) => {
         setPendingOrders(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.log("Error: ", error)

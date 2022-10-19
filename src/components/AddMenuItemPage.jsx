@@ -50,14 +50,7 @@ import DecrementIncrementIngredients from "./DecrementIncrementIngredients";
 import ModalConfirmMenu from "./modals/ModalConfirmMenu";
 import ModalWarningMenu from "./modals/ModalWarningMenu";
 
-
-
-
-
-
 const drawerWidth = 120;
-
-
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -112,285 +105,275 @@ const mdTheme = createTheme({
       primary: "#ffffff",
     },
     paper: {
-    background: "red",
-  },
-    
+      background: "red",
+    },
   },
 });
 
+export default function AddMenuItemPage() {
+  const [ingredientsCart, setIngredientsCart] = useState([]);
 
-  export default function AddMenuItemPage() {
-
-     const [ingredientsCart, setIngredientsCart] = useState([]);
-
-     // -------------Add and Remove product functionality------------------------------------------
-     const onAdd = (ingredient) => {
-       const exist = ingredientsCart.find((x) => x.id === ingredient.id);
-       if (exist) {
-         setIngredientsCart(
-           ingredientsCart.map((x) =>
-             x.id === ingredient.id ? { ...exist, qty: exist.qty + 1 } : x
-           )
-         );
-       } else {
-         setIngredientsCart([...ingredientsCart, { ...ingredient, qty: 1 }]);
-       }
-     };
-
-     const onRemove = (ingredient) => {
-       const exist = ingredientsCart.find((x) => x.id === ingredient.id);
-       if (exist.qty === 1) {
-         setIngredientsCart(
-           ingredientsCart.filter((x) => x.id !== ingredient.id)
-         );
-       } else {
-         setIngredientsCart(
-           ingredientsCart.map((x) =>
-             x.id === ingredient.id ? { ...exist, qty: exist.qty - 1 } : x
-           )
-         );
-       }
-     };
-
-
-
-
-     
-     const [ingredients, setIngredients] = React.useState([]);
-     const [categories, setCategories] = React.useState([]);
-     
-     const [itemName, setItemName] = useState("");
-     const [itemCategory, setItemCategory] = useState('')
-     const [itemPrice, setItemPrice] = useState("");
-     const [menuIngredient, setMenuIngredient] = React.useState("");
-
-      useEffect(() => {
-        if (ingredients.length === 0) {
-          axiosInstance
-            .get("/ingredient")
-            .then((response) => {
-              setIngredients(response.data);
-            })
-            .catch((error) => {
-              console.log("Error: ", error);
-            });
-        }
-
-        if (categories.length === 0) {
-          axiosInstance
-            .get("/menu/categories")
-            .then((response) => {
-              setCategories(response.data);
-            })
-            .catch((error) => {
-              console.log("Error: ", error);
-            });
-        }
-      }, []);
-
-      const handleChangeIngredient = (event) => {
-        setMenuIngredient(event.target.value);
-      };
-    const navigate = useNavigate();
-    const navigateSignInPage = () => {
-      // 👇️ navigate to /
-      navigate("/");
-    };
-
-    const navigateToHomeOrderPage = () => {
-      navigate("/homeorderpage");
-    };
-
-    const navigateToPendingPage = () => {
-      navigate("/pendingpage");
-    };
-
-    const navigateToDraftsPage = () => {
-      navigate("/draftspage");
-    };
-
-    const navigateToHistoryPage = () => {
-      navigate("/historypage");
-    };
-
-    const navigateToDiscountsPage = () => {
-      navigate("/discountspage");
-    };
-
-    const [selectedIndex, setSelectedIndex] = React.useState("");
-
-    const handleListItemClick = (event, index) => {
-      setSelectedIndex(index);
-    };
-
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
-
-    const [menuRequest, setMenuRequest] = useState({
-      category: '', 
-      ingredients: '', 
-      name: '', 
-      price: '', 
-    })
-    const [showConfirmModal, setShowConfirmModal] = useState(false)
-    const [showWarningModal, setShowWarningModal] = useState(false)
-
-    const createNewMenu = () => {
-      let ingredientsMap = {}
-      
-      ingredientsCart.map((ingredient => {
-        ingredientsMap[ingredient.name] = ingredient.qty
-      }))
-      
-      if (itemCategory != '' || ingredientsCart != '' || itemName != '' || itemPrice != '') {
-        setMenuRequest({
-          category: itemCategory, 
-          ingredients: ingredientsMap, 
-          name: itemName, 
-          price: itemPrice, 
-        })
-        setShowConfirmModal(true)
-      } else {
-        setShowWarningModal(true)
-      }
+  // -------------Add and Remove product functionality------------------------------------------
+  const onAdd = (ingredient) => {
+    const exist = ingredientsCart.find((x) => x.id === ingredient.id);
+    if (exist) {
+      setIngredientsCart(
+        ingredientsCart.map((x) =>
+          x.id === ingredient.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setIngredientsCart([...ingredientsCart, { ...ingredient, qty: 1 }]);
     }
+  };
 
-    
-      
-    const confirmNewMenu = () => {
+  const onRemove = (ingredient) => {
+    const exist = ingredientsCart.find((x) => x.id === ingredient.id);
+    if (exist.qty === 1) {
+      setIngredientsCart(ingredientsCart.filter((x) => x.id !== ingredient.id));
+    } else {
+      setIngredientsCart(
+        ingredientsCart.map((x) =>
+          x.id === ingredient.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+
+  const [ingredients, setIngredients] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
+
+  const [itemName, setItemName] = useState("");
+  const [itemCategory, setItemCategory] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [menuIngredient, setMenuIngredient] = React.useState("");
+
+  useEffect(() => {
+    if (ingredients.length === 0) {
       axiosInstance
-        .post('/menu/add', menuRequest)
+        .get("/ingredient")
         .then((response) => {
-          setMenuRequest({
-            category: '', 
-            ingredients: '', 
-            name: '', 
-            price: '', 
-          })
+          setIngredients(response.data);
         })
         .catch((error) => {
-          console.log("Error: ", error)
-        })
+          console.log("Error: ", error);
+        });
     }
 
+    if (categories.length === 0) {
+      axiosInstance
+        .get("/menu/categories")
+        .then((response) => {
+          setCategories(response.data);
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+        });
+    }
+  }, []);
 
-    
+  const handleChangeIngredient = (event) => {
+    setMenuIngredient(event.target.value);
+  };
+  const navigate = useNavigate();
+  const navigateSignInPage = () => {
+    // 👇️ navigate to /
+    navigate("/");
+  };
 
+  const navigateToHomeOrderPage = () => {
+    navigate("/homeorderpage");
+  };
 
+  const navigateToPendingPage = () => {
+    navigate("/pendingpage");
+  };
 
+  const navigateToDraftsPage = () => {
+    navigate("/draftspage");
+  };
 
+  const navigateToHistoryPage = () => {
+    navigate("/historypage");
+  };
 
+  const navigateToDiscountsPage = () => {
+    navigate("/discountspage");
+  };
 
-    return (
-      <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: "flex" }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
+  const [selectedIndex, setSelectedIndex] = React.useState("");
 
-          <Drawer
-            variant="permanent"
-            open={open}
-            PaperProps={{
-              sx: {
-                backgroundColor: "#252836",
-              },
-            }}
-          >
-            {/* ** Upper Right Part For Logo */}
-            <ToolbarUpperRight />
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
 
-            <Divider />
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
-            {/* SIDEBAR MENU LEFT ******************************************************************************/}
-            <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 0}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 0),
-                  navigateToHomeOrderPage)
-                }
-                imgID="orderIcon"
-                imgSrc="./images/ordericon.png"
-              />
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 1}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 1),
-                  navigateToPendingPage)
-                }
-                imgID="pendingIcon"
-                imgSrc="./images/pending.png"
-              />
+  const [menuRequest, setMenuRequest] = useState({
+    category: "",
+    ingredients: "",
+    name: "",
+    price: "",
+  });
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showWarningModal, setShowWarningModal] = useState(false);
 
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 3}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 3),
-                  navigateToHistoryPage)
-                }
-                imgID="historyIcon"
-                imgSrc="images/history.png"
-              />
+  const createNewMenu = () => {
+    let ingredientsMap = {};
 
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 4}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
-                }
-                imgID="logoutIcon"
-                imgSrc="images/logout.png"
-              />
-            </List>
-          </Drawer>
+    ingredientsCart.map((ingredient) => {
+      ingredientsMap[ingredient.id] = ingredient.qty;
+    });
 
-          <Box
-            component="main"
-            sx={{
+    if (
+      itemCategory === "" ||
+      ingredientsCart.length === 0 ||
+      itemName === "" ||
+      itemPrice === ""
+    ) {
+       setShowWarningModal(true);
+    } else {
+       setMenuRequest({
+         category: itemCategory,
+         ingredients: ingredientsMap,
+         name: itemName,
+         price: itemPrice,
+       });
+       setShowConfirmModal(true);
+    }
+  };
+
+  const confirmNewMenu = () => {
+    axiosInstance
+      .post("/menu/add", menuRequest)
+      .then((response) => {
+        // setMenuRequest({
+        //   category: '',
+        //   ingredients: '',
+        //   name: '',
+        //   price: '',
+        // })
+        // setShowConfirmModal(false)
+        navigate("/homeorderpage");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+        console.log(menuRequest);
+      });
+  };
+
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
+
+        <Drawer
+          variant="permanent"
+          open={open}
+          PaperProps={{
+            sx: {
               backgroundColor: "#252836",
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto",
-            }}
-          >
-            <Container maxWidth="md" sx={{ ml: -1 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 850,
-                      backgroundColor: "#252836",
-                    }}
-                  >
-                    <Box sx={{ flexGrow: 1, ml: -1 }}>
-                      <AppBar
-                        elevation={0}
-                        position="static"
-                        sx={{ backgroundColor: "#252836" }}
-                      >
-                        <ToolBarAddMenuItemPageHeader />
-                      </AppBar>
+            },
+          }}
+        >
+          {/* ** Upper Right Part For Logo */}
+          <ToolbarUpperRight />
 
-                      {/* <HistoryPageHeaderLabels /> */}
-                      {/* <HistoryPageBody /> */}
+          <Divider />
 
-                      <div>
-                        <TextField
-                          onChange={(g1) => setItemName(g1.target.value)}
-                          className="inputRounded"
-                          placeholder="Item Name"
-                          variant="outlined"
-                          size="small"
-                          sx={{ mt: 5 }}
-                          required
-                        />
-                      </div>
-                      <div>
-                        {/* <TextField
+          {/* SIDEBAR MENU LEFT ******************************************************************************/}
+          <List component="nav" sx={{ backgroundColor: "#252836" }}>
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 0}
+              getOnClick={
+                ((event) => handleListItemClick(event, 0),
+                navigateToHomeOrderPage)
+              }
+              imgID="orderIcon"
+              imgSrc="./images/ordericon.png"
+            />
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 1}
+              getOnClick={
+                ((event) => handleListItemClick(event, 1),
+                navigateToPendingPage)
+              }
+              imgID="pendingIcon"
+              imgSrc="./images/pending.png"
+            />
+
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 3}
+              getOnClick={
+                ((event) => handleListItemClick(event, 3),
+                navigateToHistoryPage)
+              }
+              imgID="historyIcon"
+              imgSrc="images/history.png"
+            />
+
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 4}
+              getOnClick={
+                ((event) => handleListItemClick(event, 4), navigateSignInPage)
+              }
+              imgID="logoutIcon"
+              imgSrc="images/logout.png"
+            />
+          </List>
+        </Drawer>
+
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: "#252836",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="md" sx={{ ml: -1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 850,
+                    backgroundColor: "#252836",
+                  }}
+                >
+                  <Box sx={{ flexGrow: 1, ml: -1 }}>
+                    <AppBar
+                      elevation={0}
+                      position="static"
+                      sx={{ backgroundColor: "#252836" }}
+                    >
+                      <ToolBarAddMenuItemPageHeader />
+                    </AppBar>
+
+                    {/* <HistoryPageHeaderLabels /> */}
+                    {/* <HistoryPageBody /> */}
+
+                    <div>
+                      <TextField
+                        onChange={(g1) => setItemName(g1.target.value)}
+                        className="inputRounded"
+                        placeholder="Item Name"
+                        variant="outlined"
+                        size="small"
+                        sx={{ mt: 5 }}
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
+                    <div>
+                      {/* <TextField
                           onChange={(g2) => setItemPrice(g2.target.value)}
                           className="inputRounded"
                           placeholder="Item Category"
@@ -398,224 +381,226 @@ const mdTheme = createTheme({
                           size="small"
                           sx={{ mt: 5 }}
                         /> */}
-                        <FormControl
-                          sx={{
-                            m: 1,
-                            width: 200,
-                            backgroundColor: "#252836",
-                            borderRadius: 3,
-                            ml: 1,
-                            height: 42,
-                            mt: 5,
-                          }}
-                        >
-                          <Select
-                            //value={menuIngredient}
-                            // onChange={handleChangeIngredient}
-                            displayEmpty
-                            inputProps={{ "aria-label": "Without label" }}
-                            sx={{
-                              "&:hover": {
-                                "&& fieldset": {
-                                  border: "1px solid white",
-                                },
-                              },
-
-                              // more accurate dropdown effect
-                              // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
-
-                              borderRadius: 3,
-                              width: 200,
-                              height: 42,
-                              fontFamily: "Barlow Condensed",
-                            }}
-                            MenuProps={{
-                              PaperProps: {
-                                sx: {
-                                  "& .MuiMenuItem-root.Mui-selected": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  "& .MuiMenuItem-root:hover": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  "& .MuiMenuItem-root.Mui-selected:hover": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  backgroundColor: "#252836",
-                                },
-                              },
-                            }}
-                            defaultValue=""
-                            required
-                          >
-                            {categories.map((category) => (
-                              <MenuItem key={category.id} value={category.name}>
-                                {category.name}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-                      <div>
-                        <TextField
-                          onChange={(g3) => setItemPrice(g3.target.value)}
-                          className="inputRounded"
-                          placeholder="Item Price"
-                          variant="outlined"
-                          size="small"
-                          sx={{ mt: 5 }}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <FormControl
-                          sx={{
-                            m: 1,
-                            width: 200,
-                            backgroundColor: "#252836",
-                            borderRadius: 3,
-                            ml: 1,
-                            height: 42,
-                            mt: 5,
-                          }}
-                        >
-                          <Select
-                            value={menuIngredient}
-                            onChange={handleChangeIngredient}
-                            displayEmpty
-                            inputProps={{ "aria-label": "Without label" }}
-                            sx={{
-                              "&:hover": {
-                                "&& fieldset": {
-                                  border: "1px solid white",
-                                },
-                              },
-
-                              // more accurate dropdown effect
-                              // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
-
-                              borderRadius: 3,
-                              width: 200,
-                              height: 42,
-                              fontFamily: "Barlow Condensed",
-                            }}
-                            MenuProps={{
-                              PaperProps: {
-                                sx: {
-                                  "& .MuiMenuItem-root.Mui-selected": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  "& .MuiMenuItem-root:hover": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  "& .MuiMenuItem-root.Mui-selected:hover": {
-                                    backgroundColor: "#3F4351",
-                                  },
-                                  backgroundColor: "#252836",
-                                },
-                              },
-                            }}
-                          >
-                            {ingredients.map((ingredient) => (
-                              <MenuItem key={ingredient.id} value={ingredient}>
-                                {ingredient.name}
-                              </MenuItem>
-                            ))}
-                          </Select>
-
-                          <button
-                            onClick={() => onAdd(menuIngredient)}
-                            style={{ marginLeft: "50px", marginTop: "15px" }}
-                          >
-                            Add
-                          </button>
-                        </FormControl>
-
-                        {/* DISPLAY HERE SELECTED INGREDIENTS, QTY, AND UNIT MEASURE */}
-                        <div>
-                          {ingredientsCart.length === 0 ? (
-                            <div style={{ marginTop: -280, marginLeft: 300 }}>
-                              Ingredients are Empty
-                            </div>
-                          ) : (
-                            ingredientsCart.map((ingredient) => (
-                              <div key={ingredient.id}>
-                                <Typography
-                                  sx={{
-                                    color: "white",
-                                    fontSize: 20,
-                                    fontFamily: "Barlow Condensed",
-                                    mt: 1,
-                                    ml: 45,
-                                    width: 50,
-                                  }}
-                                >
-                                  {ingredient.name}
-                                </Typography>
-
-                                <DecrementIncrementIngredients
-                                  onClickRemoveFunctionCounter={() =>
-                                    onRemove(ingredient)
-                                  }
-                                  onClickAddFunctionCounter={() =>
-                                    onAdd(ingredient)
-                                  }
-                                  itemQtyCounter={ingredient.qty}
-                                />
-                              </div>
-                            ))
-                          )}
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={createNewMenu}
-                        style={{ marginLeft: "25em" }}
+                      <FormControl
+                        sx={{
+                          m: 1,
+                          width: 200,
+                          backgroundColor: "#252836",
+                          borderRadius: 3,
+                          ml: 1,
+                          height: 42,
+                          mt: 5,
+                        }}
                       >
-                        Submit
-                      </button>
-                    </Box>
-                  </Paper>
-                </Grid>
+                        <Select
+                          //value={menuIngredient}
+                          // onChange={handleChangeIngredient}
+                          displayEmpty
+                          inputProps={{ "aria-label": "Without label" }}
+                          sx={{
+                            "&:hover": {
+                              "&& fieldset": {
+                                border: "1px solid white",
+                              },
+                            },
 
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 549,
-                      marginLeft: 25,
-                      backgroundColor: "#1F1D2B",
-                    }}
-                  ></Paper>
-                </Grid>
+                            // more accurate dropdown effect
+                            // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
+
+                            borderRadius: 3,
+                            width: 200,
+                            height: 42,
+                            fontFamily: "Barlow Condensed",
+                          }}
+                          MenuProps={{
+                            PaperProps: {
+                              sx: {
+                                "& .MuiMenuItem-root.Mui-selected": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                "& .MuiMenuItem-root:hover": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                "& .MuiMenuItem-root.Mui-selected:hover": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                backgroundColor: "#252836",
+                              },
+                            },
+                          }}
+                          defaultValue=""
+                          required
+                          onChange={(event) =>
+                            setItemCategory(event.target.value)
+                          }
+                        >
+                          {categories.map((category) => (
+                            <MenuItem key={category.id} value={category.name}>
+                              {category.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div>
+                      <TextField
+                        onChange={(g3) => setItemPrice(g3.target.value)}
+                        className="inputRounded"
+                        placeholder="Item Price"
+                        variant="outlined"
+                        size="small"
+                        sx={{ mt: 5 }}
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
+                    <div>
+                      <FormControl
+                        sx={{
+                          m: 1,
+                          width: 200,
+                          backgroundColor: "#252836",
+                          borderRadius: 3,
+                          ml: 1,
+                          height: 42,
+                          mt: 5,
+                        }}
+                      >
+                        <Select
+                          value={menuIngredient}
+                          onChange={handleChangeIngredient}
+                          displayEmpty
+                          inputProps={{ "aria-label": "Without label" }}
+                          sx={{
+                            "&:hover": {
+                              "&& fieldset": {
+                                border: "1px solid white",
+                              },
+                            },
+
+                            // more accurate dropdown effect
+                            // https://codesandbox.io/s/69436218-how-to-change-dropdown-hover-color-react-material-ui-select-dvkep?file=/demo.js:0-1480
+
+                            borderRadius: 3,
+                            width: 200,
+                            height: 42,
+                            fontFamily: "Barlow Condensed",
+                          }}
+                          MenuProps={{
+                            PaperProps: {
+                              sx: {
+                                "& .MuiMenuItem-root.Mui-selected": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                "& .MuiMenuItem-root:hover": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                "& .MuiMenuItem-root.Mui-selected:hover": {
+                                  backgroundColor: "#3F4351",
+                                },
+                                backgroundColor: "#252836",
+                              },
+                            },
+                          }}
+                        >
+                          {ingredients.map((ingredient) => (
+                            <MenuItem key={ingredient.id} value={ingredient}>
+                              {ingredient.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+
+                        <button
+                          onClick={() => onAdd(menuIngredient)}
+                          style={{ marginLeft: "50px", marginTop: "15px" }}
+                        >
+                          Add
+                        </button>
+                      </FormControl>
+
+                      {/* DISPLAY HERE SELECTED INGREDIENTS, QTY, AND UNIT MEASURE */}
+                      <div>
+                        {ingredientsCart.length === 0 ? (
+                          <div style={{ marginTop: -280, marginLeft: 300 }}>
+                            Ingredients are Empty
+                          </div>
+                        ) : (
+                          ingredientsCart.map((ingredient) => (
+                            <div key={ingredient.id}>
+                              <Typography
+                                sx={{
+                                  color: "white",
+                                  fontSize: 20,
+                                  fontFamily: "Barlow Condensed",
+                                  mt: 1,
+                                  ml: 45,
+                                  width: 50,
+                                }}
+                              >
+                                {ingredient.name}
+                              </Typography>
+
+                              <DecrementIncrementIngredients
+                                onClickRemoveFunctionCounter={() =>
+                                  onRemove(ingredient)
+                                }
+                                onClickAddFunctionCounter={() =>
+                                  onAdd(ingredient)
+                                }
+                                itemQtyCounter={ingredient.qty}
+                                itemUnit={ingredient.unitMeasure}
+                              />
+                            </div>
+                            
+                          ))
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={createNewMenu}
+                      style={{ marginLeft: "25em" }}
+                    >
+                      Submit
+                    </button>
+                  </Box>
+                </Paper>
               </Grid>
 
-{/* CURRENTLY DOESN'T SHOW MODAL IF FIELDS ARE INCOMPLETE, SHOWS ONLY IF INPUT FIELDS ARE ALL BLANK, FIX CONDITIONALS of the fields? */}
-              {showWarningModal && (
-                <ModalWarningMenu
-                  // sendDataBBQ={sendDataBBQ}
-                  setOpenModalWarningMenu={setShowWarningModal}
-                />
-              )}
-      
-        {/* SHOWS WHEN FIELDS ARE COMPLETE, SHOWS ALSO IF FIELDS ARE INCOMPLETE */}
-              {showConfirmModal && (
-                <ModalConfirmMenu
-                  // sendDataBBQ={sendDataBBQ}
-                  setOpenModalConfirmMenu={setShowConfirmModal}
-                  pushFunctionality={confirmNewMenu}
-                />
-              )}
-            </Container>
-          </Box>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 549,
+                    marginLeft: 25,
+                    backgroundColor: "#1F1D2B",
+                  }}
+                ></Paper>
+              </Grid>
+            </Grid>
+
+            {/* CURRENTLY DOESN'T SHOW MODAL IF FIELDS ARE INCOMPLETE, SHOWS ONLY IF INPUT FIELDS ARE ALL BLANK, FIX CONDITIONALS of the fields? */}
+            {showWarningModal && (
+              <ModalWarningMenu
+                // sendDataBBQ={sendDataBBQ}
+                setOpenModalWarningMenu={setShowWarningModal}
+              />
+            )}
+
+            {/* SHOWS WHEN FIELDS ARE COMPLETE, SHOWS ALSO IF FIELDS ARE INCOMPLETE */}
+            {showConfirmModal && (
+              <ModalConfirmMenu
+                // sendDataBBQ={sendDataBBQ}
+                setOpenModalConfirmMenu={setShowConfirmModal}
+                pushFunctionality={confirmNewMenu}
+              />
+            )}
+          </Container>
         </Box>
-      </ThemeProvider>
-    );
-  }
-
-
-
-
+      </Box>
+    </ThemeProvider>
+  );
+}

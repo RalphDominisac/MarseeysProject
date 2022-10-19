@@ -41,14 +41,9 @@ import ToolBarHistoryPageHeader from "./cssComponents/ToolBarHistoryPageHeader";
 import HistoryPageHeaderLabels from "./cssComponents/HistoryPageHeaderLabels";
 import HistoryPageBody from "./cssComponents/HistoryPageBody";
 import ToolBarAddCategoryPageHeader from "./cssComponents/ToolBarAddCategoryPageHeader";
-
-
-
-
+import axiosInstance from "../helpers/axios";
 
 const drawerWidth = 120;
-
-
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -103,182 +98,187 @@ const mdTheme = createTheme({
       primary: "#ffffff",
     },
     paper: {
-    background: "red",
-  },
-    
+      background: "red",
+    },
   },
 });
 
+export default function AddCategoryPage() {
+  const navigate = useNavigate();
+  const navigateSignInPage = () => {
+    // 👇️ navigate to /
+    navigate("/");
+  };
 
-  export default function AddCategoryPage() {
-    const navigate = useNavigate();
-    const navigateSignInPage = () => {
-      // 👇️ navigate to /
-      navigate("/");
-    };
+  const navigateToHomeOrderPage = () => {
+    navigate("/homeorderpage");
+  };
 
-    const navigateToHomeOrderPage = () => {
-      navigate("/homeorderpage");
-    };
+  const navigateToPendingPage = () => {
+    navigate("/pendingpage");
+  };
 
-    const navigateToPendingPage = () => {
-      navigate("/pendingpage");
-    };
+  const navigateToDraftsPage = () => {
+    navigate("/draftspage");
+  };
 
-    const navigateToDraftsPage = () => {
-      navigate("/draftspage");
-    };
+  const navigateToHistoryPage = () => {
+    navigate("/historypage");
+  };
 
-    const navigateToHistoryPage = () => {
-      navigate("/historypage");
-    };
+  const navigateToDiscountsPage = () => {
+    navigate("/discountspage");
+  };
 
-    const navigateToDiscountsPage = () => {
-      navigate("/discountspage");
-    };
+  const [selectedIndex, setSelectedIndex] = React.useState("");
 
-    const [selectedIndex, setSelectedIndex] = React.useState("");
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
 
-    const handleListItemClick = (event, index) => {
-      setSelectedIndex(index);
-    };
-
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
   const [category, setCategory] = useState("");
 
-
-    return (
-      <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: "flex" }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
-
-          <Drawer
-            variant="permanent"
-            open={open}
-            PaperProps={{
-              sx: {
-                backgroundColor: "#252836",
-              },
-            }}
-          >
-            {/* ** Upper Right Part For Logo */}
-            <ToolbarUpperRight />
-
-            <Divider />
-
-            {/* SIDEBAR MENU LEFT ******************************************************************************/}
-            <List component="nav" sx={{ backgroundColor: "#252836" }}>
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 0}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 0),
-                  navigateToHomeOrderPage)
-                }
-                imgID="orderIcon"
-                imgSrc="./images/ordericon.png"
-              />
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 1}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 1),
-                  navigateToPendingPage)
-                }
-                imgID="pendingIcon"
-                imgSrc="./images/pending.png"
-              />
-
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 3}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 3),
-                  navigateToHistoryPage)
-                }
-                imgID="historyIcon"
-                imgSrc="images/history.png"
-              />
-
-              <ListItemButtonComponent
-                getSelected={selectedIndex === 4}
-                getOnClick={
-                  ((event) => handleListItemClick(event, 4), navigateSignInPage)
-                }
-                imgID="logoutIcon"
-                imgSrc="images/logout.png"
-              />
-            </List>
-          </Drawer>
-
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: "#252836",
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto",
-            }}
-          >
-            <Container maxWidth="md" sx={{ ml: -1 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 850,
-                      backgroundColor: "#252836",
-                    }}
-                  >
-                    <Box sx={{ flexGrow: 1, ml: -1 }}>
-                      <AppBar
-                        elevation={0}
-                        position="static"
-                        sx={{ backgroundColor: "#252836" }}
-                      >
-                        <ToolBarAddCategoryPageHeader />
-                      </AppBar>
-
-                      {/* <HistoryPageHeaderLabels /> */}
-                      {/* <HistoryPageBody /> */}
-
-                      <TextField
-                        onChange={(g1) => setCategory(g1.target.value)}
-                        className="inputRounded"
-                        placeholder="Category Name"
-                        variant="outlined"
-                        size="small"
-                      />
-
-                      <button>Add</button>
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 790,
-                      width: 549,
-                      marginLeft: 25,
-                      backgroundColor: "#1F1D2B",
-                    }}
-                  ></Paper>
-                </Grid>
-              </Grid>
-            </Container>
-          </Box>
-        </Box>
-      </ThemeProvider>
-    );
+  function addCategory() {
+    axiosInstance
+      .post("/menu/categories/add", category)
+      .then((res) => {
+        setCategory("");
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
   }
 
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open} sx={{ width: "50" }}></AppBar>
 
+        <Drawer
+          variant="permanent"
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "#252836",
+            },
+          }}
+        >
+          {/* ** Upper Right Part For Logo */}
+          <ToolbarUpperRight />
 
+          <Divider />
 
+          {/* SIDEBAR MENU LEFT ******************************************************************************/}
+          <List component="nav" sx={{ backgroundColor: "#252836" }}>
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 0}
+              getOnClick={
+                ((event) => handleListItemClick(event, 0),
+                navigateToHomeOrderPage)
+              }
+              imgID="orderIcon"
+              imgSrc="./images/ordericon.png"
+            />
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 1}
+              getOnClick={
+                ((event) => handleListItemClick(event, 1),
+                navigateToPendingPage)
+              }
+              imgID="pendingIcon"
+              imgSrc="./images/pending.png"
+            />
+
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 3}
+              getOnClick={
+                ((event) => handleListItemClick(event, 3),
+                navigateToHistoryPage)
+              }
+              imgID="historyIcon"
+              imgSrc="images/history.png"
+            />
+
+            <ListItemButtonComponent
+              getSelected={selectedIndex === 4}
+              getOnClick={
+                ((event) => handleListItemClick(event, 4), navigateSignInPage)
+              }
+              imgID="logoutIcon"
+              imgSrc="images/logout.png"
+            />
+          </List>
+        </Drawer>
+
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: "#252836",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="md" sx={{ ml: -1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 850,
+                    backgroundColor: "#252836",
+                  }}
+                >
+                  <Box sx={{ flexGrow: 1, ml: -1 }}>
+                    <AppBar
+                      elevation={0}
+                      position="static"
+                      sx={{ backgroundColor: "#252836" }}
+                    >
+                      <ToolBarAddCategoryPageHeader />
+                    </AppBar>
+
+                    {/* <HistoryPageHeaderLabels /> */}
+                    {/* <HistoryPageBody /> */}
+
+                    <TextField
+                      onChange={(g1) => setCategory(g1.target.value)}
+                      className="inputRounded"
+                      placeholder="Category Name"
+                      variant="outlined"
+                      size="small"
+                      value={category}
+                    />
+
+                    <button onClick={addCategory}>Add</button>
+                  </Box>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 790,
+                    width: 549,
+                    marginLeft: 25,
+                    backgroundColor: "#1F1D2B",
+                  }}
+                ></Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}

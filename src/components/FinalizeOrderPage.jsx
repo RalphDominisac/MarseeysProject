@@ -128,7 +128,6 @@ const mdTheme = createTheme({
         discount: '',
       })
 
-      const [orders, setOrders] = useState({});
       const [table, setTable] = useState('');
 
       
@@ -136,13 +135,12 @@ const mdTheme = createTheme({
         let itemsMap = {}
 
         data.cartItems.map((item) => {
-          itemsMap[item.id] = item.qty
+          itemsMap[item.name] = item.qty
         })
 
-        setOrders(itemsMap)
         setOrderRequest({
           ...orderRequest, 
-          contents: orders,
+          contents: itemsMap,
         })
     }, [])
 

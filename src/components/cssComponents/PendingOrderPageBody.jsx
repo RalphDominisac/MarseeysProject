@@ -22,6 +22,18 @@ export default function PendingOrderPageBody(props) {
        navigate("/ordersummarypage", { state: order });
      };
 
+    
+     useEffect(() => {
+      axiosInstance.get("/orders")
+      .then((response) => {
+        setOrders(response.data)
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log("Error: ", error)
+      })
+    }, [])
+
   return (
     <React.Fragment>
       {/* <Typography class="customerListStack" sx={{ color: "white" }}>
