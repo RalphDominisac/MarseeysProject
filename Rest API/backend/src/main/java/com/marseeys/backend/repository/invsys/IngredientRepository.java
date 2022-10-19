@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface IngredientRepository extends MongoRepository<Ingredient, Integer> {
     @Query("{'deleted': false}")
     List<Ingredient> viewIngredients();
+    @Query("{ $and: [ {'_id' : { $in: ?0 }}, {'deleted': false}  ] }")
+    List<Ingredient> findIngredients(List<Integer> ingredientIds);
 }

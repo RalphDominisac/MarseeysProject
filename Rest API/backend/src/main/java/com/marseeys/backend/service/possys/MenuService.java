@@ -1,5 +1,6 @@
 package com.marseeys.backend.service.possys;
 
+import com.marseeys.backend.config.StoreMenu;
 import com.marseeys.backend.entity.possys.menu.Menu;
 import com.marseeys.backend.entity.possys.menu.MenuCategory;
 import com.marseeys.backend.exception.DatabaseException;
@@ -27,6 +28,7 @@ public class MenuService {
     private final MenuCategoryRepository menuCategoryRepository;
     private final DatabaseHelper databaseHelper;
     private final FindHelper findHelper;
+    private final StoreMenu storeMenu;
 
     public MenuCategory saveMenuCategory(MenuCategoryRequest menuCategoryRequest) throws DatabaseException {
         try {
@@ -76,7 +78,9 @@ public class MenuService {
                     ingredients
             );
 
-            return menuRepository.save(menu);
+            menuRepository.save(menu);
+            storeMenu.reloadMenu();
+            return menu;
         } catch (Exception ex) {
             throw new DatabaseException(
                     ex,
@@ -95,7 +99,9 @@ public class MenuService {
         menu.setCategory(category);
         menu.setIngredients(ingredients);
 
-        return menuRepository.save(menu);
+        menuRepository.save(menu);
+        storeMenu.reloadMenu();
+        return menu;
     }
 
     public Menu deleteMenu(int id) throws DatabaseException, MenuException {
@@ -106,6 +112,8 @@ public class MenuService {
                 ExceptionType.MENU_ALREADY_DELETED_EXCEPTION
         ); else menu.setDeleted(true);
 
-        return menuRepository.save(menu);
+        menuRepository.save(menu);
+        storeMenu.reloadMenu();
+        return menu;
     }
 }

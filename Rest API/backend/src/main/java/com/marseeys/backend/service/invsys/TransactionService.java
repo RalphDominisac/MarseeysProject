@@ -8,6 +8,7 @@ import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
 import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
+import com.marseeys.backend.helper.OrderingHelper;
 import com.marseeys.backend.helper.TransactionHelper;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
@@ -20,10 +21,7 @@ import com.marseeys.backend.types.ExceptionType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -33,6 +31,7 @@ public class TransactionService {
     private final DatabaseHelper databaseHelper;
     private final TransactionHelper transactionHelper;
     private final FindHelper findHelper;
+    private final OrderingHelper orderingHelper;
 
     public List<Transaction> getTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
@@ -135,54 +134,31 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> saveTransactionOut(Order order) throws IngredientException, DatabaseException {
+    public List<Transaction> saveTransactionOut(int orderId, Map<String, Integer> orderContents) throws DatabaseException, IngredientException {
         List<Transaction> orderTransaction = new ArrayList<>();
         List<Ingredient> ingredientChanges = new ArrayList<>();
-        Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(order);
+        Map<Integer, Double> totalIngredients = orderingHelper.getTotalIngredients(orderContents);
 
-        for (Map.Entry<String, Double> entry : totalDeductions.entrySet()) {
-            Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(entry.getKey()));
-            double deduction = entry.getValue();
+        Set<Integer> ingredientIds = totalIngredients.keySet();
+        List<Ingredient> availableIngredients = ingredientRepository.findIngredients(ingredientIds.stream().toList());
 
-            if (ingredient.getQuantity() - deduction < 0) {
-                throw new IngredientException(ExceptionType.INSUFFICIENT_INGREDIENTS_EXCEPTION);
-            }
-            ingredient.setQuantity(ingredient.getQuantity() - deduction);
-            ingredientChanges.add(ingredient);
-
-            Transaction transaction = new Transaction(
-                    ingredient,
-                    deduction,
-                    "Order number: " + order.getId()
-            );
-
-            orderTransaction.add(transaction);
+        if (ingredientIds.size() != availableIngredients.size()) {
+            throw new IngredientException(ExceptionType.INSUFFICIENT_INGREDIENTS_EXCEPTION);
         }
 
-        ingredientRepository.saveAll(ingredientChanges);
-        transactionHelper.reflectTransactions(orderTransaction);
-        return transactionRepository.saveAll(orderTransaction);
-    }
+        for (Ingredient ingredient : availableIngredients) {
+            Double ingredientRequired = totalIngredients.get(ingredient.getId());
 
-    public List<Transaction> saveTransactionOut(int id, Map<String, Integer> additionalContents) throws DatabaseException, IngredientException {
-        List<Transaction> orderTransaction = new ArrayList<>();
-        List<Ingredient> ingredientChanges = new ArrayList<>();
-        Map<String, Double> totalDeductions = databaseHelper.getTotalDeductions(additionalContents);
-
-        for (Map.Entry<String, Double> entry : totalDeductions.entrySet()) {
-            Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(entry.getKey()));
-            double deduction = entry.getValue();
-
-            if (ingredient.getQuantity() - deduction < 0) {
+            if (ingredient.getQuantity() - ingredientRequired < 0) {
                 throw new IngredientException(ExceptionType.INSUFFICIENT_INGREDIENTS_EXCEPTION);
             }
-            ingredient.setQuantity(ingredient.getQuantity() - deduction);
+            ingredient.setQuantity(ingredient.getQuantity() - ingredientRequired);
             ingredientChanges.add(ingredient);
 
             Transaction transaction = new Transaction(
                     ingredient,
-                    deduction,
-                    "Additional items for order number: " + id
+                    ingredientRequired,
+                    "Order number : " + orderId
             );
 
             orderTransaction.add(transaction);

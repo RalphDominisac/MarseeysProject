@@ -83,7 +83,7 @@ public class OrderService {
                 dineInRequest.getTableNo()
         );
 
-        transactionService.saveTransactionOut(order);
+        transactionService.saveTransactionOut(order.getId(), order.getContents());
         try {
             return orderRepository.save(order);
         } catch (Exception ex) {
@@ -112,7 +112,7 @@ public class OrderService {
                 findHelper.findMethod(deliveryRequest.getDeliveryMethod())
         );
 
-        transactionService.saveTransactionOut(order);
+        transactionService.saveTransactionOut(order.getId(), order.getContents());
         try {
             return orderRepository.save(order);
         } catch (Exception ex) {
@@ -141,7 +141,7 @@ public class OrderService {
                 pickUpRequest.getEstimatedTime()
         );
 
-        transactionService.saveTransactionOut(order);
+        transactionService.saveTransactionOut(order.getId(), order.getContents());
         try {
             return orderRepository.save(order);
         } catch (Exception ex) {

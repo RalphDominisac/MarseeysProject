@@ -2,10 +2,8 @@ package com.marseeys.backend.helper;
 
 import com.marseeys.backend.entity.hrmsys.department.Department;
 import com.marseeys.backend.entity.hrmsys.employee.Employee;
-import com.marseeys.backend.entity.hrmsys.employee.Shift;
 import com.marseeys.backend.entity.invsys.ingredient.Ingredient;
 import com.marseeys.backend.entity.possys.menu.Menu;
-import com.marseeys.backend.entity.possys.order.base.Order;
 import com.marseeys.backend.entity.security.role.Role;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.repository.hrmsys.DepartmentRepository;
@@ -65,36 +63,36 @@ public class DatabaseHelper {
 //        return shifts;
 //    }
 
-    public Map<String, Double> getTotalDeductions(Order order) throws DatabaseException {
-        Map<String, Double> totalDeductions = new HashMap<>();
+//    public Map<String, Double> getTotalDeductions(Order order) throws DatabaseException {
+//        Map<String, Double> totalDeductions = new HashMap<>();
+//
+//        for (Map.Entry<String, Integer> menuEntry : order.getContents().entrySet()) {
+//            Menu menu = findHelper.findMenu(menuEntry.getKey());
+//            int menuQuantity = menuEntry.getValue();
+//
+//            for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {
+//                Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(ingredientEntry.getKey()));
+//                double ingredientQuantity = ingredientEntry.getValue();
+//                double ingredientDeduction = menuQuantity * ingredientQuantity;
+//
+//                if (!totalDeductions.containsKey(String.valueOf(ingredient.getId()))) {
+//                    totalDeductions.put(
+//                            String.valueOf(ingredient.getId()),
+//                            ingredientDeduction
+//                    );
+//                } else {
+//                    totalDeductions.put(
+//                            String.valueOf(ingredient.getId()),
+//                            totalDeductions.get(String.valueOf(ingredient.getId())) + ingredientDeduction)
+//                    ;
+//                }
+//            }
+//        }
+//
+//        return totalDeductions;
+//    }
 
-        for (Map.Entry<String, Integer> menuEntry : order.getContents().entrySet()) {
-            Menu menu = findHelper.findMenu(menuEntry.getKey());
-            int menuQuantity = menuEntry.getValue();
-
-            for (Map.Entry<String, Double> ingredientEntry : menu.getIngredients().entrySet()) {
-                Ingredient ingredient = findHelper.findIngredient(Integer.parseInt(ingredientEntry.getKey()));
-                double ingredientQuantity = ingredientEntry.getValue();
-                double ingredientDeduction = menuQuantity * ingredientQuantity;
-
-                if (!totalDeductions.containsKey(String.valueOf(ingredient.getId()))) {
-                    totalDeductions.put(
-                            String.valueOf(ingredient.getId()),
-                            ingredientDeduction
-                    );
-                } else {
-                    totalDeductions.put(
-                            String.valueOf(ingredient.getId()),
-                            totalDeductions.get(String.valueOf(ingredient.getId())) + ingredientDeduction)
-                    ;
-                }
-            }
-        }
-
-        return totalDeductions;
-    }
-
-    public Map<String, Double> getTotalDeductions(Map<String, Integer> additionalContents) throws DatabaseException {
+    public Map<String, Double> getTotalIngredients(Map<String, Integer> additionalContents) throws DatabaseException {
         Map<String, Double> totalDeductions = new HashMap<>();
 
         for (Map.Entry<String, Integer> menuEntry : additionalContents.entrySet()) {
