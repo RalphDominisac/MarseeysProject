@@ -308,7 +308,7 @@ const mdTheme = createTheme({
                             <Typography
                               sx={{
                                 fontFamily: "Barlow Condensed",
-                                ml: 94,
+                                ml: 78,
                                 mt: -3.5,
                                 fontSize: 19,
                               }}
@@ -322,7 +322,7 @@ const mdTheme = createTheme({
                               - - - - - - - - - - - - - - - - - - - - - - - - -
                               - - - - - - - - - - - - - - - - - - - - - - - - -
                               - - - - - - - - - - - - - - - - - - - - - - - - -
-                              - - - - -
+                              - - - 
                             </Typography>
                           </div>
                         ))}
@@ -371,7 +371,7 @@ const mdTheme = createTheme({
 
                       <Typography
                         sx={{
-                          ml: 69,
+                          ml: 79,
                           fontFamily: "Barlow Condensed",
                           fontSize: "17px",
                           mt: 0,

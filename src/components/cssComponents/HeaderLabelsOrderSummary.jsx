@@ -46,16 +46,7 @@ export default function HeaderLabelsOrderSummary({orderNum}) {
       >
         ITEM NAME
       </Typography>
-      <Typography
-        sx={{
-          ml: 63.5,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
-          mt: -3.2,
-        }}
-      >
-        PRICE
-      </Typography>
+     
       <Typography
         sx={{
           ml: 81,
@@ -66,16 +57,7 @@ export default function HeaderLabelsOrderSummary({orderNum}) {
       >
         QTY
       </Typography>
-      <Typography
-        sx={{
-          ml: 100,
-          fontFamily: "Barlow Condensed",
-          fontSize: "17px",
-          mt: -3.2,
-        }}
-      >
-        TOTAL
-      </Typography>
+    
       <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -40,9 +40,9 @@ function onClickStatusFunction() {
             fontSize: "17px",
           }}
           style={{
-            maxWidth: "30px",
+            maxWidth: "150px",
             maxHeight: "30px",
-            minWidth: "80px",
+            minWidth: "100px",
             minHeight: "40px",
           }}
           size="small"
