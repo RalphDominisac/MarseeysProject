@@ -9,23 +9,26 @@ export default function NavigationBar({ to }) {
 
 	return (
 		<Navbar bg="dark" variant="dark">
-			<Navbar.Brand as={Link} to="/employees" className="navbar-brand">
+			<Navbar.Brand as={Link} to="/inventory" className="navbar-brand">
 				<img src={logo} width="32" height="32" alt="brand" className="ms-3" />{' '}
-				Marseey's Human Resource Management
+				Marseey's Inventory
 			</Navbar.Brand>
 			<Nav className="mr-auto">
-				<Nav.Link as={Link} to="/employees" className="nav-link">
+				<Nav.Link as={Link} to="/inventory" className="nav-link">
 					Home
 				</Nav.Link>
-				<Nav.Link as={Link} to="/new" className="nav-link">
-					Create Employee
+				<Nav.Link as={Link} to="/create" className="nav-link">
+					Add Ingredient
 				</Nav.Link>
-				{/* <Nav.Link as={Link} to="/admin/register" className="nav-link">
-					Create Account
-				</Nav.Link> */}
-				{/* <Nav.Link as={Link} to="/" className="nav-link">
-					Change Password
-				</Nav.Link> */}
+				<Nav.Link as={Link} to="/transactions" className="nav-link">
+					Transactions
+				</Nav.Link>
+				<Nav.Link as={Link} to="/stock-in" className="nav-link">
+					Stock-In
+				</Nav.Link>
+				<Nav.Link as={Link} to="/stock-out" className="nav-link">
+					Stock-Out
+				</Nav.Link>
 				{/* <Nav.Link as={Link} to="/login" onClick={logout} className="nav-link">
 					Log out
 				</Nav.Link> */}
