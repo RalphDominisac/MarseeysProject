@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,12 @@ public class OrderService {
         DeliveryMethod method = findHelper.findMethod(deliveryMethodRequest.getName());
 
         deliveryMethodRepository.delete(method);
+    }
+
+    public List<Order> getOrders() {
+        List<Order> orders = orderRepository.findAll();
+        orders.sort(Comparator.comparing(Order::getDate).reversed());
+        return orders;
     }
 
     public List<Order> getPendingOrders() {
