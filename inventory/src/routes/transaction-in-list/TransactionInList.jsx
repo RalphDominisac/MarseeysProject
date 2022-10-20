@@ -36,8 +36,8 @@ export default function TransactionInList() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	function editIngredient(transactionIn) {
-		navigate('/edit', { state: transactionIn });
+	function editTransaction(transactionIn) {
+		navigate('/edit/transaction', { state: transactionIn });
 	}
 
 	function deleteTransaction(id) {
@@ -209,7 +209,7 @@ export default function TransactionInList() {
 												<Button
 													size="sm"
 													variant="outline-primary"
-													onClick={editIngredient.bind(this, transactionIn)}
+													onClick={editTransaction.bind(this, transactionIn)}
 												>
 													<i className="fa fa-edit" />
 												</Button>

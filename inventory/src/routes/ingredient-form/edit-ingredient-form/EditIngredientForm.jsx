@@ -2,7 +2,6 @@ import { Card, Form, Button, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axios';
-import MyToast from '../../../components/my-toast/MyToast';
 
 export default function EditIngredientForm(props) {
 	const location = useLocation();
@@ -13,7 +12,6 @@ export default function EditIngredientForm(props) {
 		ingredientCategory: '',
 		threshold: '',
 		unitMeasure: '',
-		expiryDate: '',
 	});
 	const [ingredientCategories, setIngredientCategories] = useState([]);
 	const [unitMeasures] = useState([
@@ -46,7 +44,6 @@ export default function EditIngredientForm(props) {
 			ingredientCategory: ingredient.ingredientCategory.name,
 			threshold: ingredient.threshold,
 			unitMeasure: ingredient.unitMeasure,
-			expiryDate: ingredient.expiryDate,
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,7 +119,8 @@ export default function EditIngredientForm(props) {
 									))}
 								</Form.Control>
 							</Form.Group>
-
+						</Row>
+						<Row>
 							<Form.Group
 								as={Col}
 								controlId="formGridMeasure"
@@ -147,8 +145,7 @@ export default function EditIngredientForm(props) {
 									))}
 								</Form.Control>
 							</Form.Group>
-						</Row>
-						<Row>
+
 							<Form.Group
 								as={Col}
 								controlId="formGridQuantity"
@@ -164,23 +161,6 @@ export default function EditIngredientForm(props) {
 									className="bg-dark text-white"
 									placeholder="Enter a reorder point"
 									onChange={handleChange}
-								/>
-							</Form.Group>
-
-							<Form.Group
-								as={Col}
-								controlId="formGridQuantity"
-								className="col-6"
-							>
-								<Form.Label>Expiry Date</Form.Label>
-								<Form.Control
-									type="date"
-									name="expiryDate"
-									value={ingredientRequest.expiryDate}
-									required
-									className="bg-dark text-white"
-									onChange={handleChange}
-									min={new Date().toISOString().split("T")[0]}
 								/>
 							</Form.Group>
 						</Row>

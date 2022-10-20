@@ -1,10 +1,12 @@
 import axiosInstance from '../../helpers/axios';
 import { useEffect, useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card, Table, ButtonGroup, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Replenishment() {
 	const [toBeReplenished, setToBeReplenished] = useState([]);
     const [sorted, setSorted] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (toBeReplenished.length === 0) {
@@ -20,6 +22,25 @@ export default function Replenishment() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	function editIngredient(ingredient) {
+		navigate('/edit/ingredient', { state: ingredient });
+	}
+
+	function deleteIngredient(id) {
+		axiosInstance
+			.post('/ingredient/delete/' + id)
+			.then((response) => {
+				if (response.data !== null) {
+					setToBeReplenished(
+						toBeReplenished.filter((ingredient) => ingredient.id !== id)
+					);
+				}
+			})
+			.catch((error) => {
+				console.log('Error: ', error);
+			});
+	}
 
 	function sortByName() {
 		if (sorted) {
@@ -119,6 +140,7 @@ export default function Replenishment() {
 							</th>
 							<th>Reorder Point</th>
 							<th>Last Updated</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -139,6 +161,27 @@ export default function Replenishment() {
 										{ingredient.threshold} {ingredient.unitMeasure}
 									</td>
 									<td>{ingredient.lastUpdate}</td>
+										<td>
+											<ButtonGroup>
+												<Button
+													size="sm"
+													variant="outline-primary"
+													onClick={editIngredient.bind(this, ingredient)}
+												>
+													<i className="fa fa-edit" />
+												</Button>
+												<Button
+													size="sm"
+													variant="outline-danger"
+													onClick={deleteIngredient.bind(
+														this,
+														ingredient.id
+													)}
+												>
+													<i className="fa fa-trash" style={{ color: 'red' }} />
+												</Button>
+											</ButtonGroup>
+										</td>
 								</tr>
 							))
 						)}
