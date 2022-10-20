@@ -7,10 +7,10 @@ export default function EditTransactionInForm(props) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const transactionIn = location.state;
-	const [ingredientRequest, setIngredientRequest] = useState({
+	const [transactionInRequest, setTransactionInRequest] = useState({
 		name: '',
 		ingredientCategory: '',
-		threshold: '',
+		quantity: '',
 		unitMeasure: '',
 		expiryDate: '',
 	});
@@ -40,10 +40,10 @@ export default function EditTransactionInForm(props) {
 				});
 		}
 
-		setIngredientRequest({
+		setTransactionInRequest({
 			name: transactionIn.ingredient.name,
 			ingredientCategory: transactionIn.ingredient.ingredientCategory.name,
-			threshold: transactionIn.ingredient.threshold,
+			quantity: transactionIn.ingredient.quantity,
 			unitMeasure: transactionIn.ingredient.unitMeasure,
 			expiryDate: transactionIn.expiryDate,
 		});
@@ -51,11 +51,11 @@ export default function EditTransactionInForm(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	function submitIngredientRequest(event) {
+	function submittransactionInRequest(event) {
 		event.preventDefault();
 
 		axiosInstance
-			.post('/ingredient/edit/' + transactionIn.id, ingredientRequest)
+			.post('/transactions/edit/' + transactionIn.id, transactionInRequest)
 			.then((response) => {
 				if (response.data !== null) {
 					navigate('/inventory');
@@ -67,8 +67,8 @@ export default function EditTransactionInForm(props) {
 	}
 
 	function handleChange(event) {
-		setIngredientRequest({
-			...ingredientRequest,
+		setTransactionInRequest({
+			...transactionInRequest,
 			[event.target.name]: event.target.value,
 		});
 	}
@@ -79,7 +79,7 @@ export default function EditTransactionInForm(props) {
 				<Card.Header>
 					<i className="fa fa-plus-square" /> Ingredient
 				</Card.Header>
-				<Form onSubmit={submitIngredientRequest} id="ingredientFormId">
+				<Form onSubmit={submittransactionInRequest} id="ingredientFormId">
 					<Card.Body>
 						<Row>
 							<Form.Group as={Col} controlId="formGridName" className="col-6">
@@ -89,7 +89,7 @@ export default function EditTransactionInForm(props) {
 									name="name"
 									required disabled
 									autoComplete="off"
-									value={ingredientRequest.name}
+									value={transactionInRequest.name}
 									className="bg-dark text-muted"
 									placeholder="Enter name"
 									onChange={handleChange}
@@ -105,7 +105,7 @@ export default function EditTransactionInForm(props) {
 								<Form.Control
 									as="select"
 									name="ingredientCategory"
-									value={ingredientRequest.ingredientCategory}
+									value={transactionInRequest.ingredientCategory}
 									required
 									className="bg-dark text-white"
 									onChange={handleChange}
@@ -130,7 +130,7 @@ export default function EditTransactionInForm(props) {
 								<Form.Control
 									as="select"
 									name="unitMeasure"
-									value={ingredientRequest.unitMeasure}
+									value={transactionInRequest.unitMeasure}
 									required
 									className="bg-dark text-white"
 									onChange={handleChange}
@@ -155,8 +155,8 @@ export default function EditTransactionInForm(props) {
 								<Form.Label>Reorder Point</Form.Label>
 								<Form.Control
 									type="number"
-									name="threshold"
-									value={ingredientRequest.threshold}
+									name="quantity"
+									value={transactionInRequest.quantity}
 									required
 									autoComplete="off"
 									className="bg-dark text-white"
@@ -174,7 +174,7 @@ export default function EditTransactionInForm(props) {
 								<Form.Control
 									type="date"
 									name="expiryDate"
-									value={ingredientRequest.expiryDate}
+									value={transactionInRequest.expiryDate}
 									required
 									className="bg-dark text-white"
 									onChange={handleChange}

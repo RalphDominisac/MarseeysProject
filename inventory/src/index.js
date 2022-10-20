@@ -8,13 +8,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ErrorPage from './routes/error-page/ErrorPage';
 import EmptyPage from './routes/empty-page/EmptyPage';
-import TransactionInList from './routes/transaction-in-list/TransactionInList';
-import EditTransactionInForm from './routes/transaction-form/edit-transaction-in-form/EditTransactionInForm';
-import AddIngredientForm from './routes/ingredient-form/add-ingredient-form/AddIngredientForm';
-import TransactionList from './routes/transaction-list/TransactionList';
-import TransactionIn from './routes/transaction-form/transaction-in/TransactionIn';
-import TransactionOut from './routes/transaction-form/transaction-out/TransactionOut';
 import Login from './routes/login-page/Login';
+import Employees from './routes/employee-list/Employees';
+import AddEmployee from './routes/employee-list/add-employee/AddEnployee';
+import EditEmployee from './routes/employee-list/edit-employee/EditEmployee';
+import ViewEmployee from './routes/employee-list/view-employee/ViewEmployee';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,13 +22,11 @@ root.render(
 				<Route path="login" element={<Login />}></Route>
 				<Route path="signup" element={<Login />}></Route>
 				<Route path="/" element={<App />}>
-					<Route path="inventory" element={<TransactionInList />}></Route>
-					<Route path="edit" element={<EditTransactionInForm />}></Route>
-					<Route path="create" element={<AddIngredientForm />}></Route>
-					<Route path="transactions" element={<TransactionList />}></Route>
-					<Route path="stock-in" element={<TransactionIn />}></Route>
-					<Route path="stock-out" element={<TransactionOut />}></Route>
-					<Route path="*" element={<ErrorPage />}></Route>
+					<Route path="employees" element={<Employees />}></Route>
+					<Route path="new" element={<AddEmployee />}></Route>
+					<Route path="edit" element={<EditEmployee />}></Route>
+					<Route path="view" element={<ViewEmployee />}></Route>
+					<Route path="*" element={<EmptyPage />}></Route>
 				</Route>
 			</Routes>
 		</BrowserRouter>
