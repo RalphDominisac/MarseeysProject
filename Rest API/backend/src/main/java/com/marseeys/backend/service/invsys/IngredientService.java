@@ -118,17 +118,14 @@ public class IngredientService {
         }
     }
 
-    public Ingredient editIngredient(String id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
-        TransactionIn transaction = findHelper.findTransactionIn(id);
-        Ingredient ingredient = transaction.getIngredient();
+    public Ingredient editIngredient(int id, EditIngredientRequest editIngredientRequest) throws DatabaseException {
+        Ingredient ingredient = findHelper.findIngredient(id);
 
         ingredient.setName(editIngredientRequest.getName());
         ingredient.setIngredientCategory(findHelper.findIngredientCategory(editIngredientRequest.getIngredientCategory()));
         ingredient.setThreshold(editIngredientRequest.getThreshold());
         ingredient.setUnitMeasure(editIngredientRequest.getUnitMeasure());
-        transaction.setExpiryDate(editIngredientRequest.getExpiryDate());
 
-        transactionRepository.save(transaction);
         return ingredientRepository.save(ingredient);
     }
 

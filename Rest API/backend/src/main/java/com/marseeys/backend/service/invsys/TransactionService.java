@@ -10,6 +10,8 @@ import com.marseeys.backend.helper.DatabaseHelper;
 import com.marseeys.backend.helper.FindHelper;
 import com.marseeys.backend.helper.OrderingHelper;
 import com.marseeys.backend.helper.TransactionHelper;
+import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
+import com.marseeys.backend.model.invsys.transaction.EditTransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.repository.invsys.IngredientRepository;
@@ -36,7 +38,7 @@ public class TransactionService {
     public List<Transaction> getTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
 
-        transactions.sort(Comparator.comparing(Transaction::getDate));
+        transactions.sort(Comparator.comparing(Transaction::getDate).reversed());
 
         return transactions;
     }
@@ -44,9 +46,9 @@ public class TransactionService {
     public List<TransactionIn> getRelevantTransactions() {
         List<TransactionIn> stockIns = transactionRepository.findRelevantTransactions();
 
-        stockIns.sort(Comparator.comparing(Transaction::getDate));
+        stockIns.sort(Comparator.comparing(Transaction::getDate).reversed());
 
-        return transactionRepository.findRelevantTransactions();
+        return stockIns;
     }
 
     public List<TransactionIn> getTransactionsByName() {
@@ -167,6 +169,14 @@ public class TransactionService {
         ingredientRepository.saveAll(ingredientChanges);
         transactionHelper.reflectTransactions(orderTransaction);
         return transactionRepository.saveAll(orderTransaction);
+    }
+
+    public TransactionIn editTransactionIn(String id, EditTransactionInRequest editTransactionInRequest) throws DatabaseException {
+        TransactionIn transaction = findHelper.findTransactionIn(id);
+
+        transaction.setExpiryDate(editTransactionInRequest.getExpiryDate());
+
+        return transactionRepository.save(transaction);
     }
 
     public Transaction deleteRelevantTransaction(String id) throws DatabaseException, IngredientException {

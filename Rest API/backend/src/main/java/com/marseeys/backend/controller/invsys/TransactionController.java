@@ -4,7 +4,7 @@ import com.marseeys.backend.entity.invsys.transaction.Transaction;
 import com.marseeys.backend.entity.invsys.transaction.TransactionIn;
 import com.marseeys.backend.exception.DatabaseException;
 import com.marseeys.backend.exception.IngredientException;
-import com.marseeys.backend.model.invsys.ingredient.EditIngredientRequest;
+import com.marseeys.backend.model.invsys.transaction.EditTransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionInRequest;
 import com.marseeys.backend.model.invsys.transaction.TransactionOutRequest;
 import com.marseeys.backend.service.invsys.TransactionService;
@@ -118,6 +118,17 @@ public class TransactionController {
     )
     public ResponseEntity<Transaction> deductFromIngredient(@RequestBody @Valid TransactionOutRequest transactionRequest) throws DatabaseException, IngredientException {
         return new ResponseEntity<>(transactionService.saveTransactionOut(transactionRequest), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/edit/{id}")
+//    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Edits the expiry date of the specified transaction.",
+            notes = "",
+            response = Transaction.class
+    )
+    public ResponseEntity<Transaction> editTransaction(@PathVariable String id, @RequestBody @Valid EditTransactionInRequest editTransactionInRequest) throws DatabaseException {
+        return new ResponseEntity<>(transactionService.editTransactionIn(id, editTransactionInRequest), HttpStatus.OK);
     }
 
     @PostMapping("/delete/{id}")

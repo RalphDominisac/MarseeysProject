@@ -27,4 +27,8 @@ public class DigitalWalletRequest {
     @NotBlank(message = "Please provide the customer's contact number.")
     @Size(min = 11, max = 11, message = "Please input a valid contact number.")
     private String mobileNo;
+
+    @ApiModelProperty(notes = "The e-wallet platform used by the customer.")
+    @NotBlank(message = "Please provide the customer's e-wallet platform.")
+    private String platform;
 }

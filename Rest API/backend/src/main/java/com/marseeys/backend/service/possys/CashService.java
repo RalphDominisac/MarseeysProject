@@ -64,9 +64,9 @@ public class CashService {
                     cashRequest.getAmount(),
                     change
             );
-
             order.setPaid(!order.isPaid());
 
+            orderRepository.save(order);
             return paymentRepository.save(cash);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -90,8 +90,8 @@ public class CashService {
             );
 
             order.setPaid(!order.isPaid());
-            orderRepository.save(order);
 
+            orderRepository.save(order);
             return paymentRepository.save(credit);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -115,9 +115,9 @@ public class CashService {
                     bankTransferRequest.getAccountNo(),
                     bankTransferRequest.getContactNo()
             );
-
             order.setPaid(!order.isPaid());
 
+            orderRepository.save(order);
             return paymentRepository.save(bankTransfer);
         } catch (Exception ex) {
             throw new DatabaseException(
@@ -137,12 +137,12 @@ public class CashService {
                     order,
                     digitalWalletRequest.getAmount(),
                     change,
-                    digitalWalletRequest.getMobileNo()
+                    digitalWalletRequest.getMobileNo(),
+                    digitalWalletRequest.getPlatform()
             );
-
             order.setPaid(!order.isPaid());
-            orderRepository.save(order);
 
+            orderRepository.save(order);
             return paymentRepository.save(digitalWallet);
         } catch (Exception ex) {
             throw new DatabaseException(
