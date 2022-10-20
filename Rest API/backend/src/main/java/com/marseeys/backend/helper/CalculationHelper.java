@@ -19,7 +19,7 @@ public class CalculationHelper {
         double total = 0;
 
         for (Map.Entry<String, Integer> entry : contents.entrySet()) {
-            Menu menu = findHelper.findMenu(Integer.parseInt(entry.getKey()));
+            Menu menu = findHelper.findMenu(entry.getKey());
             total += menu.getPrice() * entry.getValue();
         }
 

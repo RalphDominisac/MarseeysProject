@@ -104,7 +104,7 @@ public class IngredientController {
             notes = "",
             response = Ingredient.class
     )
-    public ResponseEntity<Ingredient> editIngredient(@PathVariable String id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
+    public ResponseEntity<Ingredient> editIngredient(@PathVariable int id, @RequestBody @Valid EditIngredientRequest editIngredientRequest) throws DatabaseException {
         return new ResponseEntity<>(ingredientService.editIngredient(id, editIngredientRequest), HttpStatus.OK);
     }
 

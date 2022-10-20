@@ -10,9 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DigitalWallet extends Cash{
     private String mobileNo;
+    private String platform;
 
-    public DigitalWallet(int id, Order order, double amount, double change, String mobileNo) {
+    public DigitalWallet(int id, Order order, double amount, double change, String mobileNo, String platform) {
         super(id, order, amount, change);
         this.mobileNo = mobileNo;
+        this.platform = platform;
     }
 }
