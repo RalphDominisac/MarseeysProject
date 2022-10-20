@@ -42,6 +42,18 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getPendingOrders());
     }
 
+    @GetMapping("/history")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @ApiOperation(
+            value = "Retrieves all the orders.",
+            notes = "",
+            response = Order.class,
+            responseContainer = "List"
+    )
+    public ResponseEntity<List<Order>> getOrders() {
+        return ResponseEntity.ok(orderService.getOrders());
+    }
+
     @PostMapping("/add/dine")
 //    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @ApiOperation(
