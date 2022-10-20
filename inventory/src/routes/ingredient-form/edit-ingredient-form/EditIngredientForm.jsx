@@ -81,7 +81,7 @@ export default function EditIngredientForm(props) {
 				<Form onSubmit={submitIngredientRequest} id="ingredientFormId">
 					<Card.Body>
 						<Row>
-							<Form.Group as={Col} controlId="formGridName" className="col-6">
+							<Form.Group as={Col} controlId="formGridName">
 								<Form.Label>Name</Form.Label>
 								<Form.Control
 									type="text"
@@ -95,11 +95,7 @@ export default function EditIngredientForm(props) {
 								/>
 							</Form.Group>
 
-							<Form.Group
-								as={Col}
-								controlId="formGridCategory"
-								className="col-3"
-							>
+							<Form.Group as={Col} controlId="formGridCategory">
 								<Form.Label>Category</Form.Label>
 								<Form.Control
 									as="select"
@@ -121,11 +117,7 @@ export default function EditIngredientForm(props) {
 							</Form.Group>
 						</Row>
 						<Row>
-							<Form.Group
-								as={Col}
-								controlId="formGridMeasure"
-								className="col-3"
-							>
+							<Form.Group as={Col} controlId="formGridMeasure">
 								<Form.Label>Unit Measure</Form.Label>
 								<Form.Control
 									as="select"
@@ -146,11 +138,7 @@ export default function EditIngredientForm(props) {
 								</Form.Control>
 							</Form.Group>
 
-							<Form.Group
-								as={Col}
-								controlId="formGridQuantity"
-								className="col-6"
-							>
+							<Form.Group as={Col} controlId="formGridQuantity">
 								<Form.Label>Reorder Point</Form.Label>
 								<Form.Control
 									type="number"

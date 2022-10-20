@@ -7,7 +7,7 @@ export default function EditTransactionInForm(props) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const transactionIn = location.state;
-	const [transactionInRequest, setTransactionInRequest] = useState({
+	const [ingredientRequest, setIngredientRequest] = useState({
 		name: '',
 		ingredientCategory: '',
 		quantity: '',
@@ -40,7 +40,7 @@ export default function EditTransactionInForm(props) {
 				});
 		}
 
-		setTransactionInRequest({
+		setIngredientRequest({
 			name: transactionIn.ingredient.name,
 			ingredientCategory: transactionIn.ingredient.ingredientCategory.name,
 			quantity: transactionIn.ingredient.quantity,
@@ -51,11 +51,11 @@ export default function EditTransactionInForm(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	function submittransactionInRequest(event) {
+	function submitIngredientRequest(event) {
 		event.preventDefault();
 
 		axiosInstance
-			.post('/transactions/edit/' + transactionIn.id, transactionInRequest)
+			.post('/transactions/edit/' + transactionIn.id, ingredientRequest)
 			.then((response) => {
 				if (response.data !== null) {
 					navigate('/inventory');
@@ -67,8 +67,8 @@ export default function EditTransactionInForm(props) {
 	}
 
 	function handleChange(event) {
-		setTransactionInRequest({
-			...transactionInRequest,
+		setIngredientRequest({
+			...ingredientRequest,
 			[event.target.name]: event.target.value,
 		});
 	}
@@ -79,7 +79,7 @@ export default function EditTransactionInForm(props) {
 				<Card.Header>
 					<i className="fa fa-plus-square" /> Ingredient
 				</Card.Header>
-				<Form onSubmit={submittransactionInRequest} id="ingredientFormId">
+				<Form onSubmit={submitIngredientRequest} id="ingredientFormId">
 					<Card.Body>
 						<Row>
 							<Form.Group as={Col} controlId="formGridName" className="col-6">
@@ -89,7 +89,7 @@ export default function EditTransactionInForm(props) {
 									name="name"
 									required disabled
 									autoComplete="off"
-									value={transactionInRequest.name}
+									value={ingredientRequest.name}
 									className="bg-dark text-muted"
 									placeholder="Enter name"
 									onChange={handleChange}
@@ -99,48 +99,22 @@ export default function EditTransactionInForm(props) {
 							<Form.Group
 								as={Col}
 								controlId="formGridCategory"
-								className="col-3"
 							>
 								<Form.Label>Category</Form.Label>
 								<Form.Control
 									as="select"
 									name="ingredientCategory"
-									value={transactionInRequest.ingredientCategory}
-									required
-									className="bg-dark text-white"
+									value={ingredientRequest.ingredientCategory}
+									required disabled
+									className="bg-dark text-muted"
 									onChange={handleChange}
 								>
 									<option key="blankChoice" hidden value>
-										Pick an Ingredient Category
+										Ingredient Category
 									</option>
 									{ingredientCategories.map((category) => (
 										<option key={category.id} value={category.name}>
 											{category.name}
-										</option>
-									))}
-								</Form.Control>
-							</Form.Group>
-
-							<Form.Group
-								as={Col}
-								controlId="formGridMeasure"
-								className="col-3"
-							>
-								<Form.Label>Unit Measure</Form.Label>
-								<Form.Control
-									as="select"
-									name="unitMeasure"
-									value={transactionInRequest.unitMeasure}
-									required
-									className="bg-dark text-white"
-									onChange={handleChange}
-								>
-									<option key="blankChoice" hidden value>
-										Pick a Unit Measure
-									</option>
-									{unitMeasures.map((unitMeasure) => (
-										<option key={unitMeasure} value={unitMeasure}>
-											{unitMeasure}
 										</option>
 									))}
 								</Form.Control>
@@ -150,31 +124,53 @@ export default function EditTransactionInForm(props) {
 							<Form.Group
 								as={Col}
 								controlId="formGridQuantity"
-								className="col-6"
 							>
-								<Form.Label>Reorder Point</Form.Label>
+								<Form.Label>Quantity</Form.Label>
 								<Form.Control
 									type="number"
 									name="quantity"
-									value={transactionInRequest.quantity}
-									required
+									value={ingredientRequest.quantity}
+									required disabled
 									autoComplete="off"
-									className="bg-dark text-white"
-									placeholder="Enter a reorder point"
+									className="bg-dark text-muted"
+									placeholder="Quantity"
 									onChange={handleChange}
 								/>
 							</Form.Group>
 
 							<Form.Group
 								as={Col}
-								controlId="formGridQuantity"
-								className="col-6"
+								controlId="formGridMeasure"
+							>
+								<Form.Label>Unit Measure</Form.Label>
+								<Form.Control
+									as="select"
+									name="unitMeasure"
+									value={ingredientRequest.unitMeasure}
+									required disabled
+									className="bg-dark text-muted"
+									onChange={handleChange}
+								>
+									<option key="blankChoice" hidden value>
+										Unit Measure
+									</option>
+									{unitMeasures.map((unitMeasure) => (
+										<option key={unitMeasure} value={unitMeasure}>
+											{unitMeasure}
+										</option>
+									))}
+								</Form.Control>
+							</Form.Group>
+
+							<Form.Group
+								as={Col}
+								controlId="formGridExpiry"
 							>
 								<Form.Label>Expiry Date</Form.Label>
 								<Form.Control
 									type="date"
 									name="expiryDate"
-									value={transactionInRequest.expiryDate}
+									value={ingredientRequest.expiryDate}
 									required
 									className="bg-dark text-white"
 									onChange={handleChange}
