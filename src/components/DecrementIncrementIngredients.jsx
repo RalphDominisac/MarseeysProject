@@ -19,11 +19,12 @@ export default function DecrementIncrementIngredients({
           },
           color: "white",
           backgroundColor: "#9E3F3F",
-          ml: 52,
+          ml: 60,
           mt: -8,
           width: 3,
           borderTopLeftRadius: 10,
           borderBottomLeftRadius: 10,
+        
         }}
         style={{
           maxWidth: "30px",
@@ -46,11 +47,12 @@ export default function DecrementIncrementIngredients({
           },
           color: "white",
           backgroundColor: "#5D9B68",
-          ml: 69,
+          ml: 77,
           mt: -14.9,
           width: 10,
           borderTopRightRadius: 10,
           borderBottomRightRadius: 10,
+          
         }}
         style={{
           maxWidth: "30px",

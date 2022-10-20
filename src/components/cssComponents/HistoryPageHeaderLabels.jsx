@@ -17,13 +17,24 @@ export default function HistoryPageHeaderLabels() {
 
       <Typography
         sx={{
-          ml: 58,
+          ml: 23,
           fontFamily: "Barlow Condensed",
           fontSize: "17px",
           mt: -3.2,
         }}
       >
-        SUBTOTAL
+        PAYMENT STATUS
+      </Typography>
+
+      <Typography
+        sx={{
+          ml: 50,
+          fontFamily: "Barlow Condensed",
+          fontSize: "17px",
+          mt: -3.2,
+        }}
+      >
+        ORDER STATUS
       </Typography>
 
       <Typography
@@ -32,18 +43,17 @@ export default function HistoryPageHeaderLabels() {
           fontFamily: "Barlow Condensed",
           fontSize: "17px",
           mt: -3.2,
+          // mb: 35
         }}
       >
         TOTAL
       </Typography>
 
-      <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
+      <Typography sx={{ ml: 3, mt: 2, mb: 1, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         - - - - - - - - -
       </Typography>
-
-    
     </React.Fragment>
   );
 }

@@ -18,6 +18,7 @@ export default function ToolBarAddCategoryPageHeader() {
             fontFamily: "Barlow Condensed",
             fontSize: "30px",
             mt: 4.5,
+            mb: 5
           }}
         >
          Add Category Page

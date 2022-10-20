@@ -37,8 +37,16 @@ export default function PendingOrderPageHeaderLabels() {
         ORDER STATUS
       </Typography>
 
-
-    
+      <Typography
+        sx={{
+          ml: 93,
+          fontFamily: "Barlow Condensed",
+          fontSize: "17px",
+          mt: -3.2,
+        }}
+      >
+        ORDER TOTAL
+      </Typography>
 
       <Typography sx={{ ml: 3, mt: -0.8, color: "#504C64" }}>
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

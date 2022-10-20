@@ -72,7 +72,7 @@ export default function OrderSidePage(props) {
   return (
     <React.Fragment>
       <Typography class="orderNumberSide" sx={{ ml: 1 }}>
-        Order #0001
+        Order Creation
       </Typography>
 
       <DineInPickupDeliveryButtons

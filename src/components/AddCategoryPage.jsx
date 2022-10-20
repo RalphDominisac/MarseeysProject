@@ -21,7 +21,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import DateTime from "./DateTime";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -141,10 +141,19 @@ export default function AddCategoryPage() {
     setOpen(!open);
   };
   const [category, setCategory] = useState("");
+  const [categoryRequest, setCategoryRequest] = useState({
+    name: '', 
+  })
+  
+  useEffect(() => {
+    setCategoryRequest({
+      name: category
+    })
+  }, [category])
 
   function addCategory() {
     axiosInstance
-      .post("/menu/categories/add", category)
+      .post("/menu/categories/add", categoryRequest)
       .then((res) => {
         setCategory("");
       })
@@ -249,7 +258,7 @@ export default function AddCategoryPage() {
                     {/* <HistoryPageBody /> */}
 
                     <TextField
-                      onChange={(g1) => setCategory(g1.target.value)}
+                      onChange={(event) => setCategory(event.target.value)}
                       className="inputRounded"
                       placeholder="Category Name"
                       variant="outlined"

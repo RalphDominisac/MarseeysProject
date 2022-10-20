@@ -23,7 +23,7 @@ export default function OrderButtonPendingStyle({title,onClickFunc,key}) {
           border: "1px solid #F2A42A",
         },
         mt: -0.5,
-        ml: 2,
+        ml: -1,
         mb: 3,
         width: 131,
         textTransform: "none",

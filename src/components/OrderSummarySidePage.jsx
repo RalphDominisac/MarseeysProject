@@ -267,7 +267,7 @@ const estimatedTime = props.order?.estimatedTime
         />
       )}
 
-      <OrderStatusButton/>
+      <OrderStatusButton order={props.order}/>
     </React.Fragment>
   );
 }

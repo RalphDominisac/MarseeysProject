@@ -519,49 +519,60 @@ export default function AddMenuItemPage() {
                       </FormControl>
 
                       {/* DISPLAY HERE SELECTED INGREDIENTS, QTY, AND UNIT MEASURE */}
-                      <div>
-                        {ingredientsCart.length === 0 ? (
-                          <div style={{ marginTop: -280, marginLeft: 300 }}>
-                            Ingredients are Empty
-                          </div>
-                        ) : (
-                          ingredientsCart.map((ingredient) => (
-                            <div key={ingredient.id}>
-                              <Typography
-                                sx={{
-                                  color: "white",
-                                  fontSize: 20,
-                                  fontFamily: "Barlow Condensed",
-                                  mt: 1,
-                                  ml: 45,
-                                  width: 50,
-                                }}
-                              >
-                                {ingredient.name}
-                              </Typography>
-
-                              <DecrementIncrementIngredients
-                                onClickRemoveFunctionCounter={() =>
-                                  onRemove(ingredient)
-                                }
-                                onClickAddFunctionCounter={() =>
-                                  onAdd(ingredient)
-                                }
-                                itemQtyCounter={ingredient.qty}
-                                itemUnit={ingredient.unitMeasure}
-                              />
+                      <Container
+                        sx={{
+                          width: 860,
+                          height: 220,
+                          overflow: "hidden",
+                          overflowY: "scroll",
+                        }}
+                      >
+                        <div>
+                          {ingredientsCart.length === 0 ? (
+                            <div style={{ marginTop: 55, marginLeft: 300 }}>
+                              Ingredients are Empty
                             </div>
-                            
-                          ))
-                        )}
-                      </div>
+                          ) : (
+                            ingredientsCart.map((ingredient) => (
+                              <div
+                                key={ingredient.id}
+                                style={{ marginBottom: "-75px" }}
+                              >
+                                <Typography
+                                  sx={{
+                                    color: "white",
+                                    fontSize: 20,
+                                    fontFamily: "Barlow Condensed",
+                                    mt: 7,
+                                    ml: 45,
+                                    width: 130,
+                                  }}
+                                >
+                                  {ingredient.name}
+                                </Typography>
+
+                                <DecrementIncrementIngredients
+                                  onClickRemoveFunctionCounter={() =>
+                                    onRemove(ingredient)
+                                  }
+                                  onClickAddFunctionCounter={() =>
+                                    onAdd(ingredient)
+                                  }
+                                  itemQtyCounter={ingredient.qty}
+                                  itemUnit={ingredient.unitMeasure}
+                                />
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </Container>
                     </div>
 
                     <button
                       onClick={createNewMenu}
-                      style={{ marginLeft: "25em" }}
+                      style={{ marginLeft: "25em", marginTop: "30px" }}
                     >
-                      Submit
+                      Submit Menu Item
                     </button>
                   </Box>
                 </Paper>
