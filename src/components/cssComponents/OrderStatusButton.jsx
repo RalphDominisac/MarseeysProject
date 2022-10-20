@@ -47,7 +47,7 @@ function onClickStatusFunction() {
           }}
           size="small"
         >   
-          {served}
+          Not Served
         </Button>
         ) : (
         <Typography
@@ -73,7 +73,7 @@ function onClickStatusFunction() {
           }}
           size="small"
         >   
-          {served}
+          Served
         </Typography>
         )}
       </Toolbar>
