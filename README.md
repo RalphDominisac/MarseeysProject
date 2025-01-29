@@ -49,8 +49,8 @@ The system includes several key UML diagrams:
 - **Design Class Diagram** – Represents the software structure and data flow.
 
 ## 💾 Technology Stack
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** PHP
+- **Frontend:** HTML, CSS, JavaScript, React
+- **Backend:** Heroku
 - **Database:** MySQL
 - **Version Control:** Git/GitHub
 
