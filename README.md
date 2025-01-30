@@ -99,7 +99,9 @@ The system includes several key UML diagrams:
 - Login Page <br />
 ![Login Page SOS UI](https://github.com/user-attachments/assets/91186ec6-5e5a-4f90-8ee2-8202414aabbd)
 
-- Ordering Page
+- Ordering Page <br />
+
+![Ordering Page SOS UI](https://github.com/user-attachments/assets/566b0834-f355-405f-9507-46c17acd5227)
 
 
 - Payment Page
