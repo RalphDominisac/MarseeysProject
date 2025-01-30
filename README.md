@@ -97,19 +97,19 @@ The system includes several key UML diagrams:
 ## Sales Ordering System UI
 
 - Login Page <br />
-
+![Login Page Sales](https://github.com/user-attachments/assets/920329ff-f42d-4b6c-b95a-8580804a5298)
 
 - Ordering Page <br />
-
+![Ordering Page Sales](https://github.com/user-attachments/assets/58200174-a96b-4f25-a70e-198a97869b0f)
 
 - Payment Page <br />
-
+![Payment Page Sales](https://github.com/user-attachments/assets/a1cb8753-de47-4789-bf42-c2f3715e8f7c)
 
 - Order Summary Page <br />
-
+![Order Summary Page Sales](https://github.com/user-attachments/assets/6d667215-accb-47b6-99e0-31ee01949674)
 
 - Customer List Page <br />
-
+![Customer List Page Sales](https://github.com/user-attachments/assets/63f4714d-9dbc-48d1-a31b-c48a59298648)
 
 ## HR System UI
 
