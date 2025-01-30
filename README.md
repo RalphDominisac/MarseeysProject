@@ -94,6 +94,60 @@ The system includes several key UML diagrams:
 - AI-powered demand forecasting for inventory optimization
 - Multi-branch support for future expansion
 
+## Sales Ordering System UI
+
+- Login Page
+![Login Page SOS UI](https://github.com/user-attachments/assets/91186ec6-5e5a-4f90-8ee2-8202414aabbd)
+
+- Ordering Page
+
+
+- Payment Page
+
+- Order Summary Page
+
+- Customer List Page
+
+## HR System UI
+
+- Login Page
+
+- Home Page
+
+- View Profile Page
+
+- Edit Profile Page
+
+- Attendances Page
+
+- Edit Attendances Page
+
+- Departments Page
+
+- Service Page
+
+- Attach Payroll Page
+
+- Payslip Page
+
+- Create User Page
+
+## Inventory System UI
+
+- Inventory Main Page
+
+- Add Item Page
+
+- Main Edit Item Page
+
+- Main Delete Item Page
+
+- Edit Item Page
+
+- Delete Item Page
+
+
+
 ## 📄 License
 This project is licensed under the **MIT License**.
 
