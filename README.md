@@ -114,42 +114,57 @@ The system includes several key UML diagrams:
 ## HR System UI
 
 - Login Page <br />
+![Login Page HR](https://github.com/user-attachments/assets/72288f67-c514-4aa2-8f8f-0db76c70e934)
 
 - Home Page <br />
+![Home Page HR](https://github.com/user-attachments/assets/d5a44bb6-3683-4c0a-89d4-e64bddc62d5b)
 
 - View Profile Page <br />
+![View Profile Page HR](https://github.com/user-attachments/assets/7045a9d8-81ce-4203-ba54-a159b88da97a)
 
 - Edit Profile Page <br />
+![Edit Profile Page HR](https://github.com/user-attachments/assets/ced6c94e-cebe-4dfc-8eb6-ffb15054859e)
 
 - Attendances Page <br />
+![Attendances Page HR](https://github.com/user-attachments/assets/17135ed4-45c1-41b7-890a-bafe1caf786a)
 
 - Edit Attendances Page <br />
+![Edit Attendances Page HR](https://github.com/user-attachments/assets/672b5b05-8e58-457e-a525-88baf5981933)
 
 - Departments Page <br />
- 
+ ![Departments Page HR](https://github.com/user-attachments/assets/49b17df0-ce8c-4adc-a4ed-895feabc4177)
+
 - Service Page <br />
+![Service Page HR](https://github.com/user-attachments/assets/dc7af7ca-1754-4834-b918-bd7006b5ac9b)
 
 - Attach Payroll Page <br />
+![Attach Payroll Page HR](https://github.com/user-attachments/assets/78af3776-178e-4e4e-b21a-c27b2051a01b)
 
 - Payslip Page <br />
+![Payslip Page HR](https://github.com/user-attachments/assets/c96842c5-940a-432d-b4a0-f75cdfb25828)
 
 - Create User Page <br />
+![Create User Page HR](https://github.com/user-attachments/assets/bb3fa31d-2acc-4960-bbd3-53677ee41e66)
 
 ## Inventory System UI
 
 - Inventory Main Page <br />
+![Inventory Main Page UI](https://github.com/user-attachments/assets/ecaa93f3-fdcb-4c78-a369-4e5a8ed94898)
 
 - Add Item Page <br />
+![Add Item Page Inventory](https://github.com/user-attachments/assets/a2eb9d4d-397d-40c1-a722-a8a5cdc2ae43)
 
 - Main Edit Item Page <br />
+![Main Edit Item Page Inventory](https://github.com/user-attachments/assets/f8623c9a-6746-4c2f-9c4e-ff175551cc8d)
 
 - Main Delete Item Page <br />
+![Main Delete Item Page Inventory](https://github.com/user-attachments/assets/3dda400c-7600-4dd2-8f91-1bb611ad991a)
 
 - Edit Item Page <br />
+![Edit Item Page Inventory](https://github.com/user-attachments/assets/c2651cdd-7ef6-41c9-ba18-a6b0622f7c76)
 
 - Delete Item Page <br />
-
-
+![Delete Item Page Inventory](https://github.com/user-attachments/assets/867f401b-6412-4137-8e2d-a01714409409)
 
 ## 📄 License
 This project is licensed under the **MIT License**.
