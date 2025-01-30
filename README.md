@@ -96,7 +96,7 @@ The system includes several key UML diagrams:
 
 ## Sales Ordering System UI
 
-- Login Page
+- Login Page <br />
 ![Login Page SOS UI](https://github.com/user-attachments/assets/91186ec6-5e5a-4f90-8ee2-8202414aabbd)
 
 - Ordering Page
