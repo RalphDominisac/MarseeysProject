@@ -100,54 +100,54 @@ The system includes several key UML diagrams:
 ![Login Page SOS UI](https://github.com/user-attachments/assets/91186ec6-5e5a-4f90-8ee2-8202414aabbd)
 
 - Ordering Page <br />
-
 ![Ordering Page SOS UI](https://github.com/user-attachments/assets/566b0834-f355-405f-9507-46c17acd5227)
 
+- Payment Page <br />
+![Payment Page SOS UI](https://github.com/user-attachments/assets/6271866b-1722-445d-8a5f-a0d07f171069)
 
-- Payment Page
+- Order Summary Page <br />
+![Order Summary Page SOS UI](https://github.com/user-attachments/assets/151f2631-5c9d-4427-8465-732393b4e402)
 
-
-- Order Summary Page
-
-- Customer List Page
+- Customer List Page <br />
+![Customer List Page SOS UI](https://github.com/user-attachments/assets/af9fb097-d488-442b-aff2-6cc8399fb0ee)
 
 ## HR System UI
 
-- Login Page
+- Login Page <br />
 
-- Home Page
+- Home Page <br />
 
-- View Profile Page
+- View Profile Page <br />
 
-- Edit Profile Page
+- Edit Profile Page <br />
 
-- Attendances Page
+- Attendances Page <br />
 
-- Edit Attendances Page
+- Edit Attendances Page <br />
 
-- Departments Page
+- Departments Page <br />
+ 
+- Service Page <br />
 
-- Service Page
+- Attach Payroll Page <br />
 
-- Attach Payroll Page
+- Payslip Page <br />
 
-- Payslip Page
-
-- Create User Page
+- Create User Page <br />
 
 ## Inventory System UI
 
-- Inventory Main Page
+- Inventory Main Page <br />
 
-- Add Item Page
+- Add Item Page <br />
 
-- Main Edit Item Page
+- Main Edit Item Page <br />
 
-- Main Delete Item Page
+- Main Delete Item Page <br />
 
-- Edit Item Page
+- Edit Item Page <br />
 
-- Delete Item Page
+- Delete Item Page <br />
 
 
 
